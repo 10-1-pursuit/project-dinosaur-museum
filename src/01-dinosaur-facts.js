@@ -94,32 +94,32 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
   let foundDinos = [];
   for (let dino of dinosaurs) {
     if (dino.mya.length === 1) {
-      if (mya > (dino.mya[0] + 1) || mya > (dino.mya[0] - 1)) {
+      if (mya === dino.mya[0]  || mya === (dino.mya[0] - 1)) {
         if (key) {
           if (dino.hasOwnProperty(key)) {
             foundDinos.push(dino[key]);
           } else {
             foundDinos.push(dino.dinosaurId)
-          }
+          };
         } else {
           foundDinos.push(dino.dinosaurId)
-        }
-      }
-    }
+        };
+      };
+    };
     if (dino.mya.length === 2) {
-      if (mya > dino.mya[1]) {
+      if (mya === dino.mya[1]) {
         if (key) {
           if (dino.hasOwnProperty(key)) {
             foundDinos.push(dino[key]);
           } else {
             foundDinos.push(dino.dinosaurId)
-          }
-        }
-      }
-    }
-  }
+          };
+        };
+      };
+    };
+  };
   return foundDinos
-}
+};
 
 module.exports = {
   getLongestDinosaur,
