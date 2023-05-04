@@ -40,6 +40,25 @@ function getLongestDinosaur(dinosaurs) {
 	if (dinosaurs.length < 1) {
 		return {};
 	}
+
+	// Find the longest dinosaur using `.reduce()` method, saving to `longestDino`.
+	let longestDino = dinosaurs.reduce((a, b) => {
+		if (a.lengthInMeters > b.lengthInMeters) {
+			return a;
+		} else if (a.lengthInMeters < b.lengthInMeters) {
+			return b;
+		} else {
+			return a;
+		}
+	});
+
+	// Destructure keys of `longestDino`.
+	const { name, lengthInMeters } = longestDino;
+	// Convert length to feet from meters.
+	const convertDinoValue = lengthInMeters * 3.281;
+
+	// Return new object.
+	return { [name]: convertDinoValue };
 }
 
 /**
