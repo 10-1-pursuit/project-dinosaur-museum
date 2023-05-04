@@ -151,24 +151,25 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
 	}
 
 	// Use `.filter()` according to the inputted `mya` value and the provided criteria in JSDoc.
-	let dinoAliveMya = dinosaurs.filter((dino) => {
-		// Variables for setting the `mya` range.
-		let low = dino.mya[dino.mya.length - 1];
-		let high = dino.mya[0];
+	let dinoAliveMya = dinosaurs
+		.filter((dino) => {
+			// Variables for setting the `mya` range.
+			let low = dino.mya[dino.mya.length - 1];
+			let high = dino.mya[0];
 
-		if (dino.mya.length > 1) {
-			// Setting a range for `mya`.
-			if (mya <= high && mya >= low) {
+			if (dino.mya.length > 1) {
+				// Setting a range for `mya`.
+				if (mya <= high && mya >= low) {
+					return dino[keyOrId];
+				}
+				// If the dinosaur only has a single value for `mya`, allows for the `mya` value to be equal to the given value or one less. For example, if a dinosaur has a `mya` value of `[29]`, the dinosaur's information will be returned if `29` is entered or `28` is entered.
+			} else if (mya === high || mya === high - 1) {
 				return dino[keyOrId];
 			}
-			// If the dinosaur only has a single value for `mya`, allows for the `mya` value to be equal to the given value or one less. For example, if a dinosaur has a `mya` value of `[29]`, the dinosaur's information will be returned if `29` is entered or `28` is entered.
-		} else if (mya === high || mya === high - 1) {
-			return dino[keyOrId];
-		}
-	});
+		}) // Create a new array with `.map()` and add the appropriate value based on key in `keyOrId` which is either the `dinosaurId`(s) of the filtered dinosaurs or the values according to the key passed in by the user.
+		.map((dino) => dino[keyOrId]);
 
-	// Create a new array with `.map()` and add the appropriate value based on key in `keyOrId` which is either the `dinosaurId`(s) of the filtered dinosaurs or the values according to the key passed in by the user.
-	return dinoAliveMya.map((dino) => dino[keyOrId]);
+	return dinoAliveMya;
 }
 
 module.exports = {
