@@ -41,6 +41,8 @@ function getLongestDinosaur(dinosaurs) {
       longestDinoName = dinosaurs[i].name
     }
   }
+  // (test)key is the name of the dinosaur and the value is the height of the dinosaur in feet.
+  longestDinoObj[`${longestDinoName}`] = longestDino * 3.281
 
   return longestDinoObj
 }
