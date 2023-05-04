@@ -24,6 +24,7 @@ const exampleDinosaurData = require("../data/dinosaurs");
  */
 
 // max = arr[0]
+//push string into new object key and vlaue
 
 function getLongestDinosaur(dinosaurs){
   let result;
@@ -57,34 +58,18 @@ console.log(getLongestDinosaur(exampleDinosaurData))
  *
  ***/
 
-// function getDinosaurDescription(dinosaurs, id) {
-//   let result;
-//   for(const dino of dinosaurs){
-//     if(dino.dinosaurId === dino.dinosaurId){
-//      result= `${dino.name} (${dino.pronunciation})\n${dino.info}`
-      
-//     }
-//   }
-//   return result;
-// }
-// console.log(getDinosaurDescription(exampleDinosaurData,"U9vuZmgKwUr"))
 
 function getDinosaurDescription(dinosaurs, id) {
-  let result;
-  for(const id of dinosaurs){
-    if(id.dinosaurId === id.dinosaurId){
-     result= `${id.name} (${id.pronunciation})\n${id.info}`
-      
+  for (let dinoId of dinosaurs) {
+    if (id === dinoId.dinosaurId) {
+      return `${dinoId.name} (${dinoId.pronunciation})\n${dinoId.info} It lived in the ${dinoId.period} period, over 80.5 million years ago.`;
     }
+    // else{
+    //  return null;
+    //   }
   }
-  return result;
 }
-console.log(getDinosaurDescription(dinosaurs,"U9vuZmgKwUr"))
-
-
-
-
-
+console.log(getDinosaurDescription(exampleDinosaurData, "GKl035EYKN"))
 /**
  * getDinosaursAliveMya()
  * ---------------------
