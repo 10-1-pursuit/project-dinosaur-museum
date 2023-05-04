@@ -17,7 +17,7 @@
  
  4. return formatted dino object and length--where the key is the dino name and the value is the length{ Brachiosaurus: 98.43 } (sounds like .map)
 
-*/
+
 function getLongestDinosaur(dinosaurs) {
     let longestDino = null;
     let dinosConverted = dinosaurs.map(dino => ({[dino.name]: (dino.lengthInMeters )}))
@@ -27,3 +27,25 @@ function getLongestDinosaur(dinosaurs) {
   let sizeSortedDinos = dinosaurs.sort((a, b) => (a.lengthInMeters * 3.281) - (b.lengthInMeters * 3.281))
   re
 }
+
+1. search through the list (dinosaurs.dinosaurId) to find dinosaur.
+2. If found : return formatted statment as `${dinosaur.name} ${dinosaur.pronunciation}\n${dinosaur.info}` 
+
+3. or else : return statment `A dinosaur with an ID of ${id} cannot be found.`
+
+function getDinosaurDescription(dinosaurs, id) {
+  for (let dino of dinosaurs){
+    if(dino.dinosaurId == id){
+      return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${dino.mya[1]} million years ago.`
+    }
+ }; return "A dinosaur with an ID of '"+ id +"' cannot be found."
+  };
+
+
+*/
+
+
+
+
+
+

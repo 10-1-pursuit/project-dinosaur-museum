@@ -24,14 +24,14 @@ const exampleDinosaurData = require("../data/dinosaurs");
  */
 function getLongestDinosaur(dinosaurs) {
  
-  let sizeSortedDinos = dinosaurs.sort((a, b) => b.lengthInMeters  - a.lengthInMeters)
-  let dinosConverted = sizeSortedDinos.map(dino => ({[dino.name]: (dino.lengthInMeters * 3.281 )}))
-  if (dinosaurs.length === 0){
-    return {}
+  let sizeSortedDinos = dinosaurs.sort((a, b) => b.lengthInMeters  - a.lengthInMeters); // used .sort to find tallest dino.
+  let dinosConverted = sizeSortedDinos.map(dino => ({[dino.name]: (dino.lengthInMeters * 3.281 )})); // used .map to reorder and create new keys and adjust lengths.
+  if (dinosaurs.length === 0){   // used an if statement to see in the dinoList was empty or not.
+    return {};
   } else {
-    return dinosConverted[0]
-  }
-}
+    return dinosConverted[0];
+  };
+};
 
 /**
  * getDinosaurDescription()
@@ -53,7 +53,17 @@ function getLongestDinosaur(dinosaurs) {
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  for (let dino of dinosaurs){
+    if(dino.dinosaurId == id){
+      if(dino.mya.length == 2){
+      return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${dino.mya[1]} million years ago.`
+      } else{
+      return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${dino.mya[0]} million years ago.`
+      };
+    };
+  }; return "A dinosaur with an ID of '"+ id +"' cannot be found."
+};
 
 /**
  * getDinosaursAliveMya()
