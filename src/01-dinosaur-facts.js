@@ -22,7 +22,25 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+
+// max = arr[0]
+
+function getLongestDinosaur(dinosaurs){
+  let result;
+  let longestDino = 0
+  for(const dino of dinosaurs){
+      if(dino.lengthInMeters > longestDino){
+        longestDino = dino.lengthInMeters;
+        result = `{${dino.name}: ${dino.lengthInMeters*3.281}}`
+      }
+    }
+  
+
+   return result;
+  
+  
+}
+console.log(getLongestDinosaur(exampleDinosaurData))
 
 /**
  * getDinosaurDescription()
@@ -37,14 +55,7 @@ function getLongestDinosaur(dinosaurs) {}
  * @param {string} id - The unique identifier for the dinosaur.
  * @returns {string} A detailed description of the dinosaur.
  *
- * EXAMPLE:
- *  getDinosaurDescription(dinosaurs, "U9vuZmgKwUr");
- *  //> "Xenoceratops (ZEE-no-SEH-ruh-tops)\nXenoceratops had horns and a bony frill with elaborate ornamentation of projections, knobs, and spikes. It lived in the Early Cretaceous period, over 77.5 million years ago."
- *
- *  getDinosaurDescription(dinosaurs, "incorrect-id");
- *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
- */
-function getDinosaurDescription(dinosaurs, id) {}
+ * 
 
 /**
  * getDinosaursAliveMya()
