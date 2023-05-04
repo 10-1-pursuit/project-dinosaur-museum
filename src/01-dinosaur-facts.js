@@ -61,33 +61,53 @@ console.log(getLongestDinosaur(exampleDinosaurData))
 
 
 function getDinosaurDescription(dinosaurs, id) {
-  for (let dinoId of dinosaurs) 
-    if (id === dinoId.dinosaurId && dino.Id.mya.length === 1) {
+  for (let dinoId of dinosaurs)
+
+    if (id === dinoId.dinosaurId && dinoId.mya.length < 2) {
+
       return `${dinoId.name} (${dinoId.pronunciation})\n${dinoId.info} It lived in the ${dinoId.period} period, over ${dinoId.mya[0]} million years ago.`;
     }
-  {
-     //if(id !== dinoId.dinosaurId)
-        return `A dinosaur with an ID of 'incorrect-id' cannot be found.`;
-                    }
-  }
-    
+
+  //  if ( dinoId.mya.length > 1) {
+  //       return `${dinoId.name} (${dinoId.pronunciation})\n${dinoId.info} It lived in the ${dinoId.period} period, over ${dinoId.mya[1]} million years ago.`;
+  //     }
+  // // }
+  return `A dinosaur with an ID of 'incorrect-id' cannot be found.`;
+}
+
+
+{
+}
+
 
 console.log(getDinosaurDescription(exampleDinosaurData, "GKl035EYKN"))
 
 
+
+
 // function getDinosaurDescription(dinosaurs, id) {
-//   for (let dinoId of dinosaurs) {
-//     if (id === dinoId.dinosaurId) 
-//       return `${dinoId.name} (${dinoId.pronunciation})\n${dinoId.info} It lived in the ${dinoId.period}period, over ${dinoId.mya[0]} million years ago.`;
-//     }
-
+//   for (let dinoId of dinosaurs)  
     
-//         return `A dinosaur with an ID of 'incorrect-id' cannot be found.`;
-//     }
-
+//      if (id === dinoId.dinosaurId && dinoId.mya.length <= 2) {
     
+//   return `${dinoId.name} (${dinoId.pronunciation})\n${dinoId.info} It lived in the ${dinoId.period} period, over ${dinoId.mya[0]} million years ago.`;
+//      }
+  
+//   //  }else
+//     // if ( dinoId.mya.length > 1) {
+//     //      return `${dinoId.name} (${dinoId.pronunciation})\n${dinoId.info} It lived in the ${dinoId.period} period, over ${dinoId.mya[2]} million years ago.`;
+     
+//       return `A dinosaur with an ID of 'incorrect-id' cannot be found.`;  
+    
+//      }
+  
+//   {
+//      }
+  
+ 
+// console.log(getDinosaurDescription(dinosaurs, "GKl035EYKN"))
 
-// console.log(getDinosaurDescription(exampleDinosaurData, "GKl035EYKN"))
+
 
 
 
