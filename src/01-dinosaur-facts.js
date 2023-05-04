@@ -35,7 +35,12 @@ const exampleDinosaurData = require('../data/dinosaurs');
 // 5. Assign the converted value to a variable.
 // 6. Return a new object with the value of the name of dinosaur as the key and the converted value of the length as the value.
 
-function getLongestDinosaur(dinosaurs) {}
+function getLongestDinosaur(dinosaurs) {
+	// Guard clause: if `exampleDinosaurData` is empty return {}.
+	if (dinosaurs.length < 1) {
+		return {};
+	}
+}
 
 /**
  * getDinosaurDescription()
