@@ -5,7 +5,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all dinosaurs.
 */
-const exampleDinosaurData = require("../data/dinosaurs");
+const exampleDinosaurData = require('../data/dinosaurs');
 // Do not change the line above.
 
 /**
@@ -22,6 +22,19 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
+
+// Plan:
+
+// Goal: Function returns an object with the longest dinosaur from the list. Converts from meters to feet.
+
+// Steps:
+// 1. Iterate over the `dinosaurs` array of objects (i.e. each object is a dinosaur).
+// 2. Find the longest dinosaur. Access the `lengthInMeters` key/value pair. Use the `.reduce()` method.
+// 3. Access the value of the found dinosaur's length.
+// 4. Convert the length to feet from meters: multiply the meters by `3.281`.
+// 5. Assign the converted value to a variable.
+// 6. Return a new object with the value of the name of dinosaur as the key and the converted value of the length as the value.
+
 function getLongestDinosaur(dinosaurs) {}
 
 /**
@@ -74,7 +87,7 @@ function getDinosaurDescription(dinosaurs, id) {}
 function getDinosaursAliveMya(dinosaurs, mya, key) {}
 
 module.exports = {
-  getLongestDinosaur,
-  getDinosaurDescription,
-  getDinosaursAliveMya,
+	getLongestDinosaur,
+	getDinosaurDescription,
+	getDinosaursAliveMya,
 };
