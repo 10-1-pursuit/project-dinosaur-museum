@@ -81,6 +81,18 @@ function getLongestDinosaur(dinosaurs) {
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
+
+// Plan: 
+
+// Goal: Returns a formatted description of a dinosaur. If the dinosaur cannot be found, returns an error message.
+
+// Steps:
+// 1. Use the `.find()` method to find a dinosaur in the `dinosaurs` array passing in the string `id` inputted by the user and store it to a variable `foundDinosaur`.
+// 2. Create a guard clause to check if the value of `foundDinosaur` is `undefined` or not (i.e. whether it exists in the array or not). 
+// 3. If `foundDinosaur` is `undefined`, return a properly error message string. 
+// 4. If `foundDinosaur` contains the found dinosaur object, destructure the necessary keys to be used to return a properly formatted string, describing the dinosaur. 
+// 5. Return the properly formatted string describing the found dinosaur.
+
 function getDinosaurDescription(dinosaurs, id) {}
 
 /**
