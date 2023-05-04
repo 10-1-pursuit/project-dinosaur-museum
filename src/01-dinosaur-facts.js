@@ -136,7 +136,40 @@ function getDinosaurDescription(dinosaurs, id) {
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+
+// Plan:
+
+// Goal: Returns an array of dinosaurs who were alive at the given `mya` (i.e. "millions of years ago") value. If a `key` is provided, returns the value of that key for each dinosaur alive at that time. Otherwise, returns the ID.
+
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+	// Takes care of default. Create a variable `keyOrId` and assign the optional `key` inputted by the user to it.
+	let keyOrId = key;
+
+	// Guard clause: if inputted `key` by user is not in each object of `dinosaurs` or the user doesn't put a `key` in, assign the value of `dinosaurId` to `keyOrId`.
+	if (key === undefined || dinosaurs[0][key] === undefined) {
+		keyOrId = 'dinosaurId';
+	}
+
+	// Use `.filter()` according to the inputted `mya` value and the provided criteria in JSDoc.
+	let dinoAliveMya = dinosaurs.filter((dino) => {
+		// Variables for setting the `mya` range.
+		let low = dino.mya[dino.mya.length - 1];
+		let high = dino.mya[0];
+
+		if (dino.mya.length > 1) {
+			// Setting a range for `mya`.
+			if (mya <= high && mya >= low) {
+				return dino[keyOrId];
+			}
+			// If the dinosaur only has a single value for `mya`, allows for the `mya` value to be equal to the given value or one less. For example, if a dinosaur has a `mya` value of `[29]`, the dinosaur's information will be returned if `29` is entered or `28` is entered.
+		} else if (mya === high || mya === high - 1) {
+			return dino[keyOrId];
+		}
+	});
+
+	// Create a new array with `.map()` and add the appropriate value based on key in `keyOrId` which is either the `dinosaurId`(s) of the filtered dinosaurs or the values according to the key passed in by the user.
+	return dinoAliveMya.map((dino) => dino[keyOrId]);
+}
 
 module.exports = {
 	getLongestDinosaur,
