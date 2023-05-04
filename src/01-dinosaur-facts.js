@@ -30,6 +30,15 @@ function getLongestDinosaur(dinosaurs) {
     return longestDinoObj
   }
 
+  // iterate through dinosaur array
+  for (let i = 1; i < dinosaurs.length; i++) {
+    // (test) should return the first dinosaur if there are multiples with the same length
+    if (longestDino < dinosaurs[i].lengthInMeters) {
+      longestDino = dinosaurs[i].lengthInMeters
+      longestDinoName = dinosaurs[i].name
+    }
+  }
+
   return longestDinoObj
 }
 
