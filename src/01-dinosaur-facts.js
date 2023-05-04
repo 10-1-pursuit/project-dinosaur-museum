@@ -55,7 +55,35 @@ console.log(getLongestDinosaur(exampleDinosaurData))
  * @param {string} id - The unique identifier for the dinosaur.
  * @returns {string} A detailed description of the dinosaur.
  *
- * 
+ ***/
+
+// function getDinosaurDescription(dinosaurs, id) {
+//   let result;
+//   for(const dino of dinosaurs){
+//     if(dino.dinosaurId === dino.dinosaurId){
+//      result= `${dino.name} (${dino.pronunciation})\n${dino.info}`
+      
+//     }
+//   }
+//   return result;
+// }
+// console.log(getDinosaurDescription(exampleDinosaurData,"U9vuZmgKwUr"))
+
+function getDinosaurDescription(dinosaurs, id) {
+  let result;
+  for(const id of dinosaurs){
+    if(id.dinosaurId === id.dinosaurId){
+     result= `${id.name} (${id.pronunciation})\n${id.info}`
+      
+    }
+  }
+  return result;
+}
+console.log(getDinosaurDescription(dinosaurs,"U9vuZmgKwUr"))
+
+
+
+
 
 /**
  * getDinosaursAliveMya()
