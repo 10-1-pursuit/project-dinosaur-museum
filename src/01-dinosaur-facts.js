@@ -82,18 +82,34 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 
-// Plan: 
+// Plan:
 
 // Goal: Returns a formatted description of a dinosaur. If the dinosaur cannot be found, returns an error message.
 
 // Steps:
-// 1. Use the `.find()` method to find a dinosaur in the `dinosaurs` array passing in the string `id` inputted by the user and store it to a variable `foundDinosaur`.
-// 2. Create a guard clause to check if the value of `foundDinosaur` is `undefined` or not (i.e. whether it exists in the array or not). 
-// 3. If `foundDinosaur` is `undefined`, return a properly error message string. 
-// 4. If `foundDinosaur` contains the found dinosaur object, destructure the necessary keys to be used to return a properly formatted string, describing the dinosaur. 
+// 1. Use the `.find()` method to find a dinosaur in the `dinosaurs` array passing in the string `id` inputted by the user and store it to a variable `foundDino`.
+// 2. Create a guard clause to check if the value of `foundDino` is `undefined` or not (i.e. whether it exists in the array or not).
+// 3. If `foundDino` is `undefined`, return a properly error message string.
+// 4. If `foundDino` contains the found dinosaur object, destructure the necessary keys to be used to return a properly formatted string, describing the dinosaur.
 // 5. Return the properly formatted string describing the found dinosaur.
 
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+	// Use the `.find()` method to find a dinosaur in `dinosaurs`.
+	const foundDino = dinosaurs.find((dino) => dino.dinosaurId === id);
+
+	// Guard clause: if `foundDino` cannot be found, return an error message.
+	if (foundDino === undefined) {
+		return `A dinosaur with an ID of '${id}' cannot be found.`;
+	}
+
+	// Destructure keys from `foundDino`.
+	const { name, pronunciation, info, period, mya } = foundDino;
+
+	// Return appropriately formatted description string, using the destructured keys from `foundDino`. Use the lower value if more than 1 in the `mya` array (i.e. `mya[mya.length - 1]`), because the description says over the number of years and if more than one element then the first is larger.
+	return `${name} (${pronunciation})\n${info} It lived in the ${period} period, over ${
+		mya[mya.length - 1]
+	} million years ago.`;
+}
 
 /**
  * getDinosaursAliveMya()
