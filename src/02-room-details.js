@@ -3,8 +3,8 @@
 
   You may use this data to test your functions. You may assume the shape of the data remains the same but that the values may change.
 */
-const exampleDinosaurData = require("../data/dinosaurs");
-const exampleRoomData = require("../data/rooms");
+const exampleDinosaurData = require('../data/dinosaurs');
+const exampleRoomData = require('../data/rooms');
 // Do not change the lines above.
 
 /**
@@ -25,8 +25,26 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
 
+// Plan:
+
+// Goal: Return the name of the room where the given dinosaur can be found. If the dinosaur does not exist in the `dinosaurs` list or cannot be found in any room, return an error message that says so.
+
+// Steps:
+// 1. Create a variable `foundDino`.
+// 2. Use the `.find()` method and the inputted `dinosaurName` string to search the `dinosaurs` array to find the dinosaur if it exists. Assign result to `foundDino`.
+// 3. Test to see if `foundDino` is `undefined` or not.
+// 4. If `foundDino` is `undefined`, return appropriate error message.
+// 5. If `foundDino` does exist, reassign the `dinosaurId` to `foundDino`.
+// 6. Iterate over the `rooms` array and then iterate over each `rooms.dinosaurs` array to see if any contain `foundDino` id.
+// 7. If found, create a `dinoRoom` variable, and assign the `rooms.name` variable to it and return it.
+// 8. If not found, return the appropriate error message.
+
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+	console.log(dinosaurs[0]);
+	console.log(rooms[0]);
+}
+console.log(getRoomByDinosaurName(exampleDinosaurData, exampleRoomData));
 /**
  * getConnectedRoomNamesById()
  * ---------------------
@@ -52,6 +70,6 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
 function getConnectedRoomNamesById(rooms, id) {}
 
 module.exports = {
-  getRoomByDinosaurName,
-  getConnectedRoomNamesById,
+	getRoomByDinosaurName,
+	getConnectedRoomNamesById,
 };
