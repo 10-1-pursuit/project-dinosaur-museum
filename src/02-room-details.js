@@ -35,16 +35,51 @@ const exampleRoomData = require('../data/rooms');
 // 2. Use the `.find()` method and the inputted `dinosaurName` string to search the `dinosaurs` array to find the dinosaur if it exists. Assign result to `foundDino`.
 // 3. Test to see if `foundDino` is `undefined` or not.
 // 4. If `foundDino` is `undefined`, return appropriate error message.
-// 5. If `foundDino` does exist, reassign the `dinosaurId` to `foundDino`.
+// 5. If `foundDino` does exist, create a variable `foundDinoId` and assign the found dinosaur's id to it.
 // 6. Iterate over the `rooms` array and then iterate over each `rooms.dinosaurs` array to see if any contain `foundDino` id.
 // 7. If found, create a `dinoRoom` variable, and assign the `rooms.name` variable to it and return it.
 // 8. If not found, return the appropriate error message.
 
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-	console.log(dinosaurs[0]);
-	console.log(rooms[0]);
+	// Create a variable `roomName` to either hold the room name the dinosaur is found in or one of the 2 expected error messages based on conditions.
+	let roomName;
+
+	// Create a variable `foundDino` to refer to the found dinosaur or if not than `undefined`. Use `.find()` to search for the requested dinosaur by the `dinosaurName` string inputted by the user.
+	let foundDino = dinosaurs.find((dino) => dino.name === dinosaurName);
+	// Create a variable `foundDinoId`.
+	let foundDinoId;
+
+	// If `foundDino` is exists, then assign the associated id at the `dinosaurId` key to it. We need it to search the `rooms` array, since only the dinosaurs' ids are found there.
+	if (foundDino) {
+		foundDinoId = foundDino.dinosaurId;
+
+		// Build a nested for loop in order to check every array containing the dinosaur ids assigned to each `room` object's `dinosaurs` key. Every `room` is located at each index of the `room` array.
+		for (let i = 0; i < rooms.length; i++) {
+			for (let j = 0; j < rooms[i].dinosaurs.length; j++) {
+				// Access each `dinosaurs` array's id and assign it to a variable `foundDinoIdInRoom`.
+				let foundDinoIdInRoom = rooms[i].dinosaurs[j];
+				// If `foundDinoId` from `dinosaurs` matches `foundDinoIdInRoom`, the dinosaur is in said room.
+				if (foundDinoIdInRoom === foundDinoId) {
+					// Assign the name of said room at the `name` key to `roomName`.
+					roomName = rooms[i].name;
+					// Return the room name string.
+					return roomName;
+				}
+			}
+		}
+		// If `roomName` is indefined meaning the dinosaur wasn't found in any of the rooms, assign the appropriate error message, interpolating the inputted `dinosaurName` from the user.
+		roomName = `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
+		// If the dinosaur wasn't found in `dinosaurs` or any of the rooms, assign the appropriate error message to `roomName`.
+	} else {
+		roomName = `Dinosaur with name '${dinosaurName}' cannot be found.`;
+	}
+
+	// Return `roomName` either with the room name of found dinosaur or the appropriate error message based on conditions.
+	return roomName;
 }
-console.log(getRoomByDinosaurName(exampleDinosaurData, exampleRoomData));
+console.log(
+	getRoomByDinosaurName(exampleDinosaurData, exampleRoomData, 'Pterodactyl')
+);
 /**
  * getConnectedRoomNamesById()
  * ---------------------
