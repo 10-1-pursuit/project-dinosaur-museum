@@ -26,7 +26,7 @@ function getLongestDinosaur(dinosaurs) {
   if(dinosaurs.length === 0){return {};}
   let currentDinosaurLength = 0
   let currentDinosaurID = 0
-  const longestDinosaur = dinosaurs.forEach(dinosaur => {
+  dinosaurs.forEach(dinosaur => {
     if(!currentDinosaurLength){
       currentDinosaurLength = dinosaur.lengthInMeters
     }
@@ -70,7 +70,6 @@ function getDinosaurDescription(dinosaurs, id) {
   }else{
     return `A dinosaur with an ID of '${id}' cannot be found.`
   }
-  // "Xenoceratops (ZEE-no-SEH-ruh-tops)\nXenoceratops had horns and a bony frill with elaborate ornamentation of projections, knobs, and spikes. It lived in the Early Cretaceous period, over 77.5 million years ago."
 }
 
 /**
