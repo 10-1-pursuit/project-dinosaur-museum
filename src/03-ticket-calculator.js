@@ -85,6 +85,15 @@ function calculateTicketPrice(ticketData, ticketInfo) {
 			}
 		}
 	}
+
+	// Set the `accumulator`
+	let totalTicketPrice = 0;
+
+	// Use the `accumulator pattern` to get a sub-total based on `ticketType` and `entrantType`.
+	totalTicketPrice +=
+		ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType];
+
+	return totalTicketPrice;
 }
 // const ticketInfo = {
 // 	ticketType: 'general',
