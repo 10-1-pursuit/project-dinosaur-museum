@@ -55,15 +55,18 @@ function getLongestDinosaur(dinosaurs) {
  */
 function getDinosaurDescription(dinosaurs, id) {
   for (let dino of dinosaurs) {  // tried to use .find function for cleaner code but couldn't use it how i wanted it.
-    if (dino.dinosaurId == id) {
-      if (dino.mya.length == 2) {  // used an if statement to check on the MYA and how many index's it had.
+    if (dino.dinosaurId === id) {
+      if (dino.mya.length === 2) {  // used an if statement to check on the MYA and how many index's it had.
         return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${dino.mya[1]} million years ago.`
-      } else {
+      } if (dino.mya.length === 1) {
         return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${dino.mya[0]} million years ago.`
       };
     };
   }; return "A dinosaur with an ID of '" + id + "' cannot be found."
 };
+
+
+
 
 /**
  * getDinosaursAliveMya()
@@ -91,35 +94,18 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  let foundDinos = [];
-  for (let dino of dinosaurs) {
-    if (dino.mya.length === 1) {
-      if (mya === dino.mya[0]  || mya === (dino.mya[0] - 1)) {
-        if (key) {
-          if (dino.hasOwnProperty(key)) {
-            foundDinos.push(dino[key]);
-          } else {
-            foundDinos.push(dino.dinosaurId)
-          };
-        } else {
-          foundDinos.push(dino.dinosaurId)
-        };
-      };
-    };
-    if (dino.mya.length === 2) {
-      if (mya === dino.mya[1]) {
-        if (key) {
-          if (dino.hasOwnProperty(key)) {
-            foundDinos.push(dino[key]);
-          } else {
-            foundDinos.push(dino.dinosaurId)
-          };
-        };
-      };
-    };
-  };
-  return foundDinos
-};
+let target = key || "dinosaurId";
+let theDinoFound = [];
+
+for(let dino of dinosaurs){
+  if (dino.mya.length === 1 && (mya === (dino.mya[0]-1 )|| (mya === dino.mya[0]))){
+  theDinoFound.push(dino[target])
+} if (mya <= dino.mya[0] && mya >= dino.mya[1]){
+    theDinoFound.push(dino[target])
+  }
+}
+return theDinoFound;
+}
 
 module.exports = {
   getLongestDinosaur,
