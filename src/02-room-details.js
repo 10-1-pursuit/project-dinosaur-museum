@@ -67,7 +67,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 				}
 			}
 		}
-		// If `roomName` is indefined meaning the dinosaur wasn't found in any of the rooms, assign the appropriate error message, interpolating the inputted `dinosaurName` from the user.
+		// If `roomName` is `undefined` meaning the dinosaur wasn't found in any of the rooms, assign the appropriate error message, interpolating the inputted `dinosaurName` from the user.
 		roomName = `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
 		// If the dinosaur wasn't found in `dinosaurs` or any of the rooms, assign the appropriate error message to `roomName`.
 	} else {
@@ -77,32 +77,78 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 	// Return `roomName` either with the room name of found dinosaur or the appropriate error message based on conditions.
 	return roomName;
 }
-console.log(
-	getRoomByDinosaurName(exampleDinosaurData, exampleRoomData, 'Pterodactyl')
-);
 /**
  * getConnectedRoomNamesById()
  * ---------------------
  * Returns an array of strings, where each string is the name of a room connected to the given room. If a room ID cannot be found, an error message is returned.
- *
- * @param {Object[]} rooms - An array of room objects. See the `data/rooms.js` file for an example of the input.
- * @param {string} id - A unique room identifier.
- * @returns {string|string[]} An array of room names, or an error message.
- *
- * EXAMPLE:
- *  getConnectedRoomNamesById(rooms, "aIA6tevTne");
- *  //> ["Ticket Center"]
- *
- * EXAMPLE:
- *  getConnectedRoomNamesById(rooms, "A6QaYdyKra");
- *  //> [
-      "Entrance Room",
-      "Coat Check Room",
-      "Ellis Family Hall",
-      "Kit Hopkins Education Wing"
-    ]
- */
-function getConnectedRoomNamesById(rooms, id) {}
+*
+* @param {Object[]} rooms - An array of room objects. See the `data/rooms.js` file for an example of the input.
+* @param {string} id - A unique room identifier.
+* @returns {string|string[]} An array of room names, or an error message.
+*
+* EXAMPLE:
+*  getConnectedRoomNamesById(rooms, "aIA6tevTne");
+*  //> ["Ticket Center"]
+*
+* EXAMPLE:
+*  getConnectedRoomNamesById(rooms, "A6QaYdyKra");
+*  //> [
+  "Entrance Room",
+  "Coat Check Room",
+  "Ellis Family Hall",
+  "Kit Hopkins Education Wing"
+]
+*/
+
+// Plan:
+
+// Goal: Returns an array of strings, where each string is the name of a room connected to the given room. If a room ID cannot be found, an error message is returned.
+
+// Steps:
+// 1. Search through all the rooms using the inputted room id from the user.
+// 2. If room is found according to the inputted id, access the `connectsTo` array.
+// 3. Iterate over the said `connectsTo` array.
+// 4. Get each element (i.e. maybe use a native array method) and search the `rooms` array to see if it exists.
+// 5. If it doesn't return appropriate error message.
+// 6. If it exists, use a callback function to create a new array with the `name` of room instead of the `roomId`.
+// 7. Return the new string array of all the found connected rooms.
+
+function getConnectedRoomNamesById(rooms, id) {
+	// Use `.find()` to search for room by the inputted `id`.
+	let foundRoom = rooms.find(({ roomId }) => roomId === id);
+	console.log(foundRoom);
+	let connectedRooms;
+
+	// Guard clause: if `foundRoom` is undefined, return the appropriate error message.
+	if (foundRoom === undefined) {
+		return `Room with ID of '${id}' could not be found.`;
+	}
+
+	// Destructure `connectsTo` key where the array is.
+	const { connectsTo } = foundRoom;
+
+	connectedRooms = rooms
+		.filter(({ roomId }) => {
+			if (connectsTo.includes(roomId)) {
+				return roomId;
+			}
+		})
+		.map(({ name }) => name);
+
+	//
+	// `Room with ID of '${roomId}' could not be found.`;
+	// test = test.map(({ name }) => name);
+	// console.log(test);
+	// connectedRooms = connectsTo.find((connectedId) => {
+	// 	if (connectedId === roomId) {
+	// 		return name;
+	// 	}
+	// });
+
+	// console.log(connectsTo, roomId, name);
+	// return connectedRooms;
+}
+console.log(getConnectedRoomNamesById(exampleRoomData, 'zwfsfPU5u'));
 
 module.exports = {
 	getRoomByDinosaurName,
