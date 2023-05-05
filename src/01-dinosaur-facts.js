@@ -63,7 +63,15 @@ function getLongestDinosaur(dinosaurs) {
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  const dinosaurTarget = dinosaurs.find(dinosaur => dinosaur.dinosaurId === id)
+  if(!!dinosaurTarget){
+    return `${dinosaurTarget.name} (${dinosaurTarget.pronunciation})\n${dinosaurTarget.info} It lived in the ${dinosaurTarget.period} period, over ${dinosaurTarget.mya[dinosaurTarget.mya.length - 1]} million years ago.`
+  }else{
+    return `A dinosaur with an ID of '${id}' cannot be found.`
+  }
+  // "Xenoceratops (ZEE-no-SEH-ruh-tops)\nXenoceratops had horns and a bony frill with elaborate ornamentation of projections, knobs, and spikes. It lived in the Early Cretaceous period, over 77.5 million years ago."
+}
 
 /**
  * getDinosaursAliveMya()
