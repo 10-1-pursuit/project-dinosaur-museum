@@ -117,7 +117,7 @@ function getConnectedRoomNamesById(rooms, id) {
 	// Use `.find()` to search for room by the inputted `id`.
 	let foundRoom = rooms.find(({ roomId }) => roomId === id);
 
-	// Guard clause: if `foundRoom` is undefined, return the appropriate error message.
+	// Guard clause: if `foundRoom` is `undefined`, return the appropriate error message.
 	if (foundRoom === undefined) {
 		return `Room with ID of '${id}' could not be found.`;
 	}
@@ -136,7 +136,7 @@ function getConnectedRoomNamesById(rooms, id) {
 				connectedRooms.push(rooms[j].name);
 				break;
 			}
-			// If connected room id is incorrect, return appropriate error message.
+			// Guard clause: if connected room id is incorrect, return appropriate error message.
 			if (j === rooms.length - 1) {
 				return `Room with ID of '${connectsTo[i]}' could not be found.`;
 			}
