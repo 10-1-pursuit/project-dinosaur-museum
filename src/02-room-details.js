@@ -116,8 +116,6 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 function getConnectedRoomNamesById(rooms, id) {
 	// Use `.find()` to search for room by the inputted `id`.
 	let foundRoom = rooms.find(({ roomId }) => roomId === id);
-	console.log(foundRoom);
-	let connectedRooms;
 
 	// Guard clause: if `foundRoom` is undefined, return the appropriate error message.
 	if (foundRoom === undefined) {
@@ -127,28 +125,27 @@ function getConnectedRoomNamesById(rooms, id) {
 	// Destructure `connectsTo` key where the array is.
 	const { connectsTo } = foundRoom;
 
-	connectedRooms = rooms
-		.filter(({ roomId }) => {
-			if (connectsTo.includes(roomId)) {
-				return roomId;
+	// Create empty array `connectedRooms` for found room names.
+	let connectedRooms = [];
+
+	// Outer loop - loops over `connectsTo` array.
+	for (let i = 0; i < connectsTo.length; i++) {
+		// Inner loop - loops over the `rooms` array to find match.
+		for (let j = 0; j < rooms.length; j++) {
+			if (rooms[j].roomId === connectsTo[i]) {
+				connectedRooms.push(rooms[j].name);
+				break;
 			}
-		})
-		.map(({ name }) => name);
+			// If connected room id is incorrect, return appropriate error message.
+			if (j === rooms.length - 1) {
+				return `Room with ID of '${connectsTo[i]}' could not be found.`;
+			}
+		}
+	}
 
-	//
-	// `Room with ID of '${roomId}' could not be found.`;
-	// test = test.map(({ name }) => name);
-	// console.log(test);
-	// connectedRooms = connectsTo.find((connectedId) => {
-	// 	if (connectedId === roomId) {
-	// 		return name;
-	// 	}
-	// });
-
-	// console.log(connectsTo, roomId, name);
-	// return connectedRooms;
+	return connectedRooms;
 }
-console.log(getConnectedRoomNamesById(exampleRoomData, 'zwfsfPU5u'));
+console.log(getConnectedRoomNamesById(exampleRoomData, 'xwG7O4wQl'));
 
 module.exports = {
 	getRoomByDinosaurName,
