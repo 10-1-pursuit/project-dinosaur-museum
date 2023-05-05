@@ -36,7 +36,7 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> 3000
  *  
- * EXAMPLE:
+ * EXAMPLE:2
  *  const ticketInfo = {
       ticketType: "membership",
       entrantType: "child",
@@ -45,7 +45,7 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> 2500
 
- * EXAMPLE:
+ * EXAMPLE:3
  *  const ticketInfo = {
       ticketType: "general",
       entrantType: "kid", // Incorrect
@@ -54,8 +54,7 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-
-
+    
     const ticketInfo = {
       ticketType: "general",
       entrantType: "adult",
@@ -64,21 +63,22 @@ const exampleTicketData = require("../data/tickets");
 
     function calculateTicketPrice(ticketData, ticketInfo) {
       for (ticketLook of ticketData){
-
+//general admision
         if (ticketInfo.ticketType===ticketLook.general.description &&
           ticketInfo.entrantType===ticketInfo.entrantType && Object.keys(ticketLook.general.priceInCents)=== ticketInfo.entrantType||
-           ticketInfo.extras.length>0){
+           ticketInfo.extras.length>0)
             return ticketLook.general.priceInCents.adult;
-      
-      
-      
-      
+//membership admission
+            if (ticketInfo.ticketType===ticketLook.membership.description&& ticketLook.membership.priceInCents=== ticketInfo.entrantType&&
+              Object.keys(ticketInfo.extras.movie.priceInCents)=== ticketInfo.extras)//{
+                return Object.values(ticketLook.membership.priceInCents)+Object.values(ticketLook.extras.priceInCents)
+                //{
+//nona admission doesnt exist 
+                  if(ticketInfo.entrantType=== Object.keys(ticketLook.general.priceInCents)){
+
+                    return `Entrant type ${ticketInfo.entrantType} cannot be found.` }                     
         }
-
-      }
-
-  
-}
+      } 
 
 console.log(caluculateTicketPrice(exampleTicketData, ticketInfo))
 
