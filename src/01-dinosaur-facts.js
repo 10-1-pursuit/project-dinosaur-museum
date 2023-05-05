@@ -22,7 +22,23 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+function getLongestDinosaur(dinosaurs) {
+  if (dinosaurs.length === 0) {
+    return {};
+  } let dinosaurArr = dinosaurs[0]
+  for (r = 1; r < dinosaurs.length; r++) {
+    if (dinosaurs[r].lengthInMeters > dinosaurArr.lengthInMeters)
+      dinosaurArr = dinosaurs[r]
+    // console.log(dinosaurArr)
+  }
+  return ({
+    [dinosaurArr.name]: dinosaurArr.lengthInMeters * 3.281
+  })
+
+}
+// console.log(getLongestDinosaur(exampleDinosaurData))
+
+
 
 /**
  * getDinosaurDescription()
@@ -44,8 +60,16 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
-
+//returns dinodescrip else returns error 
+function getDinosaurDescription(dinosaurs, id) {
+  //   let noId = "incorrect-id";
+  //   for (const dino of dinosaurs ){
+  //     `${dino.name} ${dino.pronounciation}\n${dino.info} It lived in the ${dino.period}, over ${dino.mya} million years ago.`
+  //   }
+  //   return 
+  // } if (! id === dino.id) {
+  //   return `A dinosaur with an ID of ${noId} cannot be found. `
+}
 /**
  * getDinosaursAliveMya()
  * ---------------------
@@ -61,6 +85,7 @@ function getDinosaurDescription(dinosaurs, id) {}
  * EXAMPLE:
  *  getDinosaursAliveMya(dinosaurs, 150);
  *  //> ["YLtkN9R37", "GGvO1X9Zeh", "BFjjLjea-O", "V53DvdhV2A"]
+ * // dino.dinosaurId
  *
  *  getDinosaursAliveMya(dinosaurs, 65);
  *  //> ["WHQcpcOj0G"]
@@ -71,7 +96,26 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+// let key: 
+// return an array of dinos that was alive at param "mya" value , if no "key" param otherwise return dino id.
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  let dinoArr = []
+  let dinoId = key || "dinosaurId"
+  for (const dino of dinosaurs) {
+    if (!dino[dinoId]) {
+      dinoId = "dinosaurId"
+    }
+    if (dino.mya.length === 1 &&
+       (dino.mya[0] === mya || dino.mya[0] - 1 === mya)) { dinoArr.push(dino[dinoId]) }
+    else if (mya <= dino.mya[0] && mya >= dino.mya[1]) {
+      dinoArr.push(dino[dinoId])
+    }
+  }
+  return dinoArr
+}
+//dino. 
+//return 
+
 
 module.exports = {
   getLongestDinosaur,
