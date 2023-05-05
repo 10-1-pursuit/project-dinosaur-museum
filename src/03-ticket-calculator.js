@@ -93,21 +93,15 @@ function calculateTicketPrice(ticketData, ticketInfo) {
 	totalTicketPrice +=
 		ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType];
 
+	// Use a `for...of` loop to loop through `ticketInfo.extras` array and adjust the total accordingly, using the accessing structure of `ticketData` and dynamically plugging in the `extras` string for the key if any to the total.
+	for (let extra of ticketInfo.extras) {
+		totalTicketPrice +=
+			ticketData.extras[extra].priceInCents[ticketInfo.entrantType];
+	}
+
 	return totalTicketPrice;
 }
-// const ticketInfo = {
-// 	ticketType: 'general',
-// 	entrantType: 'child',
-// 	extras: ['movie'],
-// };
 
-const ticketInfo = {
-	ticketType: 'general',
-	entrantType: 'child',
-	extras: [],
-};
-
-console.log(calculateTicketPrice(exampleTicketData, ticketInfo));
 /**
  * purchaseTickets()
  * ---------------------
