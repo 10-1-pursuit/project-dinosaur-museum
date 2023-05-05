@@ -145,7 +145,6 @@ function getConnectedRoomNamesById(rooms, id) {
 
 	return connectedRooms;
 }
-console.log(getConnectedRoomNamesById(exampleRoomData, 'xwG7O4wQl'));
 
 module.exports = {
 	getRoomByDinosaurName,
