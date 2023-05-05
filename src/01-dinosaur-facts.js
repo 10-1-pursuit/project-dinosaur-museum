@@ -105,16 +105,14 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
   //if they given valid key then use the key in the array 
   //if there is no key return id --not valid return ids
   const aliveMya = []
+  let dinoKey = key || 'dinosaurId'
   for(let dinosaur of dinosaurs){
       if(!dinosaur[key]){
-        aliveMya.push(dinosaur.dinosaurId)
-      }
-      else {
-        aliveMya.push(dinosaur.dinosaurId)
+        dinoKey = 'dinosaurId'
       }
       if( dinosaur.mya.length === 1 && //if the dino is 1 compare the mya that came into the function 
       (dinosaur.mya[0] === mya || dinosaur.mya[0]- 1 === mya)){
-      aliveMya.push(dinosaur.dinosaurId)
+      aliveMya.push(dinosaur[dinoKey])
       }
     }
     return aliveMya
