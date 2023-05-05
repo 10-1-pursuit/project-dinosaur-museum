@@ -5,6 +5,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all dinosaurs.
 */
+const dinosaurs = require("../data/dinosaurs");
 const exampleDinosaurData = require("../data/dinosaurs");
 // Do not change the line above.
 
@@ -66,8 +67,18 @@ function getLongestDinosaur(dinosaurs) {
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(_dinosaurs, _id) {
-
+function getDinosaurDescription(_dinosaurs, _id) { 
+  let value  
+   for(let info of dinosaurs){
+    if(info.dinosaurId === _id){
+      value = info
+    }
+  }
+   if(!value){
+    return `A dinosaur with an ID of '${_id}' cannot be found.`;
+   }
+  
+return `${value.name} (${value.pronunciation})\n${value.info} It lived in the ${value.period} period, over ${value.mya[value.mya.length - 1]} million years ago.`
 }
 
 /**
