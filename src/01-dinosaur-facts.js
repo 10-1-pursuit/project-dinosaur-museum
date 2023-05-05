@@ -27,15 +27,11 @@ function getLongestDinosaur(dinosaurs) {
   const longestDinosaur = dinosaurs.find(dinosaur => {
     //declaring a variable to an array of dinosaur lengths
     const dinoLengths = dinosaurs.map(dinosaur => dinosaur.lengthInMeters)
-    //return dinosaur length equal to largest number in array of dinoLengths
+    //checks and returns current dino equal to max dino length
     return dinosaur.lengthInMeters === Math.max(...dinoLengths)
   })
-  if (!longestDinosaur) {
-    //return empty object if nothing is passed
-    return {}
-  } else
-    //return object with dino name as key and length converted to feet as the value
-    return { [longestDinosaur.name]: longestDinosaur.lengthInMeters * 3.281 }
+  //checks truthy value of longestDinosaur and returns object with dino name as key and length converted to feet as the value or empty object
+  return longestDinosaur ? { [longestDinosaur.name]: longestDinosaur.lengthInMeters * 3.281 } : {};
 }
 
 /**
