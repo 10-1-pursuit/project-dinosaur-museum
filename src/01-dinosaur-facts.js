@@ -69,7 +69,7 @@ function getDinosaurDescription(dinosaurs, id) {
     }
   }
   if (!found) { // there is an existing value that isn't a given id
-    return `A dinosaur with an ID of '${id}' cannot be found.`; //i couldnt do interpolation of id - why? 
+    console.log( `A dinosaur with an ID of '${id}' cannot be found.`); //i couldnt do interpolation of id - why? 
   }
   return `${found.name} (${found.pronunciation})\n${ // obj.assign w my null bc it was reassigned to be the var(69)
     found.info
@@ -103,31 +103,31 @@ function getDinosaurDescription(dinosaurs, id) {
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {
-  //if key(optional ""), return it or return dino id
-  //if my mya = mya(param) or -1,
-  //use key to find dino
-  let foundKey = key || "dinosaurId";
-  let target = [];
+// function getDinosaursAliveMya(dinosaurs, mya, key) {
+//   //if key(optional ""), return it or return dino id
+//   //if my mya = mya(param) or -1,
+//   //use key to find dino
+//   let foundKey = key || "dinosaurId";
+//   let target = [];
 
-  for (let oneDino of dinosaurs) {
-    if (
-      oneDino.mya.length === 1 && (oneDino.mya[0] - 1) ||
-      mya === oneDino.mya[0])) {//check if my array has anything inside && if the mya(param) = myobj[0] or that value -1
-      target.push(oneDino[foundKey]); //push the kvp into empty arr
-    } else if (mya <= oneDino.mya[0] && mya >= oneDino.mya[1]) { //if param mya <= myobj & it's greater than the value after [0]
-      target.push(oneDino[foundKey]); // push the kvp into empty arr
-    }
-  }
+//   for (let oneDino of dinosaurs) {
+//     if (
+//       oneDino.mya.length === 1 && (oneDino.mya[0] - 1) ||
+//       mya === oneDino.mya[0])) {//check if my array has anything inside && if the mya(param) = myobj[0] or that value -1
+//       target.push(oneDino[foundKey]); //push the kvp into empty arr
+//     } else if (mya <= oneDino.mya[0] && mya >= oneDino.mya[1]) { //if param mya <= myobj & it's greater than the value after [0]
+//       target.push(oneDino[foundKey]); // push the kvp into empty arr
+//     }
+//   }
 
-  return target;
-}
+//   return target;
+// }
 
 function getDinosaursAliveMya(dinosaurs, mya, key) {
   let targetKey = key || "dinosaurId"; //declare key to be either key or the id as instructed
   let matching = []; //an empty array to push in the info if found , based on return instructions
 
-  for (let dino of dinosaurs) { 
+  for (let dino of dinosaurs) {
     if (!dino[targetKey]) { //if my obj doesn't have a key - 85
       targetKey = "dinosaurId"; // let it be the id
     }
