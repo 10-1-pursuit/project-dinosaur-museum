@@ -156,7 +156,7 @@ console.log(getDinosaurDescription(exampleDinosaurData, "GKl035EYKN"))
  *
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
- */
+ */// STILLNEED TO FIX 3RD FUNCTION OF FIRST PAGE
 function getDinosaursAliveMya(dinosaurs, mya, key) {
   for (let dinoLife of dinosaurs)
   if(mya === dinoLife.mya){
