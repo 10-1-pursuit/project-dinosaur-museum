@@ -26,23 +26,43 @@ const exampleDinosaurData = require("../data/dinosaurs");
 // max = arr[0]
 //push string into new object key and vlaue
 
+
+
+
 function getLongestDinosaur(dinosaurs){
-  let result;
   let longestDino = 0
-  let newDinoObj= {}
+  let dinoObj ={}
   for(const dino of dinosaurs){
       if(dino.lengthInMeters > longestDino){
         longestDino = dino.lengthInMeters;
-        result = `{${dino.name}: ${dino.lengthInMeters*3.281}}`
+      result= `{${dino.name}: ${dino.lengthInMeters*3.281}}`
+        
+        
       }
     }
   
 
-   return result;
-  
-  
+   return Object.values([result]);
 }
-console.log(getLongestDinosaur(exampleDinosaurData))
+  console.log(getLongestDinosaur(exampleDinosaurData))
+
+// function getLongestDinosaur(dinosaurs){
+//   let result;
+//   let longestDino = 0
+//   let newDinoObj= {}
+//   for(const dino of dinosaurs){
+//       if(dino.lengthInMeters > longestDino){
+//         longestDino = dino.lengthInMeters;
+//         result = `{${dino.name}: ${dino.lengthInMeters*3.281}}`
+//       }
+//     }
+  
+
+//    return result;
+  
+  
+// }
+// console.log(getLongestDinosaur(exampleDinosaurData))
 
 /**
  * getDinosaurDescription()
@@ -137,7 +157,13 @@ console.log(getDinosaurDescription(exampleDinosaurData, "GKl035EYKN"))
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  for (let dinoLife of dinosaurs)
+  if(mya === dinoLife.mya){
+    return dinoLife.dinosaurId
+  }
+}
+console.log(getDinosaursAliveMya(getDinosaurDescription,150))
 
 module.exports = {
   getLongestDinosaur,
