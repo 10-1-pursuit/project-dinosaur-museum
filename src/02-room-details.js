@@ -31,15 +31,17 @@ const exampleRoomData = require("../data/rooms");
 //     for(const worth of prod.products.priceInCents){
 //   }
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-  for(const roomLook of dinosaurs){
+  for(const roomLook of dinosaurs){//for loop to search through the array of objects
     
-    if (rooms ===roomLook.name && dinosaurName=== roomLook.dinosaurs){
-      return roomLook.name
-    }
-    return `Dinosaur with name ${dinosaurName} cannot be found.`;
+    if (roomLook.dinoasuars.length>=1 && rooms ===roomLook.name && dinosaurName=== roomLook.dinosaurs){
+      return roomLook.name //setup my Boolean if these values are true then return the rooms name. 
+    }                        // if dinosaurs.length is greater or equal than one so i can see if a dinosaur exist in the room.
+                              //If dino exist return roomLook.name which is the room the dinosaur woiuld be in
+    return `Dinosaur with name ${dinosaurName} cannot be found.`;// if no dinosuar is found return this message
     
   }
 }
+console.log(getRoomByDinosaurName(exampleRoomData, rooms, "Tyrannosaurus"));// invoking function with the parameters
 
 /**
  * getConnectedRoomNamesById()
@@ -62,8 +64,17 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
       "Ellis Family Hall",
       "Kit Hopkins Education Wing"
     ]
- */
-function getConnectedRoomNamesById(rooms, id) {}
+ *///if id is equal to room id i want to reutrn the name of all the rooms, if no room id is found return an error message
+ // i room equals room id i want to return all connect to rooms
+function getConnectedRoomNamesById(rooms, id) {
+  for(let idLook of rooms){
+    if (id=== idLook.roomId){
+      return idLook.connectTo
+    }
+    reuturn  `Room with ID of '${id}' could not be found.`;
+  }
+}
+console.log(getConnectedRoomNamesById(exampleRoomData,"A6QaYdyKra"))
 
 module.exports = {
   getRoomByDinosaurName,
