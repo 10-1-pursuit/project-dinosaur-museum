@@ -44,7 +44,19 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
     return "Dinosaur with name '" + dinosaurName +"' cannot be found."
    }
 };
-
+let theDinoFound = [];
+if(key){
+  
+}
+for(let dino of dinosaurs){
+  if (dino.mya.length === 1 && (mya === (dino.mya[0]-1 )|| (mya === dino.mya[0]))){
+  theDinoFound.push(dino[target])
+} else if (mya <= dino.mya[0] && mya >= dino.mya[1]){
+    theDinoFound.push(dino[target])
+  }
+}
+return theDinoFound;
+}
 
 
 
