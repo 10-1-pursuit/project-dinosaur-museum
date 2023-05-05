@@ -64,7 +64,6 @@ function getDinosaurDescription(dinosaurs, id) {
   let found = null; //can be reassigned to hold obj/array/number/boolean
   for (let dino of dinosaurs) {
     //iterate through dinosaurs
-
     if (dino.dinosaurId === id) { // compare my obj.id to id in param
       found = dino; //reassign null to my obj if === true
     }
