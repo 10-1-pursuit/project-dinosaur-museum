@@ -31,17 +31,14 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 
   target = dinosaurs.find((dino) => dinosaurName === dino.name)
   if (!target) {
-    
     return "Dinosaur with name '" + dinosaurName + "' cannot be found."
   }
-
   targetRoom = rooms.find(room => room.dinosaurs.includes(target.dinosaurId))
-
   if (!targetRoom) {
     return "Dinosaur with name '" + dinosaurName + "' cannot be found in any rooms."
   }
   return targetRoom.name
- 
+
 }
 
 
@@ -69,19 +66,24 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
     ]
  */
 function getConnectedRoomNamesById(rooms, id) {
-  let connectedRooms = [];
-  for(let room of rooms){
-    if(room.roomId === id){
-      for(let ids of room.connectsTo){
-        connectedRooms.push(ids)
-        console.log(ids)
+  let arrayOfRooms = [];
+let arrayOfRoomNames = [];
+let targetRoom = rooms.find((room) => room.roomId === id)
+  if(!targetRoom){
+    return "Room with ID of 'incorrect-id' could not be found."
+  } else {
+ targetRoom.connectsTo.forEach((room) => arrayOfRooms.push(room))    
+    for ( let target of arrayOfRooms){
+    rooms.find((room) => {
+      if(room.roomId === target){
+        arrayOfRoomNames.push(room.name);
       }
-    }
-    return connectedRooms;
-    
+    })
+  } return arrayOfRoomNames
+  } 
+   
   }
- 
- }
+
 
 module.exports = {
   getRoomByDinosaurName,

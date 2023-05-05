@@ -54,16 +54,14 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
-  for (let dino of dinosaurs) {  // tried to use .find function for cleaner code but couldn't use it how i wanted it.
-    if (dino.dinosaurId === id) {
-      if (dino.mya.length === 2) {  // used an if statement to check on the MYA and how many index's it had.
-        return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${dino.mya[1]} million years ago.`
-      } if (dino.mya.length === 1) {
-        return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${dino.mya[0]} million years ago.`
-      };
-    };
-  }; return "A dinosaur with an ID of '" + id + "' cannot be found."
-};
+  let targetDino = dinosaurs.find((dino) => dino.dinosaurId === id)
+  if (targetDino) {
+    millionYears = Math.min(...targetDino.mya)
+    return `${targetDino.name} (${targetDino.pronunciation})\n${targetDino.info} It lived in the ${targetDino.period} period, over ${millionYears} million years ago.`
+  } else 
+    return  "A dinosaur with an ID of '" + id + "' cannot be found."
+  }
+  
 
 
 
@@ -93,32 +91,34 @@ function getDinosaurDescription(dinosaurs, id) {
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {
-  let value = key
-  let foundDinos = [];
-  for (let dino of dinosaurs){
-    if(dino[value] === undefined){
-       value = "dinosaurId"
-     }
-    if (dino.mya.length === 1 && (mya === dino.mya[0]  || mya === (dino.mya[0] - 1))) {
-        if (value) {
-          if (dino.hasOwnProperty(value)) {
-            foundDinos.push(dino[value]);
-          };
-        };
-      };
-     if (mya <= dino.mya[0] && mya >= dino.mya[1]) {
-          if (value) {
-            if (dino.hasOwnProperty(value)) {
-              foundDinos.push(dino[value]);
-            };
-          }; return foundDinos
-        };
-    };
-      return foundDinos
-  };
+function getDinosaursAliveMya(dinosaurs, mya, key) { 
+let foundDinos = [];
 
-    
+for (let dino of dinosaurs) {
+  if ((dino.mya.length === 1) && (mya === dino.mya[0]) || (dino.mya.length === 1) && (mya >= (dino.mya[0] - 1))) {
+    if (key) {
+      if (key in dino) {
+        foundDinos.push(dino[key])
+      } else {
+        foundDinos.push(dino.dinosaurId)
+      };
+    };
+  };
+  if ((dino.mya.length === 2) && (mya <= dino.mya[0]) && (mya >= dino.mya[1])) {
+    if (key) {
+      if (key in dino) {
+        foundDinos.push(dino[key])
+      } else {
+        foundDinos.push(dino.dinosaurId)
+      };
+    };
+  };
+} return foundDinos;
+}
+
+
+
+
 module.exports = {
   getLongestDinosaur,
   getDinosaurDescription,
