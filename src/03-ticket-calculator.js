@@ -57,6 +57,7 @@ const exampleTicketData = require("../data/tickets");
 function calculateTicketPrice(ticketData, ticketInfo) {
   let totalPrice = 0
   const ticketKeys = Object.keys(ticketData)
+  const ticketDataExtrasKeys = Object.keys(ticketData.extras)
   let ticketType = ticketKeys.find(ticket => ticket === ticketInfo.ticketType)
   if(!ticketType){return `Ticket type '${ticketInfo.ticketType}' cannot be found.`}
   
@@ -64,8 +65,23 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   let entrantType = entrants.find(entrant => entrant === ticketInfo.entrantType)
   if(!entrantType){return `Entrant type '${ticketInfo.entrantType}' cannot be found.`}
   // `Extra type '' cannot be found.`
-  let ticketTypeObject = ticketData[ticketType]
-  totalPrice += ticketTypeObject.priceInCents[entrantType]
+  let c = ticketData[ticketType]
+  totalPrice += c.priceInCents[entrantType]
+  if(!!ticketInfo.extras.length){
+    let previewTotal = totalPrice
+    let foundExtras = []
+    for(const x of ticketInfo.extras){
+      for(const y of ticketDataExtrasKeys){
+        if(x === y){
+          let extraObj = ticketData.extras[y]
+          totalPrice += extraObj.priceInCents[entrantType]
+        }
+      }
+    }
+    if(previewTotal === totalPrice){
+      return `Extra type '${ticketInfo.extras}' cannot be found.`
+    }
+  }
   return totalPrice;
 }
 
