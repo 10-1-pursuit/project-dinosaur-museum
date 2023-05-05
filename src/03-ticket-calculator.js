@@ -5,7 +5,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all tickets.
 */
-const exampleTicketData = require("../data/tickets");
+const exampleTicketData = require('../data/tickets');
 // Do not change the line above.
 
 /**
@@ -54,8 +54,29 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
 
+// Plan:
+
+// Goal: Returns the ticket price based on the ticket information supplied to the function.
+
+// If either the `ticketInfo.ticketType` value or `ticketInfo.entrantType` value is incorrect, or any of the values inside of the `ticketInfo.extras` key is incorrect, an error message should be returned.
+
+// Steps:
+// 1. Write guard clauses for all the edge cases of incorrect or not included ticket types (i.e. general or membership), entrant type, or extras.
+// 2. Create a variable `totalTicketPrice` to be the `accumulator` for the total.
+// 3. Based on the ticket info and the criteria in the `tickets` object, use the `accumulator pattern` to come up with the total and store it in `totalTicketPrice`.
+// 4. Return the final total.
+
+function calculateTicketPrice(ticketData, ticketInfo) {
+	// Guard clauses: If either the `ticketInfo.ticketType` value or `ticketInfo.entrantType` value is incorrect, or any of the values inside of the `ticketInfo.extras` key is incorrect, an error message should be returned.
+	if (
+		!ticketData[ticketInfo.ticketType] ||
+		ticketInfo.ticketType === 'extras'
+	) {
+		return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
+	}
+}
+// console.log(calculateTicketPrice(exampleTicketData, ticketInfo));
 /**
  * purchaseTickets()
  * ---------------------
@@ -113,6 +134,6 @@ function purchaseTickets(ticketData, purchases) {}
 
 // Do not change anything below this line.
 module.exports = {
-  calculateTicketPrice,
-  purchaseTickets,
+	calculateTicketPrice,
+	purchaseTickets,
 };
