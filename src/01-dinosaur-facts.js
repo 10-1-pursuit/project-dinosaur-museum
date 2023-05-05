@@ -23,6 +23,7 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  //> { Brachiosaurus: 98.43 }
  */
 function getLongestDinosaur(dinosaurs) {
+  //.sort???
   if (dinosaurs[0] === undefined) {
     return {};
   }
@@ -106,30 +107,26 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
           result.push(dino.dinosaurId);
       }
     }
-  }
-  return result;
 
 
 
+    /*if(dino.mya.length === 1){
+      if(mya === dino.mya || mya - 1 === dino.mya ){
+        if(key !== undefined){
+          result.push(key);
+        }else{
+          result.push(dino.dinosaurId)
+        }
 
-  /*if(dino.mya.length === 1){
-    if(mya === dino.mya || mya - 1 === dino.mya ){
+      }
+    }else if( (mya <= dino.mya[0]) && (mya >= dino.mya[1])){
       if(key !== undefined){
         result.push(key);
       }else{
         result.push(dino.dinosaurId)
       }
-
-    }
-  }else if( (mya <= dino.mya[0]) && (mya >= dino.mya[1])){
-    if(key !== undefined){
-      result.push(key);
-    }else{
-      result.push(dino.dinosaurId)
-    }
+    } */
   } 
-}*/
-
 
 
 
@@ -143,15 +140,7 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       result.push(d.dinosaurId)
     }
   }*/
-
-  // dinosaurs.filter(dino => ( (mya <= dino.mya[0] && mya >= dino.mya[1]) || (mya === dino.mya[0] || mya === dino.mya[0] - 1) ) )
-  // if(dino[key] !== undefined){
-  //   dinosaurs.forEach(dino => result.push(dino[key]))
-  // }else
-  //   dinosaurs.forEach(dino => result.push(dino.dinosaurId))
-
-  // return result;
-
+  return result;
 }
 
 module.exports = {
