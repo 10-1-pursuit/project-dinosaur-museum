@@ -25,27 +25,6 @@ const exampleDinosaurData = require("../data/dinosaurs");
 
 // max = arr[0]
 //push string into new object key and vlaue
-
-
-
-
-function getLongestDinosaur(dinosaurs){
-  let longestDino = 0
-  let dinoObj ={}
-  for(const dino of dinosaurs){
-      if(dino.lengthInMeters > longestDino){
-        longestDino = dino.lengthInMeters;
-      result= `{${dino.name}: ${dino.lengthInMeters*3.281}}`
-        
-        
-      }
-    }
-  
-
-   return Object.values([result]);
-}
-  console.log(getLongestDinosaur(exampleDinosaurData))
-
 // function getLongestDinosaur(dinosaurs){
 //   let result;
 //   let longestDino = 0
@@ -63,6 +42,27 @@ function getLongestDinosaur(dinosaurs){
   
 // }
 // console.log(getLongestDinosaur(exampleDinosaurData))
+
+
+
+
+function getLongestDinosaur(dinosaurs){
+  let longestDino = 0             //i set longest dino to zero to keep count
+  let dinoObj ={}
+  for(const dino of dinosaurs){
+      if(dino.lengthInMeters > longestDino){
+        longestDino = dino.lengthInMeters;
+      result= `{${dino.name}: ${dino.lengthInMeters*3.281}}`
+        
+        
+      }
+    }
+  
+
+   return Object.values([result]);
+}
+  console.log(getLongestDinosaur(exampleDinosaurData))
+
 
 /**
  * getDinosaurDescription()
