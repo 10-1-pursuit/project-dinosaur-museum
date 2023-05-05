@@ -114,7 +114,10 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       (dinosaur.mya[0] === mya || dinosaur.mya[0]- 1 === mya)){
       aliveMya.push(dinosaur[dinoKey])
       }
+      else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) {
+        aliveMya.push(dinosaur[dinoKey])
     }
+      }
     return aliveMya
   }
 
