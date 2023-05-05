@@ -22,7 +22,30 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+// Initial value of accumulator is set to "null" since there may be no dinos 🦖 in the input array.
+function getLongestDinosaur(dinosaurs) {
+  let longestDino = { name: null, height: 0 };
+
+  // Loop through each dino 🦖 in the array then convert the length of the dino 🦖 from meters to feet.
+  // If the height of the current dino 🦖 is > than the height of the longest dinosaur so far, update the longest dino 🦖 
+  // object w/ the current dinosaur's 🦖 name & height.
+  for (let dino of dinosaurs) {
+    let heightInFeet = dino.lengthInMeters * 3.281;
+    if (heightInFeet > longestDino.height) {
+      longestDino.name = dino.name;
+      longestDino.height = heightInFeet;
+    }
+  }
+
+  // If a longest dino 🦕 was found, return an object with its name & height in feet.
+  // If NOT, return ⏎ an empty object 🪫
+  if (longestDino.name) {
+    return { [longestDino.name]: parseFloat(longestDino.height.toFixed(2)) };
+  } else {
+    return {};
+  }
+}
+
 
 /**
  * getDinosaurDescription()
@@ -44,7 +67,7 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) { }
 
 /**
  * getDinosaursAliveMya()
@@ -71,7 +94,7 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) { }
 
 module.exports = {
   getLongestDinosaur,
