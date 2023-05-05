@@ -57,8 +57,11 @@ const exampleTicketData = require("../data/tickets");
 function calculateTicketPrice(ticketData, ticketInfo) {
   const ticketKeys = Object.keys(ticketData)
   let ticketType = ticketKeys.find(ticket => ticket === ticketInfo.ticketType)
-  if(!ticketType){return `Ticket type '${ticketInfo.ticketType}' cannot be found`}
-  // `Entrant type '' cannot be found.`
+  if(!ticketType){return `Ticket type '${ticketInfo.ticketType}' cannot be found.`}
+  
+  const entrants = ["child", "adult", "senior"]
+  let entrantType = entrants.find(entrant => entrant === ticketInfo.entrantType)
+  if(!entrantType){return `Entrant type '${ticketInfo.entrantType}' cannot be found.`}
   // `Extra type '' cannot be found.`
 
 }
