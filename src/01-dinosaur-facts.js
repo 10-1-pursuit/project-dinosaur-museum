@@ -69,14 +69,14 @@ function getDinosaurDescription(dinosaurs, id) {
   let placeHeld = null
   
   for (let dino of dinosaurs) {
-    if (dino.dinosaurId == id) {
-      placeheld = dino
+    if (dino.dinosaurId === id) {
+      placeHeld = dino
     }
   }
     if (!placeHeld) {
       return `A dinosaur with an ID of '${id}' cannot be found.`
   }
-  return `${placeHeld.name} ${placeHeld.pronunciation}/n ${placeHeld.info} It lived in the ${placeHeld.period} over ${placeHeld.mya} million years ago.`
+  return `${placeHeld.name} (${placeHeld.pronunciation})\n${placeHeld.info} It lived in the ${placeHeld.period} period, over ${placeHeld.mya[placeHeld.mya.length - 1]} million years ago.`
 
 }
 /**
