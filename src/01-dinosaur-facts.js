@@ -107,7 +107,31 @@ function getDinosaurDescription(dinosaurs, id) {
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
   //returns array of dinos who lived during certain mya
+   let dinoArr = []
   //if key is provided, returns the value of that key for each dinosaur alive at that time
+  for (let i = 0; i < dinosaurs.length; i++){
+    let dino = dinosaurs[i]
+  //If the dinosaur only has a single value for `mya`, allows for the `mya` value to be equal to the given value or one less
+    if (dino.mya.length === 1){
+      if ((dino.mya[0]=== mya) || (dino.mya[0] === (mya-1)) || (dino.mya[0] === (mya + 1))){
+        if (key){
+          dinoArr.push(dino[key])
+         } 
+         else {
+          dinoArr.push(dino.dinosaurId)
+        }
+      }
+   } 
+    else if((mya >= dino.mya[1]) && (mya <= dino.mya[0])) {
+        if (key){
+          dinoArr.push(dino[key])
+        }
+         else {
+          dinoArr.push(dino.dinosaurId)
+        }
+      }
+    } 
+  return dinoArr
 }
 
 module.exports = {
