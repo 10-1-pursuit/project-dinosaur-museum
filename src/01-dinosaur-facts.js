@@ -76,6 +76,7 @@ function getDinosaurDescription(dinosaurs, id) {
     }
   } // If the dinosaur cannot be found, returns an error message
   return `A dinosaur with an ID of '${id}' cannot be found.`;
+  //✅
 }
 
 /**
