@@ -138,7 +138,17 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) {
+  let purchasesArr = purchases.map(purchase => calculateTicketPrice(ticketData, purchase))
+  if(!!purchasesArr[0].length){
+    return purchasesArr.reduce((previous, current) => previous + current)
+  }else{
+    let displayMessage = [
+      "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n",
+      
+    ]
+  }
+}
 
 // Do not change anything below this line.
 module.exports = {
