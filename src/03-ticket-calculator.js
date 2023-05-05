@@ -74,9 +74,31 @@ function calculateTicketPrice(ticketData, ticketInfo) {
 		ticketInfo.ticketType === 'extras'
 	) {
 		return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
+	} else if (
+		!ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType]
+	) {
+		return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
+	} else {
+		for (let extra of ticketInfo.extras) {
+			if (!ticketData.extras[extra]) {
+				return `Extra type '${extra}' cannot be found.`;
+			}
+		}
 	}
 }
-// console.log(calculateTicketPrice(exampleTicketData, ticketInfo));
+// const ticketInfo = {
+// 	ticketType: 'general',
+// 	entrantType: 'child',
+// 	extras: ['movie'],
+// };
+
+const ticketInfo = {
+	ticketType: 'general',
+	entrantType: 'child',
+	extras: [],
+};
+
+console.log(calculateTicketPrice(exampleTicketData, ticketInfo));
 /**
  * purchaseTickets()
  * ---------------------
