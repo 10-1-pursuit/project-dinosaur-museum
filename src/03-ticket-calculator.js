@@ -63,17 +63,17 @@ const exampleTicketData = require("../data/tickets");
 
     function calculateTicketPrice(ticketData, ticketInfo) {
       for (ticketLook of ticketData){
-//general admision
+//general admision turn into call back function/or else if/or case: break;
         if (ticketInfo.ticketType===ticketLook.general.description &&
           ticketInfo.entrantType===ticketInfo.entrantType && Object.keys(ticketLook.general.priceInCents)=== ticketInfo.entrantType||
            ticketInfo.extras.length>0)
             return ticketLook.general.priceInCents.adult;
-//membership admission
+//membership admission turn into callbackfunction /or else if/or case: break;
             if (ticketInfo.ticketType===ticketLook.membership.description&& ticketLook.membership.priceInCents=== ticketInfo.entrantType&&
               Object.keys(ticketInfo.extras.movie.priceInCents)=== ticketInfo.extras)//{
                 return Object.values(ticketLook.membership.priceInCents)+Object.values(ticketLook.extras.priceInCents)
                 //{
-//nona admission doesnt exist 
+//nona admission doesnt exist  turn into callback /or else if/or case: break;
                   if(ticketInfo.entrantType=== Object.keys(ticketLook.general.priceInCents)){
 
                     return `Entrant type ${ticketInfo.entrantType} cannot be found.` }                     
@@ -135,7 +135,27 @@ console.log(caluculateTicketPrice(exampleTicketData, ticketInfo))
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+
+const purchases =
+{
+  ticketType: "general",
+  entrantType: "adult",
+  extras: ["movie", "terrace"]
+}
+
+function purchaseTickets(ticketData, purchases) {
+  for (const purchaseLook of ticketData) {
+
+    if (purchases.ticketType === purchaseLook.general.description ||
+      purchaseLook.membership.description && purchases.extras.length > 0 ||
+      purchaseLook.extras.movie.description === purchases.extras) {
+      return `${purchaseLook.general.description}` +
+        Object.values(purchaseLook.general.priceInCents) + Object.values(purchaseLook.extras.movies.priceInCents)
+    }
+  }
+
+}
+console.log(purchaseTickets(exampleTicketData,purchases))
 
 // Do not change anything below this line.
 module.exports = {
