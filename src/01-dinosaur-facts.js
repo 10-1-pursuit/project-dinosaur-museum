@@ -55,9 +55,24 @@ return {[longestDino.name]: lengthInFeet};
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  
+  let dinosaur = dinosaurs.find(dino => dino.dinosaurId === id);
+  if (dinosaur === undefined) {
+    return "A dinosaur with an ID of '" + id + "' cannot be found.";
+  }
+  return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${dinosaur.mya[dinosaur.mya.length - 1]} million years ago.`;
+  } 
 
+  //if (Array.isArray(dinosaur.mya) && dinosaur.mya.length === 1) {
+    //return `${dinosaur.name} (${dinosaur.pronunciation}) \n${id.info}. It lived in the ${id.period} period, over ${id.mya[id.mya.length -1]} million years ago.`;
+    //} else {
+      //return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.mya.join(", ")}\n${dinosaur.info.join("\n")}`;
+    
+  
 
+   
+  
 /**
  * getDinosaursAliveMya()
  * ---------------------
@@ -84,6 +99,7 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {}
+}
 
 module.exports = {
   getLongestDinosaur,
