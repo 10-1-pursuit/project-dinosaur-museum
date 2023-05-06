@@ -71,10 +71,12 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
+  // looks up the target dinosaur and creates a variable with the object of the dinosaur
   const dinosaurTarget = dinosaurs.find(dinosaur => dinosaur.dinosaurId === id)
+  // Displays the information of the dinosaur if the dinosaurTarget variable is not empty
   if(!!dinosaurTarget){
     return `${dinosaurTarget.name} (${dinosaurTarget.pronunciation})\n${dinosaurTarget.info} It lived in the ${dinosaurTarget.period} period, over ${dinosaurTarget.mya[dinosaurTarget.mya.length - 1]} million years ago.`
-  }else{
+  }else{ //Displays an error if variable is empty
     return `A dinosaur with an ID of '${id}' cannot be found.`
   }
 }
