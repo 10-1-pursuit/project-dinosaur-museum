@@ -23,9 +23,13 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  //> { Brachiosaurus: 98.43 }
  */
 function getLongestDinosaur(dinosaurs) {
+  // Returns an empty object if the argument is empty
   if(dinosaurs.length === 0){return {};}
+  // Keeps track of the current length of the longes dinosaur
   let currentDinosaurLength = 0
+  // Keeps track of the current ID of the longes dinosaur
   let currentDinosaurID = 0
+  // Goes through all dinosaurs, replacing the current dinosaur length and ID if a longer dinosaur is found
   dinosaurs.forEach(dinosaur => {
     if(!currentDinosaurLength){
       currentDinosaurLength = dinosaur.lengthInMeters
@@ -38,8 +42,11 @@ function getLongestDinosaur(dinosaurs) {
     }
     return;
   })
+  // Finds the longes dinosaur object with the ID saved in the currendDinosaurID variable
   tallestDinosaurObj = dinosaurs.find(dinosaur => dinosaur.dinosaurId === currentDinosaurID)
+  // Converts the dinosaur's length from meters to feet
   const lengthInFeet = (meters) => meters * 3.281
+  // Returns an object with the name of the dinosaur as the key, and the dinosaur's length as the value
   return {[tallestDinosaurObj.name] : lengthInFeet(tallestDinosaurObj.lengthInMeters)};
 }
 
