@@ -107,8 +107,11 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
+  // This array will store the dinosaurs within the given conditions
   let dinosaurArr = []
+  // Result array
   let newArr = []
+  // Adds to dinosaurArr al the filtered dinosaurs that were alive in the given year
   dinosaurs.forEach(dinosaur => {
     if(dinosaur.mya.length === 1){
       if(dinosaur.mya >= mya && dinosaur.mya <= mya + 1){
@@ -120,10 +123,15 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       }
     }
   })
+  // Gets the general keys for the object structure of each dinosaur
   const dinosaurKeys = Object.keys(dinosaurs[0])
+
+  // Looks up if given key is found in dinosaur object structure
   if(dinosaurKeys.some(currentKey => currentKey === key)){
+      // Creates the final array with the key given 
       newArr = dinosaurArr.map(dinosaur => dinosaur[key])
   }else{
+    // Creates the final array with the default format (Dinosaur ID)
     newArr = dinosaurArr.map(dinosaur => dinosaur.dinosaurId)
   }
   return newArr;
