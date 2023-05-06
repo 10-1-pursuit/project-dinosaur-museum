@@ -153,10 +153,11 @@ function purchaseTickets(ticketData, purchases) {
       else if(purchase.entrantType === "senior"){transaction += "Senior "}
       if(purchase.ticketType === "general"){transaction += "General "}
       else if(purchase.ticketType === "membership"){transaction += "Membership "}
-      transaction += `Admission: $\n`
+      transaction += `Admission: $${parseFloat((calculateTicketPrice(ticketData, purchase)) / 100).toFixed(2)}\n` 
+      //TODO: Add to transaction "+=" the description of the extras with a for loop and an array that will join at the last stage
       ticket2.push(transaction)
     }
-    ticket2.join('')
+    ticket2 = ticket2.join('')
     return ticket1 + ticket2 + ticket3
   }
 }
