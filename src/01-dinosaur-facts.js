@@ -54,14 +54,14 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
-  let targetDino = dinosaurs.find((dino) => dino.dinosaurId === id)
+  let targetDino = dinosaurs.find((dino) => dino.dinosaurId === id) // i was using a for of loop at first, but i thought the test had an error with my method. it wasnt that either/
   if (targetDino) {
-    millionYears = Math.min(...targetDino.mya)
+    millionYears = Math.min(...targetDino.mya) // i added this because I thought the if statement i previosly wrote  was saying i was mutating my array. It was not and now i have no idea what could be.
     return `${targetDino.name} (${targetDino.pronunciation})\n${targetDino.info} It lived in the ${targetDino.period} period, over ${millionYears} million years ago.`
-  } else 
-    return  "A dinosaur with an ID of '" + id + "' cannot be found."
-  }
-  
+  } else
+    return "A dinosaur with an ID of '" + id + "' cannot be found."
+}
+
 
 
 
@@ -91,29 +91,29 @@ function getDinosaurDescription(dinosaurs, id) {
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) { 
-let foundDinos = [];
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  let foundDinos = [];
+  let finalList = [];
 
-for (let dino of dinosaurs) {
-  if ((dino.mya.length === 1) && (mya === dino.mya[0]) || (dino.mya.length === 1) && (mya >= (dino.mya[0] - 1))) {
-    if (key) {
-      if (key in dino) {
-        foundDinos.push(dino[key])
-      } else {
-        foundDinos.push(dino.dinosaurId)
-      };
-    };
-  };
-  if ((dino.mya.length === 2) && (mya <= dino.mya[0]) && (mya >= dino.mya[1])) {
-    if (key) {
-      if (key in dino) {
-        foundDinos.push(dino[key])
-      } else {
-        foundDinos.push(dino.dinosaurId)
-      };
-    };
-  };
-} return foundDinos;
+  dinosaurs.find((dino) => {
+    if ((dino.mya.length === 1) && (mya === dino.mya[0] || mya === dino.mya[0] - 1)) {
+      foundDinos.push(dino);
+    }
+  });
+
+  dinosaurs.find((dino) => {
+    if ((dino.mya.length === 2) && (mya <= dino.mya[0] - 1) && (mya >= dino.mya[1])) {
+      foundDinos.push(dino);
+    }
+  });
+  for (let dino of foundDinos) {
+    if (key in dino) {
+      finalList.push(dino[key])
+    } if (!key) {
+      finalList.push(dino.dinosaurId)
+    }
+  }
+  return finalList;
 }
 
 
