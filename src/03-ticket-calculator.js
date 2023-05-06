@@ -153,8 +153,24 @@ function purchaseTickets(ticketData, purchases) {
       else if(purchase.entrantType === "senior"){transaction += "Senior "}
       if(purchase.ticketType === "general"){transaction += "General "}
       else if(purchase.ticketType === "membership"){transaction += "Membership "}
-      transaction += `Admission: $${parseFloat((calculateTicketPrice(ticketData, purchase)) / 100).toFixed(2)}\n` 
-      //TODO: Add to transaction "+=" the description of the extras with a for loop and an array that will join at the last stage
+      transaction += `Admission: $${parseFloat((calculateTicketPrice(ticketData, purchase)) / 100).toFixed(2)}` 
+      if(!purchase.extras.length){
+        transaction += "\n"
+      }else{
+        let extras = []
+        let extraKeys = Object.keys(ticketData.extras)
+        transaction += " "
+        for(let x of purchase.extras){
+          for(let y of extraKeys){
+            if(x === y){
+              const extrasObj = ticketData.extras[y]
+              extras.push(extrasObj.description)
+              break;
+            }
+          }
+        }
+        transaction += `(${extras.join(', ')})\n`
+      }
       ticket2.push(transaction)
     }
     ticket2 = ticket2.join('')
