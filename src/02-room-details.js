@@ -26,9 +26,13 @@ const exampleRoomData = require("../data/rooms");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+  // Filters the dinosaur target object
   let id = dinosaurs.find(dinosaur => dinosaur.name === dinosaurName)
+  // Returns an error if dinosaur was not found
   if(!id){return `Dinosaur with name '${dinosaurName}' cannot be found.`}
+  // Changes the id value to the dinosaur's ID only
   id = id.dinosaurId
+  //TODO: Finish comments
   let roomFound = rooms.find(room => room.dinosaurs.find(dinosaur => dinosaur === id))
   if(!roomFound){return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`}
   return roomFound.name
