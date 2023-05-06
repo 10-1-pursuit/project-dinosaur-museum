@@ -67,6 +67,12 @@ const exampleTicketData = require('../data/tickets');
 // 3. Based on the ticket info and the criteria in the `tickets` object, use the `accumulator pattern` to come up with the total and store it in `totalTicketPrice`.
 // 4. Return the final total.
 
+// const ticketInfo = {
+// 	ticketType: 'membership',
+// 	entrantType: 'child',
+// 	extras: ['movie'],
+// };
+
 function calculateTicketPrice(ticketData, ticketInfo) {
 	// Guard clauses: If either the `ticketInfo.ticketType` value or `ticketInfo.entrantType` value is incorrect, or any of the values inside of the `ticketInfo.extras` key is incorrect, an error message should be returned.
 	if (
@@ -161,134 +167,48 @@ function calculateTicketPrice(ticketData, ticketInfo) {
 
 // Goal: Returns a receipt based off of a number of purchase. Each "purchase" maintains the shape from `ticketInfo` in the previous function.
 
-/* 
-Ideas:
-
-Since I already created a `calculateTicketPrice()` function that returns a value for one ticket
-(object), then I can create another higher order helper function that iterates over the inputted `purchases` array of `ticket` objects and then I can call this `calculateTicketPrice()` function on each element (each `ticket` object, originally `ticketInfo`). I might have to refactor and customize said callback function, but I can def use the concepts and solutions from the original. I can then use the `accumulator pattern` of each of these results and accumulate them into a total (maybe use `.reduce()`). Finally, return the properly formatted string as the assignment requires. 
-
-*/
-
-// Steps:
-// 1. 
-// 2.
-
-// Helper Higher Order Function: Calculate the total ticket price for a group.
-function calculateGroupTicketPrice(ticketData, purchases) {
-	// Each ticket from `purchases` array.
-
-  purchases.forEach((purchase) => )
-  
-  // Guard clauses: If either the `ticketInfo.ticketType` value or `ticketInfo.entrantType` value is incorrect, or any of the values inside of the `ticketInfo.extras` key is incorrect, an error message should be returned.
-	if (
-		!ticketData[ticketInfo.ticketType] ||
-		ticketInfo.ticketType === 'extras'
-	) {
-		return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
-	} else if (
-		!ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType]
-	) {
-		return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
-	} else {
-		for (let extra of ticketInfo.extras) {
-			if (!ticketData.extras[extra]) {
-				return `Extra type '${extra}' cannot be found.`;
-			}
-		}
-	}
-
-	// Set the `accumulator`
-	let totalTicketPrice = 0;
-
-	// Use the `accumulator pattern` to get a sub-total based on `ticketType` and `entrantType`.
-	totalTicketPrice +=
-		ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType];
-
-	// Use a `for...of` loop to loop through `ticketInfo.extras` array and adjust the total accordingly, using the accessing structure of `ticketData` and dynamically plugging in the `extras` string for the key if any to the total.
-	for (let extra of ticketInfo.extras) {
-		totalTicketPrice +=
-			ticketData.extras[extra].priceInCents[ticketInfo.entrantType];
-	}
-
-	return totalTicketPrice;
-}
-
 function purchaseTickets(ticketData, purchases) {
-	const ticketInfo = purchases.forEach();
-	let receipt = `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n`;
-	let receipt2 = `\n-------------------------------------------\nTOTAL: $${
-		// Use helper function defined above to calculate group price based on `purchases` array.
-		(calculateGroupTicketPrice(ticketData, ticketInfo) / 100).toFixed(2)
-	}`;
-	let finalResult = '';
-	let body = '';
-	for (let i = 0; i < purchases.length; i++) {
-		for (let j = 0; j < purchases[i].extras.length; j++) {
-			let extFrills = purchases[i].extras[j];
-			//console.log(extFrills)
+	let receipt = `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------`;
+	let totalReceiptPrice = 0;
+
+	for (let purchase of purchases) {
+		let purchasePrice = calculateTicketPrice(ticketData, purchase);
+
+		if (typeof purchasePrice === 'string') {
+			return purchasePrice;
+		} else {
+			totalReceiptPrice += purchasePrice;
+			let entrant =
+				purchase.entrantType[0].toUpperCase() +
+				purchase.entrantType.slice(1).toLowerCase();
+			let ticketType = ticketData[purchase.ticketType].description;
+			let priceInDollars = (purchasePrice / 100).toFixed(2);
+			let ticketExtras = ''; // "(Movie Access, Terrace Access)"
+
+			// ["movie", "terrace"]
+			for (let j = 0; j < purchase.extras.length; j++) {
+				if (j === 0) {
+					ticketExtras += ' (';
+				}
+				if (j === purchase.extras.length - 1) {
+					ticketExtras +=
+						ticketData.extras[purchase.extras[j]].description + ')';
+				} else {
+					ticketExtras +=
+						ticketData.extras[purchase.extras[j]].description + ', ';
+				}
+			}
+
+			receipt += `\n${entrant} ${ticketType}: $${priceInDollars}${ticketExtras}`;
 		}
-		body +=
-			purchases[i].entrantType[0].toUpperCase() +
-			purchases[i].entrantType.slice(1).toLowerCase() +
-			' ' +
-			tickets[purchases[i].ticketType].description +
-			`: $${(calculateGroupTicketPrice(ticketData, ticketInfo) / 100).toFixed(
-				2
-			)}` +
-			' ' +
-			`(${tickets.extras[purchases[i].extras[0]]})`;
 	}
-	finalResult = receipt + body + receipt2;
-	return finalResult;
+
+	totalReceiptPrice = (totalReceiptPrice / 100).toFixed(2);
+	receipt += `\n-------------------------------------------\nTOTAL: $${totalReceiptPrice}`;
+	console.log(receipt);
+	return receipt;
 }
 
-// const purchases = [
-// 	{
-// 		ticketType: 'general',
-// 		entrantType: 'adult',
-// 		extras: ['movie', 'terrace'],
-// 	},
-// 	{
-// 		ticketType: 'general',
-// 		entrantType: 'senior',
-// 		extras: ['terrace'],
-// 	},
-// 	{
-// 		ticketType: 'general',
-// 		entrantType: 'child',
-// 		extras: ['education', 'movie', 'terrace'],
-// 	},
-// 	{
-// 		ticketType: 'general',
-// 		entrantType: 'child',
-// 		extras: ['education', 'movie', 'terrace'],
-// 	},
-// ];
-
-const purchases = [
-	{
-		ticketType: 'general',
-		entrantType: 'adult',
-		extras: ['movie', 'terrace'],
-	},
-	{
-		ticketType: 'general',
-		entrantType: 'senior',
-		extras: ['terrace'],
-	},
-	{
-		ticketType: 'general',
-		entrantType: 'child',
-		extras: ['education', 'movie', 'terrace'],
-	},
-	{
-		ticketType: 'general',
-		entrantType: 'child',
-		extras: ['education', 'movie', 'terrace'],
-	},
-];
-
-console.log(purchaseTickets(exampleTicketData, purchases));
 // Do not change anything below this line.
 module.exports = {
 	calculateTicketPrice,
