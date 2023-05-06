@@ -1,6 +1,8 @@
 const dinosaurs = require("../data/dinosaurs");
 const rooms = require("../data/rooms");
 
+const formatLine = () => {return "o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o"}
+
 function getThreeLongestDinosaurs(dinosaursArrayList){
     let first = .0003
     let firstId = ""
@@ -30,7 +32,7 @@ function getThreeLongestDinosaurs(dinosaursArrayList){
     let secondObj = dinosaursArrayList.find(dinosaur => dinosaur.dinosaurId === secondId)
     let thirdObj = dinosaursArrayList.find(dinosaur => dinosaur.dinosaurId === thirdId)
     
-    return `Top 3 longest dinosaurs:\n\n1. ${firstObj.name} (${firstObj.lengthInMeters} meters)\n2. ${secondObj.name} (${secondObj.lengthInMeters} meters)\n3. ${thirdObj.name} (${thirdObj.lengthInMeters} meters)\n`;
+    return `${formatLine()}\nTop 3 longest dinosaurs:\n\n1. ${firstObj.name} (${firstObj.lengthInMeters} meters)\n2. ${secondObj.name} (${secondObj.lengthInMeters} meters)\n3. ${thirdObj.name} (${thirdObj.lengthInMeters} meters)\n${formatLine()}\n`;
 }
 
 function getThreeOldestDinosaurs(dinosaursArrayList){
@@ -46,6 +48,7 @@ function getAllSameDietDinosaurs(dinosaursArrayList, diet){
 }
 
 function getAllFactsTogether(dinosaursArrayList){
+    
     // TODO: add all functions with the next format
     /**
      * (The ${} must be filled with the arrays from the result of the functions)
@@ -60,7 +63,8 @@ function getAllFactsTogether(dinosaursArrayList){
      * ...
      * 
     */
-    return;
+    return `${getThreeLongestDinosaurs(dinosaursArrayList)}\n
+    `;
 }
 
-console.log(getThreeLongestDinosaurs(dinosaurs))
+console.log(getAllFactsTogether(dinosaurs))
