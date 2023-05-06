@@ -23,13 +23,14 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  //> { Brachiosaurus: 98.43 }
  */
 function getLongestDinosaur(dinosaurs) {
- 
- let emptyObj ={}
-  let sort = dinosaurs.sort((a,b) => b.lengthInMeters - a.lengthInMeters).map(dino => ({[dino.name] : dino.lengthInMeters * (3.281)}))
- if( sort[0] >= sort[1]){
-  return sort[0]
- }
-return emptyObj
+
+  let emptyObj = {}
+  const duplicateCopy = Object.assign([], dinosaurs)
+  let sort = duplicateCopy.sort((a, b) => b.lengthInMeters - a.lengthInMeters).map(dino => ({ [dino.name]: dino.lengthInMeters * (3.281) }))
+  if (sort[0] >= sort[1]) {
+    return sort[0]
+  }
+  return emptyObj
 }
 
 
@@ -54,6 +55,7 @@ return emptyObj
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
+
 function getDinosaurDescription(dinosaurs, id) {
 
   let dinosaur = dinosaurs.find(dino => dino.dinosaurId === id)
@@ -66,7 +68,6 @@ function getDinosaurDescription(dinosaurs, id) {
     return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${dinosaur.mya[1]} million years ago.`
   }
   return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${dinosaur.mya[0]} million years ago.`
-
 }
 
 /**
@@ -94,25 +95,33 @@ function getDinosaurDescription(dinosaurs, id) {
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
+
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  idArr = []
-  console.log(key)
-  for (let dino of dinosaurs) {
+  let idArr = []
 
-    if (dino.mya.length > 1 && mya <= dino.mya[0] && mya >= dino.mya[1]) {
-      idArr.push(dino.dinosaurId)
+  let indexOfInfo = process.argv
 
+
+  const myaLengthEqualToOne = (currentDinosaur) => currentDinosaur.mya.length === 1
+  let lengthOne = dinosaurs.filter(myaLengthEqualToOne)
+  for (let info of lengthOne) {
+    if (key === Object.keys(info)) {
+      idArr.push(Object.values(info))
     }
-    // if(key === Object.keys(dino)){
-    //   idArr.push(Object.values(dino))
-    // }
-
-
-    if ((dino.mya.length === 1) && (dino.mya[0] - mya <= 1)) {
-      idArr.push(dino.dinosaurId)
-
+    else if (info.mya - mya === 1 || info.mya - mya === 0) {
+      idArr.push(info.dinosaurId)
     }
-
+  }
+  console.log(indexOfInfo)
+  const myaLengthEqualToTwo = (currentDinosaur) => currentDinosaur.mya.length === 2
+  let lengthTwo = dinosaurs.filter(myaLengthEqualToTwo)
+  for (let info of lengthTwo) {
+    if (key === Object.keys(info)) {
+      idArr.push(Object.values(info))
+    }
+    else if ((mya <= info.mya[0]) && (mya >= info.mya[1])) {
+      idArr.push(info.dinosaurId)
+    }
   }
   return idArr
 }
