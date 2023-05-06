@@ -98,28 +98,17 @@ function getDinosaurDescription(dinosaurs, id) {
 
 function getDinosaursAliveMya(dinosaurs, mya, key) {
   let idArr = []
-
-  let indexOfInfo = process.argv
-
-
   const myaLengthEqualToOne = (currentDinosaur) => currentDinosaur.mya.length === 1
   let lengthOne = dinosaurs.filter(myaLengthEqualToOne)
   for (let info of lengthOne) {
-    if (key === Object.keys(info)) {
-      idArr.push(Object.values(info))
-    }
-    else if (info.mya - mya === 1 || info.mya - mya === 0) {
+   if(info.mya - mya === 1 || info.mya - mya === 0) {
       idArr.push(info.dinosaurId)
     }
   }
-  console.log(indexOfInfo)
   const myaLengthEqualToTwo = (currentDinosaur) => currentDinosaur.mya.length === 2
   let lengthTwo = dinosaurs.filter(myaLengthEqualToTwo)
   for (let info of lengthTwo) {
-    if (key === Object.keys(info)) {
-      idArr.push(Object.values(info))
-    }
-    else if ((mya <= info.mya[0]) && (mya >= info.mya[1])) {
+  if((mya <= info.mya[0]) && (mya >= info.mya[1])) {
       idArr.push(info.dinosaurId)
     }
   }
