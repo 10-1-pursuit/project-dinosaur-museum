@@ -144,6 +144,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     //> "Ticket type 'discount' cannot be found."
  */
 function purchaseTickets(ticketData, purchases) {
+  // TODO: Finish this function comments
   let purchasesArr = purchases.map(purchase => calculateTicketPrice(ticketData, purchase))
   if(!!purchasesArr[0].length){
     return purchasesArr.reduce((previous, current) => previous + current)
