@@ -106,7 +106,23 @@ return `${value.name} (${value.pronunciation})\n${value.info} It lived in the ${
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(_dinosaurs, _mya, _key) { }
+function getDinosaursAliveMya(_dinosaurs, _mya, _key) { 
+  let searchingFor = [];
+  let keyOfKeys = (_key || "dinosaurId")
+   
+for(let info of dinosaurs){ 
+  if(!info[keyOfKeys]){
+   keyOfKeys = "dinosaurId";
+  }
+   if(info.mya.length === 1 && (_mya === info.mya[0]) || (_mya === info.mya[0] - 1)){
+     searchingFor.push(info[keyOfKeys]);
+   }else if(_mya <= info.mya[0] && _mya >= info.mya[1]){
+    searchingFor.push(info[keyOfKeys])
+   }
+ 
+ }
+ return searchingFor;
+}
 
 module.exports = {
   getLongestDinosaur,
