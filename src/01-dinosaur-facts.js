@@ -100,10 +100,10 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       valueKey = "dinosaurId"
     };
     
-    if ((dino.mya.length === 1) && (mya === dino.mya) || (mya === dino.mya - 1)) {
+    if ((dino.mya.length === 2) && (mya <= dino.mya[0] - 1) && (mya >= dino.mya[1])) {
       foundDinos.push(dino[valueKey]);
     };
-    if ((dino.mya.length === 2) && (mya <= dino.mya[0] - 1) && (mya >= dino.mya[1])) {
+    if ((dino.mya.length === 1) && (mya === dino.mya) || (mya === dino.mya - 1)) {
       foundDinos.push(dino[valueKey]);
     };
   };
