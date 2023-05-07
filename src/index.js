@@ -19,56 +19,48 @@
 
 /*
 
-Return the name of the room where the given dinosaur can be found. If the dinosaur does not exist in the `dinosaurs` list or cannot be found in any room, return an error message that says so.
- *
-search through the dino list to compare name given with dinosaurs.diand dinosaurs.
-and rooms list rooms.name
+// Return the name of the room where the given dinosaur can be found. If the dinosaur does not exist in the `dinosaurs` list or cannot be found in any room, return an error message that says so.
+//  *
+// search through the dino list to compare name given with dinosaurs.diand dinosaurs.
+// and rooms list rooms.name
 
-equate nameGiven w/ dinosaurs.dinosaursID w/ roooms.dinosaurs
-make vars for dinoId
+// equate nameGiven w/ dinosaurs.dinosaursID w/ roooms.dinosaurs
+// make vars for dinoId
 
 
 
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
- let target = null;
- let targetRoom = null;
-  for( let dino of dinosaurs){
-   if(dinosaurName === dino.dinosaurId){
-    let target = dino.dinosaurId;
-   } else return "Dinosaur with name '" + dinosaurName +"' cannot be found in any rooms"
- };
-   targetRoom = rooms.find((room) => room.dinosaurs == target)
-   if(target === targetRoom){
-    return target.name
-   }else {
-    return "Dinosaur with name '" + dinosaurName +"' cannot be found."
-   }
-};
-let theDinoFound = [];
-if(key){
+// function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+//  let target = null;
+//  let targetRoom = null;
+//   for( let dino of dinosaurs){
+//    if(dinosaurName === dino.dinosaurId){
+//     let target = dino.dinosaurId;
+//    } else return "Dinosaur with name '" + dinosaurName +"' cannot be found in any rooms"
+//  };
+//    targetRoom = rooms.find((room) => room.dinosaurs == target)
+//    if(target === targetRoom){
+//     return target.name
+//    }else {
+//     return "Dinosaur with name '" + dinosaurName +"' cannot be found."
+//    }
+// };
+// let theDinoFound = [];
+// if(key){
   
-}
-for(let dino of dinosaurs){
-  if (dino.mya.length === 1 && (mya === (dino.mya[0]-1 )|| (mya === dino.mya[0]))){
-  theDinoFound.push(dino[target])
-} else if (mya <= dino.mya[0] && mya >= dino.mya[1]){
-    theDinoFound.push(dino[target])
-  }
-}
-return theDinoFound;
-}
+// // // }
+// return theDinoFound;
+// }
 
-
-
-
-
-
-
-
-
-
-
-
-
+// // for(let dino of dinosaurs){
+// //   if (dino.mya.length === 1 && (mya === (dino.mya[0]-1 )|| (mya === dino.mya[0]))){
+// //   theDinoFound.push(dino[target])
+// // } else if (mya <= dino.mya[0] && mya >= dino.mya[1]){
+// //     theDinoFound.push(dino[target])
+// //   }
+// // }
 
 */
+
+
+
+console.log(calculateTicketPrice(tickets, ticketInfo))

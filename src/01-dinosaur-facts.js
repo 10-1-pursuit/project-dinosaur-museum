@@ -92,29 +92,23 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  let foundDinos = [];
-  let finalList = [];
+  let valueKey = key   // I added a var for the key so that i could manipulate it later for hedge cases like "unknown Key" which isnt useable.
+  let foundDinos = []; // a var to store my found dino's in.
 
-  dinosaurs.find((dino) => {
-    if ((dino.mya.length === 1) && (mya === dino.mya[0] || mya === dino.mya[0] - 1)) {
-      foundDinos.push(dino);
-    }
-  });
-
-  dinosaurs.find((dino) => {
+  for (let dino of dinosaurs) {     // my major change was to move to a traditional loop. So that i could create a key as the id.
+    if (dino[valueKey] === undefined) {  // unknow Key will result in it being undefined so inplace it uses dino Id.
+      valueKey = "dinosaurId"
+    };
+    
+    if ((dino.mya.length === 1) && (mya === dino.mya) || (mya === dino.mya - 1)) {
+      foundDinos.push(dino[valueKey]);
+    };
     if ((dino.mya.length === 2) && (mya <= dino.mya[0] - 1) && (mya >= dino.mya[1])) {
-      foundDinos.push(dino);
-    }
-  });
-  for (let dino of foundDinos) {
-    if (key in dino) {
-      finalList.push(dino[key])
-    } if (!key) {
-      finalList.push(dino.dinosaurId)
-    }
-  }
-  return finalList;
-}
+      foundDinos.push(dino[valueKey]);
+    };
+  };
+  return foundDinos; 
+};
 
 
 
