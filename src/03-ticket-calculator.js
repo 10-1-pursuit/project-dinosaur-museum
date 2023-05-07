@@ -60,13 +60,14 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   const ticketDataExtrasKeys = Object.keys(ticketData.extras)
   let ticketType = ticketKeys.find(ticket => ticket === ticketInfo.ticketType)
   if(!ticketType){return `Ticket type '${ticketInfo.ticketType}' cannot be found.`}
-  
   const entrants = ["child", "adult", "senior"]
   let entrantType = entrants.find(entrant => entrant === ticketInfo.entrantType)
   if(!entrantType){return `Entrant type '${ticketInfo.entrantType}' cannot be found.`}
-  // `Extra type '' cannot be found.`
-  let c = ticketData[ticketType]
-  totalPrice += c.priceInCents[entrantType]
+  // Gets the type of ticket to determine the price
+  let cost = ticketData[ticketType]
+  // Determines the price with the entrant type
+  totalPrice += cost.priceInCents[entrantType]
+  //TODO: Finish extra case
   if(!!ticketInfo.extras.length){
     let previewTotal = totalPrice
     let foundExtras = []
