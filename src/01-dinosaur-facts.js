@@ -67,14 +67,14 @@ function getLongestDinosaur(dinosaurs) {
  */
 function getDinosaurDescription(dinosaurs, id) {
   let placeHeld = null
-  
+
   for (let dino of dinosaurs) {
     if (dino.dinosaurId === id) {
       placeHeld = dino
     }
   }
-    if (!placeHeld) {
-      return `A dinosaur with an ID of '${id}' cannot be found.`
+  if (!placeHeld) {
+    return `A dinosaur with an ID of '${id}' cannot be found.`
   }
   return `${placeHeld.name} (${placeHeld.pronunciation})\n${placeHeld.info} It lived in the ${placeHeld.period} period, over ${placeHeld.mya[placeHeld.mya.length - 1]} million years ago.`
 
@@ -104,7 +104,15 @@ function getDinosaurDescription(dinosaurs, id) {
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) { }
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+    dinoArr = [];
+
+    for(let dino of dinosaurs){
+      dinoArr.push(dino.dinosaurId)
+    }
+
+    return dinoArr;
+ }
 
 module.exports = {
   getLongestDinosaur,
