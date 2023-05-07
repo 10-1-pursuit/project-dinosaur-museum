@@ -70,7 +70,6 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   //TODO: Finish extra case
   if(!!ticketInfo.extras.length){
     let previewTotal = totalPrice
-    let foundExtras = []
     for(const x of ticketInfo.extras){
       for(const y of ticketDataExtrasKeys){
         if(x === y){
