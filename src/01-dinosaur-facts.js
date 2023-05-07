@@ -100,10 +100,6 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
   let lengthOne = dinosaurs.filter(myaLengthEqualToOne);
   for (let info of lengthOne) {
     if (info.mya - mya === 1 || info.mya - mya === 0) {
-      if (info.key !== undefined) {
-        console.log(key);
-        idArr.push(info[key]);
-      }
       idArr.push(info.dinosaurId);
     }
   }
@@ -112,9 +108,6 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
   let lengthTwo = dinosaurs.filter(myaLengthEqualToTwo);
   for (let info of lengthTwo) {
     if (mya <= info.mya[0] && mya >= info.mya[1]) {
-      if (info.key !== undefined) {
-        idArr.push(info[key]);
-      }
       idArr.push(info.dinosaurId);
     }
   }
