@@ -26,30 +26,28 @@ const exampleRoomData = require("../data/rooms");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
 // they give us the name
-//loop through 
+//loop through
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-const idArray = dinosaurs.filter((id)=> { return id.name.includes(dinosaurName)})
-console.log(idArray)
-if(idArray.length === 0 ){
-  return `Dinosaur with name '${dinosaurName}' cannot be found.`
-}
+  const idArray = dinosaurs.filter((id) => {
+    return id.name.includes(dinosaurName);
+  });
+  if (idArray.length === 0) {
+    return `Dinosaur with name '${dinosaurName}' cannot be found.`;
+  }
   for (let dino of dinosaurs) {
-    let dinoId = dino.dinosaurId
-    let names = dino.name
+    let dinoId = dino.dinosaurId;
+    let names = dino.name;
     for (let room of rooms) {
       for (let dinoA of room.dinosaurs) {
-        if ((dinosaurName === names) && (dinoId === dinoA)) {
-          return room.name
+        if (dinosaurName === names && dinoId === dinoA) {
+          return room.name;
         }
       }
     }
   }
-  return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
+  return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
 }
 
-
-// if(rooms !== room.name && dinosaurName !== names ){
-//   return `Dinosaur with name '${dinosaurName}' cannot be found in any room.`
 /**
  * getConnectedRoomNamesById()
  * ---------------------
@@ -73,19 +71,35 @@ if(idArray.length === 0 ){
     ]
  */
 function getConnectedRoomNamesById(rooms, id) {
-  let emptyArr = []
+  let validID = [];
+  rooms.forEach((room) => {
+    validID.push(room.roomId);
+  });
+  let emptyArr = [];
   for (let room of rooms) {
     for (let iDs of room.connectsTo) {
-     if (id === iDs) {
-        emptyArr.push(room.name)
+      if (id === iDs) {
+        emptyArr.push(room.name);
       }
-      
     }
-   
+  }
+  const connectedIDs = rooms.filter((room) => {
+    return room.roomId === id;
+  });
+
+  if (connectedIDs.length === 0) {
+    return `Room with ID of '${id}' could not be found.`;
+  }
+  for (info of connectedIDs) {
+    for (connect of info.connectsTo) {
+      if (!validID.includes(connect)) {
+        return `Room with ID of '${connect}' could not be found.`;
+      }
     }
-    return emptyArr
   }
 
+  return emptyArr;
+}
 
 module.exports = {
   getRoomByDinosaurName,
