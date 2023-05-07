@@ -26,23 +26,33 @@ const exampleRoomData = require("../data/rooms");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-//let roomName = null;
-//console.log(`hey , ${dinosaurName}`)
+  //console.log(`hey , ${dinosaurName}`)
+  //return room name where Dino can be found
+  //ELSE if it's not in "dinosaurs" or in "rooms" return error message
 
+  let foundDinosaur = null; //placeholder for dino name
+  let foundInRoom = false //placeholder for dino in room
 
-if(!dinosaurs[dinosaurName]){
-  return `Dinosaur with name '${dinosaurName}' cannot be found.`
-}
-
-for (const room of rooms) {
-
- if(room.dinosaurs.includes(dinosaurName)) {
-  console.log(rom.name)
-  return room.name; //name = room name
+  for (const room of rooms) { //iterate through rooms
+    for (const dinosaur of dinosaurs) { //iterate through dinos
+      //console.log(dinosaur)
+      if (dinosaur.name === dinosaurName && room.dinosaurs.includes(dinosaur.dinosaurId)) { //dinoName matches param & room has same dino(by id to match name)
+        foundDinosaur = room.name; //placeholder becomes room name
+        foundInRoom = true; //dino is in room
+      }
+    }
   }
+
+  if (!foundDinosaur && !foundInRoom) { //true values 
+    return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
+  } else if (!foundDinosaur) {
+    return `Dinosaur with name '${dinosaurName}' cannot be found.`;
+  }
+
+  return foundDinosaur;
 }
-return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
-}
+
+
 //console.log(exampleRoomData)
 // {
 //   roomId: 'Y707HL8uP9',
@@ -50,7 +60,6 @@ return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
 //   requiredTicketPermissions: [],
 //   dinosaurs: [ 'wuL4ddBinQ' ],
 //   connectsTo: [ 'VEr3w2ca_v', 'dBZeK6vhpt', 'Gp6nCN1JGT' ]
-
 
 /**
  * getConnectedRoomNamesById()
