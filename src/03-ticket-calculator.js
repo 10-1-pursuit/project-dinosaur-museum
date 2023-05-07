@@ -67,21 +67,26 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   let cost = ticketData[ticketType]
   // Determines the price with the entrant type
   totalPrice += cost.priceInCents[entrantType]
-  //TODO: Finish extra case
+  // Finds if there are extras added
   if(!!ticketInfo.extras.length){
+    // Stores the preview total
     let previewTotal = totalPrice
     for(const x of ticketInfo.extras){
       for(const y of ticketDataExtrasKeys){
         if(x === y){
+          // Stores the object of the extra added
           let extraObj = ticketData.extras[y]
+          // Adds the price of the extra to the total
           totalPrice += extraObj.priceInCents[entrantType]
         }
       }
     }
+    // Returns an error if extras were not found on the original array by comparing the difference of prices
     if(previewTotal === totalPrice){
       return `Extra type '${ticketInfo.extras}' cannot be found.`
     }
   }
+  // Returns the total cost
   return totalPrice;
 }
 
