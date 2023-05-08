@@ -90,7 +90,40 @@ function getLongestDinosaur(dinosaurs) {
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) { }
+function getDinosaurDescription(dinosaurs, id) {
+  // What do they want:
+  // Returns a description of the dinosaur based on a given id and if the dinosaur cannot be found returns an error message.
+  // How to do it:
+  // First access the elements in the main array
+  // - For Loop
+  // Then access the dinosaurs by the ID
+  // - dot(.)notation
+  // Should work for dinosaurs with only 1 value in 'mya'
+  // - Some type of comparison meaning if statement
+
+
+
+  for (const { dinosaurId, name, pronunciation, period, mya, info } of dinosaurs) {
+    let dinoId = dinosaurId;
+
+    // console.log(dinoId)
+    // console.log(oneMyaVal)
+    // console.log(id)
+
+    // console.log(Math.max(mya))
+
+    console.log(mya.map((myaArr) => { myaArr }))
+
+
+    if (dinoId === id) {
+      return `${name} (${pronunciation})\n${info} It lived in the ${period} period, over ${mya} million years ago.`
+    } else {
+      return "A dinosaur with an ID of 'incorrect-id' cannot be found.";
+    }
+
+  }
+
+}
 
 /**
  * getDinosaursAliveMya()
