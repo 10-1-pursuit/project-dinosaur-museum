@@ -135,53 +135,52 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) { 
+function purchaseTickets(ticketData, purchases) {
+  let total = 0;
+  let grandTotal = 0;
+  let addOns = 0;
+  let headLine = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
+  let reciept = "";
+
+  for (let tickets of purchases) {
+    let extra = tickets.extras;
+    let tickType = tickets.ticketType;
+    let entrant = tickets.entrantType;
+    let tickCost = ticketData[tickType].priceInCents[entrant] / 100;
 
 
-  let grandTotal = 0
-  let addOns = 0
-  let reciept = "Thank you for visiting the Dinosaur Museum!\n"
-   
-    for(let tickets of purchases){
-     let extra = tickets.extras;
-     let tickType = tickets.ticketType;
-     let entrant = tickets.entrantType;
-     let tickCost = ticketData[tickType].priceInCents[entrant] / 1.00 ;
-     grandTotal += tickCost;
-  
-     if(tickType === "general"||"membership"){
-       reciept += `\n${entrant} ${tickType} Admission: ${tickCost}\n` 
+    if (entrant === 'adult') {
+      reciept += `\nAdult ${ticketData[tickType].description}: $ ${tickCost} (`
+      grandTotal += tickCost;
+    };
+
+    if (entrant === 'child') {
+      reciept += `\nChild ${ticketData[tickType].description}: $ ${tickCost} (`
+      grandTotal += tickCost;
     }
-  
-     
-      if(ticketData[tickType] === undefined){
-      return "ticket type does not match an existing ticket type."
-    } 
-      
-      
-      if(ticketData[tickType].priceInCents[entrant] === undefined){
-      return "entrant type does not match an existing entrant type."
+
+    if (entrant === 'senior') {
+      reciept += `\nSenior ${ticketData[tickType].description}: $ ${tickCost} (`
+      grandTotal += tickCost;
     }
-    for(let extra of tickets.extras){
-      if(ticketData.extras[extra] === undefined){
-        return "extra type does match an existing extra type"
+
+    for (let toAddOn of extra) {
+      if (toAddOn === 'movie' || 'terrace' || 'education') {
+        addOns = ticketData.extras[toAddOn].priceInCents[entrant] / 100
+        total = grandTotal += addOns
+        reciept += ` ${ticketData.extras[toAddOn].description})`
+
+
       }
-        if( ticketData.extras[extra].priceInCents[entrant]){
-          addOns += ticketData.extras[extra].priceInCents[entrant]
-          reciept += `(${extra} Access)`
-   }   
-   }
-  
-     
-  
-  
-     
-   }
-    let total = addOns + grandTotal * .01
-    reciept += `\nTOTAL: ${total}`
-  
-    return reciept
+    }
+    return `${headLine} ${reciept} ${total}`
+
   }
+}
+
+
+
+
 
 
 
