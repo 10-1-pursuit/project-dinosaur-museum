@@ -26,40 +26,45 @@ const exampleRoomData = require("../data/rooms");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-  //console.log(`hey , ${dinosaurName}`)
+  //console.log(`hey , ${dinosaurs}`)
   //return room name where Dino can be found
   //ELSE if it's not in "dinosaurs" or in "rooms" return error message
-
   let foundDinosaur = null; //placeholder for dino name
-  let foundInRoom = false //placeholder for dino in room
+  let foundInRoom = false; //placeholder for dino in room
 
-  for (const room of rooms) { //iterate through rooms
-    for (const dinosaur of dinosaurs) { //iterate through dinos
+  for (let dino of dinosaurs) { // loop dinos 
+    if (dino.name === dinosaurName) { //myobj name is exactly equal to param name ?
+      foundDinosaur = dino; // reassign null to my obj
+    }
+  }
+  if (!foundDinosaur) { // if my obj doesn't exist
+    return `Dinosaur with name '${dinosaurName}' cannot be found.`;
+  }
+
+  for (const room of rooms) { // 
+    //iterate through rooms
+    for (const dinosaur of dinosaurs) {
+      //iterate through dinos
       //console.log(dinosaur)
-      if (dinosaur.name === dinosaurName && room.dinosaurs.includes(dinosaur.dinosaurId)) { //dinoName matches param & room has same dino(by id to match name)
+      if (
+        dinosaur.name === dinosaurName &&
+        room.dinosaurs.includes(dinosaur.dinosaurId)
+      ) {
+        //dinoName matches param & room has same dino(by id to match name)
         foundDinosaur = room.name; //placeholder becomes room name
         foundInRoom = true; //dino is in room
       }
     }
   }
 
-  if (!foundDinosaur && !foundInRoom) { //true values 
+  if (!foundInRoom) {
+    //true values
     return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
-  } else if (!foundDinosaur) {
-    return `Dinosaur with name '${dinosaurName}' cannot be found.`;
   }
 
   return foundDinosaur;
 }
 
-
-//console.log(exampleRoomData)
-// {
-//   roomId: 'Y707HL8uP9',
-//   name: 'Roberts Room',
-//   requiredTicketPermissions: [],
-//   dinosaurs: [ 'wuL4ddBinQ' ],
-//   connectsTo: [ 'VEr3w2ca_v', 'dBZeK6vhpt', 'Gp6nCN1JGT' ]
 
 /**
  * getConnectedRoomNamesById()
@@ -83,7 +88,21 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
       "Kit Hopkins Education Wing"
     ]
  */
-function getConnectedRoomNamesById(rooms, id) {}
+// return rooms connected by room ID
+//if incorrect id,  "Room with ID of 'incorrect-id' could not be found."
+//if incorrect id , also ^^ 
+function getConnectedRoomNamesById(rooms, id) {
+  let arrOfRooms = [];
+  let connection = null
+  for (let roomObj of rooms) {
+  console.log(roomObj.roomId, roomObj.connectsTo, id)
+  if (roomObj.connectsTo == id) {
+    connection = roomObj.connectsTo
+  }
+  }
+
+ return arrOfRooms
+}
 
 module.exports = {
   getRoomByDinosaurName,
