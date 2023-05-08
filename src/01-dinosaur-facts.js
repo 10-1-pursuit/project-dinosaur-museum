@@ -97,10 +97,9 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
   let addToArr = key;
   let result = [];
   for (let aliveDinos of dinosaurs) {
-    if (aliveDinos[addToArr]=== undefined){
+    if (aliveDinos[addToArr]=== undefined) {
       addToArr = "dinosaurId"
     }
-    
     if (aliveDinos.mya.length === 1 && (mya === aliveDinos.mya[0] || mya === (aliveDinos.mya[0] - 1)) ) {
         result.push(aliveDinos[addToArr])
     }
