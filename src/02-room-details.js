@@ -64,13 +64,13 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
     ]
  */
 function getConnectedRoomNamesById(rooms, id) {
-  const room = rooms.find(room => room.roomId === id);
+  const foundRoom = rooms.find(room => room.roomId === id);
 
-  if (!room) {
-    return `Room with ID '${id}' cannot be found.`;
+  if (!foundRoom) {
+    return `Room with ID of '${id}' could not be found.`;
   }
 
-  const connectedRoomIds = room.connectsTo;
+  const connectedRoomIds = foundRoom.connectsTo;
   const connectedRooms = rooms.filter(room => connectedRoomIds.includes(room.roomId));
   const connectedRoomNames = connectedRooms.map(room => room.name);
 
