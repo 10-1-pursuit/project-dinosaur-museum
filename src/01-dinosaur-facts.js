@@ -22,9 +22,26 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
 
-/**
+
+// Helper function created , which will convert meters into feet.
+let nFeet = (meters) => {return parseFloat(meters * 3.281)}
+
+function getLongestDinosaur(dinosaurs) {
+  let obj = {}
+  if(!dinosaurs.length){
+    return obj
+  }
+  let xYoshiSorted = dinosaurs.sort((a,b) => b.lengthInMeters - a.lengthInMeters)
+  let tallestDinosaur = xYoshiSorted[0];
+
+  obj[tallestDinosaur.name] = nFeet(tallestDinosaur.lengthInMeters)
+  console.log(obj) 
+  return obj
+};
+
+
+ /**¡
  * getDinosaurDescription()
  * ---------------------
  * Returns a formatted description of a dinosaur. If the dinosaur cannot be found, returns an error message.
