@@ -135,7 +135,55 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) { }
+function purchaseTickets(ticketData, purchases) { 
+
+
+  let grandTotal = 0
+  let addOns = 0
+  let reciept = "Thank you for visiting the Dinosaur Museum!\n"
+   
+    for(let tickets of purchases){
+     let extra = tickets.extras;
+     let tickType = tickets.ticketType;
+     let entrant = tickets.entrantType;
+     let tickCost = ticketData[tickType].priceInCents[entrant] / 1.00 ;
+     grandTotal += tickCost;
+  
+     if(tickType === "general"||"membership"){
+       reciept += `\n${entrant} ${tickType} Admission: ${tickCost}\n` 
+    }
+  
+     
+      if(ticketData[tickType] === undefined){
+      return "ticket type does not match an existing ticket type."
+    } 
+      
+      
+      if(ticketData[tickType].priceInCents[entrant] === undefined){
+      return "entrant type does not match an existing entrant type."
+    }
+    for(let extra of tickets.extras){
+      if(ticketData.extras[extra] === undefined){
+        return "extra type does match an existing extra type"
+      }
+        if( ticketData.extras[extra].priceInCents[entrant]){
+          addOns += ticketData.extras[extra].priceInCents[entrant]
+          reciept += `(${extra} Access)`
+   }   
+   }
+  
+     
+  
+  
+     
+   }
+    let total = addOns + grandTotal * .01
+    reciept += `\nTOTAL: ${total}`
+  
+    return reciept
+  }
+
+
 
 // Do not change anything below this line.
 module.exports = {
