@@ -78,13 +78,9 @@ function getConnectedRoomNamesById(rooms, id) {
     return "Room with ID of '" + incorrectId + "' could not be found.";
   };
 
-  const result = [];
-  result.push
-    (connectedRoomIds.forEach(
-      roomId => {
-        rooms.find(
-          room => room.roomId === roomId).name;
-      }));
+  const result = connectedRoomIds.map(roomId => {
+    return rooms.find(room => room.roomId === roomId).name;
+  });
 
   return result;
 }
