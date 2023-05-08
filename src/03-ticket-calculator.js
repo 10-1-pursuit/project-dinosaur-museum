@@ -54,8 +54,33 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
 
+function calculateTicketPrice(ticketData, ticketInfo) {
+  if (!(ticketInfo.ticketType === "general") && !(ticketInfo.ticketType === "membership")) {
+    return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
+  } else if (!(ticketInfo.entrantType === "child") && !(ticketInfo.entrantType === "adult") && !(ticketInfo.entrantType === "senior")) {
+    return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
+  }
+  let priceOfAdmission = 0
+  if ((ticketInfo.ticketType === "general") && (ticketInfo.entrantType === "child")) {
+    const genChild = priceOfAdmission += 2000
+  } else if ((ticketInfo.ticketType === "general") && (ticketInfo.entrantType === "adult")) {
+    const genAdult = priceOfAdmission += 3000
+  } else if ((ticketInfo.ticketType === "general") && (ticketInfo.entrantType === "senior")) {
+    const genSenior = priceOfAdmission += 2500
+  }
+  if ((ticketInfo.ticketType === "membership") && (ticketInfo.entrantType === "child")) {
+    const memberChild = priceOfAdmission += 1500
+  } else if ((ticketInfo.ticketType === "membership") && (ticketInfo.entrantType === "adult")) {
+    const memberAdult = priceOfAdmission += 2800
+  } else if ((ticketInfo.ticketType === "membership") && (ticketInfo.entrantType === "senior")) {
+    const memberSenior = priceOfAdmission += 2300
+  }
+  // if (!(ticketInfo.extras.includes("movie")) && !(ticketInfo.extras.includes("education")) && !(ticketInfo.extras.includes("terrace"))) {
+  //   return `Extra type '${ticketInfo.extras}' cannot be found.`
+  // }
+  return priceOfAdmission
+}
 /**
  * purchaseTickets()
  * ---------------------
@@ -109,7 +134,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) { }
 
 // Do not change anything below this line.
 module.exports = {
