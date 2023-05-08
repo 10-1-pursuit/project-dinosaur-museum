@@ -24,7 +24,7 @@ const exampleDinosaurData = require("../data/dinosaurs");
  */
 function getLongestDinosaur(dinosaurs) {
 
-  let sizeSortedDinos = dinosaurs.slice().sort((a, b) => b.lengthInMeters - a.lengthInMeters); // used .sort to find tallest dino.
+  let sizeSortedDinos = dinosaurs.slice().sort((a, b) => b.lengthInMeters - a.lengthInMeters); // used .sort to find tallest dino. *used .slice to make a shallow copy.
   let dinosConverted = sizeSortedDinos.map(dino => ({ [dino.name]: (dino.lengthInMeters * 3.281) })); // used .map to reorder and create new keys and adjust lengths.
   if (dinosaurs.length === 0) {   // used an if statement to see in the dinoList was empty or not.
     return {};
