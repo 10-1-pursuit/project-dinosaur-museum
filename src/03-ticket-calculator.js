@@ -62,25 +62,28 @@ const exampleTicketData = require("../data/tickets");
     };
 
     function calculateTicketPrice(ticketData, ticketInfo) {
-      for (ticketLook of ticketData){
+      for (let ticketLook of ticketData){
 //general admision turn into call back function/or else if/or case: break;
         if (ticketInfo.ticketType===ticketLook.general.description &&
           ticketInfo.entrantType===ticketInfo.entrantType && Object.keys(ticketLook.general.priceInCents)=== ticketInfo.entrantType||
-           ticketInfo.extras.length>0)
+           ticketInfo.extras.length>0){
             return ticketLook.general.priceInCents.adult;
+        }
 //membership admission turn into callbackfunction /or else if/or case: break;
             if (ticketInfo.ticketType===ticketLook.membership.description&& ticketLook.membership.priceInCents=== ticketInfo.entrantType&&
-              Object.keys(ticketInfo.extras.movie.priceInCents)=== ticketInfo.extras)//{
+              Object.keys(ticketInfo.extras.movie.priceInCents)=== ticketInfo.extras){
                 return Object.values(ticketLook.membership.priceInCents)+Object.values(ticketLook.extras.priceInCents)
-                //{
+                {
 //nona admission doesnt exist  turn into callback /or else if/or case: break;
                   if(ticketInfo.entrantType=== Object.keys(ticketLook.general.priceInCents)){
 
-                    return `Entrant type ${ticketInfo.entrantType} cannot be found.` }                     
+                    return `Entrant type ${ticketInfo.entrantType} cannot be found.` 
+                    {                    
         }
       } 
+    }
 
-console.log(caluculateTicketPrice(exampleTicketData, ticketInfo))
+console.log(calculateTicketPrice(exampleTicketData, ticketInfo))
 
 /**
  * purchaseTickets()
@@ -151,10 +154,12 @@ function purchaseTickets(ticketData, purchases) {
       purchaseLook.extras.movie.description === purchases.extras) {
       return `${purchaseLook.general.description}` +
         Object.values(purchaseLook.general.priceInCents) + Object.values(purchaseLook.extras.movies.priceInCents)
+        }
+      }
     }
-  }
+  
 
-}
+
 console.log(purchaseTickets(exampleTicketData,purchases))
 
 // Do not change anything below this line.

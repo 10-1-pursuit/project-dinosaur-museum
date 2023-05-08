@@ -33,15 +33,16 @@ const exampleRoomData = require("../data/rooms");
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   for(const roomLook of dinosaurs){//for loop to search through the array of objects
     
-    if (roomLook.dinoasuars.length>=1 && rooms ===roomLook.name && dinosaurName=== roomLook.dinosaurs){
+    if (roomLook.dinoasuars>0 && rooms ===roomLook.name && dinosaurName=== roomLook.dinosaurs){
       return roomLook.name //setup my Boolean if these values are true then return the rooms name. 
-    }                        // if dinosaurs.length is greater or equal than one so i can see if a dinosaur exist in the room.
+    }  
+    else{                    // if dinosaurs.length is greater or equal than one so i can see if a dinosaur exist in the room.
                               //If dino exist return roomLook.name which is the room the dinosaur woiuld be in
-    return `Dinosaur with name ${dinosaurName} cannot be found.`;// if no dinosuar is found return this message
-    
+    return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;// if no dinosuar is found return this message
+  }
   }
 }
-console.log(getRoomByDinosaurName(exampleRoomData, rooms, "Tyrannosaurus"));// invoking function with the parameters
+console.log(getRoomByDinosaurName(exampleRoomData, exampleRoomData, "Tyrannosaurus"));// invoking function with the parameters
 
 /**
  * getConnectedRoomNamesById()
@@ -71,7 +72,7 @@ function getConnectedRoomNamesById(rooms, id) {
     if (id=== idLook.roomId){
       return idLook.connectTo
     }
-    reuturn  `Room with ID of '${id}' could not be found.`;
+    return  `Room with ID of '${id}' could not be found.`;
   }
 }
 console.log(getConnectedRoomNamesById(exampleRoomData,"A6QaYdyKra"))
