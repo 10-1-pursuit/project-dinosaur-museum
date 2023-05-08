@@ -76,11 +76,34 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   } else if ((ticketInfo.ticketType === "membership") && (ticketInfo.entrantType === "senior")) {
     const memberSenior = priceOfAdmission += 2300
   }
-  // if (!(ticketInfo.extras.includes("movie")) && !(ticketInfo.extras.includes("education")) && !(ticketInfo.extras.includes("terrace"))) {
-  //   return `Extra type '${ticketInfo.extras}' cannot be found.`
-  // }
+  for (const extra of ticketInfo.extras) {
+    if (extra === "movie" && ticketInfo.ticketType === "general") {
+      priceOfAdmission += 1000
+    } else if (extra === "education" && ticketInfo.ticketType === "general") {
+      if (ticketInfo.entrantType === "child") priceOfAdmission += 1000
+      if (ticketInfo.entrantType === "adult") priceOfAdmission += 1200
+      if (ticketInfo.entrantType === "senior") priceOfAdmission += 1200
+    } else if (extra === "terrace" && ticketInfo.ticketType === "general") {
+      if (ticketInfo.entrantType === "child") priceOfAdmission += 500
+      if (ticketInfo.entrantType === "adult") priceOfAdmission += 1000
+      if (ticketInfo.entrantType === "senior") priceOfAdmission += 1000
+    } else if (extra === "movie" && ticketInfo.ticketType === "membership") {
+      priceOfAdmission += 1000
+    } else if (extra === "education" && ticketInfo.ticketType === "membership") {
+      if (ticketInfo.entrantType === "child") priceOfAdmission += 1000
+      if (ticketInfo.entrantType === "adult") priceOfAdmission += 1200
+      if (ticketInfo.entrantType === "senior") priceOfAdmission += 1200
+    } else if (extra === "terrace" && ticketInfo.ticketType === "membership") {
+      if (ticketInfo.entrantType === "child") priceOfAdmission += 500
+      if (ticketInfo.entrantType === "adult") priceOfAdmission += 1000
+      if (ticketInfo.entrantType === "senior") priceOfAdmission += 1000
+    } else if (!(ticketInfo.extras.includes("movie")) && !(ticketInfo.extras.includes("education")) && !(ticketInfo.extras.includes("terrace"))) {
+      return `Extra type '${ticketInfo.extras}' cannot be found.`
+    }
+  }
   return priceOfAdmission
 }
+
 /**
  * purchaseTickets()
  * ---------------------
