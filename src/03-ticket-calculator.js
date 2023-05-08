@@ -54,7 +54,7 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
-  for (const typeOfTikObj of tickets){
+  for (const typeOfTikObj of ticketData){
    console.log( typeOfTikObj)
   }
   if (ticketInfo.ticketType === tickets|| ticketInfo.entrantType)
