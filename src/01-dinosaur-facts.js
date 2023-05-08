@@ -95,12 +95,20 @@ function getDinosaurDescription(dinosaurs, id) {
 
 function getDinosaursAliveMya(dinosaurs, mya, key) {
   let idArr = [];
+  if (key === undefined) {
+    key = "dinosaurId";
+  }
   const myaLengthEqualToOne = (currentDinosaur) =>
     currentDinosaur.mya.length === 1;
   let lengthOne = dinosaurs.filter(myaLengthEqualToOne);
+  // console.log(lengthOne)
   for (let info of lengthOne) {
     if (info.mya - mya === 1 || info.mya - mya === 0) {
-      idArr.push(info.dinosaurId);
+      if (info[key] === undefined) {
+        idArr.push(info.dinosaurId);
+      } else {
+        idArr.push(info[key]);
+      }
     }
   }
   const myaLengthEqualToTwo = (currentDinosaur) =>
@@ -108,7 +116,11 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
   let lengthTwo = dinosaurs.filter(myaLengthEqualToTwo);
   for (let info of lengthTwo) {
     if (mya <= info.mya[0] && mya >= info.mya[1]) {
-      idArr.push(info.dinosaurId);
+      if (info[key] === undefined) {
+        idArr.push(info.dinosaurId);
+      } else {
+        idArr.push(info[key]);
+      }
     }
   }
   return idArr;
