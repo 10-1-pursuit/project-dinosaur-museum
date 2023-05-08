@@ -28,7 +28,7 @@ function getLongestDinosaur(dinosaurs) {
   let dName = "";
 
   if (!dinosaurs.length) {
-    return {};
+    return longestObj;
   }
   for (let dino of dinosaurs) {
 
