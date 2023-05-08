@@ -54,7 +54,7 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
-return `${ticketInfo.ticketType} ${tickets.general.description} cannot be found.`
+return `${ticketInfo.ticketType} ${ticketData.general.description} cannot be found.`
 }
 
 /**
