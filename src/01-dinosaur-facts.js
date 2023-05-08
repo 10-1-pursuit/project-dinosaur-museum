@@ -93,20 +93,30 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
+  // create empty array
   const dinosAliveAtMya = []
+  // create array of filtered dinosaurs with given conditions
   const filteredDinos = dinosaurs.filter(dino => {
+    // if one element in mya array length
     if (dino.mya.length === 1) {
-      return dino.mya[0] === mya || dino.mya[0] === mya - 1
+      // return dino mya equal to mya or mya less 1
+      return dino.mya[0] === mya || dino.mya[0] - 1 === mya
+      // if 2 elements in mya array length
     } else if (dino.mya.length === 2) {
-      return (dino.mya[0] === mya || dino.mya[0] === mya - 1) || (dino.mya[1] === mya || dino.mya[1] === mya - 1)
+      //return 1st dino mya element greater and equal to mya or mya - 1 AND 2nd dino element less than and equal to mya or mya - 1
+      return (dino.mya[0] >= mya || dino.mya[0] >= mya - 1) && (dino.mya[1] <= mya || dino.mya[1] <= mya - 1)
     }
   })
   for (const dino of filteredDinos) {
+    //iterate thru array of dinos and if key or key as object key in each dino object is not undefined
     if (key && dino[key] !== undefined) {
+      //push the key object as the dino object to the array created
       dinosAliveAtMya.push(dino[key])
     } else
+      // else push the dino's ID to the array created
       dinosAliveAtMya.push(dino.dinosaurId)
   }
+  //return created array with dino info
   return dinosAliveAtMya
 }
 
