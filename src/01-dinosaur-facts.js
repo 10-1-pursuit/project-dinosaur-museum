@@ -23,50 +23,17 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  //> { Brachiosaurus: 98.43 }
  */
 function getLongestDinosaur(dinosaurs) {
-  // What they want:
-  // Return an object where the key is the name of the tallest dino and the values are the height of the dino in feet
-  // Retrieve the dino's name from the dinosaurs array[]
-  // - Loop(For , For of...)
-  // - . notation / ["notaion"] to get the dino's name
-  // Retrieve the dino's lengthInMeters/Height and convert it to feet
-  // - . notation / ["notaion"] to get the dino's height
-  // Put both data into an object where the name are the keys and height is the value
-  // - Destructuring? const { } = dinosaurs
-  // If multiple dinosaurs are the same length return the one whos name comes first
-  // Return an empty object if there are no dinosaurs
-
-  let num = 0
+  let num = 0;
   let tallestDino = {};
-
   for (const { name, lengthInMeters } of dinosaurs) {
-    // const { name, lengthInMeters } = dinoObj;
-
-    let lengthInFeet = lengthInMeters * 3.281
-    // console.log("Dino's name: ", name, "Dino's length in ft: ", lengthInFeet)
-
+    let lengthInFeet = lengthInMeters * 3.281;
     if (lengthInFeet > num) {
-      num = lengthInFeet
-      // console.log(num)
-
-      // if (!tallestDino.lengthInFeet || lengthInFeet > tallestDino.lengthInFeet) {}
-
-      // console.log({ [name]: lengthInFeet })
-      // To have some as a key and something else as a value you need brackets and a colon(:).
-      // Having only the name and a comma will give you "name" and "lengthInFeet" as the key
-      tallestDino = { [name]: lengthInFeet }
+      num = lengthInFeet;
+      tallestDino = { [name]: lengthInFeet };
 
     }
-    // // console.log("Dino's Name: ", name, "Dino's Height: ", lengthInMeters);
-
-    // console.log({ [name]: lengthInFeet })
-
-    // Object.assign(tallestDino, { name: lengthInMeters });
-
-    // console.log(newObj);
-
   }
   return tallestDino;
-  // console.log("This is the tallest Dinosaur(Brachiosaurus): ", tallestDino);
 }
 
 
@@ -101,10 +68,9 @@ function getDinosaurDescription(dinosaurs, id) {
   // Should work for dinosaurs with only 1 value in 'mya'
   // - Some type of comparison meaning if statement
 
-
+  // let dinoDescription = null
 
   for (const { dinosaurId, name, pronunciation, period, mya, info } of dinosaurs) {
-    let dinoId = dinosaurId;
 
     // console.log(dinoId)
     // console.log(oneMyaVal)
@@ -115,14 +81,12 @@ function getDinosaurDescription(dinosaurs, id) {
     // console.log(mya.map((myaArr) => { myaArr }))
 
 
-    if (dinoId === id) {
+    if (dinosaurId === id) {
       return `${name} (${pronunciation})\n${info} It lived in the ${period} period, over ${mya.slice(-1)} million years ago.`
     }
-    // else {
-    //   return "A dinosaur with an ID of 'incorrect-id' cannot be found.";
-    // }
 
   }
+  return "A dinosaur with an ID of 'incorrect-id' cannot be found.";
 
 }
 
