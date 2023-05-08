@@ -112,14 +112,15 @@ function getDinosaurDescription(dinosaurs, id) {
 
     // console.log(Math.max(mya))
 
-    console.log(mya.map((myaArr) => { myaArr }))
+    // console.log(mya.map((myaArr) => { myaArr }))
 
 
     if (dinoId === id) {
-      return `${name} (${pronunciation})\n${info} It lived in the ${period} period, over ${mya} million years ago.`
-    } else {
-      return "A dinosaur with an ID of 'incorrect-id' cannot be found.";
+      return `${name} (${pronunciation})\n${info} It lived in the ${period} period, over ${mya.slice(-1)} million years ago.`
     }
+    // else {
+    //   return "A dinosaur with an ID of 'incorrect-id' cannot be found.";
+    // }
 
   }
 
