@@ -25,6 +25,12 @@ const exampleDinosaurData = require("../data/dinosaurs");
 
 function getLongestDinosaur(dinosaurs) {
 
+  let noSuchDinosaurExists = {};
+
+  if (dinosaurs.length === 0) {
+    return noSuchDinosaurExists;
+  };
+
   const dinosInSizeOrder = [...dinosaurs].sort((dino1, dino2) => {
 
 
@@ -40,17 +46,12 @@ function getLongestDinosaur(dinosaurs) {
   });
 
   const tallestDino = dinosInSizeOrder[0];
-  const noSuchDinosaurExists = {};
+
   let dinoName = tallestDino.name
   let dinoLength = tallestDino.lengthInMeters * 3.281
   let largestOfThePact = { [dinoName]: dinoLength }
 
-  if (tallestDino === 0) {
-
-    return noSuchDinosaurExists;
-  } else {
-    return largestOfThePact;
-  }
+  return largestOfThePact;
 }
 getLongestDinosaur(exampleDinosaurData)
 

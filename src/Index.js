@@ -93,43 +93,76 @@ function getLongestDinosaur(dinosaurs) { }
 
 function getLongestDinosaur(dinosaurs) {
 
-  const noSuchDinosaurExists = {};
-  let oneDinoEatsTheOther = [];
-  let dinoName = dinosaurs.name;
-  let dinoLength = dinosaurs.lengthInMeters;
 
-  // X set length === 0 and returned length[0]
-  if (!dinoName || !dinoLength) {
-    return noSuchDinosaurExists
-  };
-
-  let lengthOfDinosaur = `${dinoLength} * 3.281 + "feet"`
-  // let lengthOfDinosaur = `${metersToFeetConverter}`
-  let nameOfDinosaur = `${dinoName}`
-  let largestOfThePact = { [nameOfDinosaur]: lengthOfDinosaur }
-
-  const tallestDino = dinosaurs.sort.slice((dinoHeightInfo) => {
+  const dinosInSizeOrder = [...dinosaurs].sort((dino1, dino2) => {
 
 
-    if (dinoHeightInfo.dinoLength > dinoHeightInfo.dinoLength) {
+    if (dino1.lengthInMeters > dino2.lengthInMeters) {
       return -1;
     }
-
-    return tallestDino;
+    if (dino1.lengthInMeters < dino2.lengthInMeters) {
+      return 1
+    }
+    if (dino1.lengthInMeters === dino2.lengthInMeters) {
+      return 0;
+    }
   });
 
-  // for (let dinoInfo of dinosaurs) {
-  //   let dinoHeightInfo = dinoInfo.lengthInMeters;
-  //   if (dinosaurs.indexOf(dinoHeightInfo) !== -1) {
-  //     dinoTwins.push(dinoHeightInfo[index])
-  //   }
-  //   return dinoTwins
-  // }
-  // return oneDinoEatsTheOther;
+  const tallestDino = dinosInSizeOrder[0];
+  const noSuchDinosaurExists = {};
+  let dinoName = tallestDino.name
+  let dinoLength = tallestDino.lengthInMeters * 3.281
+  let largestOfThePact = { [dinoName]: dinoLength }
+
+  if (tallestDino.lengthInMeters === 0) {
+    return noSuchDinosaurExists;
+  } else {
+    return largestOfThePact;
+  }
+}
+getLongestDinosaur(exampleDinosaurData)
 
 
 
-  return largestOfThePact;
+
+
+// const noSuchDinosaurExists = {};
+// let oneDinoEatsTheOther = [];
+// let dinoName = dinosaurs.name;
+// let dinoLength = dinosaurs.lengthInMeters;
+
+// // X set length === 0 and returned length[0]
+// if (!dinoName || !dinoLength) {
+//   return noSuchDinosaurExists
+// };
+
+// let lengthOfDinosaur = `${dinoLength} * 3.281 + "feet"`
+// // let lengthOfDinosaur = `${metersToFeetConverter}`
+// let nameOfDinosaur = `${dinoName}`
+// let largestOfThePact = { [nameOfDinosaur]: lengthOfDinosaur }
+
+// const tallestDino = dinosaurs.sort.slice((dinoHeightInfo) => {
+
+
+//   if (dinoHeightInfo.dinoLength > dinoHeightInfo.dinoLength) {
+//     return -1;
+//   }
+
+//   return tallestDino;
+// });
+
+// for (let dinoInfo of dinosaurs) {
+//   let dinoHeightInfo = dinoInfo.lengthInMeters;
+//   if (dinosaurs.indexOf(dinoHeightInfo) !== -1) {
+//     dinoTwins.push(dinoHeightInfo[index])
+//   }
+//   return dinoTwins
+// }
+// return oneDinoEatsTheOther;
+
+
+
+return largestOfThePact;
 }
 
 

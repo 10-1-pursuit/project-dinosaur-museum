@@ -54,7 +54,58 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
+function calculateTicketPrice(ticketData, ticketInfo) {
+
+
+  let ticketEntrant = ticketInfo.entrantType //general or membership
+  let ticketMenuAndPrices = ticketData.general.priceInCents;
+  let ticketAdmissionsType = ticketInfo.ticketType //incorrect type
+  let ticketWithAddOns = ticketInfo.extras
+  let invalidEntryType = undefined;
+
+
+  if (ticketData[ticketAdmissionsType] === invalidEntryType) {
+    return "Ticket type 'incorrect-type' cannot be found."
+  }
+
+  if (ticketData[ticketEntrant] === invalidEntryType) {
+    return "Entrant type 'incorrect-entrant' cannot be found."
+  }
+
+  for (let addOns of ticketWithAddOns) {
+    if (ticketData.extras[addOns] === invalidEntryType) {
+      return "Extra type 'incorrect-extra' cannot be found."
+    }
+  }
+
+
+  //calculator
+
+  let generalAdmissionForChild = 0;
+  let childPrice = ticketMenuAndPrices.child;
+  let priceForChild = `$${childPrice}`
+  let adultPrice = ticketMenuAndPrices.adult;
+  let priceForAdult = `$${adultPrice}`
+  let seniorPrice = ticketMenuAndPrices.senior;
+  let priceForSenior = `$${seniorPrice}`
+
+  if (ticketEntrant === "child") {
+    //console.log(ticketData[ticketEntrant].priceInCents.child)
+  }
+
+  if (ticketEntrant === "senior") {
+    return priceForSenior;
+  }
+  if (ticketEntrant === "adult") {
+    return priceForAdult;
+  }
+
+}
+
+
+
+
+
 
 /**
  * purchaseTickets()
@@ -97,7 +148,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
     ];
     purchaseTickets(tickets, purchases);
     //> "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $50.00 (Movie Access, Terrace Access)\nSenior General Admission: $35.00 (Terrace Access)\nChild General Admission: $45.00 (Education Access, Movie Access, Terrace Access)\nChild General Admission: $45.00 (Education Access, Movie Access, Terrace Access)\n-------------------------------------------\nTOTAL: $175.00"
-
+ 
  * EXAMPLE:
     const purchases = [
       {
@@ -109,7 +160,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) { }
 
 // Do not change anything below this line.
 module.exports = {
