@@ -22,46 +22,116 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
+function getLongestDinosaur(dinosaurs) { }
+
+//     const noSuchDinosaurExists = {};
+//     let oneDinoEatsTheOther = [];
+//     let dinoTwins = [];
+//     let tallestDino = [];
+//     let dinoName = dinosaurs.name;
+//     let dinoLength = dinosaurs.lengthInMeters;
+
+//     // X set length === 0 and returned length[0]
+//     if (!dinoName || !dinoLength) {
+//         return noSuchDinosaurExists
+//     };
+
+//     const tallestDino = dinosaurs.sort((dino1, dino2) => {
+
+
+//         if (dino1.dinoLength > dino2.dinoLength) {
+//             return -1;
+//         }
+//         if (dino1.dinoLength < dino2.dinoLength) {
+//             return 1;
+//         }
+
+//         return tallestDino;
+//     }
+//     });
+// for (let dinoInfo of dinosaurs) {
+//     let dinoHeightInfo = dinoInfo.lengthInMeters;
+//     if (dinosaurs.indexOf(dinoHeightInfo) !== -1) {
+//         dinoTwins.push(dinoHeightInfo[index])
+//     }
+//     return dinoTwins
+// }
+// return oneDinoEatsTheOther;
+
+// let metersToFeetConverter = `${dinoLength} * 3.281 + "feet"`
+// let lengthOfDinosaur = `${metersToFeetConverter}`
+// let nameOfDinosaur = `${dinoName}`
+// let largestOfThePact = { [nameOfDinosaur]: lengthOfDinosaur }
+
+// return largestOfThePact;
+// }
+
+
+// let noSuchDinosaurExists = {};
+// let dinoName = dinosaurs.name;
+// let dinoLength = dinosaurs.lengthInMeters;
+// let tallestDino = null;
+
+// if (!dinoName) {
+//   return noSuchDinosaurExists
+// }
+// const dinosInSizeOrder = dinosaurs.sort((dino1, dino2) => {
+
+//   if (dino1.dinoLength > dino2.dinoLength) {
+//     return -1;
+//   }
+// });
+// if (dinoLength > oneDinoEatsTheOther.length) {
+//   return tallestDino = dinoLength;
+// }
+// let metersToFeetConverter = `${dinoLength} * 3.281 + "feet"`
+// let lengthOfDinosaur = `${metersToFeetConverter}`
+// let nameOfDinosaur = `${dinoName}`
+// let largestOfThePact = { [nameOfDinosaur]: lengthOfDinosaur }
+
+// return largestOfThePact;
+
 function getLongestDinosaur(dinosaurs) {
 
-    const noSuchDinosaurExists = {};
-    let oneDinoEatsTheOther = [];
-    let dinoTwins = [];
-    let dinoName = dinosaurs.name;
-    let dinoLength = dinosaurs.lengthInMeters;
+  const noSuchDinosaurExists = {};
+  let oneDinoEatsTheOther = [];
+  let dinoName = dinosaurs.name;
+  let dinoLength = dinosaurs.lengthInMeters;
 
-    // X set length === 0 and returned length[0]
-    if (!dinoName || !dinoLength) {
-        return noSuchDinosaurExists
-    };
+  // X set length === 0 and returned length[0]
+  if (!dinoName || !dinoLength) {
+    return noSuchDinosaurExists
+  };
 
-    const tallestDino = dinosaurs.sort((dino1, dino2) => {
+  let lengthOfDinosaur = `${dinoLength} * 3.281 + "feet"`
+  // let lengthOfDinosaur = `${metersToFeetConverter}`
+  let nameOfDinosaur = `${dinoName}`
+  let largestOfThePact = { [nameOfDinosaur]: lengthOfDinosaur }
 
-        if (dino1.dinoLength > dino2.dinoLength) {
-            return -1;
-        }
-        if (dino1.dinoLength < dino2.dinoLength) {
-            return 1;
-        }
-        return tallestDino
-    });
+  const tallestDino = dinosaurs.sort.slice((dinoHeightInfo) => {
 
-    for (let dino of dinosaurs) {
-        let dinoHeightInfo = dino.lengthInMeters;
-        if (dinosaurs.indexOf(dinoHeightInfo) !== -1) {
-            dinoTwins.push(dinoHeightInfo[index])
-        }
-        return dinoTwins
+
+    if (dinoHeightInfo.dinoLength > dinoHeightInfo.dinoLength) {
+      return -1;
     }
-    return oneDinoEatsTheOther;
-    ;
-    let metersToFeetConverter = `${dinoLength} * 3.281 + "feet"`
-    let lengthOfDinosaur = `${metersToFeetConverter}`
-    let nameOfDinosaur = `${dinoName}`
-    let largestOfThePact = { [nameOfDinosaur]: lengthOfDinosaur }
 
-    return largestOfThePact;
+    return tallestDino;
+  });
+
+  // for (let dinoInfo of dinosaurs) {
+  //   let dinoHeightInfo = dinoInfo.lengthInMeters;
+  //   if (dinosaurs.indexOf(dinoHeightInfo) !== -1) {
+  //     dinoTwins.push(dinoHeightInfo[index])
+  //   }
+  //   return dinoTwins
+  // }
+  // return oneDinoEatsTheOther;
+
+
+
+  return largestOfThePact;
 }
+
 
 getLongestDinosaur(exampleDinosaurData)
 /**
@@ -86,16 +156,16 @@ getLongestDinosaur(exampleDinosaurData)
  */
 function getDinosaurDescription(dinosaurs, id) {
 
-    // let dinoName = dinosaur.name;
+  // let dinoName = dinosaur.name;
 
-    // for (let dinoID of dinosaurs) {
-    //     if (!dinoID.dinosaurId === true) {
-    //         return `A dinosaur with an ID of ${dinoID.dinosaurId} cannot be found. `
-    //     }
-    // }
-    // if (dinoID.dinosaurId === true) {
-    //     return `${dinoName}(${dino.pronunciation}) \n ${dinosaurs.info}. It lived in the ${dinosaurs.period} period, over ${dinosaurs.mya[1]}.`
-    // }
+  // for (let dinoID of dinosaurs) {
+  //     if (!dinoID.dinosaurId === true) {
+  //         return `A dinosaur with an ID of ${dinoID.dinosaurId} cannot be found. `
+  //     }
+  // }
+  // if (dinoID.dinosaurId === true) {
+  //     return `${dinoName}(${dino.pronunciation}) \n ${dinosaurs.info}. It lived in the ${dinosaurs.period} period, over ${dinosaurs.mya[1]}.`
+  // }
 
 }
 
@@ -127,7 +197,7 @@ function getDinosaurDescription(dinosaurs, id) {
 function getDinosaursAliveMya(dinosaurs, mya, key) { }
 
 module.exports = {
-    getLongestDinosaur,
-    getDinosaurDescription,
-    getDinosaursAliveMya,
+  getLongestDinosaur,
+  getDinosaurDescription,
+  getDinosaursAliveMya,
 };

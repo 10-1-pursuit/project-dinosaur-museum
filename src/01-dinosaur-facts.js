@@ -22,42 +22,33 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
+
 function getLongestDinosaur(dinosaurs) {
 
-  const noSuchDinosaurExists = {};
-  let oneDinoEatsTheOther = [];
-  let dinoTwins = [];
-  let dinoName = dinosaurs.name;
-  let dinoLength = dinosaurs.lengthInMeters;
+  const dinosInSizeOrder = [...dinosaurs].sort((dino1, dino2) => {
 
-  if (!dinoName) {
-    return noSuchDinosaurExists
-  };
 
-  const tallestDino = dinosaurs.sort((dino1, dino2) => {
-
-    if (dino1.dinoLength > dino2.dinoLength) {
+    if (dino1.lengthInMeters > dino2.lengthInMeters) {
       return -1;
     }
-    if (dino1.dinoLength < dino2.dinoLength) {
-      return 1;
+    if (dino1.lengthInMeters < dino2.lengthInMeters) {
+      return 1
     }
-    return dino1.dinoLength;
+    if (dino1.lengthInMeters === dino2.lengthInMeters) {
+      return 0;
+    }
   });
 
-  for (let dino of dinosaurs) {
-    let dinoHeightInfo = dino.lengthInMeters;
-    if (dinoTwins.indexOf(dinoHeightInfo) !== -1) {
-      dinoTwins.push(dinoHeightInfo)
+  const tallestDino = dinosInSizeOrder[0];
+  const noSuchDinosaurExists = {};
+  let dinoName = tallestDino.name
+  let dinoLength = tallestDino.lengthInMeters * 3.281
+  let largestOfThePact = { [dinoName]: dinoLength }
 
-    }
-    return oneDinoEatsTheOther
+  if (tallestDino === 0) {
 
-    let metersToFeetConverter = `${dinoLength} * 3.281 + "feet"`
-    let lengthOfDinosaur = `${metersToFeetConverter}`
-    let nameOfDinosaur = `${dinoName}`
-    let largestOfThePact = { [nameOfDinosaur]: lengthOfDinosaur }
-
+    return noSuchDinosaurExists;
+  } else {
     return largestOfThePact;
   }
 }
@@ -72,7 +63,7 @@ getLongestDinosaur(exampleDinosaurData)
  *
  * NOTE: The `\n` represents a new line in text.
  *
- * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data/dinosaurs.js` file for an example of the input.
+ * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data / dinosaurs.js` file for an example of the input.
  * @param {string} id - The unique identifier for the dinosaur.
  * @returns {string} A detailed description of the dinosaur.
  *
@@ -85,19 +76,18 @@ getLongestDinosaur(exampleDinosaurData)
  */
 function getDinosaurDescription(dinosaurs, id) {
 
-  let dinoName = dinosaur.name;
-
-  for (let dinoID of dinosaurs) {
-    if (!dinoID.dinosaurId === true) {
-      return `A dinosaur with an ID of ${dinoID.dinosaurId} cannot be found.`
-    }
-
-    if (dinoID.dinosaurId === true) {
-      return `${dinoName}(${dino.pronunciation}) \n ${dinosaurs.info}. It lived in the ${dinosaurs.period} period, over ${dinosaurs.mya[1]}.`
-    }
-
+  if (!dinosaurs.name || !id) {
+    return "A dinosaur with an ID of 'incorrect-id' cannot be found."
   }
+
+  if (dinosaurs.dinosaurId === id) {
+    return `${dinosaurs.name} (${dinosaurs.pronunciation}) \n ${dinosaurs.info}. It lived in the ${dinosaurs.period} period, over ${dinosaurs.mya} years ago.`
+  }
+
 }
+
+getDinosaurDescription(exampleDinosaurData)
+
 /**
  * getDinosaursAliveMya()
  * ---------------------
@@ -105,7 +95,7 @@ function getDinosaurDescription(dinosaurs, id) {
  *
  * If the dinosaur only has a single value for `mya`, allows for the `mya` value to be equal to the given value or one less. For example, if a dinosaur has a `mya` value of `[29]`, the dinosaur's information will be returned if `29` is entered or `28` is entered.
  *
- * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data/dinosaurs.js` file for an example of the input.
+ * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data / dinosaurs.js` file for an example of the input.
  * @param {number} mya - "Millions of years ago."
  * @param {string} key - An optional parameter. If included, for dinosaurs that lived during the `mya` value given, will return the value of the supplied key. Otherwise, returns the ID.
  * @returns {*[]} An array of values, which depend on the key given. The array should only include data of dinosaurs who lived during the given time period.
