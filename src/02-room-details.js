@@ -25,7 +25,37 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+// return name of room where given dino can be found . IF the dino doesn't exist in dinosaurs ARRAY OR in any rooms return an error message that says so .
+//return rooms.name 
+// iterate thru rooms ARRAY, n return name of ROOM dino is found in . IF DINO IS NOT IN ROOMS.dino return error.
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+  let foundOrNot = false
+  for (const eachDino of dinosaurs) {
+    if (eachDino.name === dinosaurName) {
+      foundOrNot = true
+    }
+  }
+  // did we find what we were looking for ,if not return error message 
+  if (foundOrNot === false) {
+    return `Dinosaur with name '${dinosaurName}' cannot be found.`
+    // .map(findName => findName.name)
+  }
+  for (const roomObj of rooms) {
+    if (roomObj.dinosaurs === dinosaurName) {
+      console.log(roomObj.dinosaurs)
+    }
+  }
+  if (!rooms[dinosaurName]) {
+    return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
+  }
+  // console.log (roomObj)
+}
+
+
+// onst threeMins = songs.filter(eleThree => eleThree.runtimeInSeconds > 180).forEach(eleThree => console.log(eleThree.title))
+
+// return (rooms.find(findName => findName.name === dinosaurs.rooms ))
+// }
 
 /**
  * getConnectedRoomNamesById()
@@ -49,7 +79,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
       "Kit Hopkins Education Wing"
     ]
  */
-function getConnectedRoomNamesById(rooms, id) {}
+function getConnectedRoomNamesById(rooms, id) { }
 
 module.exports = {
   getRoomByDinosaurName,
