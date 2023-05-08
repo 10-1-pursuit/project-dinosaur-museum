@@ -118,12 +118,12 @@ dinosaurs.forEach(dino=>{
 }
 });
 if (key) {
-  return idss.map(id => {
+  return idss.map(dinosaurId => {
     const dino = dinosaurs.find(dino1 => dino1.dinosaurId === id);
     if (dino[key]) {
       return dino[key];
     }else {
-      return id;
+      return dinosaurId;
   }
 });
 } else {
