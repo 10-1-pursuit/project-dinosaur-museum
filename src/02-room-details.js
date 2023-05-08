@@ -12,6 +12,7 @@ const exampleRoomData = require("../data/rooms");
  * ---------------------
  * Return the name of the room where the given dinosaur can be found. If the dinosaur does not exist in the `dinosaurs` list or cannot be found in any room, return an error message that says so.
  *
+ * 
  * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data/dinosaurs.js` file for an example of the input.
  * @param {Object[]} rooms - An array of room objects. See the `data/rooms.js` file for an example of the input.
  * @param {string} dinosaurName - The name of the dinosaur.
@@ -26,8 +27,20 @@ const exampleRoomData = require("../data/rooms");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-  
+  for (const dinosaur of dinosaurs) {
+  if(dinosaur.name === dinosaurName) { // checks if dinosaur.name matches dinosaurName argument
+
+    for (const room of rooms) { //this for of loop is inside the previous if statement and if a match is found it goes through this for of loop
+      if (room.dinosaurs.includes(dinosaur.dinosaurId)) { // for each room it checks if it includes dinosaurId of current dinosaur its checking
+      return room.name // if there is a match then return the name of the room where dinosaur can be found
+    }
+    }
+     return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.` // if no match in any room, it returns this error message.
+    }
+  }
+  return `Dinosaur with name '${dinosaurName}' cannot be found.` // if there is no match in dinosaur array, then return this error message.
 }
+
 
 /**
  * getConnectedRoomNamesById()
@@ -51,7 +64,9 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
       "Kit Hopkins Education Wing"
     ]
  */
-function getConnectedRoomNamesById(rooms, id) {}
+function getConnectedRoomNamesById(rooms, id) {
+  
+}
 
 module.exports = {
   getRoomByDinosaurName,
