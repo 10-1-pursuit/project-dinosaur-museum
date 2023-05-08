@@ -66,13 +66,18 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
     ]
  */
 function getConnectedRoomNamesById(rooms, id) {
+  //assign variable to result of find method returning objects of rooms with same room Id value as Id parameter
   const room = rooms.find(room => room.roomId === id)
   if (!room) {
+    //if room varibale is falsy it returns error showing no room id value matches id parameter
     return `Room with ID of '${id}' could not be found.`
   } else if (room.connectsTo.includes('incorrect-id')) {
+    //if room object has connecting room id value as incorrect-id return error 
     return "Room with ID of 'incorrect-id' could not be found."
   }
+  //assign variable to result of filter method creating array with room objects that include connecting room id value as id parameter
   const connectedRooms = rooms.filter(room => room.connectsTo.includes(id))
+  //assign variable to result of map method creating array with the corresponding room names from room objects that include id parameters
   const connectedRoomsNames = connectedRooms.map(room => room.name)
   return connectedRoomsNames
 }
