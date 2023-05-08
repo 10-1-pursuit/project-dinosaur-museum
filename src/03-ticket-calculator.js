@@ -54,7 +54,52 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
+function calculateTicketPrice(ticketData, ticketInfo) {
+  console.log(ticketInfo)
+let costArr = []
+let extra = ticketInfo.extras
+let singledExtra = (Object.values(extra))
+for(let single of singledExtra){
+if(single !== ("movie" || "education" || "terrace" )){
+  return `Extra type '${single}' cannot be found.`
+}
+}
+//taking care of general
+if(ticketInfo.ticketType === "general" && ticketInfo.entrantType === "child"){
+return ticketData.general.priceInCents.child
+}
+if(ticketInfo.ticketType === "general" && ticketInfo.entrantType === "adult"){
+  return ticketData.general.priceInCents.adult
+}
+if(ticketInfo.ticketType === "general" && ticketInfo.entrantType === "senior"){
+  return ticketData.general.priceInCents.senior
+}
+//taking care of membership
+if(ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "child"){
+  return ticketData.membership.priceInCents.child
+}
+if(ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "adult"){
+  return ticketData.membership.priceInCents.adult
+}
+if(ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "senior"){
+  return ticketData.membership.priceInCents.senior
+}
+// taking care of errors
+if(ticketInfo.ticketType !== ("general" || "membership")){
+  return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
+}
+if(ticketInfo.entrantType !== ("child" || "adult" || "senior")){
+  return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
+}
+
+}
+
+
+
+
+
+
+
 
 /**
  * purchaseTickets()
