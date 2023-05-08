@@ -26,7 +26,7 @@ const exampleTicketData = require("../data/tickets");
  * @param {string} ticketInfo.entrantType - Represents the type of entrant. Prices change depending on the entrant.
  * @param {string[]} ticketInfo.extras - An array of strings where each string represent a different "extra" that can be added to the ticket. All strings should be keys under the `extras` key in `ticketData`.
  * @returns {number} The cost of the ticket in cents.
-//  * returns the Price of tik based on info provided. if any values don't match return an error message. 
+//  * returns the Price of tik based on info provided. no values match return an error message or if any values in the extras key is wrong return error. 
  * EXAMPLE:
  *  const ticketInfo = {
       ticketType: "general",
@@ -54,6 +54,10 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
+  for (const typeOfTikObj of tickets){
+   console.log( typeOfTikObj)
+  }
+  if (ticketInfo.ticketType === tickets|| ticketInfo.entrantType)
 return `${ticketInfo.ticketType} ${ticketData.general.description} cannot be found.`
 }
 
