@@ -26,12 +26,12 @@ function getLongestDinosaur(dinosaurs) {
   let longestDinosaurName;
   let longestDinosaurLength = 0;
 
-  for (const dinosaur of dinosaurs) {
+  dinosaurs.forEach(dinosaur => {
     if (dinosaur.lengthInMeters > longestDinosaurLength) {
       longestDinosaurName = dinosaur.name;
       longestDinosaurLength = dinosaur.lengthInMeters;
     }
-  }
+  });
 
   if (longestDinosaurName === undefined) {
     return result = {};
