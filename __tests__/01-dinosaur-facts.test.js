@@ -7,7 +7,7 @@ const {
 // Dinosaur data
 const dinosaurs = require("../data/dinosaurs");
 
-describe.only("getLongestDinosaur()", () => {
+describe("getLongestDinosaur()", () => {
   test("should return an object where the key is the tallest dinosaur name and the value is the length in feet", () => {
     const actual = getLongestDinosaur(dinosaurs);
 
@@ -97,7 +97,7 @@ describe("getDinosaurDescription()", () => {
   });
 });
 
-describe("getDinosaursAliveMya()", () => {
+describe.only("getDinosaursAliveMya()", () => {
   test("should return the IDs of all dinosaurs that were alive approximately at the given time", () => {
     const mya = 150;
     const actual = getDinosaursAliveMya(dinosaurs, mya);
