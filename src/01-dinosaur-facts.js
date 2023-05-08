@@ -25,7 +25,6 @@ const exampleDinosaurData = require("../data/dinosaurs");
 function getLongestDinosaur(dinosaurs) {
   let longestDinosaurName;
   let longestDinosaurLength = 0;
-  let result = {};
 
   for (const dinosaur of dinosaurs) {
     if (dinosaur.lengthInMeters > longestDinosaurLength) {
@@ -35,7 +34,7 @@ function getLongestDinosaur(dinosaurs) {
   }
 
   if (longestDinosaurName === undefined) {
-    return result;
+    return result = {};
   }
   return result = { [longestDinosaurName]: longestDinosaurLength * 3.281 };
 }
@@ -62,13 +61,12 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
-  let dinosaur = dinosaurs.find(dinosaur => dinosaur.id === id);
+  let dino = dinosaurs.find(dinosaur => dinosaur.dinosaurId === id);
 
-  if (!dinosaur) {
-    return `A dinosaur with an ID of '${id}' cannot be found.`
+  if (dino === undefined) {
+    return result = `A dinosaur with an ID of '${id}' cannot be found.`
   }
-  return `${dinosaur.info} It lived in the ${dinosaur.period} period, over ${Math.min(...dinosaur.mya)} million years ago.`
-
+  return result = `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${Math.min(...dino.mya)} million years ago.`
 }
 
 /**
@@ -97,7 +95,6 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  const keyOrId = key || "dinosaurId";
 
   return dinosaurs.filter(dinosaur => {
     if (dinosaur.mya.length === 1) {
@@ -105,7 +102,7 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
     } else {
       return dinosaur.mya[0] >= mya && mya >= dinosaur.mya[1]
     }
-  }).map(dinosaur => dinosaur[keyOrId] || dinosaur.dinosaurId);
+  }).map(dinosaur => dinosaur[key] || dinosaur.dinosaurId);
 }
 
 module.exports = {
