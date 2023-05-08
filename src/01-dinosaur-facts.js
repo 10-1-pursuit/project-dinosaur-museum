@@ -75,6 +75,7 @@ function getDinosaurDescription(dinosaurs, id) {
     
 }
 
+ getDinosaurDescription()
 /**
  * getDinosaursAliveMya()
  * ---------------------
