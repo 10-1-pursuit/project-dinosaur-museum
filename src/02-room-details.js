@@ -41,6 +41,11 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   return room.name;
 }
 
+
+// Used, the `.find()` method on the dinosaurs array to find the dinosaur object that matches the given dinosaur name, If the dinosaur cannot be found, an error message is returned.
+// Next the function used the `.find()` method on the rooms array to find the room object thatr contains the dinosaur with the matching `dinosaurId`. If the room cannot be found, en error message is returned
+// If both the dinsoaur and room are found, the function returns the name of the room. 
+
 /**
  * getConnectedRoomNamesById()
  * ---------------------
@@ -76,6 +81,13 @@ function getConnectedRoomNamesById(rooms, id) {
 
   return connectedRoomNames;
 }
+
+// The find() method is used to search the array of rooms for the room with the matching roomId.
+// An array of connected room IDs is created by accessing the 'connectsTo' property of the foundRoom object.
+// The filter() method is used to create an array of rooms that have an ID that matches one of the IDs in the connectedRoomIds array.
+// The map() method is used to create an array of room names from the connectedRooms array.
+// The array of connected room names is returned.
+
 
 module.exports = {
   getRoomByDinosaurName,
