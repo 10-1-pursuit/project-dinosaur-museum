@@ -57,7 +57,6 @@ function getLongestDinosaur(dinosaurs) {
 
 function getDinosaurDescription(dinosaurs, id) {
   let dinosaur = dinosaurs.find((dino) => dino.dinosaurId === id);
-
   if (dinosaur === undefined) {
     return `A dinosaur with an ID of 'incorrect-id' cannot be found.`;
   }
@@ -101,7 +100,6 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
   const myaLengthEqualToOne = (currentDinosaur) =>
     currentDinosaur.mya.length === 1;
   let lengthOne = dinosaurs.filter(myaLengthEqualToOne);
-  // console.log(lengthOne)
   for (let info of lengthOne) {
     if (info.mya - mya === 1 || info.mya - mya === 0) {
       if (info[key] === undefined) {

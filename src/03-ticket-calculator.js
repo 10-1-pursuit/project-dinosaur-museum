@@ -131,8 +131,26 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) {
+  let ticketSum = ''
+  for (let info of purchases) {
+    let type = ticketData[info.ticketType];
+    
+    let ticketCost = calculateTicketPrice(ticketData, info);
+    let exactCostStyle = ticketCost / 100;
+    exactCostStyle = `$${exactCostStyle.toPrecision(4)}`;
+    let ticketSum =`${info.entrantType} ${type.description}: ${exactCostStyle} `
+    let properTicketSum = ticketSum.charAt(0).toUpperCase()+ ticketSum.slice(1);
 
+    for (let extra of info.extras) { 
+      let extraName = ticketData.extras[extra];
+      properTicketSum = `${properTicketSum} ${extraName.description},`
+    
+    console.log(properTicketSum)
+  }
+
+}
+}
 // Do not change anything below this line.
 module.exports = {
   calculateTicketPrice,
