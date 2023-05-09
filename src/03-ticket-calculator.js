@@ -69,7 +69,6 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     default:
       return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
   }
-  //extras
   if (!(ticketInfo.extras === undefined || ticketInfo.extras.length === 0)
     && !(ticketInfo.extras.includes("movie") || ticketInfo.extras.includes("education") || ticketInfo.extras.includes("terrace"))) {
     return `Extra type '${ticketInfo.extras[0]}' cannot be found.`;
@@ -83,9 +82,6 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   }
   return price;
 }
-
-
-
 
 /**
  * purchaseTickets()
@@ -140,9 +136,6 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-
-//Two decimal places: 
-//Make first letter uppercase:
 function purchaseTickets(ticketData, purchases) {
   let statement = "";
   const receipt = [];
