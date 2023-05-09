@@ -23,25 +23,28 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  //> { Brachiosaurus: 98.43 }
  */
 
-
 // Helper function created , which will convert meters into feet.
-let nFeet = (meters) => {return(meters * 3.281)}
-
-function getLongestDinosaur(dinosaurs) {
-  let obj = {}
-  if(!dinosaurs.length){
-    return obj
-  }  
-  let sortedSaurs = dinosaurs.sort((a,b) => b.lengthInMeters - a.lengthInMeters)
-  let tallestDinosaur = sortedSaurs[0];
-
-  obj[tallestDinosaur.name] = nFeet(tallestDinosaur.lengthInMeters)
-   
-  return obj
+let nFeet = (meters) => {
+  return meters * 3.281;
 };
 
+function getLongestDinosaur(dinosaurs) {
+  let obj = {};
+  if (!dinosaurs.length) {
+    return obj;
+  }
+  // run .map
+  let sortedSaurs = dinosaurs.sort(
+    (a, b) => b.lengthInMeters - a.lengthInMeters
+  );
+  let tallestDinosaur = sortedSaurs[0];
+  // then .sort .... copy sort and return;
+  obj[tallestDinosaur.name] = nFeet(tallestDinosaur.lengthInMeters);
 
- /**¡
+  return obj;
+}
+
+/**¡
  * getDinosaurDescription()
  * ---------------------
  * Returns a formatted description of a dinosaur. If the dinosaur cannot be found, returns an error message.
@@ -61,14 +64,21 @@ function getLongestDinosaur(dinosaurs) {
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
- function getDinosaurDescription(dinosaurs, id) {
-  for(let dino of dinosaurs){
-   let currentYear = Math.min(...dino.mya)
-     if(dino.dinosaurId === id){
-      return`${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${currentYear} million years ago.`
+function getDinosaurDescription(dinosaurs, id) {
+  let yoshi = null;
+  for (let dino of dinosaurs) {
+    if (dino.dinosaurId === id) {
+      yoshi = dino;
     }
   }
-      return `A dinosaur with an ID of '${id}' cannot be found.`
+  if (!yoshi) {
+    return `A dinosaur with an ID of '${id}' cannot be found.`;
+  }
+  return `${yoshi.name} (${yoshi.pronunciation})\n${
+    yoshi.info
+  } It lived in the ${yoshi.period} period, over ${
+    yoshi.mya[yoshi.mya.length - 1]
+  } million years ago.`;
 }
 /**
  * getDinosaursAliveMya()
@@ -96,19 +106,22 @@ function getLongestDinosaur(dinosaurs) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
- const result =[];
- for(const dinosaur of dinosaurs){
-  const addToArr = key || "dinosaurId";
-  if(dinosaur[addTOArr] === undefined){
-    continue;
+  const result = [];
+  for (const dinosaur of dinosaurs) {
+    const addToArr = key || "dinosaurId";
+    if (dinosaur[addToArr] === undefined) {
+      continue;
+    }
+    const aliveMya = dinosaur.mya;
+    if (
+      (aliveMya,
+      length === 1 && (mya === aliveMya[0] || mya === aliveMya[0] - 1))
+    ) {
+      result.push(dinsoaur[addToArr]);
+    } else if (mya <= aliveMya[0] && mya >= aliveMya[1]) {
+      result.push(dinsoaur[addToArr]);
+    }
   }
-  const aliveMya = dinosaur.mya;
-  if(aliveMya.length === 1 && (mya === aliveMya[0] || mya === (aliveMya[0] -1))) {
-  }else if (mya <= aliveMya[0] && mya >= aliveMya[1]){
-    result.push(dinosaur[addToArr]);
-  }
- }
- return result;
 }
 
 module.exports = {
