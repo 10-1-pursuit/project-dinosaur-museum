@@ -68,20 +68,26 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
+  // Find the dinosaur 🦕 object with the given ID
   const dinosaur = dinosaurs.find(dino => dino.dinosaurId === id);
+
+  //If no dinosaur 🦕 is found, return na error message 
   if (!dinosaur) {
     return `A dinosaur with an ID of '${id}' cannot be found.`;
   }
 
+  // Intialize the `mya` variable
   let mya;
 
   // Check if the `mya` array has only one value, and assign the corresponding string to `mya`
   if (dinosaur.mya.length === 1) {
     mya = `${dinosaur.mya[0]} million years ago`;
   } else {
+    // If the `mya` array has two values, format them as a range
     mya = `${dinosaur.mya[0]}-${dinosaur.mya[1]} million years ago`;
   }
 
+  //Return a string containg the 🦕dino's name pronunciation, info, period, and MYA 
   return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${mya}.`;
 }
 // Added new variable 'mya' to hold the string representation of the dino's 🦖 "million years ago" time period. 
@@ -114,23 +120,29 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-
-  const result = [];
-  for (const dinosaur of dinosaurs) {
-    const dinosaurMya = dinosaur.mya;
-    if (dinosaurMya.length === 1) {
-      if (dinosaurMya[0] === mya || dinosaurMya[0] === mya - 1) {
-        result.push(key ? dinosaur[key] : dinosaur.id);
-      }
-    } else if (dinosaurMya.length === 2) {
-      if (mya >= dinosaurMya[1] && mya <= dinosaurMya[0]) {
-        result.push(key ? dinosaur[key] : dinosaur.id);
-      }
+  // Filter the dinos 🦖 based on whether they were alive during the specified time period (mya)
+  const filtered = dinosaurs.filter(dinosaur => {
+    // Get an array of mya values for the dino 🦖 
+    const myaValues = dinosaur.mya;
+    // If the array only contains one value, check ✅ if it's within one million years of the specified time period
+    if (myaValues.length === 1) {
+      const myaValue = myaValues[0];
+      return myaValue === mya || myaValue === mya - 1;
     }
+    // If the array contains multiple values, check if the specified time period is included in the range
+    return myaValues.includes(mya);
+  });
+
+  // If a key is specified , return an array of values for that key from the filted dinos 🦖
+  if (key) {
+    return filtered.map(dinosaur => dinosaur[key] || dinosaur.id);
   }
-  return result;
+  // If no key is specified, return an array of dinosaur 🦖 ids from the filtered dinosaurs 🦖.
+  return filtered.map(dinosaur => dinosaur.id);
 }
 
+
+// Unfortunatley  
 module.exports = {
   getLongestDinosaur,
   getDinosaurDescription,
