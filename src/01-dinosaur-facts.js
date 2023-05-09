@@ -97,7 +97,22 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  
+let targetKey = key // this variable was created to stand as a representation of an undefined key. 
+let foundDino = [];// this empty array was created to return the values in the array being pushed to return the result after the function is invoked. 
+
+
+
+  for(let dinosaur of dinosaurs) { //this loop was created with a variable to loop through the given array of dinosaurs. 
+  if(!dinosaur[targetKey]) { targetKey = "dinosaurId" } //This if statemnts checks to see if the dinosaurs array contains any properties that are inside targetKey and if undefined then targetkey is assigned the value of dinosaurdId.
+
+   if(dinosaur.mya.length === 1 && (dinosaur.mya[0] === mya) || (dinosaur.mya[0] - 1 === mya)) {
+  foundDino.push(dinosaur[targetKey])
+  }
+  else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) {
+   foundDino.push(dinosaur[targetKey]);
+  }
+  }
+  return foundDino
 }
 
 module.exports = {
