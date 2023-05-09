@@ -76,15 +76,23 @@ getLongestDinosaur(exampleDinosaurData)
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
+  inputtedID = dinosaurs.dinosaurId;
+  let invalidDinoId = undefined;
 
-  if (!dinosaurs.name || !id) {
+  if (!dinosaurs.name || !id || dinosaurs[id] === invalidDinoId) {
     return "A dinosaur with an ID of 'incorrect-id' cannot be found."
   }
+  const dinoFactSheet = dinosaurs.find((dinoData) => {
+    if (dinoData.dinosaurId === id) {
+      let dinoEra = math.min(...dinoFactSheet.mya)
+    }
 
-  if (dinosaurs.dinosaurId === id) {
-    return `${dinosaurs.name} (${dinosaurs.pronunciation}) \n ${dinosaurs.info}. It lived in the ${dinosaurs.period} period, over ${dinosaurs.mya} years ago.`
-  }
+    if (inputtedID === id) {
+      return `${dinoFactSheet.name} ${dinoFactSheet.pronunciation} \n ${dinoFactSheet.info}. It lived in the ${dinoFactSheet.period} period, over ${dinoEra} million years ago.`
+    }
 
+  });
+  return dinoFactSheet;
 }
 
 getDinosaurDescription(exampleDinosaurData)
@@ -114,7 +122,27 @@ getDinosaurDescription(exampleDinosaurData)
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) { }
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+
+  let invalidKey = undefined;
+  let dinoWorld = [];
+  let valueInsideKey = key;
+
+  for (let dinoFactFile of dinosaurs) {
+    if (dinoFactFile[valueInsideKey] === invalidKey) {
+      let valueInsideKey = "dinosaurId"
+    }
+    if ((dinoFactFile.mya.length === 2) && (mya <= dinoFactFile.mya[0] - 1) && (mya >= dinoFactFile.mya[1])) {
+      dinoWorld.push(dinoFactFile[valueInsideKey]);
+    }
+    if ((dinoFactFile.mya.length === 1) && (mya === dinoFactFile.mya[0]) || (mya === dinoFactFile.mya[0] - 1)) {
+      dinoWorld.push(dinoFactFile[valueInsideKey]);
+    }
+  }
+  return dinoWorld;
+}
+
+getDinosaursAliveMya(exampleDinosaurData)
 
 module.exports = {
   getLongestDinosaur,

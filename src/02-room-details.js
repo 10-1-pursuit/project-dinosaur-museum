@@ -27,28 +27,27 @@ const exampleRoomData = require("../data/rooms");
  */
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 
-  // const searchKeywordByDinosaurs = searchByRoom.dinosaurs;
-  // const searchKeywordByID = searchByRoom.dinosaurId;
-  // const returnSearchForRoom = searchByRoom.name;
-  // const returnConnectedRooms = searchByRoom.connectsTo;
+  const searchKeywordByDinosaurs = dinosaurs;
+  const searchKeywordByID = searchByRoom.dinosaurId;
+  const returnSearchForRoom = searchByRoom.name;
+  const returnConnectedRooms = searchByRoom.connectsTo;
 
-  const dinosaurRoomGuide = rooms.find((searchKeyword) => {
+  // const dinosaurRoomGuide = rooms.find((searchKeyword) => {
 
-    if (searchKeyword.dinosaurs === true) {
-      return returnSearchOfRoom;
-    }
+  if (searchKeyword.dinosaurs === true) {
+    return returnSearchOfRoom;
+  }
 
-    if (!searchKeyword.dinosaurs === true) {
-      return `"Dinosaur with name ${searchKeywordByDinosaurs} cannot be found."`
+  if (!searchKeyword.dinosaurs === true) {
+    return `"Dinosaur with name ${searchKeywordByDinosaurs} cannot be found."`
 
-    }
-    else if (searchKeyword.dinosaurs !== returnSearchOfRoom) {
-      return `"Dinosaur with name ${searchKeywordByDinosaurs} cannot be found in any rooms."`
-    }
-    else if (searchKeyword.dinosaurId === true) {
-      return returnConnectedRooms
-    }
-  })
+  }
+  else if (searchKeyword.dinosaurs !== returnSearchOfRoom) {
+    return `"Dinosaur with name ${searchKeywordByDinosaurs} cannot be found in any rooms."`
+  }
+  else if (searchKeyword.dinosaurId === true) {
+    return returnConnectedRooms
+  }
 
 }
 getRoomByDinosaurName(exampleRoomData)

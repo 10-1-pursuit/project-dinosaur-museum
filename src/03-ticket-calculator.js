@@ -57,11 +57,12 @@ const exampleTicketData = require("../data/tickets");
 function calculateTicketPrice(ticketData, ticketInfo) {
 
 
-  let ticketEntrant = ticketInfo.entrantType //general or membership
-  let ticketMenuAndPrices = ticketData.general.priceInCents;
-  let ticketAdmissionsType = ticketInfo.ticketType //incorrect type
+  let ticketEntrant = ticketInfo.entrantType;
+  let ticketAdmissionsType = ticketInfo.ticketType;
+  let ticketMenuAndPrices = ticketData.general.priceInCents
   let ticketWithAddOns = ticketInfo.extras
   let invalidEntryType = undefined;
+  let howMuchExtraForThis = 0;
 
 
   if (ticketData[ticketAdmissionsType] === invalidEntryType) {
@@ -72,40 +73,41 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     return "Entrant type 'incorrect-entrant' cannot be found."
   }
 
-  for (let addOns of ticketWithAddOns) {
-    if (ticketData.extras[addOns] === invalidEntryType) {
+  for (let addons of ticketWithAddOns) {
+    if (ticketData.extras[addons] === invalidEntryType) {
       return "Extra type 'incorrect-extra' cannot be found."
     }
+    if (ticketData.extras[addons].priceInCents[ticketEntrant]) {
+      howMuchExtraForThis += ticketData.extras[addons].priceInCents[ticketEntrant]
+    }
   }
-
-
-  //calculator
-
-  let generalAdmissionForChild = 0;
-  let childPrice = ticketMenuAndPrices.child;
-  let priceForChild = `$${childPrice}`
-  let adultPrice = ticketMenuAndPrices.adult;
-  let priceForAdult = `$${adultPrice}`
-  let seniorPrice = ticketMenuAndPrices.senior;
-  let priceForSenior = `$${seniorPrice}`
-
-  if (ticketEntrant === "child") {
-    //console.log(ticketData[ticketEntrant].priceInCents.child)
-  }
-
-  if (ticketEntrant === "senior") {
-    return priceForSenior;
-  }
-  if (ticketEntrant === "adult") {
-    return priceForAdult;
-  }
+  let ticketPrice = ticketData[ticketAdmissionsType].priceInCents[ticketEntrant]
+  return ticketPrice + howMuchExtraForThis;
 
 }
 
+calculateTicketPrice(exampleTicketData)
+//calculator
 
+// let generalAdmissionForChild = 0;
+// let childPrice = ticketMenuAndPrices.child;
+// let priceForChild = `$${childPrice}`
+// let adultPrice = ticketMenuAndPrices.adult;
+// let priceForAdult = `$${adultPrice}`
+// let seniorPrice = ticketMenuAndPrices.senior;
+// let priceForSenior = `$${seniorPrice}`
 
+// if (ticketEntrant === "child") {
+//   //console.log(ticketData[ticketEntrant].priceInCents.child)
+// }
 
-
+// if (ticketEntrant === "senior") {
+//   return priceForSenior;
+// }
+// if (ticketEntrant === "adult") {
+//   return priceForAdult;
+// }
+// console.log(ticketMenuAndPrices.child)
 
 /**
  * purchaseTickets()
