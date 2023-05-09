@@ -28,9 +28,12 @@ const exampleRoomData = require("../data/rooms");
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   for (let dino of dinosaurs) {
     if (dinosaurName === dino.name){
-      id = dino.dinosaurId
+      id = dino.dinosaurId;
+
       for (let dinosRoom of rooms){
-        roomName = dinosRoom.name
+        
+        roomName = dinosRoom.name;
+
         if (dinosRoom.dinosaurs.includes(id)){
           return roomName;
         }
@@ -64,17 +67,28 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
       "Kit Hopkins Education Wing"
     ]
  */
-    function getConnectedRoomNamesById(rooms, id) {
-      let connectedTo = [];
-      let connected = null;
-      for (const conRoom of rooms) {
-        if (conRoom.connectsTo.includes(id)){
-          connected = conRoom.name
-         } 
-      }
-       connectedTo.push(connected)
-      return connectedTo
+function getConnectedRoomNamesById(rooms, id) {
+  let connectedTo = [];
+  let connected = {};
+  for (const conRoom of rooms) {
+    connected[conRoom.roomId] = conRoom.name;
+    //put all the room names in an object with the key being the roomId
+  }
+  if (!connected[id]) {
+    return `Room with ID of 'incorrect-id' could not be found.`;
+  }
+  let myTarget = rooms.find(conRoom => conRoom.roomId === id);
+  // .find will search through the entire array, use the key work conroom, and equal it to my target only if the roomId matches the given Id
+  for (let roomId of myTarget.connectsTo) {
+  //looping through the array of connectsTo inside of the conRoom that has matches the Id given
+   if (!connected[roomId]) {
+     return `Room with ID of 'incorrect-id' could not be found.`;
     }
+   connectedTo.push(connected[roomId]);
+   //if the room has an Id that is inside of the room we're trying to find connections for, were giving back that name inside ofour array
+  }
+  return connectedTo;
+}
 
 module.exports = {
   getRoomByDinosaurName,
