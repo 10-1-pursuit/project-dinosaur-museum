@@ -55,41 +55,29 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
-  let childGeneralTicketPrice = 0;
-  let adultGeneralTicketPrice = 0;
-  let seniorGeneralTicketPrice = 0;
-  let childMembershipTicketPrice = 0;
-  let adultMembershipTicketPrice = 0;
-  let seniorMembershipTicketPrice = 0;
-  let adultGeneralWithMovieTicketPrice = 0;
   if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "child"){
-    childGeneralTicketPrice = ticketData.general.priceInCents.child;
-    return(childGeneralTicketPrice);
+    return ticketData.general.priceInCents.child; 
   }
   if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "adult"){
-    adultGeneralTicketPrice = ticketData.general.priceInCents.adult;
-    return(adultGeneralTicketPrice);
+    return ticketData.general.priceInCents.adult;
   }
-  /*if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "adult" && ticketInfo.extras === "movie"){
-    adultGeneralWithMovieTicketPrice += ticketData.general.priceInCents.adult 
-    adultGeneralWithMovieTicketPrice += ticketData.extra.movie.priceInCents.adult;
-    return(adultGeneralWithMovieTicketPrice);
-  }*/
   if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "senior"){
-    seniorGeneralTicketPrice = ticketData.general.priceInCents.senior;
-    return(seniorGeneralTicketPrice);
+    return ticketData.general.priceInCents.senior;
   }
   if (ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "child"){
-    childMembershipTicketPrice = ticketData.membership.priceInCents.child;
-    return(childMembershipTicketPrice);
+   return ticketData.membership.priceInCents.child;
   }
   if (ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "adult"){
-    adultMembershipTicketPrice = ticketData.membership.priceInCents.adult;
-    return(adultMembershipTicketPrice);
+    return ticketData.membership.priceInCents.adult;
   }
   if (ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "senior"){
-    seniorMembershipTicketPrice = ticketData.membership.priceInCents.senior;
-    return(seniorMembershipTicketPrice);
+    return ticketData.membership.priceInCents.senior;
+  }
+  if (ticketInfo.ticketType !== "membership" || "general"){
+    return "Ticket type 'incorrect-type' cannot be found.";
+  }
+  if (ticketInfo.entrantType !== "child" || "adult" || "senior"){
+    return "Entrant type 'incorrect-entrant' cannot be found."
   }
 }
 
