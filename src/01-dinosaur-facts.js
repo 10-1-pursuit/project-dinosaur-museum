@@ -29,20 +29,23 @@ function getLongestDinosaur(dinosaurs) {
 
   if (!dinosaurs.length) {
     return longestObj;
+
+    // checks the length of dinosaur if there is any value within, if there is not return longestObj which has a value of an empty object.
   }
   for (let dino of dinosaurs) {
-
+    // for of needed to intirate over dinosaurs, so we can manipulate the data.
     if (dino.lengthInMeters > length) {
+      // using .notation we check if the length in meters for each dinosaur we itirated over is greater than the length at which point of this program has a value of 0.
       length = dino.lengthInMeters;
       dName = dino.name;
-
+      // we then asign the length in meters and the name of each dinosaur to length and dname.
     }
   }
   longestObj[`${dName}`] = Number(`${length * 3.281}`)
-
+  // within the empty object we are assigning the dinosaurs we are interating over to become keys with the object, while assigning the converted length in feet to the keys value.
   return (longestObj)
+  // then return the object.
 
-  //console.log (dinosaurs.map(dino => `${dino.name}: ${dino.lengthInMeters * 3.281}`))
 }
 
 /**
@@ -68,7 +71,9 @@ function getLongestDinosaur(dinosaurs) {
 function getDinosaurDescription(dinosaurs, id) {
   let placeHeld = null
 
+
   for (let dino of dinosaurs) {
+    //for of needed to intirate over dinosaurs, so we can manipulate the data.
     if (dino.dinosaurId === id) {
       placeHeld = dino
     }

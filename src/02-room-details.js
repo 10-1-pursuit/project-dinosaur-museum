@@ -85,16 +85,14 @@ function getConnectedRoomNamesById(rooms, id) {
   }
   let myTarget = rooms.find(room => room.roomId === id)
 
-  for (let roomId of myTarget.connectsTo) {
+  for (let roomIdTarget of myTarget.connectsTo) {
 
-    if (!roomObj[roomId]) {
+    if (!roomObj[roomIdTarget]) {
 
       return `Room with ID of 'incorrect-id' could not be found.`
     }
-
-    roomNames.push(roomObj[roomId])
+    roomNames.push(roomObj[roomIdTarget])
   }
-
   return roomNames;
 
 }

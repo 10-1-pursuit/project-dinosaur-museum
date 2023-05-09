@@ -65,7 +65,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     return "this ticket has no entrant"
   }
   if (!ticketInfo.extras) {
-    return "this ticket has no extras lkisted"
+    return "this ticket has no extras listed"
   }
 }
 
