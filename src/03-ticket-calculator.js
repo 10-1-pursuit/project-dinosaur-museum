@@ -56,7 +56,6 @@ const exampleTicketData = require("../data/tickets");
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
 
-
   let ticketEntrant = ticketInfo.entrantType;
   let ticketAdmissionsType = ticketInfo.ticketType;
   let ticketMenuAndPrices = ticketData.general.priceInCents
@@ -87,27 +86,8 @@ function calculateTicketPrice(ticketData, ticketInfo) {
 }
 
 calculateTicketPrice(exampleTicketData)
-//calculator
 
-// let generalAdmissionForChild = 0;
-// let childPrice = ticketMenuAndPrices.child;
-// let priceForChild = `$${childPrice}`
-// let adultPrice = ticketMenuAndPrices.adult;
-// let priceForAdult = `$${adultPrice}`
-// let seniorPrice = ticketMenuAndPrices.senior;
-// let priceForSenior = `$${seniorPrice}`
 
-// if (ticketEntrant === "child") {
-//   //console.log(ticketData[ticketEntrant].priceInCents.child)
-// }
-
-// if (ticketEntrant === "senior") {
-//   return priceForSenior;
-// }
-// if (ticketEntrant === "adult") {
-//   return priceForAdult;
-// }
-// console.log(ticketMenuAndPrices.child)
 
 /**
  * purchaseTickets()
@@ -162,8 +142,32 @@ calculateTicketPrice(exampleTicketData)
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) { }
+function purchaseTickets(ticketData, purchases) {
 
+  let genOrMemTicket = purchases[].ticketType
+  let ageOfEntrant = purchases[].entrantType
+  let addOnsToTickets = purchases[].extras
+  let ticketPrice = 0;
+  let perks = 0;
+  let totalPrice = 0
+
+  const purchases = ticketData.map((ticketItinerary) => {
+    [ticketItinerary.ticketType]: (ticketItinerary.genOrMemTicket), [ticketItinerary.entrantType]: (ticketItinerary, ageOfEntrant), [ticketItinerary.extras]: (ticketItinerary.addOnsToTickets)
+  })
+
+
+  let receipt = `“This is a DinoWorld ${ticketItinerary.genOrMemTicket} admission ticket permits only 1 ${ticketItinerary, ageOfEntrant} 
+  admission for the Dinosaur Museum.The total price is $${sum} and includes the dinosaur exhibits and dinosaur souvenir shop.
+  Any extras are excluded, and may be purchased upon availability during your visit. Thank you for your purchase and enjoy your visit at the Dinosaur Museum."`
+
+  let receiptForMembersOnly = `"This is a DinoWorld ${ticketItinerary.genOrMemTicket} admission ticket for Dinosaur Museum. This ticket permits admission for one adult only at a 
+  discounted membership price of ${ticketPrice}. This ticket includes no extra add ons. ${totalPrice} "`
+
+  let receiptForPerks = 
+
+
+}
+purchaseTickets(exampleTicketData)
 // Do not change anything below this line.
 module.exports = {
   calculateTicketPrice,

@@ -130,7 +130,7 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
 
   for (let dinoFactFile of dinosaurs) {
     if (dinoFactFile[valueInsideKey] === invalidKey) {
-      let valueInsideKey = "dinosaurId"
+      let valueInsideKey = "dinosaurId";
     }
     if ((dinoFactFile.mya.length === 2) && (mya <= dinoFactFile.mya[0] - 1) && (mya >= dinoFactFile.mya[1])) {
       dinoWorld.push(dinoFactFile[valueInsideKey]);

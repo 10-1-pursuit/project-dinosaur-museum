@@ -162,9 +162,30 @@ getLongestDinosaur(exampleDinosaurData)
 
 
 
-return largestOfThePact;
-}
+// return largestOfThePact;
+// }
 
+//calculator
+
+// let generalAdmissionForChild = 0;
+// let childPrice = ticketMenuAndPrices.child;
+// let priceForChild = `$${childPrice}`
+// let adultPrice = ticketMenuAndPrices.adult;
+// let priceForAdult = `$${adultPrice}`
+// let seniorPrice = ticketMenuAndPrices.senior;
+// let priceForSenior = `$${seniorPrice}`
+
+// if (ticketEntrant === "child") {
+//   //console.log(ticketData[ticketEntrant].priceInCents.child)
+// }
+
+// if (ticketEntrant === "senior") {
+//   return priceForSenior;
+// }
+// if (ticketEntrant === "adult") {
+//   return priceForAdult;
+// }
+// console.log(ticketMenuAndPrices.child)
 
 getLongestDinosaur(exampleDinosaurData)
 /**
