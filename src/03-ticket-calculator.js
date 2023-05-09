@@ -68,7 +68,7 @@ if ( !(ticketInfo.entrantType in ticketData[ticketInfo.ticketType].priceInCents)
 // The ticketprice will then be determined by the entrant type. 
  totalPrice = ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType]
 
-// last if checks for the condition for the elements in the array. this for loop iterates thrugh the array of ticketInfo. the ticketPrice will be based of the type of extras in each iteration
+// checks for the condition for the elements in the array. 
 if (ticketInfo.extras.length) {
   for (const extra of ticketInfo.extras) {
     if (extra in ticketData.extras) { 
