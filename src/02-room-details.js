@@ -95,7 +95,7 @@ function getConnectedRoomNamesById(rooms, id) {
        roomArr.push(rooms[i].name)
      } 
    }
-   return arr
+   return roomArr
 }
 
 module.exports = {
