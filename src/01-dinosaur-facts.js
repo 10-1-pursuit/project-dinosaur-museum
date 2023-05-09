@@ -81,7 +81,7 @@ function getDinosaurDescription(dinosaurs, id) {
     }
     
     //return error messages if dino has no value
-    return `A dinosaur with an ID of '${id}' cannot be found.`
+    return `A dinosaur with an ID of 'incorrect-id' cannot be found.`
 }
 
 /**
@@ -113,17 +113,18 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
   //returns array of dinos who lived during certain mya
   //if key is provided, returns the value of that key for each dinosaur alive at that time
   //If the dinosaur only has a single value for `mya`, allows for the `mya` value to be equal to the given value or one less
-  let arr = []
+  let dinoArr = []
   for(let i = 0; i < dinosaurs.length; i++){
     if(dinosaurs[i].mya.includes(mya) || dinosaurs[i].mya-1 === mya || dinosaurs[i].mya[0] > mya && dinosaurs[i].mya[1] < mya){
-      if(!key){
-        arr.push(dinosaurs[i].dinosaurId)
-      } else {
-        arr.push(dinosaurs[i][key])
+      if(dinosaurs[i][key] === undefined){
+        dinoArr.push(dinosaurs[i].dinosaurId)
+      } 
+      else {
+        dinoArr.push(dinosaurs[i][key])
       }
     }
   }
-  return arr
+  return dinoArr
 }
 
 module.exports = {
