@@ -54,7 +54,34 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
+function calculateTicketPrice(ticketData, ticketInfo) {
+// default ticket price
+  let totalPrice = 0
+// first if checks if the ticketInfo ticketType keypair is false. 
+if (!(ticketInfo.ticketType in ticketData)) {
+  return `Ticket type 'incorrect-type' cannot be found.`
+}
+// second if checks for if the entrant's type cost is false using priceInCents. 
+if ( !(ticketInfo.entrantType in ticketData[ticketInfo.ticketType].priceInCents)) {
+  return `Entrant type 'incorrect-entrant' cannot be found.`
+} 
+// The ticketprice will then be determined by the entrant type. 
+ totalPrice = ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType]
+
+// last if checks for the condition for the elements in the array. this for loop iterates thrugh the array of ticketInfo. the ticketPrice will be based of the type of extras in each iteration
+if (ticketInfo.extras.length) {
+  for (const extra of ticketInfo.extras) {
+    if (extra in ticketData.extras) { 
+      totalPrice += ticketData.extras[extra].priceInCents[ticketInfo.entrantType]
+    }
+    else {
+      return `Extra type 'incorrect-extra' cannot be found.`
+    }
+  }
+}
+return totalPrice
+
+}
 
 /**
  * purchaseTickets()
