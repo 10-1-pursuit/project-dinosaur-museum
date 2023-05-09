@@ -32,7 +32,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
         if(room.dinosaurs.includes(dinosaur.dinosaurId)) { 
           return room.name
         }
-// looking through the array of dinosaurs inside rooms arrey and .include was used to know whether it matches and outputs a boolean.
+// looking through the array of dinosaurs inside rooms array and .include was used to know whether it matches and outputs a boolean.
 
     }
     return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
@@ -80,19 +80,39 @@ function getConnectedRoomNamesById(rooms, id) {
         if (connectedRooms) {
           getConnectedRoom.push(connectedRooms.name)
         }else { 
-          return `Room with ID of '${getConnect}' could not be found.`
+          return `Room with ID of '${getConnect}' could not be found.`;
        } 
-  }
-}
-}
+       }  
+      }   
+      }
   if (getConnectedRoom.length === 0) {
-    return `Room with ID of '${id}' could not be found.`
+    return `Room with ID of '${id}' could not be found.`;
     
   }
   return getConnectedRoom;
+
 }
 
 module.exports = {
   getRoomByDinosaurName,
   getConnectedRoomNamesById,
 };
+function getConnectedRoomNamesById(rooms, id) {
+  let addArr = [];
+  for (const room of rooms) {
+    if (room.roomId === id) { // checks if the roomId its looping in equals id
+      for (const connect of room.connectsTo) { // if it does match then loop through connectsTo array that the room is currently on.
+        const connectRoom = rooms.find(room => room.roomId === connect); //find method   * const connectRoom = rooms.find(function(room) { *
+        if (connectRoom) { //searches room for roomId that matches each Id in connectsTo   * return room.roomId === connect *
+          addArr.push(connectRoom.name); // If it finds a match it adds name or names from connects * })   *this is same thing as the arrow syntax *
+        } else { // if it doesnt find a match return the error message
+          return `Room with ID of '${connect}' could not be found.`;
+        }
+      }
+    }
+  }
+  if (addArr.length === 0) { // outside the scope of the for of loops if addArr is empty, it means the original id parameter was not
+    return `Room with ID of '${id}' could not be found.`; // found in the rooms array so display this error message
+  }
+  return addArr; //returns the string names in connectRoom
+}
