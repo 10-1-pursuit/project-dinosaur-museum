@@ -54,7 +54,44 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
+function calculateTicketPrice(ticketData, ticketInfo) {
+  let childGeneralTicketPrice = 0;
+  let adultGeneralTicketPrice = 0;
+  let seniorGeneralTicketPrice = 0;
+  let childMembershipTicketPrice = 0;
+  let adultMembershipTicketPrice = 0;
+  let seniorMembershipTicketPrice = 0;
+  let adultGeneralWithMovieTicketPrice = 0;
+  if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "child"){
+    childGeneralTicketPrice = ticketData.general.priceInCents.child;
+    return(childGeneralTicketPrice);
+  }
+  if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "adult"){
+    adultGeneralTicketPrice = ticketData.general.priceInCents.adult;
+    return(adultGeneralTicketPrice);
+  }
+  /*if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "adult" && ticketInfo.extras === "movie"){
+    adultGeneralWithMovieTicketPrice += ticketData.general.priceInCents.adult 
+    adultGeneralWithMovieTicketPrice += ticketData.extra.movie.priceInCents.adult;
+    return(adultGeneralWithMovieTicketPrice);
+  }*/
+  if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "senior"){
+    seniorGeneralTicketPrice = ticketData.general.priceInCents.senior;
+    return(seniorGeneralTicketPrice);
+  }
+  if (ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "child"){
+    childMembershipTicketPrice = ticketData.membership.priceInCents.child;
+    return(childMembershipTicketPrice);
+  }
+  if (ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "adult"){
+    adultMembershipTicketPrice = ticketData.membership.priceInCents.adult;
+    return(adultMembershipTicketPrice);
+  }
+  if (ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "senior"){
+    seniorMembershipTicketPrice = ticketData.membership.priceInCents.senior;
+    return(seniorMembershipTicketPrice);
+  }
+}
 
 /**
  * purchaseTickets()
