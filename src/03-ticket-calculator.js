@@ -171,12 +171,15 @@ function purchaseTickets(ticketData, purchases) {
 	let receipt = `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------`;
 	let totalReceiptPrice = 0;
 
+	// Iterate over the `purchases` array.
 	for (let purchase of purchases) {
+		// Use `calculateTicketPrice` to calculate each ticket price.
 		let purchasePrice = calculateTicketPrice(ticketData, purchase);
 
 		if (typeof purchasePrice === 'string') {
 			return purchasePrice;
 		} else {
+			// Accumulate ticket prices from `purchases`.
 			totalReceiptPrice += purchasePrice;
 			let entrant =
 				purchase.entrantType[0].toUpperCase() +
@@ -190,6 +193,7 @@ function purchaseTickets(ticketData, purchases) {
 				if (j === 0) {
 					ticketExtras += ' (';
 				}
+
 				if (j === purchase.extras.length - 1) {
 					ticketExtras +=
 						ticketData.extras[purchase.extras[j]].description + ')';
@@ -202,10 +206,11 @@ function purchaseTickets(ticketData, purchases) {
 			receipt += `\n${entrant} ${ticketType}: $${priceInDollars}${ticketExtras}`;
 		}
 	}
-
+	// Transform total into dollar amount.
 	totalReceiptPrice = (totalReceiptPrice / 100).toFixed(2);
+	// Final receipt string.
 	receipt += `\n-------------------------------------------\nTOTAL: $${totalReceiptPrice}`;
-	console.log(receipt);
+
 	return receipt;
 }
 

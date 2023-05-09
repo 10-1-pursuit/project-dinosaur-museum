@@ -31,7 +31,7 @@ const exampleRoomData = require('../data/rooms');
 // Goal: Return the name of the room where the given dinosaur can be found. If the dinosaur does not exist in the `dinosaurs` list or cannot be found in any room, return an error message that says so.
 
 // Steps:
-// 1. Create a variable `foundDino`.
+// 1. Create `roomName`, `foundDino` variables for found room and dinosaur.
 // 2. Use the `.find()` method and the inputted `dinosaurName` string to search the `dinosaurs` array to find the dinosaur if it exists. Assign result to `foundDino`.
 // 3. Test to see if `foundDino` is `undefined` or not.
 // 4. If `foundDino` is `undefined`, return appropriate error message.
