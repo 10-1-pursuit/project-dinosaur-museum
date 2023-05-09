@@ -24,18 +24,22 @@ const exampleDinosaurData = require("../data/dinosaurs");
  */
 function getLongestDinosaur(dinosaurs) {
   // feet = m * 3.281
+  // error statement if there are no dinosaurs
   if(!dinosaurs.length){
     return {}
   }
+  // Variables for length, name and empty object for results
   let len = dinosaurs[0].lengthInMeters
   let dName = dinosaurs[0].name
   const largeDino = {}
+  // iterate through dinosaurs; if the length of the dino is greater than the default, len = dino length and dname = dino name
   for (const dino of dinosaurs){
     if(dino.lengthInMeters > len){
       len = dino.lengthInMeters
       dName = dino.name
     }
   }
+  //multiply length by 3.281 to convert to feet
     len *= 3.281
     largeDino[dName] = len
   
