@@ -72,7 +72,16 @@ function getDinosaurDescription(dinosaurs, id) {
   if (!dinosaur) {
     return `A dinosaur with an ID of '${id}' cannot be found.`;
   }
-  const mya = dinosaur.mya.length === 1 ? `${dinosaur.mya[0]} million years ago` : `${dinosaur.mya[0]}-${dinosaur.mya[1]} million years ago`;
+
+  let mya;
+
+  // Check if the `mya` array has only one value, and assign the corresponding string to `mya`
+  if (dinosaur.mya.length === 1) {
+    mya = `${dinosaur.mya[0]} million years ago`;
+  } else {
+    mya = `${dinosaur.mya[0]}-${dinosaur.mya[1]} million years ago`;
+  }
+
   return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${mya}.`;
 }
 
