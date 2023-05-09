@@ -24,16 +24,16 @@ const exampleDinosaurData = require("../data/dinosaurs");
  */
 function getLongestDinosaur(dinosaurs) {
   if (dinosaurs.length === 0){
-  return {};
+  return {}; //returns empty obj
 }
-let longestDino = dinosaurs[0];
-for (let i = 1; i < dinosaurs.length; i++){
-  if (dinosaurs[i].lengthInMeters > longestDino.lengthInMeters) {
-    longestDino = dinosaurs[i];
+let longestDino = dinosaurs[0]; //first element
+for (let i = 1; i < dinosaurs.length; i++){ //looping through all dinos to determinate the longest one
+  if (dinosaurs[i].lengthInMeters > longestDino.lengthInMeters) { 
+    longestDino = dinosaurs[i]; //checking and iterating the length of object
   }
 }
-const lengthInFeet = longestDino.lengthInMeters * 3.28084
-return {[longestDino.name]: lengthInFeet};
+const lengthInFeet = longestDino.lengthInMeters * 3.28084 //calculates in feets
+return {[longestDino.name]: lengthInFeet}; //returning an obj of the longest dino
 }
 /**
  * getDinosaurDescription()
@@ -57,20 +57,12 @@ return {[longestDino.name]: lengthInFeet};
  */
 function getDinosaurDescription(dinosaurs, id) {
   
-  let dinosaur = dinosaurs.find(dino => dino.dinosaurId === id);
+  let dinosaur = dinosaurs.find(dino => dino.dinosaurId === id); //using .find method to search for dino obj in dinosaurs.js array w/'dinosaurId'='id'
   if (dinosaur === undefined) {
-    return "A dinosaur with an ID of '" + id + "' cannot be found.";
+    return "A dinosaur with an ID of '" + id + "' cannot be found."; //returns an error msg since dino was undefined
   }
   return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${dinosaur.mya[dinosaur.mya.length - 1]} million years ago.`;
-  } 
-
-  //if (Array.isArray(dinosaur.mya) && dinosaur.mya.length === 1) {
-    //return `${dinosaur.name} (${dinosaur.pronunciation}) \n${id.info}. It lived in the ${id.period} period, over ${id.mya[id.mya.length -1]} million years ago.`;
-    //} else {
-      //return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.mya.join(", ")}\n${dinosaur.info.join("\n")}`;
-    
-  
-
+  } //returns searched dinos 
    
   
 /**
@@ -99,35 +91,33 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  const i = 1;
-const idss = [];
-dinosaurs.forEach(dino=>{
-  if (Array.isArray(dino.mya) && dino.mya.length === 1) {
-    const dinoMya = dino.mya[0];
-    if (dinoMya >= mya - i && dinoMya <= mya) {
-     idss.push(dino.dinosaurId)
-     
-      
+  const i = 0; //const variable 
+const ids = []; //empty array
+dinosaurs.forEach(dino=> { //initiates loop for each dino obj in "dinosaurs".js array
+  if (Array.isArray(dino.mya) && dino.mya.length === 1) { //checks if mya of obj 'dino' is an array and has length of 1
+    const dinoMya = dino.mya[0]; //assigns the only value of property 'mya' and obj 'dino' 
+    if (dinoMya >= mya - i && dinoMya <= mya) { //checks if the value of 'dinoMya' if greater or= to 'mya -i' as well as less than or = to 'mya'
+     ids.push(dino.dinosaurId) //if true pushes obj 'dino' to the 'ids' array
     }
   } else {
     dino.mya.forEach (dinoMya => {
       if (dinoMya >= mya - i && dinoMya <= mya) {
-       return idss.push(dino.dinosaurId)
+       return ids.push(dino.dinosaurId) //looping througt each array with method '.ForEach' and checks if 'dinosaur.mya'falls with specific range. if all good it will be pushed to array 'ids' 
     }
   });
 }
 });
-if (key) {
-  return idss.map(dinosaurId => {
-    const dino = dinosaurs.find(dino1 => dino1.dinosaurId === id);
-    if (dino[key]) {
-      return dino[key];
-    }else {
-      return dinosaurId;
+if (key) { //checks if 'key' exists 
+  return ids.map(dinosaurId => { //using .map method to transform 'dinosaurId' to array of 'ids'
+    const dino = dinosaurs.find(dino1 => dino1.dinosaurId === dinosaurId); //using method .find to search for matching 'dinosaurId' in 'ids' array
+    if (dino[key]) { //checks if 'dino' obj has a prop. that matches 'key'
+      return dino[key]; //returns value assosiated w/ 'key'
+    } else {
+      return dinosaurId; //returns dinosaurId if paramenters dot match w/'key'
   }
 });
 } else {
-  return idss;
+  return ids; // returns an array of all dino's ID
 }
 }
 

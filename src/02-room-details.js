@@ -26,25 +26,22 @@ const exampleRoomData = require("../data/rooms");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
 
+
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-  
-  const room = rooms.find(room => room.dinosaurs.some(dino => dino.id === dinosaurName));
-  
-  // If the room is not found, return an error message
-  if (!room) {
-    return `Dinosaur with name '${dinosaurName}' cannot be found in any room.`;
+  for (let room of rooms) {
+    for (let dino of room.dinosaurs) {
+      if (dino === dinosaurName) {
+        return rooms.name;
+      }
+    }
   }
-  
-  // Otherwise, return the name of the room
-  return room.name;
+  for (let dino of dinosaurs) {
+    if (dino.name === dinosaurName) {
+      return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
+    }
+  }
+  return `Dinosaur with name '${dinosaurName}' cannot be found.`;
 }
-
-
-
-  
-
-
-
 
 
 
@@ -70,15 +67,27 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
       "Kit Hopkins Education Wing"
     ]
  */
-  function getConnectedRoomNamesById(rooms, id) {
-    const connecteTo = rooms.filter(room => room.id === id);
-    if (connectedTo.length === 0) {
-    return "No rooms connected to the given room by ID";
-    }
-    return connectedTo.map(room => room.name);
-    }
   
+    function getConnectedRoomNamesById(rooms, id) {
+      let room = rooms.find(room => room.roomId === id); //using .find method to find the room in array "rooms" that matches ID
+      if (!room) {
+        return `Room with ID of '${id}' could not be found.`; //checks and returns if falsy
+      }
+      let connectedRoomNames = []; // empty array
+      for (let i = 0; i < room.connectsTo.length; i++) {
+        let connectedRoomId = room.connectsTo[i];
+        let connectedRoom = rooms.find(room => room.roomId === connectedRoomId);
+        if (!connectedRoom) {
+          return `Room with ID of '${connectedRoomId}' could not be found.`; // looping though each ID in 'connectsTo' to find 'room'; using .find method to search room in 'rooms'
+        }
+        connectedRoomNames.push(connectedRoom.name);
+      }
+      return connectedRoomNames; //returning array with all connectedTo rooms
+    }
+    
+    
 
+    
     
 
 module.exports = {
