@@ -29,30 +29,39 @@ const exampleRoomData = require("../data/rooms");
 //return rooms.name 
 // iterate thru rooms ARRAY, n return name of ROOM dino is found in . IF DINO IS NOT IN ROOMS.dino return error.
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-  let foundOrNot = false
-  for (const eachDino of dinosaurs) {
+  let foundOrNot = false;
+  let idOfDino = null;
+  for (let eachDino of dinosaurs) {
+    // console.log(eachDino)
     if (eachDino.name === dinosaurName) {
-      foundOrNot = true
+
+      idOfDino = eachDino
+
+      // foundOrNot = true 
+      // console.log(idOfDino)
+    }
+  } if (!idOfDino) {
+    return `Dinosaur with name '${dinosaurName}' cannot be found.`;
+  }
+  for (const roomObj of rooms) {
+    for (const dinoObjs of dinosaurs) {
+      if (dinoObjs.name === dinosaurName && roomObj.dinosaurs.includes(dinoObjs.dinosaurId)) {
+        idOfDino = roomObj.name
+        foundOrNot = true
+        // console.log(rooms.name)
+      }
     }
   }
   // did we find what we were looking for ,if not return error message 
-  if (foundOrNot === false) {
-    return `Dinosaur with name '${dinosaurName}' cannot be found.`
+  if (!foundOrNot) {
+    return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
     // .map(findName => findName.name)
   }
-  for (const roomObj of rooms) {
-    if (roomObj.dinosaurs === dinosaurName) {
-      console.log(roomObj.dinosaurs)
-    }
-  }
-  if (!rooms[dinosaurName]) {
-    return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
-  }
-  // console.log (roomObj)
+  return idOfDino
 }
 
 
-// onst threeMins = songs.filter(eleThree => eleThree.runtimeInSeconds > 180).forEach(eleThree => console.log(eleThree.title))
+// const threeMins = songs.filter(eleThree => eleThree.runtimeInSeconds > 180).forEach(eleThree => console.log(eleThree.title))
 
 // return (rooms.find(findName => findName.name === dinosaurs.rooms ))
 // }
@@ -65,7 +74,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
  * @param {Object[]} rooms - An array of room objects. See the `data/rooms.js` file for an example of the input.
  * @param {string} id - A unique room identifier.
  * @returns {string|string[]} An array of room names, or an error message.
- *
+//  * return an ARRAY of strings where each string is the name of a connnected room to main [given] room. if room Id can't be found return ERROR message.
  * EXAMPLE:
  *  getConnectedRoomNamesById(rooms, "aIA6tevTne");
  *  //> ["Ticket Center"]
@@ -79,7 +88,14 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
       "Kit Hopkins Education Wing"
     ]
  */
-function getConnectedRoomNamesById(rooms, id) { }
+function getConnectedRoomNamesById(rooms, id) {
+let arrayOfConnectedRooms= [];
+let idMatchRoomId= rooms.find(roomIdIsPara => roomIdIsPara.roomId ===  id)
+
+return `Room with ID of ${id} could not be found.`
+
+// Room with ID of 'incorrect-id' could not be found.`
+}
 
 module.exports = {
   getRoomByDinosaurName,
