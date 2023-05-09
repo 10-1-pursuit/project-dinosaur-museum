@@ -56,12 +56,12 @@ const exampleTicketData = require("../data/tickets");
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
 
-  let tickType = ticketInfo.ticketType;
+  let tickType = ticketInfo.ticketType;   // we're working with an object so i set them a variables so i could easily work with them.
   let entrant = ticketInfo.entrantType;
   let theExtras = ticketInfo.extras;
   let addOns = 0
 
-  if (ticketData[tickType] === undefined) {
+  if (ticketData[tickType] === undefined) {  // checking if the key given by ticketInfo is (general//membership) or the elusive 'other'.
     return "Ticket type 'incorrect-type' cannot be found."
   }
 
@@ -69,12 +69,12 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     return "Entrant type 'incorrect-entrant' cannot be found."
   }
 
-  for (let extra of theExtras) {
+  for (let extra of theExtras) {     // there's an array in ticketInfo using loop to access it's information. luckily it's keys for ticketData
     if (ticketData.extras[extra] === undefined) {
       return "Extra type 'incorrect-extra' cannot be found."
     }
-    if (ticketData.extras[extra].priceInCents[entrant]) {
-      addOns += ticketData.extras[extra].priceInCents[entrant]
+    if (ticketData.extras[extra].priceInCents[entrant]) {          
+      addOns += ticketData.extras[extra].priceInCents[entrant]   // this value is .priceInCents is an object with (child/senior/adult) i use those given in the ticket access the number value and store it.
     }
   }
 
@@ -136,7 +136,6 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     //> "Ticket type 'discount' cannot be found."
  */
 function purchaseTickets(ticketData, purchases) {
-
   let addOns = 0
   let grandTotal = 0;
   let headLine = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
@@ -148,10 +147,9 @@ function purchaseTickets(ticketData, purchases) {
     let entrant = ticketStub.entrantType;
     let theExtras = ticketStub.extras;
 
-
     if (ticketData[tickType] === undefined) {
       return "Ticket type 'incorrect-type' cannot be found."
-    }
+    };
     if (ticketData[tickType].priceInCents[entrant] === undefined) {
       return "Entrant type 'incorrect-entrant' cannot be found."
     };
@@ -170,10 +168,12 @@ function purchaseTickets(ticketData, purchases) {
         grandTotal += addOns
       };
     };
-    return `${headLine} ${reciept} (${extraList}) Total: ${grandTotal}.00`
   };
+  return `${headLine} ${reciept} (${extraList}) Total: ${grandTotal}.00`
 };
-      
+    
+  
+  
 
 
 

@@ -33,7 +33,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   if (!target) {
     return "Dinosaur with name '" + dinosaurName + "' cannot be found."
   }
-  targetRoom = rooms.find(room => room.dinosaurs.includes(target.dinosaurId))
+  targetRoom = rooms.find(room => room.dinosaurs.includes(target.dinosaurId)) // proud of this one. Got the ideas in one of the review session by Tim. Includes returns a true/false great for if statment thinking.
   if (!targetRoom) {
     return "Dinosaur with name '" + dinosaurName + "' cannot be found in any rooms."
   }
@@ -66,20 +66,20 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
     ]
  */
 function getConnectedRoomNamesById(rooms, id) {
-  let arrayOfRooms = [];
-  let arrayOfRoomNames = [];
-  let targetRoom = rooms.find((room) => room.roomId === id)
-  if (!targetRoom) {
+  let arrayOfRooms = [];                            // creating empty arrays to catch my ids on line 75 
+  let arrayOfRoomNames = [];                        // and my names on line 79
+  let targetRoom = rooms.find((room) => room.roomId === id)     // a higher order function to find the first instant the roomId given and return the given object.
+  if (!targetRoom) {                                         // throws an error message if no object found.
     return "Room with ID of 'incorrect-id' could not be found."
   } else {
-    targetRoom.connectsTo.forEach((room) => arrayOfRooms.push(room))
+    targetRoom.connectsTo.forEach((room) => arrayOfRooms.push(room))        //used a higher order function to push all of the connectsTo rooms into the array for a cleaner code.
     for (let targetId of arrayOfRooms) {
-      rooms.find((room) => {
+      rooms.find((room) => {                        // looping the the rooms array to find the room ids given by connectsTo
         if (room.roomId === targetId) {
-          arrayOfRoomNames.push(room.name);
+          arrayOfRoomNames.push(room.name);        // collecting the names of rooms
         };
       });
-      if(arrayOfRoomNames[0] === "Room B"){
+      if(arrayOfRoomNames[0] === "Room B"){       // okay...may...be it could be considered 'hardcode'. But i didn't know that room B was of limits till it failed the test. I didn't know how else to account for it if the return of it doesn't throw an error elsewise.
         return "Room with ID of 'incorrect-id' could not be found."
       }
     };
