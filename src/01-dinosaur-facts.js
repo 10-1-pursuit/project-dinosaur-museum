@@ -27,10 +27,14 @@ const exampleDinosaurData = require("../data/dinosaurs");
 // identify the longest dinosaur
 //convert the longest dinosaur from meters to feet
 //return the object with the longest dinosaur from the list 
-function getLongestDinosaur(dinosaurs) {
-  let feet = (meters) => { return (meters * 3.281) }
-  let obj = {};
 
+function feet(meters) {
+return meters * 3.281;
+}
+console.log(feet(2))
+
+function getLongestDinosaur(dinosaurs) {
+  
 }
 
 
