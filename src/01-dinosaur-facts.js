@@ -31,8 +31,8 @@ function getLongestDinosaur(dinosaurs) {
       num = lengthInFeet;
       tallestDino = { [name]: lengthInFeet };
 
-    }
-  }
+    };
+  };
   return tallestDino;
 }
 
@@ -58,36 +58,12 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
-  // What do they want:
-  // Returns a description of the dinosaur based on a given id and if the dinosaur cannot be found returns an error message.
-  // How to do it:
-  // First access the elements in the main array
-  // - For Loop
-  // Then access the dinosaurs by the ID
-  // - dot(.)notation
-  // Should work for dinosaurs with only 1 value in 'mya'
-  // - Some type of comparison meaning if statement
-
-  // let dinoDescription = null
-
   for (const { dinosaurId, name, pronunciation, period, mya, info } of dinosaurs) {
-
-    // console.log(dinoId)
-    // console.log(oneMyaVal)
-    // console.log(id)
-
-    // console.log(Math.max(mya))
-
-    // console.log(mya.map((myaArr) => { myaArr }))
-
-
     if (dinosaurId === id) {
-      return `${name} (${pronunciation})\n${info} It lived in the ${period} period, over ${mya.slice(-1)} million years ago.`
-    }
-
-  }
+      return `${name} (${pronunciation})\n${info} It lived in the ${period} period, over ${mya.slice(-1)} million years ago.`;
+    };
+  };
   return "A dinosaur with an ID of 'incorrect-id' cannot be found.";
-
 }
 
 /**
@@ -115,7 +91,30 @@ function getDinosaurDescription(dinosaurs, id) {
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) { }
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  // What they what:
+  // Returns an array of dinosaurs who were alive at the given `mya`
+  // - we can declare a variable and give it an empty array as a value
+  // If a key is given return the value of that key for each dino alive at that time
+  // - If statement
+  // Otherwise return the ID
+
+  let dinoArr = [];
+
+  for (const dinoObj of dinosaurs) {
+    if (dinoObj.mya.length === 1 && (dinoObj.mya[0] === mya || dinoObj.mya[0] - 1 === mya)) {
+      console.log("DinoId: ", dinoArr.push(dinoObj.dinosaurId))
+    } else if (mya <= dinoObj.mya[0] && mya >= dinoObj.mya[1]) {
+      console.log("Also DinoId: ", dinoArr.push(dinoObj.dinosaurId))
+    }
+  }
+
+
+
+
+
+
+}
 
 module.exports = {
   getLongestDinosaur,
