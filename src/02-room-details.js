@@ -33,11 +33,13 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
     }
   }
   for (const roomObj of rooms) {
-    if (roomObj.dinosaurs === dinoId) {
-      dinoId = roomObj.name;
+    for (const dino of roomObj.dinosaurs) {
+      if (dino === dinoId) {
+        dinoId = roomObj.name;
+      }
     }
   }
-  console.log(dinoId);
+  return dinoId;
 }
 
 /**
