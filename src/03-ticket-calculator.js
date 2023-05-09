@@ -81,7 +81,7 @@ if (ticketInfo.extras.length) {
 }
 return totalPrice
 
-}
+};
 
 /**
  * purchaseTickets()
@@ -136,7 +136,43 @@ return totalPrice
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) {
+// default variables for recipt and total amount
+  let receipt = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n"
+  let total = 0
+
+// iterate through purchases array
+for(let purchase of purchases){
+
+  // setting variable equal to calculateTicketPrice function
+  let ticketPrice = calculateTicketPrice(ticketData, purchase);
+
+  //checks to see if there are any errors in calculateTicketPrice
+  if(typeof ticketPrice === 'string'){
+    return ticketPrice
+  }
+  
+  // array for description for extras  
+  let extraInfo = []
+  
+  // iterate through extras in purchase array for description key
+  for(let extra of purchase.extras){
+  
+  // pushed into array extraInfo  
+    extraInfo.push(ticketData.extras[extra].description)
+  }
+  
+  // checks if the length is true. then formart entrant type, access, and the cost of the ticket in a receipt with the total price formatted
+  if(purchase.extras.length){
+    extraInfo = ` (${extraInfo.join(', ')})`
+  }
+  receipt += `${purchase.entrantType[0].toUpperCase() + purchase.entrantType.slice(1)} ${ticketData[purchase.ticketType].description}: $${(ticketPrice/100).toFixed(2)}${extraInfo}\n`
+  total += ticketPrice/100
+  }
+  receipt += `-------------------------------------------\nTOTAL: $${total.toFixed(2)}`
+  return receipt
+  
+};
 
 // Do not change anything below this line.
 module.exports = {
