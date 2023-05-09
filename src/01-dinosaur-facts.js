@@ -62,26 +62,14 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
  function getDinosaurDescription(dinosaurs, id) {
-  //if (!dinosaurs.id){
-    //return `A dinosaur with an ID of '${id}' cannot be found.`
-  //}
-  //return dinosaurs.forEach((xDino) => xDino.dinosaur.Id === id  `${dinosFiltered.pronunciation}) \r\n ${dinosFiltered.info}. It lived in the \r\n ${dinosFiltered.period}, over ${dinosFiltered.mya[1]} million years ago.`);
-  let found = null;
-
   for(let dino of dinosaurs){
-    if(dino.dinosaurId === id){
-      found = dino
+   let currentYear = Math.min(...dino.mya)
+     if(dino.dinosaurId === id){
+      return`${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${currentYear} million years ago.`
     }
   }
-  if(!found){
-    return `A dinosaur with an ID of '${id}' cannot be found.`
-  }else{
-    return`${found.name} (${found.pronunciation})\n${found.info} It lived in the ${found.period} period, over ${found.mya[found.mya.length -1]} million years ago.`;
-  
-  }
-
+      return `A dinosaur with an ID of '${id}' cannot be found.`
 }
-  
 /**
  * getDinosaursAliveMya()
  * ---------------------
@@ -108,19 +96,19 @@ function getLongestDinosaur(dinosaurs) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  let dinoArr = [];
-  let dinoId = key || "dinosaurId"
-  for(const dino of dinosaurs) {
-    if(!dino[dinoId]) {
-      dinoId = "dinosaurId"
-    }
-    if(dino.mya.length === 1 && (dino.mya[0] === mya || dino.mya[0] === -1)) {
-      dinoArr.push(dino[dinoId]) 
-    }else if (mya <= dino.mya[0 && mya >= dino.mya[1]]) {
-
-    }
+ const result =[];
+ for(const dinosaur of dinosaurs){
+  const addToArr = key || "dinosaurId";
+  if(dinosaur[addTOArr] === undefined){
+    continue;
   }
-  return dinoArr
+  const aliveMya = dinosaur.mya;
+  if(aliveMya.length === 1 && (mya === aliveMya[0] || mya === (aliveMya[0] -1))) {
+  }else if (mya <= aliveMya[0] && mya >= aliveMya[1]){
+    result.push(dinosaur[addToArr]);
+  }
+ }
+ return result;
 }
 
 module.exports = {
