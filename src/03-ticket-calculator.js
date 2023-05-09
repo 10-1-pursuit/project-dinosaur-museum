@@ -136,16 +136,16 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     //> "Ticket type 'discount' cannot be found."
  */
 function purchaseTickets(ticketData, purchases) {
-  let addOns = 0
   let grandTotal = 0;
   let headLine = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
   let reciept = "";
   let extraList = "";
 
   for (let ticketStub of purchases) {
-    let tickType = ticketStub.ticketType;
-    let entrant = ticketStub.entrantType;
+    let tickType = ticketStub.ticketType; // general 
+    let entrant = ticketStub.entrantType; // "child"
     let theExtras = ticketStub.extras;
+    let addOns = 0
 
     if (ticketData[tickType] === undefined) {
       return "Ticket type 'incorrect-type' cannot be found."
@@ -154,8 +154,8 @@ function purchaseTickets(ticketData, purchases) {
       return "Entrant type 'incorrect-entrant' cannot be found."
     };
     if (ticketData[tickType]) {
-      let tickCost = ticketData[tickType].priceInCents[entrant] * .01
-      reciept += `\n${entrant.charAt(0).toUpperCase() + entrant.slice(1).toLowerCase()} ${ticketData[tickType].description}: $ ${tickCost}.00`
+      let tickCost = ticketData[tickType].priceInCents[entrant] / 100
+      reciept += `\n${entrant.charAt(0).toUpperCase() + entrant.slice(1).toLowerCase()} ${ticketData[tickType].description}:  $ ${tickCost}.00 (${extraList})`
       grandTotal += tickCost
     };
     for (let activites of theExtras) {
@@ -163,17 +163,17 @@ function purchaseTickets(ticketData, purchases) {
         return "Extra type 'incorrect-extra' cannot be found."
       };
       if (ticketData.extras[activites]) {
-        addOns += ticketData.extras[activites].priceInCents[entrant] * .01
+        addOns += ticketData.extras[activites].priceInCents[entrant] / 100
         extraList += ` ${ticketData.extras[activites].description}\n`
         grandTotal += addOns
       };
     };
   };
-  return `${headLine} ${reciept} (${extraList}) Total: ${grandTotal}.00`
+  return `${headLine} ${reciept}\n-------------------------------------------\nTotal: ${grandTotal}.00`
 };
-    
-  
-  
+
+
+
 
 
 
