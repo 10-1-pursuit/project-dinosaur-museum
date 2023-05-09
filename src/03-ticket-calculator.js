@@ -56,14 +56,14 @@ const exampleTicketData = require("../data/tickets");
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
   let price = 0;
-  if (ticketInfo.entrantType.toLowerCase() !== "child" && ticketInfo.entrantType.toLowerCase() !== "adult" && ticketInfo.entrantType.toLowerCase() !== "senior") {
+  if (capitalizeFirstLetter(ticketInfo.entrantType) !== "Child" && capitalizeFirstLetter(ticketInfo.entrantType) !== "Adult" && capitalizeFirstLetter(ticketInfo.entrantType) !== "Senior") {
     return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
   }
-  switch (ticketInfo.ticketType.toLowerCase()) {
-    case "general":
+  switch (capitalizeFirstLetter(ticketInfo.ticketType)) {
+    case "General":
       price = ticketData.general.priceInCents[ticketInfo.entrantType];
       break;
-    case "membership":
+    case "Membership":
       price = ticketData.membership.priceInCents[ticketInfo.entrantType]
       break;
     default:
@@ -172,7 +172,6 @@ function purchaseTickets(ticketData, purchases) {
  * @return {String} A string where only the first character is uppercase.
 */ 
 const capitalizeFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-console.log(capitalizeFirstLetter("hEllo"))
 
 /**
  * centsToDollars()
@@ -182,7 +181,6 @@ console.log(capitalizeFirstLetter("hEllo"))
  * @returns - a number with two decimal places.
  */
 const centsToDollars = (priceInCents) => Math.round(priceInCents/100).toFixed(2);
-console.log(centsToDollars(300));
 
 // Do not change anything below this line.
 module.exports = {
