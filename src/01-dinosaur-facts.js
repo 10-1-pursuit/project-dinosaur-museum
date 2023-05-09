@@ -106,6 +106,25 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
   return result;
 }
 
+/**
+ * getDinosaursByDiet()
+ * ---------------------
+ * Returns an array of dinosaurs whose diet matches the given 'diet'. If no dinosaurs cannot be found with the diet, returns an error message.
+ * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data/dinosaurs.js` file for an example of the input.
+ * @param {string} diet -  A diet a dinosaur might follow (i.e. "herbivorores", "omnivores")
+ * @returns {Object[]} - An array of dinosaurs that practice the diet, or an error message.
+ */
+function getDinosaursByDiet(dinosaurs, diet){
+  if(diet.toLowerCase() === "herbivorous" || diet.toLowerCase() === "herbivores"){
+    return dinosaurs.filter(herbivore => herbivore.diet === "herbivorous");
+  }else if(diet.toLowerCase() === "carnivorous" || diet.toLowerCase() === "carnivores"){
+    return dinosaurs.filter(carnivore => carnivore.diet === "carnivorous");
+  }else if(diet.toLowerCase() === "omnivorous" || diet.toLowerCase() === "omnivores"){
+    return dinosaurs.filter(omnivore => omnivore.diet === "omnivorous");
+  }else
+  return `'${diet}' could not be found`;
+}
+
 module.exports = {
   getLongestDinosaur,
   getDinosaurDescription,
