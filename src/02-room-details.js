@@ -90,8 +90,9 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
  */
 function getConnectedRoomNamesById(rooms, id) {
 let arrayOfConnectedRooms= [];
-let idMatchRoomId= rooms.find(roomIdIsPara => roomIdIsPara.roomId ===  id)
-
+let idMatchRoomId = rooms.find(roomIdIsPara => roomIdIsPara.roomId ===  id);
+for(const roomObj of rooms)
+roomObj.roomid
 return `Room with ID of ${id} could not be found.`
 
 // Room with ID of 'incorrect-id' could not be found.`
