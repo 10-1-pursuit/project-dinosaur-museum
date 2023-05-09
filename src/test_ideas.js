@@ -59,3 +59,28 @@ return foundDinosaur;
 
        
   //     }
+
+  for (let roomObj of rooms) {
+    //console.log(roomObj.roomId)
+      //connected Id not match param id
+      //connection = roomObj.connectsTo
+
+
+    for (let connected of roomObj.connectsTo){ // connected room ids
+      //console.log(connected)
+
+      if ( roomObj.roomId === id ) { //yes
+       // console.log("roomid", roomObj.roomId, "connectsto",connected, "param" , id)
+         connected = roomObj.name
+         arrOfRooms.push(connected)
+
+      }
+  const searchBarFilterDemo = arrayOfFellows.filter ((eachFellow) => eachFellow.name.toLowerCase().includes
+
+
+
+
+  if (connection === connectedRoom) {
+    //connectedRoom = room.name;
+    //console.log(connection)
+  }
