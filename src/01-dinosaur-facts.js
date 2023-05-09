@@ -23,16 +23,20 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  //> { Brachiosaurus: 98.43 }
  */
 function getLongestDinosaur(dinosaurs) {
+  // Declared variables to hold the longest dinosaur name and length.
   let longestDinosaurName;
   let longestDinosaurLength = 0;
-
+  // For of Loop is equally efficient. Used forEach method to compare lengths of all the dinosaurs.
+  // Each length that is greater than the previous longest triggers the execution part of the conditional.
+  // The execution only assigns to the previously declared variables the name and length of the longest dinosaur.
   dinosaurs.forEach(dinosaur => {
     if (dinosaur.lengthInMeters > longestDinosaurLength) {
       longestDinosaurName = dinosaur.name;
       longestDinosaurLength = dinosaur.lengthInMeters;
     }
   });
-
+  // if no dinosaurs were found, return an empty object.
+  // Otherwise return the longest dinosaur {as an Object[]} name(Key) and length(Value).
   if (longestDinosaurName === undefined) {
     return result = {};
   }
@@ -61,8 +65,10 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
+  // declared a variable and assigned it using .find() method, the dinosaur object that matches the given ID.
   let dino = dinosaurs.find(dinosaur => dinosaur.dinosaurId === id);
-
+  // if no dinosaur was found, return an error message.
+  // Otherwise return the formatted description of the dinosaur. Note: Math.min(...dino.mya) returns the smallest value in the array. Maybe dino.mya[1] works just as well.
   if (dino === undefined) {
     return result = `A dinosaur with an ID of '${id}' cannot be found.`
   }
@@ -95,7 +101,8 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-
+  // filtered the dinosaurs array to only include the objects of the dinosaurs who lived during the given time period using the .filter() method.
+  // Chained it with the .map() method to return an array of dinosaur IDs or whichever key is provided from the element of the filtered down array.
   return dinosaurs.filter(dinosaur => {
     if (dinosaur.mya.length === 1) {
       return dinosaur.mya[0] === mya || mya === (dinosaur.mya[0] - 1)
