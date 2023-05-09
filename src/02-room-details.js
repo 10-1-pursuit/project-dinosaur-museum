@@ -31,18 +31,21 @@ const exampleRoomData = require("../data/rooms");
 //     for(const worth of prod.products.priceInCents){
 //   }
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-  for(const roomLook of dinosaurs){//for loop to search through the array of objects
+  for(const dino of dinosaurs){//for loop to search through the array of dinos
+    for(const roomLook of rooms){// 2nd for loop to search through array of rooms
     
-    if (roomLook.dinoasuars>0 && rooms ===roomLook.name && dinosaurName=== roomLook.dinosaurs){
+         if( roomLook.dinosuars>0 && dino.dinosuarName===dinosaurName && dino.dinosuarId=== roomLook.dinosaurs){
+      // if (roomLook.dinoasuars>0 && rooms ===roomLook.roomId && dinosaurName=== dino.name&& dino.dinosuarId=== roomLook.dinosaurs){
       return roomLook.name //setup my Boolean if these values are true then return the rooms name. 
     }  
-    else{                    // if dinosaurs.length is greater or equal than one so i can see if a dinosaur exist in the room.
+                        // if dinosaurs.length is greater or equal than one so i can see if a dinosaur exist in the room.
                               //If dino exist return roomLook.name which is the room the dinosaur woiuld be in
     return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;// if no dinosuar is found return this message
   }
   }
 }
-console.log(getRoomByDinosaurName(exampleRoomData, exampleRoomData, "Tyrannosaurus"));// invoking function with the parameters
+
+console.log(getRoomByDinosaurName(exampleDinosaurData, exampleRoomData, "Tyrannosaurus"));// invoking function with the parameters
 
 /**
  * getConnectedRoomNamesById()
@@ -70,7 +73,7 @@ console.log(getRoomByDinosaurName(exampleRoomData, exampleRoomData, "Tyrannosaur
 function getConnectedRoomNamesById(rooms, id) {
   for(let idLook of rooms){
     if (id=== idLook.roomId){
-      return idLook.connectTo
+      return idLook.connectsTo
     }
     return  `Room with ID of '${id}' could not be found.`;
   }

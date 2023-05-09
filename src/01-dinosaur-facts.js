@@ -214,25 +214,65 @@ console.log(getDinosaurDescription(exampleDinosaurData, "GKl035EYKN"))
  */// STILLNEED TO FIX 3RD FUNCTION OF FIRST PAGE
 // function getDinosaursAliveMya(dinosaurs, mya, key) {
 //   for (const dinoLife of dinosaurs){
-function getDinosaursAliveMya(dinosaurs, mya, key) {
-  for (const dinoLife of dinosaurs) {
-    if (key === "unkown-key" && mya === dinoLife.mya[0]) {
-      return dinoLife.dinosaurId
-    }
-    if (key === "name" && mya === dinoLife.mya[0]) {
-      return [`${dinoLife.name}`]
-    }
+// function getDinosaursAliveMya(dinosaurs, mya, key) {
+//   for (const dinoLife of dinosaurs) {
+//     if (key === "unkown-key" && mya === dinoLife.mya[0]) {
+//       return dinoLife.dinosaurId
+//     }
+//     if (key === "name" && mya === dinoLife.mya[0]) {
+//       return [`${dinoLife.name}`]
+//     }
 
-    if (mya === dinoLife.mya[0]) {
-      return dinoLife.dinosaurId
-    }
-    if (mya.length === 1 && mya === dinoLife.mya[0] - 1) {
-      return dinoLife.dinosaurId
-    }
-  }
-}
+//     if (mya === dinoLife.mya[0]) {
+//       return dinoLife.dinosaurId
+//     }
+//     if (mya.length === 1 && mya === dinoLife.mya[0] - 1) {
+//       return dinoLife.dinosaurId
+//     }
+//   }
+// }
   
-console.log(getDinosaursAliveMya(exampleDinosaurData, 155, "name"))
+// console.log(getDinosaursAliveMya(exampleDinosaurData, 155, "name"))
+
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  for (const dinoLife of dinosaurs){
+    
+    if (dinoLife.mya.length===1&& mya=== dinoLife.mya[0]-1)
+      return [`${dinoLife.dinosaurId}`]
+    if (dinoLife.mya.length === 1 && mya===dinoLife.mya[0]-1&& key === dinoLife.dinosaurId)
+      return [(dinoLife.dinosaurId)]
+    
+    if (mya===dinoLife.mya[0]-1&&key===dinoLife.name&& dinoLife.mya.length===1)
+      return [dinoLife.name]
+  }  
+  
+}
+ console.log(getDinosaursAliveMya(exampleDinosaurData,70, "Indosuchus"))
+
+
+// function getDinosaursAliveMya(dinosaurs, mya, key) {/// working
+//   for (const dinoLife of dinosaurs){
+//     if(key ==="incorrectKey"&& mya === dinoLife.mya){
+//       return dinoLife.dinosaurId
+//     }
+// if(key = "name"&& mya=== dinoLife.mya){
+//     return [`${dinoLife.name}`]
+//    }         
+  
+//   if(mya === dinoLife.mya|| mya <=dinoLife.mya+10){
+//     return dinoLife.dinosaurId
+//   }
+//     if( mya.length===1 && mya ===dinoLife.mya[0]-1){
+//       return dinoLife.dinosaurId
+//     }
+    
+    
+   
+//       }
+  
+// }
+// console.log(getDinosaursAliveMya(exampleDinosaurData,66,"incorrectKey"))
+
 
   
 //   if(mya === dinoLife.mya[0]){
@@ -251,5 +291,5 @@ console.log(getDinosaursAliveMya(exampleDinosaurData, 155, "name"))
 module.exports = {
   getLongestDinosaur,
   getDinosaurDescription,
-  //getDinosaursAliveMya,
+  getDinosaursAliveMya,
 };
