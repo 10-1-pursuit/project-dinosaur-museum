@@ -84,6 +84,9 @@ function getDinosaurDescription(dinosaurs, id) {
 
   return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${mya}.`;
 }
+// Added new variable 'mya' to hold the string representation of the dino's 🦖 "million years ago" time period. 
+// Then I used an 'if' statement to check if the 'mya' array has only one value and assigned the corresponding string to 'mya'.
+// Finally I used the 'mya' variable in the returned string instead of directly accessing the `mya` array. 
 
 /**
  * getDinosaursAliveMya()
@@ -111,20 +114,21 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  const aliveDinosaurs = dinosaurs.filter(dinosaur => {
-    const myaArray = dinosaur.mya;
-    if (myaArray.length === 1) {
-      return myaArray[0] === mya || myaArray[0] === mya - 1.5;
-    } else {
-      return myaArray.includes(mya);
-    }
-  });
 
-  if (key) {
-    return aliveDinosaurs.map(dinosaur => dinosaur[key] || dinosaur.id);
-  } else {
-    return aliveDinosaurs.map(dinosaur => dinosaur.id);
+  const result = [];
+  for (const dinosaur of dinosaurs) {
+    const dinosaurMya = dinosaur.mya;
+    if (dinosaurMya.length === 1) {
+      if (dinosaurMya[0] === mya || dinosaurMya[0] === mya - 1) {
+        result.push(key ? dinosaur[key] : dinosaur.id);
+      }
+    } else if (dinosaurMya.length === 2) {
+      if (mya >= dinosaurMya[1] && mya <= dinosaurMya[0]) {
+        result.push(key ? dinosaur[key] : dinosaur.id);
+      }
+    }
   }
+  return result;
 }
 
 module.exports = {
