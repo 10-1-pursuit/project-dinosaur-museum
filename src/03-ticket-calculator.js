@@ -141,7 +141,6 @@ function purchaseTickets(ticketData, purchases) {
   const receipt = [];
   let total = 0;
   for (let purchase of purchases) {
-    //errors
     if (calculateTicketPrice(ticketData, purchase) === `Ticket type '${purchase.ticketType}' cannot be found.`) {
       return `Ticket type '${purchase.ticketType}' cannot be found.`;
     }
@@ -151,7 +150,7 @@ function purchaseTickets(ticketData, purchases) {
     if (calculateTicketPrice(ticketData, purchase) === `Extra type '${purchase.extras[0]}' cannot be found.`) {
       return `Extra type '${purchase.extras[0]}' cannot be found.`;
     }
-    receipt.push(`${capitalizeFirstLetter(purchase.entrantType)} ${capitalizeFirstLetter(purchase.ticketType)} Admission: $${Math.round(calculateTicketPrice(ticketData, purchase) / 100).toFixed(2)}`)
+    receipt.push(`${capitalizeFirstLetter(purchase.entrantType)} ${capitalizeFirstLetter(purchase.ticketType)} Admission: $${centsToDollars(calculateTicketPrice(ticketData, purchase))}`)
     total += calculateTicketPrice(ticketData, purchase);
     if (purchase.extras !== undefined && purchase.extras.length !== 0) {
       let extras = [];
@@ -161,7 +160,7 @@ function purchaseTickets(ticketData, purchases) {
       receipt[receipt.length - 1] = receipt[receipt.length - 1] + ` (${extras.join(", ")})`;
     }
   }
-  return `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n${receipt.join('\n')}\n-------------------------------------------\nTOTAL: $${Math.round(total / 100).toFixed(2)}`
+  return `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n${receipt.join('\n')}\n-------------------------------------------\nTOTAL: $${centsToDollars(total)}`
 }
 
 /** 
@@ -174,6 +173,16 @@ function purchaseTickets(ticketData, purchases) {
 */ 
 const capitalizeFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 console.log(capitalizeFirstLetter("hEllo"))
+
+/**
+ * centsToDollars()
+ * ---------------------
+ * Helper function that returns a price number with two decimal places.
+ * @param {number} priceInCents - the cost in cents.
+ * @returns - a number with two decimal places.
+ */
+const centsToDollars = (priceInCents) => Math.round(priceInCents/100).toFixed(2);
+console.log(centsToDollars(300));
 
 // Do not change anything below this line.
 module.exports = {
