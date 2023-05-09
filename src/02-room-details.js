@@ -29,11 +29,8 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   for (let dino of dinosaurs) {
     if (dinosaurName === dino.name){
       id = dino.dinosaurId;
-
       for (let dinosRoom of rooms){
-        
         roomName = dinosRoom.name;
-
         if (dinosRoom.dinosaurs.includes(id)){
           return roomName;
         }
@@ -85,7 +82,7 @@ function getConnectedRoomNamesById(rooms, id) {
      return `Room with ID of 'incorrect-id' could not be found.`;
     }
    connectedTo.push(connected[roomId]);
-   //if the room has an Id that is inside of the room we're trying to find connections for, were giving back that name inside ofour array
+   //if the room has an Id that is inside of the room we're trying to find connections for, were giving back that name inside of our array
   }
   return connectedTo;
 }

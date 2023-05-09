@@ -60,17 +60,17 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   if (!ticketData[ticketType]) {
     return `Ticket type '${ticketType}' cannot be found.`
   }
-  if (!ticketData[entrantType]) {
+  else if (!ticketData[entrantType]) {
     return `Entrant type '${entrantType}' cannot be found.`
   }
-  else if (ticketInfo.ticketType === ticketData.general.priceIncents[ticketType]){
-        ticketPrice = ticketData.general.priceIncents[ticketType]
-        if (ticketInfo.extras.length > 0) {
-          for (const ex of ticketInfo.extras) {
+  else if (ticketInfo.ticketType === ticketData["membership" || " general"]){
+        ticketPrice = ticketData[ticketType].priceIncents[entrantType]
+        if (extras.length > 0) {
+          for (const ex of extras) {
             if (ticketData.extras[ex]){
-              ticketPrice += ticketData.extras[ex].priceIncents
-           return  "Extra type '${ex}' cannot be found."
-        }
+              ticketPrice += ticketData.extras[ex].priceIncents[entrantType]
+            }
+            else return  "Extra type '${ex}' cannot be found."
       }
     }
   }  
