@@ -151,18 +151,29 @@ function purchaseTickets(ticketData, purchases) {
     if (calculateTicketPrice(ticketData, purchase) === `Extra type '${purchase.extras[0]}' cannot be found.`) {
       return `Extra type '${purchase.extras[0]}' cannot be found.`;
     }
-    receipt.push(`${purchase.entrantType.charAt(0).toUpperCase() + purchase.entrantType.slice(1)} ${purchase.ticketType.charAt(0).toUpperCase() + purchase.ticketType.slice(1)} Admission: $${Math.round(calculateTicketPrice(ticketData, purchase) / 100).toFixed(2)}`)
+    receipt.push(`${capitalizeFirstLetter(purchase.entrantType)} ${capitalizeFirstLetter(purchase.ticketType)} Admission: $${Math.round(calculateTicketPrice(ticketData, purchase) / 100).toFixed(2)}`)
     total += calculateTicketPrice(ticketData, purchase);
     if (purchase.extras !== undefined && purchase.extras.length !== 0) {
       let extras = [];
       for (let extra of purchase.extras) {
-        extras.push(`${extra.charAt(0).toUpperCase() + extra.slice(1)} Access`)
+        extras.push(`${capitalizeFirstLetter(extra)} Access`)
       }
       receipt[receipt.length - 1] = receipt[receipt.length - 1] + ` (${extras.join(", ")})`;
     }
   }
   return `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n${receipt.join('\n')}\n-------------------------------------------\nTOTAL: $${Math.round(total / 100).toFixed(2)}`
 }
+
+/** 
+ * captilizeFirstLetter()
+ * ---------------------
+ * Helper function that returns a string with only the first letter capitalized.
+ * 
+ * @param {String} str - Any string.
+ * @return {String} A string where only the first character is uppercase.
+*/ 
+const capitalizeFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+console.log(capitalizeFirstLetter("hEllo"))
 
 // Do not change anything below this line.
 module.exports = {
