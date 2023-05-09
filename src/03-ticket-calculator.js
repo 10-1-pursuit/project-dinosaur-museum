@@ -68,18 +68,22 @@ function calculateTicketPrice(ticketData, ticketInfo) {
       ticketInfo.entrantType === ticketInfo.entrantType && Object.keys(ticketLook.general.priceInCents) === ticketInfo.entrantType ||
       ticketInfo.extras.length > 0) {
       return ticketLook.general.priceInCents.adult;
-      }
+      } else{
     //membership admission turn into callbackfunction /or else if/or case: break;
     if (ticketInfo.ticketType === ticketLook.membership.description && ticketLook.membership.priceInCents === ticketInfo.entrantType &&
-      Object.keys(ticketInfo.extras.movie.priceInCents) === ticketInfo.extras) 
+      Object.keys(ticketInfo.extras.movie.priceInCents) === ticketInfo.extras) {
       return Object.values(ticketLook.membership.priceInCents) + Object.values(ticketLook.extras.priceInCents)
-      
+                          }
         //nona admission doesnt exist  turn into callback /or else if/or case: break;
-        if (ticketInfo.entrantType === Object.keys(ticketLook.general.priceInCents)) 
-
+       } 
+       // if (ticketInfo.entrantType === Object.keys(ticketLook.general.priceInCents)) 
+          
           return `Entrant type ${ticketInfo.entrantType} cannot be found.`
+      {
+      }
           }
         }
+  
       
 
 console.log(calculateTicketPrice(exampleTicketData, ticketInfo))
@@ -163,6 +167,6 @@ console.log(purchaseTickets(exampleTicketData,purchases))
 
 // Do not change anything below this line.
 module.exports = {
-  calculateTicketPrice,
+ calculateTicketPrice,
   purchaseTickets,
 };
