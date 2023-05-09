@@ -63,9 +63,6 @@ function getDinosaurDescription(dinosaurs, id) {
 }
 
 
-
-
-
 /**
  * getDinosaursAliveMya()
  * ---------------------
@@ -100,7 +97,7 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       valueKey = "dinosaurId"
     };
     
-    if ((dino.mya.length === 1) && (mya === dino.mya[0]) || (mya === dino.mya[0] - 1)) {
+    if ((dino.mya.length === 1) && (mya === dino.mya[0]) || (mya === dino.mya[0] - 1)) { // seaching for a range 
       foundDinos.push(dino[valueKey]);
     };
     if ((dino.mya.length === 2) && (mya <= dino.mya[0] - 1) && (mya >= dino.mya[1])) {

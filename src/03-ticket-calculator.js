@@ -40,7 +40,7 @@ const exampleTicketData = require("../data/tickets");
  *  const ticketInfo = {
       ticketType: "membership",
       entrantType: "child",
-      extras: ["movie"],
+      extras: ["movie", "terrace"],
     };
     calculateTicketPrice(tickets, ticketInfo);
     //> 2500
@@ -136,49 +136,44 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     //> "Ticket type 'discount' cannot be found."
  */
 function purchaseTickets(ticketData, purchases) {
-  let total = 0;
+
+  let addOns = 0
   let grandTotal = 0;
-  let addOns = 0;
   let headLine = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
   let reciept = "";
+  let extraList = "";
 
-  for (let tickets of purchases) {
-    let extra = tickets.extras;
-    let tickType = tickets.ticketType;
-    let entrant = tickets.entrantType;
-    let tickCost = ticketData[tickType].priceInCents[entrant] / 100;
+  for (let ticketStub of purchases) {
+    let tickType = ticketStub.ticketType;
+    let entrant = ticketStub.entrantType;
+    let theExtras = ticketStub.extras;
 
 
-    if (entrant === 'adult') {
-      reciept += `\nAdult ${ticketData[tickType].description}: $ ${tickCost} (`
-      grandTotal += tickCost;
+    if (ticketData[tickType] === undefined) {
+      return "Ticket type 'incorrect-type' cannot be found."
+    }
+    if (ticketData[tickType].priceInCents[entrant] === undefined) {
+      return "Entrant type 'incorrect-entrant' cannot be found."
     };
-
-    if (entrant === 'child') {
-      reciept += `\nChild ${ticketData[tickType].description}: $ ${tickCost} (`
-      grandTotal += tickCost;
-    }
-
-    if (entrant === 'senior') {
-      reciept += `\nSenior ${ticketData[tickType].description}: $ ${tickCost} (`
-      grandTotal += tickCost;
-    }
-
-    for (let toAddOn of extra) {
-      if (toAddOn === 'movie' || 'terrace' || 'education') {
-        addOns = ticketData.extras[toAddOn].priceInCents[entrant] / 100
-        total = grandTotal += addOns
-        reciept += ` ${ticketData.extras[toAddOn].description})`
-
-
-      }
-    }
-    return `${headLine} ${reciept} ${total}`
-
-  }
-}
-
-
+    if (ticketData[tickType]) {
+      let tickCost = ticketData[tickType].priceInCents[entrant] * .01
+      reciept += `\n${entrant.charAt(0).toUpperCase() + entrant.slice(1).toLowerCase()} ${ticketData[tickType].description}: $ ${tickCost}.00`
+      grandTotal += tickCost
+    };
+    for (let activites of theExtras) {
+      if (ticketData.extras[activites] === undefined) {
+        return "Extra type 'incorrect-extra' cannot be found."
+      };
+      if (ticketData.extras[activites]) {
+        addOns += ticketData.extras[activites].priceInCents[entrant] * .01
+        extraList += ` ${ticketData.extras[activites].description}\n`
+        grandTotal += addOns
+      };
+    };
+    return `${headLine} ${reciept} (${extraList}) Total: ${grandTotal}.00`
+  };
+};
+      
 
 
 
