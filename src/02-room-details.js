@@ -86,7 +86,7 @@ function getConnectedRoomNamesById(rooms, id) {
     console.log(roomByName)
   }
   if (roomByName[id] === undefined) {
-    return `Room with ID of 'incorrect-id' could not be found.`
+    return `Room with ID of '${id}' could not be found.`
   }
   let foundRoom = rooms.find(roomsI => roomsI.roomId === id)
   for (let roomId of foundRoom.connectsTo) {
