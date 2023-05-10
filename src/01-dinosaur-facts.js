@@ -141,11 +141,12 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
     const myaAlive = dino.mya; // this vairable will capture the dinosaur mya age
     if (
       myaAlive.length === 1 &&
-      (mya === myaAlive[0] || mya === myaAlive[0] - 1) // If the mta range is a sinlge number , check if it is equal to the specified mya
+      (mya === myaAlive[0] || mya === myaAlive[0] - 1) // If the mya range is a single number , check if it is equal to a specified mya.
     ) {
-      dinosaurArr.push(dino[dinoId]); // if the mya range is two numbers, check if the specified mya is within the range.
+      dinosaurArr.push(dino[dinoId]); // this code block adds(.push) the dinosaur's ID to the empty array when a single number condition is met.
     } else if (mya <= myaAlive[0] && mya >= myaAlive[1]) {
-      dinosaurArr.push(dino[dinoId]);
+      // If the mya range is two numbers, check if the specified mya is within a range.
+      dinosaurArr.push(dino[dinoId]); // This code block adds (.push) the dinosaur's ID to the empty array when a specified condition is compared aganist 2 numbers.
     }
   }
   return dinosaurArr;
