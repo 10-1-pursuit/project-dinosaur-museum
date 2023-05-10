@@ -30,28 +30,25 @@ let nFeet = (meters) => {
 
 function getLongestDinosaur(dinosaurs) {
   // This actually works better but test wil stil fail whithin the Alive Mya function
-
-  let obj = {};
-  if (!dinosaurs.length) {
-    return obj;
-  }
+  ////////////////
+  //let obj = {};
+  //if (!dinosaurs.length) {
+  //return obj;
+  // }
   // run .map
-  let sortedSaurs = dinosaurs.sort(
-    (a, b) => b.lengthInMeters - a.lengthInMeters
-  );
-  let tallestDinosaur = sortedSaurs[0];
+  //let sortedSaurs = dinosaurs.sort(
+  //(a, b) => b.lengthInMeters - a.lengthInMeters
+  //);
+  //let tallestDinosaur = sortedSaurs[0];
   // then .sort .... copy sort and return;
-  obj[tallestDinosaur.name] = nFeet(tallestDinosaur.lengthInMeters);
-
-  return obj;
-
+  //obj[tallestDinosaur.name] = nFeet(tallestDinosaur.lengthInMeters);
+  //return obj;
   //let sortedSaurs = dinosaurs
   // .slice()
   //.sort((a, b) => b.lengthInMeters - a.lengthInMeters);
   //let dinoNonMutated = sortedSaurs.map((dino) => ({
   //[dino.name]: dino.lengthInMeters,
   // }));
-
   //return dinoNonMutated;
 }
 /**¡

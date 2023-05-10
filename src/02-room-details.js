@@ -25,7 +25,23 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+  let target = null;
+  let targetRoom = null;
+
+  target = dinosaurs.find((dino) => dinosaurName === dino.name);
+  if (!target) {
+    return "Dinosaur with name '" + dinosaurName + "' cannot be found.";
+  }
+  targetRoom = rooms.find((room) => room.dinosaurs.includes(target.dinosaurId));
+  if (!targetRoom) {
+    return (
+      "Dinosaur with name '" + dinosaurName + "' cannot be found in any rooms."
+    );
+  }
+  return targetRoom.name;
+}
 
 /**
  * getConnectedRoomNamesById()
@@ -50,26 +66,21 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
     ]
  */
 function getConnectedRoomNamesById(rooms, id) {
-  let roomsConnected = [];
-  let roomsTogetherByName = {};
-  // This for of loop will iterate through the list of rooms and ready the elements for munilpulation
-  for (let roomElements of rooms) {
-    roomsTogetherByName[roomElements.roomId] = roomElements.name;
+  let room = rooms.find((room) => room.roomId === id); //Finding the exact room in which to test an argument aganist ..... then satisify the functions edge case
+  if (!room) {
+    return `Room with ID of '${id}' could not be found.`; //checks for edge case
   }
-  // Edge Case
-  if (!roomsTogetherByName[id]) {
-    return `Room with ID of '${id}' could not be found.`;
-  }
-  let roomIdMatch = rooms.find(
-    (roomsfunctionfind) => roomsfunctionfind.roomId === id
-  );
-  for (let connectedRoom of roomIdMatch.connectsTo) {
-    if (!roomsTogetherByName[connectedRoom]) {
-      return `Room with ID of 'incorrect-id' could not be found.`;
+  let connectedRoomNames = []; // empty array
+  for (let i = 0; i < room.connectsTo.length; i++) {
+    let connectedRoomId = room.connectsTo[i];
+    let connectedRoom = rooms.find((room) => room.roomId === connectedRoomId);
+    if (!connectedRoom) {
+      // edge case
+      return `Room with ID of '${connectedRoomId}' could not be found.`; // looping though each ID in 'connectsTo' to find 'room'; using .find method to search room in 'rooms'
     }
-    roomsConnected.push(roomsTogetherByName[connectedRoom]);
+    connectedRoomNames.push(connectedRoom.name);
   }
-  return roomsConnected;
+  return connectedRoomNames; //returning array with all connectedTo rooms
 }
 
 module.exports = {
