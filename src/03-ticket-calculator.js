@@ -55,9 +55,25 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
-  
-}
 
+  for (let ticket in ticketData) {
+    for (let entry in ticketInfo) {
+      if (ticket !== ticketInfo.ticketType) {
+        return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
+      }
+      if (ticket !== ticketInfo.entrantType) {
+        return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
+      }
+      for (let extra of ticketInfo.extras) {
+        for (let copy in ticketData.extras) {
+          if (!ticketInfo.extras.includes(ticketInfo.extras)) {
+            return `Extra type' ${ticketInfo.extras}' cannot be found.`
+          }
+        }
+      }
+    }
+  }
+}
 /**
  * purchaseTickets()
  * ---------------------
@@ -111,7 +127,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) { }
 
 // Do not change anything below this line.
 module.exports = {
