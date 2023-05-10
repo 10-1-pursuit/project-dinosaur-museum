@@ -100,9 +100,11 @@ function getConnectedRoomNamesById(rooms, id) {
             connectedRooms = roomObjAgain.name;
             newArr.push(connectedRooms);
           }
+          // return `Room with ID of '${id}' could not be found.`
         }
       }
     }
+    // return `Room with ID of '${id}' could not be found.`
   }
   return newArr;
 }
