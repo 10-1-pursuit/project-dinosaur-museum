@@ -29,7 +29,7 @@ let nFeet = (meters) => {
 };
 
 function getLongestDinosaur(dinosaurs) {
-  // This actually works better but test wil stil fail whithin the Alive Mya function
+  // This actually works better but test will still fail whithin the Alive Mya function
   ////////////////
   //let obj = {};
   //if (!dinosaurs.length) {
@@ -43,6 +43,7 @@ function getLongestDinosaur(dinosaurs) {
   // then .sort .... copy sort and return;
   //obj[tallestDinosaur.name] = nFeet(tallestDinosaur.lengthInMeters);
   //return obj;
+  /////////////////////////////////////// Tired my best here it kept mutating the array
   //let sortedSaurs = dinosaurs
   // .slice()
   //.sort((a, b) => b.lengthInMeters - a.lengthInMeters);
@@ -50,6 +51,19 @@ function getLongestDinosaur(dinosaurs) {
   //[dino.name]: dino.lengthInMeters,
   // }));
   //return dinoNonMutated;
+
+  if (dinosaurs.length === 0) {
+    // takes care of the edge case
+    return {};
+  }
+  let longestDino = dinosaurs[0];
+  for (let i = 1; i < dinosaurs.length; i++) {
+    if (dinosaurs[i].lengthInMeters > longestDino.lengthInMeters) {
+      longestDino = dinosaurs[i];
+    }
+  }
+
+  return { [longestDino.name]: nFeet(longestDino.lengthInMeters) };
 }
 /**¡
  * getDinosaurDescription()
