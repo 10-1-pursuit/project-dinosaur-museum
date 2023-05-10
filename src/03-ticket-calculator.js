@@ -82,6 +82,17 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   return totalCost;
 }
 
+// The function calculateTicketPrice is defined with two parameters `ticketData` and `ticketInfo`.
+// Two constants `ticketType` and `entrantType` are initialized using the `ticketInfo` object.
+// An error is thrown if the `ticketType` is not found in the `ticketData` object. The error message states that the ticket type cannot be found.
+// An error is thrown if the `entrantType` is not found in the `ticketData` object. The error message states that the entrant type cannot be found.
+// An empty array is assigned to the extras constant if the extras array is not provided in the `ticketInfo` object.
+// The `totalPriceInCents` variable is initialized with the ticket price in cents for the given ticket type and entrant type.
+// A for loop iterates over each extra in the extras array.
+// An error is thrown if the extra type is not found in the `ticketData.extras` object. The error message states that the extra type cannot be found.
+// The price in cents for the given entrant type is added to the `totalPriceInCents` for each extra found in the `ticketData.extras` object.
+// The `totalPriceInCents` is returned by the function.
+
 /**
  * purchaseTickets()
  * ---------------------
@@ -135,7 +146,54 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) { }
+function purchaseTickets(ticketData, purchases, ticketType) {
+  // Initialize a variable named `totalCost` to keep track of the total cost of all purchased tickets
+  let totalCost = 0;
+  // Initialize a variable named `receipt` to store a message that will be returned later
+  let receipt = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
+
+  // Loop through each purchase in the `purchases` array
+  for (let purchase of purchases) {
+    // Extract the `ticketType`, `entrantType`, and `extras` properties from the current `purchase` object
+    const ticketType = purchase.ticketType;
+    const entrantType = purchase.entrantType;
+    const extras = purchase.extras || [];
+
+    // Retrieve the ticket and entrant type information from the `ticketData` object
+    const ticketTypeInfo = ticketData[ticketType];
+    // If the ticket type is not found in the `ticketData` object, return an error message
+    if (!ticketTypeInfo) {
+      return `Ticket type '${ticketType}' cannot be found.`;
+    }
+    const entrantTypeInfo = ticketTypeInfo.prices[entrantType];
+    // If the entrant type is not found for the given ticket type, return an error message
+    if (!entrantTypeInfo) {
+      return `Entrant type '${entrantType}' cannot be found for ticket type '${ticketType}'.`;
+    }
+
+    // Calculate the total cost of the current ticket by adding the base ticket price and any extra costs
+    const ticketPrice = entrantTypeInfo.price + extras.reduce((acc, extra) => {
+      // Retrieve the price of the current extra from the `ticketData` object
+      const extraPrice = ticketData.extras[extra];
+      // If the extra is not found in the `ticketData` object, throw an error
+      if (!extraPrice) {
+        throw new Error(`Extra '${extra}' cannot be found.`);
+      }
+      // Add the extra price to the accumulator
+      return acc + extraPrice;
+    }, 0);
+
+    // Add the ticket price to the total cost
+    totalCost += ticketPrice;
+    // Add a line to the `receipt` variable detailing the purchased ticket
+    receipt += `${entrantType.charAt(0).toUpperCase()}${entrantType.slice(1)} ${ticketType.charAt(0).toUpperCase()}${ticketType.slice(1)} Admission: $${ticketPrice.toFixed(2)} (${extras.map(extra => extra.charAt(0).toUpperCase() + extra.slice(1) + " Access").join(", ")})\n`;
+  }
+
+  // Add a final line to the `receipt` variable with the total cost
+  receipt += `-------------------------------------------\nTOTAL: $${totalCost.toFixed(2)}\n`;
+  // Return the `receipt` variable as the result of the function
+  return receipt;
+}
 
 // Do not change anything below this line.
 module.exports = {
