@@ -43,7 +43,6 @@ function getLongestDinosaur(dinosaurs) {
 
   return obj;
 }
-
 /**¡
  * getDinosaurDescription()
  * ---------------------
@@ -117,9 +116,9 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       (aliveMya,
       length === 1 && (mya === aliveMya[0] || mya === aliveMya[0] - 1))
     ) {
-      result.push(dinsoaur[addToArr]);
+      result.push(dinosaur[addToArr]);
     } else if (mya <= aliveMya[0] && mya >= aliveMya[1]) {
-      result.push(dinsoaur[addToArr]);
+      result.push(dinosaur[addToArr]);
     }
   }
 }

@@ -25,20 +25,7 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-let dinoInRoom;
-
-const dinoName = dinosaurs.find(dinoName => dinoName.name === dinosaurName);
-if(dinoName === undefined){
-  return `Dinosaur with name '${dinosaurName}' cannot be found.`
-}
-for(let dinoRoom of rooms){
-  for(let dino of dinosaurs){
-    if(dino.name === dinosaurName && dinoRoom.)
-  }
-}
-  
-}
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
 
 /**
  * getConnectedRoomNamesById()
@@ -63,7 +50,26 @@ for(let dinoRoom of rooms){
     ]
  */
 function getConnectedRoomNamesById(rooms, id) {
-
+  let roomsConnected = [];
+  let roomsTogetherByName = {};
+  // This for of loop will iterate through the list of rooms and ready the elements for munilpulation
+  for (let roomElements of rooms) {
+    roomsTogetherByName[roomElements.roomId] = roomElements.name;
+  }
+  // Edge Case
+  if (!roomsTogetherByName[id]) {
+    return `Room with ID of '${id}' could not be found.`;
+  }
+  let roomIdMatch = rooms.find(
+    (roomsfunctionfind) => roomsfunctionfind.roomId === id
+  );
+  for (let connectedRoom of roomIdMatch.connectsTo) {
+    if (!roomsTogetherByName[connectedRoom]) {
+      return `Room with ID of 'incorrect-id' could not be found.`;
+    }
+    roomsConnected.push(roomsTogetherByName[connectedRoom]);
+  }
+  return roomsConnected;
 }
 
 module.exports = {
