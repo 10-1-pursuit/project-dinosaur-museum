@@ -113,13 +113,23 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
     if (dinosaur[keyToAddArr] === undefined) {
       keyToAddArr = "dinosaurId"
     }
-
-    return dinoAliveMya
+    // "returns the IDs of all dinosaurs that were alive approximately at the given time"
+    // "if the `mya` key is an array of one number, should allow for 1 MYA less than the amount"
+    // "include dinosaurs with only one `mya` year"
+    if (dinosaur.mya.length === 1 && (mya === dinosaur.mya[0] || mya === (dinosaur.mya[0] - 1))) {
+      dinoAliveMya.push(dinosaur[keyToAddArr])
+    }
+    else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) {
+      dinoAliveMya.push(dinosaur[keyToAddArr])
+    }
   }
 
+  return dinoAliveMya
+}
 
-  module.exports = {
-    getLongestDinosaur,
-    getDinosaurDescription,
-    getDinosaursAliveMya,
-  };
+
+module.exports = {
+  getLongestDinosaur,
+  getDinosaurDescription,
+  getDinosaursAliveMya,
+};
