@@ -30,16 +30,18 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   for (const dinoObj of dinosaurs) {
     if (dinoObj.name === dinosaurName) {
       dinoId = dinoObj.dinosaurId;
-    }
-  }
-  for (const roomObj of rooms) {
-    for (const dino of roomObj.dinosaurs) {
-      if (dino === dinoId) {
-        dinoId = roomObj.name;
+      for (const roomObj of rooms) {
+        for (const dino of roomObj.dinosaurs) {
+          if (dino === dinoId) {
+            dinoId = roomObj.name;
+            return dinoId;
+          }
+        }
       }
+      return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
     }
   }
-  return dinoId;
+  return `Dinosaur with name '${dinosaurName}' cannot be found.`
 }
 
 /**
