@@ -22,7 +22,31 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+function getLongestDinosaur(dinosaurs) {
+  let longestObj = {};
+  let length = 0;
+  let dName = "";
+
+  if (!dinosaurs.length) {
+    return longestObj;
+
+    // checks the length of dinosaur if there is any value within, if there is not return longestObj which has a value of an empty object.
+  }
+  for (let dino of dinosaurs) {
+    // for of needed to intirate over dinosaurs, so we can manipulate the data.
+    if (dino.lengthInMeters > length) {
+      // using .notation we check if the length in meters for each dinosaur we itirated over is greater than the length at which point of this program has a value of 0.
+      length = dino.lengthInMeters;
+      dName = dino.name;
+      // we then asign the length in meters and the name of each dinosaur to length and dname.
+    }
+  }
+  longestObj[`${dName}`] = Number(`${length * 3.281}`)
+  // within the empty object we are assigning the dinosaurs we are interating over to become keys with the object, while assigning the converted length in feet to the keys value.
+  return (longestObj)
+  // then return the object.
+
+}
 
 /**
  * getDinosaurDescription()
@@ -44,8 +68,25 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  let placeHeld = null
 
+
+  for (let dino of dinosaurs) {
+    //for of needed to intirate over dinosaurs, so we can manipulate the data.
+    if (dino.dinosaurId === id) {
+      placeHeld = dino
+    }
+    // if Ids within dinosaurs match the ids of what the guest are looking for assign whats in dino to placeHeld.
+  }
+  if (!placeHeld) {
+    return `A dinosaur with an ID of '${id}' cannot be found.`
+    //this checks if any value is placed within placeHeld, if there is not we will be left with a message. 
+  }
+  return `${placeHeld.name} (${placeHeld.pronunciation})\n${placeHeld.info} It lived in the ${placeHeld.period} period, over ${placeHeld.mya[placeHeld.mya.length - 1]} million years ago.`
+  //returns a string manipulated by string interlopation to the desired requirments 
+
+}
 /**
  * getDinosaursAliveMya()
  * ---------------------
@@ -71,7 +112,30 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  let dinoArr = [];
+  let keyOrId = (key || "dinosaurId");
+  //using short circuiting I assigned "key" which is value being passed through by the user or "dinosaurId" 
+
+  for (let dino of dinosaurs) {
+    // for let is used to intirate over dinosaurs using dino
+    if (!dino[keyOrId]) {
+      keyOrId = "dinosaurId";
+      // ! in this situation is used to check if there is anything within key from our user if there is not using [] notation if thhere is not the string 'dinosaurId' will be prompted
+    }
+    if (dino.mya.length === 1 && (mya === (dino.mya[0]) || (mya === dino.mya[0] - 1))) {
+      //using the .length method we check to see if dinosaur only has a single value for `mya, and if the mya being passed by users matches the value of mya at position zero with the mya array or if it matches one less than the value of mya 
+
+      dinoArr.push(dino[keyOrId]);
+      //places all the keys that match with in the dino array we created. 
+
+    } else if (mya <= dino.mya[0] && mya >= dino.mya[1]) {
+
+      dinoArr.push(dino[keyOrId])
+    }
+  }
+  return dinoArr;
+}
 
 module.exports = {
   getLongestDinosaur,
