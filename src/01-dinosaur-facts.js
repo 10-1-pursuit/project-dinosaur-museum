@@ -22,7 +22,38 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+
+function getLongestDinosaur(dinosaurs) {
+
+  let noSuchDinosaurExists = {};
+
+  if (dinosaurs.length === 0) {
+    return noSuchDinosaurExists;
+  };
+
+  const dinosInSizeOrder = [...dinosaurs].sort((dino1, dino2) => {
+
+
+    if (dino1.lengthInMeters > dino2.lengthInMeters) {
+      return -1;
+    }
+    if (dino1.lengthInMeters < dino2.lengthInMeters) {
+      return 1;
+    }
+    if (dino1.lengthInMeters === dino2.lengthInMeters) {
+      return 0;
+    }
+  });
+
+  const tallestDino = dinosInSizeOrder[0];
+
+  let dinoName = tallestDino.name;
+  let dinoLength = tallestDino.lengthInMeters * 3.281;
+  let largestOfThePact = { [dinoName]: dinoLength };
+
+  return largestOfThePact;
+};
+getLongestDinosaur(exampleDinosaurData)
 
 /**
  * getDinosaurDescription()
@@ -33,7 +64,7 @@ function getLongestDinosaur(dinosaurs) {}
  *
  * NOTE: The `\n` represents a new line in text.
  *
- * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data/dinosaurs.js` file for an example of the input.
+ * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data / dinosaurs.js` file for an example of the input.
  * @param {string} id - The unique identifier for the dinosaur.
  * @returns {string} A detailed description of the dinosaur.
  *
@@ -44,8 +75,18 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  let handsOffTheExhibitsOnDisplay = `A dinosaur with an ID of '${id}' cannot be found.`;
 
+  const dinoFactSheet = dinosaurs.find((dinoData) => dinoData.dinosaurId === id)
+  if (dinoFactSheet) {
+    let dinoEra = Math.min(...dinoFactSheet.mya);
+    return `${dinoFactSheet.name} (${dinoFactSheet.pronunciation})\n${dinoFactSheet.info} It lived in the ${dinoFactSheet.period} period, over ${dinoEra} million years ago.`;
+  }
+  else
+    return handsOffTheExhibitsOnDisplay;
+};
+getDinosaurDescription(exampleDinosaurData)
 /**
  * getDinosaursAliveMya()
  * ---------------------
@@ -53,7 +94,7 @@ function getDinosaurDescription(dinosaurs, id) {}
  *
  * If the dinosaur only has a single value for `mya`, allows for the `mya` value to be equal to the given value or one less. For example, if a dinosaur has a `mya` value of `[29]`, the dinosaur's information will be returned if `29` is entered or `28` is entered.
  *
- * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data/dinosaurs.js` file for an example of the input.
+ * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data / dinosaurs.js` file for an example of the input.
  * @param {number} mya - "Millions of years ago."
  * @param {string} key - An optional parameter. If included, for dinosaurs that lived during the `mya` value given, will return the value of the supplied key. Otherwise, returns the ID.
  * @returns {*[]} An array of values, which depend on the key given. The array should only include data of dinosaurs who lived during the given time period.
@@ -71,7 +112,27 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+
+  let invalidKey = undefined;
+  let dinoWorld = [];
+  let valueInsideKey = key;
+
+  for (let dinoFactFile of dinosaurs) {
+    if (dinoFactFile[valueInsideKey] === invalidKey) {
+      valueInsideKey = "dinosaurId";
+    }
+    if ((dinoFactFile.mya.length === 2) && (mya <= dinoFactFile.mya[0] - 1) && (mya >= dinoFactFile.mya[1])) {
+      dinoWorld.push(dinoFactFile[valueInsideKey]);
+    }
+    if ((dinoFactFile.mya.length === 1) && (mya === dinoFactFile.mya[0]) || (mya === dinoFactFile.mya[0] - 1)) {
+      dinoWorld.push(dinoFactFile[valueInsideKey]);
+    }
+  }
+  return dinoWorld;
+}
+
+getDinosaursAliveMya(exampleDinosaurData)
 
 module.exports = {
   getLongestDinosaur,

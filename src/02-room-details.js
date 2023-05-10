@@ -25,31 +25,79 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+
+  const noDinoInTheseParts = `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
+  const dinoWhoNeverHeardOfHer = `Dinosaur with name '${dinosaurName}' cannot be found.`
+
+  const findDino = dinosaurs.find((dinoSearch => dinoSearch.name === dinosaurName)
+  )
+  if (findDino) {
+    keywordSearchDinoById = findDino.dinosaurId
+    for (let dinoFactFile of rooms) {
+      let suiteDinoName = dinoFactFile.name;
+
+      if (dinoFactFile.dinosaurs.includes(keywordSearchDinoById)) {
+        return suiteDinoName;
+      }
+    }
+    return noDinoInTheseParts;
+  }
+  return dinoWhoNeverHeardOfHer;
+};
+getRoomByDinosaurName(exampleRoomData)
+
 
 /**
  * getConnectedRoomNamesById()
  * ---------------------
  * Returns an array of strings, where each string is the name of a room connected to the given room. If a room ID cannot be found, an error message is returned.
- *
- * @param {Object[]} rooms - An array of room objects. See the `data/rooms.js` file for an example of the input.
- * @param {string} id - A unique room identifier.
- * @returns {string|string[]} An array of room names, or an error message.
- *
- * EXAMPLE:
- *  getConnectedRoomNamesById(rooms, "aIA6tevTne");
- *  //> ["Ticket Center"]
- *
- * EXAMPLE:
- *  getConnectedRoomNamesById(rooms, "A6QaYdyKra");
- *  //> [
-      "Entrance Room",
-      "Coat Check Room",
-      "Ellis Family Hall",
-      "Kit Hopkins Education Wing"
-    ]
- */
-function getConnectedRoomNamesById(rooms, id) {}
+*
+* @param {Object[]} rooms - An array of room objects. See the `data / rooms.js` file for an example of the input.
+* @param {string} id - A unique room identifier.
+* @returns {string|string[]} An array of room names, or an error message.
+*
+* EXAMPLE:
+*  getConnectedRoomNamesById(rooms, "aIA6tevTne");
+*  //> ["Ticket Center"]
+*
+* EXAMPLE:
+*  getConnectedRoomNamesById(rooms, "A6QaYdyKra");
+*  //> [
+  "Entrance Room",
+  "Coat Check Room",
+  "Ellis Family Hall",
+  "Kit Hopkins Education Wing"
+]
+*/
+function getConnectedRoomNamesById(rooms, id) {
+
+  let whoopsWrongRoom_DidntMeanToWalkInOnYa = "Room with ID of 'incorrect-id' could not be found.";
+  let uGotCaughtRunningInTheHallsByMuseumSecurity = `Room with ID of '${id}' could not be found.`;
+  let aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth = [];
+
+  const dinosaurRoomGuide = rooms.find((searchRoomForID => searchRoomForID.roomId === id)
+  )
+  if (!dinosaurRoomGuide) {
+    return uGotCaughtRunningInTheHallsByMuseumSecurity;
+  }
+  for (let secretEntranceWays of dinosaurRoomGuide.connectsTo) {
+    const aLabyrinthOfDoors = rooms.find(aLittleDoorFlapForPets => aLittleDoorFlapForPets.roomId === secretEntranceWays)
+    if (aLabyrinthOfDoors) {
+      aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth.push(aLabyrinthOfDoors.name);
+    }
+    if (!aLabyrinthOfDoors) {
+      return whoopsWrongRoom_DidntMeanToWalkInOnYa;
+    }
+  }
+  return aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth;
+}
+
+getConnectedRoomNamesById(exampleRoomData)
+
+
+
+
 
 module.exports = {
   getRoomByDinosaurName,
