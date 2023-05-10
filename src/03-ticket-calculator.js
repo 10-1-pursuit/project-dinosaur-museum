@@ -64,7 +64,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
       price = ticketData.general.priceInCents[ticketInfo.entrantType];
       break;
     case "Membership":
-      price = ticketData.membership.priceInCents[ticketInfo.entrantType]
+      price = ticketData.membership.priceInCents[ticketInfo.entrantType];
       break;
     default:
       return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
@@ -150,17 +150,17 @@ function purchaseTickets(ticketData, purchases) {
     if (calculateTicketPrice(ticketData, purchase) === `Extra type '${purchase.extras[0]}' cannot be found.`) {
       return `Extra type '${purchase.extras[0]}' cannot be found.`;
     }
-    receipt.push(`${capitalizeFirstLetter(purchase.entrantType)} ${capitalizeFirstLetter(purchase.ticketType)} Admission: $${centsToDollars(calculateTicketPrice(ticketData, purchase))}`)
+    receipt.push(`${capitalizeFirstLetter(purchase.entrantType)} ${capitalizeFirstLetter(purchase.ticketType)} Admission: $${centsToDollars(calculateTicketPrice(ticketData, purchase))}`);
     total += calculateTicketPrice(ticketData, purchase);
     if (purchase.extras !== undefined && purchase.extras.length !== 0) {
       let extras = [];
       for (let extra of purchase.extras) {
-        extras.push(`${capitalizeFirstLetter(extra)} Access`)
+        extras.push(`${capitalizeFirstLetter(extra)} Access`);
       }
       receipt[receipt.length - 1] = receipt[receipt.length - 1] + ` (${extras.join(", ")})`;
     }
   }
-  return `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n${receipt.join('\n')}\n-------------------------------------------\nTOTAL: $${centsToDollars(total)}`
+  return `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n${receipt.join('\n')}\n-------------------------------------------\nTOTAL: $${centsToDollars(total)}`;
 }
 
 /** 

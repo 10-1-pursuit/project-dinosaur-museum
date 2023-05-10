@@ -30,7 +30,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   if(dinosaur === undefined){
     return `Dinosaur with name '${dinosaurName}' cannot be found.`;
   }
-  found = rooms.find(room => room.dinosaurs.includes(dinosaur.dinosaurId) )
+  found = rooms.find(room => room.dinosaurs.includes(dinosaur.dinosaurId));
   if(found === undefined){
     return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
   }
@@ -69,7 +69,7 @@ function getConnectedRoomNamesById(rooms, id) {
   for(element of connected){
     let found = rooms.find(room => room.roomId === element);
     if(found === undefined){
-      return `Room with ID of '${element}' could not be found.`
+      return `Room with ID of '${element}' could not be found.`;
     }
     result.push(found.name);
   }
