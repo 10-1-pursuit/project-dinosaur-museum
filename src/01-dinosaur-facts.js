@@ -129,19 +129,21 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  const dinosaurArr = [];
+  const dinosaurArr = []; // Empty array set up for the pushed information when and if a specified condition is then met.
 
   for (const dino of dinosaurs) {
-    const dinoId = key || "dinosaurId";
+    // the for of loop iterates thorugh the array of dinosaurs
+    const dinoId = key || "dinosaurId"; // get dinosaurs id.
     if (dino[dinoId] === undefined) {
+      // if the dinosaur does not have an Id it will be skipped
       continue;
     }
-    const myaAlive = dino.mya;
+    const myaAlive = dino.mya; // this vairable will capture the dinosaur mya age
     if (
       myaAlive.length === 1 &&
-      (mya === myaAlive[0] || mya === myaAlive[0] - 1)
+      (mya === myaAlive[0] || mya === myaAlive[0] - 1) // If the mta range is a sinlge number , check if it is equal to the specified mya
     ) {
-      dinosaurArr.push(dino[dinoId]);
+      dinosaurArr.push(dino[dinoId]); // if the mya range is two numbers, check if the specified mya is within the range.
     } else if (mya <= myaAlive[0] && mya >= myaAlive[1]) {
       dinosaurArr.push(dino[dinoId]);
     }
