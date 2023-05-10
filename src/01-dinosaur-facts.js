@@ -90,12 +90,13 @@ function getLongestDinosaur(dinosaurs) {
  */
 function getDinosaurDescription(dinosaurs, id) {
   // Check if the dinosaur with the specified ID exists.
-  let yoshi = dinosaurs.find((dino) => dino.dinosaurId === id);
+  let yoshi = dinosaurs.find((dino) => dino.dinosaurId === id); // The find method will return the first dinosaur in the array whos property Id is equal to
+  // the specified Id in the given parameter withing the function.
 
   // If the dinosaur does not exist, return an error message.
   if (!yoshi) {
     return `A dinosaur with an ID of '${id}' cannot be found.`;
-  } // Return a string with the dinosaur's description.
+  } // Return a string with the dinosaur's description as per
   return `${yoshi.name} (${yoshi.pronunciation})\n${
     yoshi.info
   } It lived in the ${yoshi.period} period, over ${
