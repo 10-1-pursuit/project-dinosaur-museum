@@ -74,9 +74,9 @@ function getConnectedRoomNamesById(rooms, id) {
 
 
   let whoopsWrongRoom_DidntMeanToWalkInOnYa = "Room with ID of 'incorrect-id' could not be found."
-  let thereIsNoRoomForYouInsideThisRoom = `Room with ID of '${id}' could not be found.`
+  let UCantFitThruALittleDoorFlapForPets = `Room with ID of '${id}' could not be found.`
   let aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth = []
-  let littleDoorFlapForPets = {};
+
 
 
   const dinosaurRoomGuide = rooms.find((searchRoomForID => searchRoomForID.roomId === id)
@@ -87,16 +87,20 @@ function getConnectedRoomNamesById(rooms, id) {
   if (!dinosaurRoomGuide) {
     return whoopsWrongRoom_DidntMeanToWalkInOnYa;
   }
-  const adjacentRooms = rooms.find(searchRoomForSecretEntryWays => searchRoomForSecretEntryWays.connectsTo === id)
-  aLabyrinthOfDoors = adjacentRooms.connectsTo
+  const aLabyrinthOfDoors = rooms.filter(searchRoomForSecretEntranceWays => searchRoomForSecretEntranceWays.connectsTo === id)
+    .map()
+  aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth.push(aLabyrinthOfDoors)
 
-  for (let theIdImLookingForInsideMyWalletThatHasOverEighteenCardSlotsAndSeveralSecretStashCompartments of adjacentRooms.connectsTo) {
-    if (!littleDoorFlapForPets[theIdImLookingForInsideMyWalletThatHasOverEighteenCardSlotsAndSeveralSecretStashCompartments]) {
-      return thereIsNoRoomForYouInsideThisRoom;
-    }
+  if (aLabyrinthOfDoors.length === 0) {
+    return UCantFitThruALittleDoorFlapForPets
   }
-  return aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth.push(aLabyrinthOfDoors)
-}
+  return aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth
+};
+
+
+//   for (let theIdImLookingForInsideMyWalletThatHasOverEighteenCardSlotsAndSeveralSecretStashCompartments of aLabyrinthOfDoors) {
+// if 
+//     return thereIsNoRoomForYouInsideThisRoom;
 
 
 //let theIdImLookingForInsideMyWalletThatHasOverEighteenCardSlotsAndSeveralSecretStashCompartments = adjacentRooms.connectTo;
