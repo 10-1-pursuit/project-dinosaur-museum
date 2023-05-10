@@ -7,7 +7,6 @@
 */
 const exampleTicketData = require("../data/tickets");
 // Do not change the line above.
-
 /**
  * calculateTicketPrice()
  * ---------------------
@@ -26,8 +25,9 @@ const exampleTicketData = require("../data/tickets");
  * @param {string} ticketInfo.entrantType - Represents the type of entrant. Prices change depending on the entrant.
  * @param {string[]} ticketInfo.extras - An array of strings where each string represent a different "extra" that can be added to the ticket. All strings should be keys under the `extras` key in `ticketData`.
  * @returns {number} The cost of the ticket in cents.
-//  * returns the Price of tik based on info provided. no values match return an error message or if any values in the extras key is wrong return error. 
- * EXAMPLE:
+//  * returns the PRICE of tik based on info provided. IF no values match return an error message or if any values in the extras key is wrong return error. 
+//  TicketInfo.ticketType && ticketInfo.entrantType AND seperate if statement for extra
+* EXAMPLE:
  *  const ticketInfo = {
       ticketType: "general",
       entrantType: "adult",
@@ -54,12 +54,26 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
-  for (const typeOfTikObj of ticketData){
-   console.log( typeOfTikObj)
+  let wrongEntry = 'incorrect-entrant';
+  let wrongExtra = 'incorrect-extra'
+  for (let typeOfTikObj in ticketData) {
+    for (let ticketTypeObj in ticketInfo) {
+      // console.log(typeOfTikObj)
+      if (ticketInfo.ticketType !== typeOfTikObj) {
+        return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
+      }
+      if (ticketInfo.entrantType !== typeOfTikObj) {
+        return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
+      }
+    }
   }
-  if (ticketInfo.ticketType === tickets|| ticketInfo.entrantType)
-return `${ticketInfo.ticketType} ${ticketData.general.description} cannot be found.`
+  if (ticketInfo.extras !== ticketTypeObj.extras) {
+    return `Extra type '${ticketInfo.extras}' cannot be found.`
+
+
+  }
 }
+// let idMatchRoomId = rooms.find((roomIdIsPara) => roomIdIsPara.roomId === id);
 
 /**
  * purchaseTickets()
@@ -114,7 +128,9 @@ return `${ticketInfo.ticketType} ${ticketData.general.description} cannot be fou
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) {
+
+}
 
 // Do not change anything below this line.
 module.exports = {
