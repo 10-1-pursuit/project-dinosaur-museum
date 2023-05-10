@@ -92,27 +92,22 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  // What they what:
-  // Returns an array of dinosaurs who were alive at the given `mya`
-  // - we can declare a variable and give it an empty array as a value
-  // If a key is given return the value of that key for each dino alive at that time
-  // - If statement
-  // Otherwise return the ID
-
   let dinoArr = [];
+  let addToArr = key;
 
   for (const dinoObj of dinosaurs) {
+    if (!dinoObj[addToArr]) {
+      addToArr = "dinosaurId";
+    }
+
     if (dinoObj.mya.length === 1 && (dinoObj.mya[0] === mya || dinoObj.mya[0] - 1 === mya)) {
-      console.log("DinoId: ", dinoArr.push(dinoObj.dinosaurId))
+      dinoArr.push(dinoObj.dinosaurId)
     } else if (mya <= dinoObj.mya[0] && mya >= dinoObj.mya[1]) {
-      console.log("Also DinoId: ", dinoArr.push(dinoObj.dinosaurId))
+      dinoArr.push(dinoObj.dinosaurId)
     }
   }
 
-
-
-
-
+  return dinoArr;
 
 }
 
