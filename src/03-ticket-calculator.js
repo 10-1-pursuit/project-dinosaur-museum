@@ -147,11 +147,10 @@ function purchaseTickets(ticketData, purchases) {
 
     if (ticketData[tickType] === undefined) {
       return `Ticket type '${tickType}' cannot be found.`;
-    }
+    };
     if (ticketData[tickType].priceInCents[entrant] === undefined) {
       return `Entrant type '${entrant}' cannot be found.`;
-    }
-
+    };
     let tickCost = ticketData[tickType].priceInCents[entrant] / 100;
     let extraList = "";
     let addOns = 0;
@@ -159,11 +158,10 @@ function purchaseTickets(ticketData, purchases) {
     for (let extra of extras) {
       if (ticketData.extras[extra] === undefined) {
         return `Extra type '${extra}' cannot be found.`;
-      }
-      extraList += `${ticketData.extras[extra].description},\n`;
+      };
+      extraList += `${ticketData.extras[extra].description}\n`;
       addOns += ticketData.extras[extra].priceInCents[entrant] / 100;
-    }
-
+    };
     tickCost += addOns;
     receipt += `\n${entrant.charAt(0).toUpperCase() + entrant.slice(1).toLowerCase()} ${ticketData[tickType].description}: $${tickCost}.00 (${extraList})`;
     grandTotal += tickCost;
