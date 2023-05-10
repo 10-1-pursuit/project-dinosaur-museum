@@ -168,6 +168,6 @@ console.log(purchaseTickets(exampleTicketData ,purchases))
 
 // Do not change anything below this line.
 module.exports = {
- //calculateTicketPrice,
+ calculateTicketPrice,
   purchaseTickets,
 };

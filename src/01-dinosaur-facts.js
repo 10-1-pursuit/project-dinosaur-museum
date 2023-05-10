@@ -123,7 +123,7 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
 console.log(getDinosaursAliveMya(exampleDinosaurData, 70, "Indosuchus"))
 
 
-  /
+  
 module.exports = {
   getLongestDinosaur,
   getDinosaurDescription,

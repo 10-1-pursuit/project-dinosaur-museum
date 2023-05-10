@@ -49,7 +49,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   }
 }
 
-console.log(getRoomByDinosaurName(exampleDinosaurData, exampleRoomData, "Tyrannosaurus"));meters
+console.log(getRoomByDinosaurName(exampleDinosaurData, exampleRoomData, "Tyrannosaurus"));
 
 /**
  * getConnectedRoomNamesById()
