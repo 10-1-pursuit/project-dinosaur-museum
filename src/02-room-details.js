@@ -26,20 +26,20 @@ const exampleRoomData = require("../data/rooms");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-  let found = false;
-  for (const dino of dinosaurs) {
+  let found = false; // the line initialize a boolean variable found to false. variabke is used to check if the dinosaur with the given name is found.
+  for (const dino of dinosaurs) { // loop through the dinosaurs array and check if the name property of each dinosaur object matches the given  'dinosaur name'.
     if (dino.name === dinosaurName) {
-      for (const room of rooms) {
+      for (const room of rooms) { // Loop through the rooms array abd check if the dinosaurs property of ech room object includes the dinosaurId of the matching dinosaur.
         if (room.dinosaurs.includes(dino.dinosaurId)) {
-          found = true;
+          found = true; //found is set to true annd the function returns the name property of the room object.
           return room.name;
         }
       }
       return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
-    }
+    } // If no room are found to contain the matching dinosaur, the function retruns a message indicating that the dinosaur could not be found in any rooms.
   }
   return `Dinosaur with name '${dinosaurName}' cannot be found.`;
-}
+} // No dinosaurs wuth the given name is dound , the function returns a nessage indicating that the dinosaurs could not be found.
 /**
  * getConnectedRoomNamesById()
  * ---------------------
@@ -63,23 +63,23 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
     ]
  */
 function getConnectedRoomNamesById(rooms, id) {
-  let getConnectedRoom = [];
-  for (const room of rooms) {
-    if (room.roomId === id) {
-      for (const connect of room.connectsTo) {
-        const connectedRoom = rooms.find((room) => room.roomId === connect);
-        if (connectedRoom) {
-          getConnectedRoom.push(connectedRoom.name);
-        } else {
-          return "Room with ID of 'incorrect-id' could not be found.";
+  let getConnectedRoom = []; // creates an empty array to store the names of connected rooms
+  for (const room of rooms) { //iterate over each room object in the array of rooms.
+    if (room.roomId === id) { // if the current room object has an Id that matches the given ID.
+      for (const connect of room.connectsTo) { // iterate over each connected room ID in the current room object.
+        const connectedRoom = rooms.find((room) => room.roomId === connect); // find room object in the array of rooms that has the connected room Id
+        if (connectedRoom) { // if a connected room object was found
+          getConnectedRoom.push(connectedRoom.name); // add the name of the connected room to the array of connected room names
+        } else { // if a connected room object was not found.
+          return "Room with ID of 'incorrect-id' could not be found."; // return an error message
         }
       }
     }
   }
-  if (getConnectedRoom.length === 0) {
-    return "Room with ID of 'incorrect-id' could not be found.";
+  if (getConnectedRoom.length === 0) { // if no connected room names were added to the array
+    return "Room with ID of 'incorrect-id' could not be found."; // return an error message
   }
-  return getConnectedRoom;
+  return getConnectedRoom;// return the array of connected room names
 }
 
 module.exports = {
