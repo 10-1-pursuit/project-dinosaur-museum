@@ -76,26 +76,16 @@ getLongestDinosaur(exampleDinosaurData)
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
-  inputtedID = dinosaurs.dinosaurId;
-  let invalidDinoId = undefined;
+  let invalidSearchById = `A dinosaur with an ID of '${id}' cannot be found.`
 
-  if (!dinosaurs.name || !id || dinosaurs[id] === invalidDinoId) {
-    return "A dinosaur with an ID of 'incorrect-id' cannot be found."
+  const dinoFactSheet = dinosaurs.find((dinoData) => dinoData.dinosaurId === id)
+  if (dinoFactSheet) {
+    let dinoEra = Math.min(...dinoFactSheet.mya)
+    return `${dinoFactSheet.name} (${dinoFactSheet.pronunciation})\n${dinoFactSheet.info} It lived in the ${dinoFactSheet.period} period, over ${dinoEra} million years ago.`
   }
-  const dinoFactSheet = dinosaurs.find((dinoData) => {
-    if (dinoData.dinosaurId === id) {
-      let dinoEra = math.min(...dinoFactSheet.mya)
-    }
-
-    if (inputtedID === id) {
-      return `${dinoFactSheet.name} ${dinoFactSheet.pronunciation} \n ${dinoFactSheet.info}. It lived in the ${dinoFactSheet.period} period, over ${dinoEra} million years ago.`
-    }
-
-  });
-  return dinoFactSheet;
+  else
+    return invalidSearchById;
 }
-
-getDinosaurDescription(exampleDinosaurData)
 
 /**
  * getDinosaursAliveMya()
@@ -130,7 +120,7 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
 
   for (let dinoFactFile of dinosaurs) {
     if (dinoFactFile[valueInsideKey] === invalidKey) {
-      let valueInsideKey = "dinosaurId";
+      valueInsideKey = "dinosaurId";
     }
     if ((dinoFactFile.mya.length === 2) && (mya <= dinoFactFile.mya[0] - 1) && (mya >= dinoFactFile.mya[1])) {
       dinoWorld.push(dinoFactFile[valueInsideKey]);
