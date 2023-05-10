@@ -75,31 +75,44 @@ console.log(getRoomByDinosaurName(exampleDinosaurData, exampleRoomData, "Tyranno
     ]
  *///if id is equal to room id i want to reutrn the name of all the rooms, if no room id is found return an error message
  // i room equals room id i want to return all connect to rooms
-function getConnectedRoomNamesById(rooms, id) {
-  for (let idLook of rooms) {
-    if (id === idLook.connectsTo ) {
-      return idLook.name
-    } else 
+// function getConnectedRoomNamesById(rooms, id) {
+//   for (let idLook of rooms) {
+//     if (id === idLook.connectsTo ) {
+//       return idLook.name
+//     } else 
 
-      if (id === idLook.roomId) {
+//       if (id === idLook.roomId) {
 
-        return idLook.connectsTo
+//         return idLook.connectsTo
 
-      } else {
+//       } else {
 
-        if (idLook.roomId===0 && idLook.roomId !== id) {
+//         if (idLook.roomId===0 && idLook.roomId !== id) {
 
-          return "Room with ID of " + "'incorrect-id'" + " could not be found.";
+//           return "Room with ID of " + "'incorrect-id'" + " could not be found.";
         
-        }
+//         }
 
-        }
-      }
-    }
+//         }
+//       }
+//     }
    
 
-console.log(getConnectedRoomNamesById(exampleRoomData, "A6QaYdyKra"))
+// console.log(getConnectedRoomNamesById(exampleRoomData, "A6QaYdyKra"))
 
+
+function getConnectedRoomNamesById(rooms, id) {
+  for (let idLook of rooms) 
+
+    if (id === idLook.roomId ) {
+
+        return idLook.connectsTo;
+    }   
+          return "Room with ID of " + "'incorrect-id'" + " could not be found.";
+  }
+      
+
+console.log(getConnectedRoomNamesById(exampleRoomData, "aIA6tevTne"))
 module.exports = {
   getRoomByDinosaurName,
   getConnectedRoomNamesById,

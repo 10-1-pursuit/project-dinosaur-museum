@@ -128,7 +128,7 @@ const rooms = [
     dinosaurs: [],
     connectsTo: [
       "dBZeK6vhpt", // Paxton Decker Terrace
-      "Gp6nCN1JGT", // Reyes Hall
+      "Reyes Hall" //"Gp6nCN1JGT", // 
     ],
   },
   {
@@ -158,7 +158,7 @@ const rooms = [
       "BFjjLjea-O", // Brachiosaurus
     ],
     connectsTo: [
-      "Gp6nCN1JGT", // Reyes Hall
+      "Reyes Hall" //"Gp6nCN1JGT", //
     ],
   },
   {
@@ -167,7 +167,7 @@ const rooms = [
     requiredTicketPermissions: [],
     dinosaurs: [],
     connectsTo: [
-      "Gp6nCN1JGT", // Reyes Hall
+      "Reyes Hall" //"Gp6nCN1JGT", 
     ],
   },
 ];
