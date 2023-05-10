@@ -77,11 +77,14 @@ function getDinosaurDescription(dinosaurs, id) {
     if (dino.dinosaurId === id) {
       placeHeld = dino
     }
+    // if Ids within dinosaurs match the ids of what the guest are looking for assign whats in dino to placeHeld.
   }
   if (!placeHeld) {
     return `A dinosaur with an ID of '${id}' cannot be found.`
+    //this checks if any value is placed within placeHeld, if there is not we will be left with a message. 
   }
   return `${placeHeld.name} (${placeHeld.pronunciation})\n${placeHeld.info} It lived in the ${placeHeld.period} period, over ${placeHeld.mya[placeHeld.mya.length - 1]} million years ago.`
+  //returns a string that
 
 }
 /**

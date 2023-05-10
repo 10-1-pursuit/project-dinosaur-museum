@@ -54,20 +54,41 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
+
 function calculateTicketPrice(ticketData, ticketInfo) {
+  let ticketPrice = 0;
 
-  const { ticketType, entrantType, extras } = ticketInfo
+  const { ticketType, entrantType, extras } = ticketInfo;
+  
+  if (!(ticketType in ticketData)) {
+    return `Ticket type '${ticketType}' cannot be found.`
+  }
 
-  if (!ticketInfo.ticketType) {
-    return "this ticket data cannot be found"
+  else if (!ticketData[ticketType].priceInCents[entrantType]) {
+    return `Entrant type '${entrantType}' cannot be found.`
   }
-  if (!ticketInfo.entrantType) {
-    return "this ticket has no entrant"
-  }
-  if (!ticketInfo.extras) {
-    return "this ticket has no extras listed"
+
+  else if (ticketData[ticketType].priceInCents[entrantType]) {
+    
+    ticketPrice += ticketData[ticketType].priceInCents[entrantType]
+    
+    if (extras.length > 0) {
+      for (const xtra of extras) {
+        
+        if (!(xtra in ticketData.extras)) {
+          return `Extra type '${xtra}' cannot be found.`;
+        }
+        
+        if (ticketData.extras[xtra].priceInCents[entrantType]) {
+          ticketPrice += ticketData.extras[xtra].priceInCents[entrantType];
+        }
+      }
+    }
+    return ticketPrice
   }
 }
+
+
 
 /**
  * purchaseTickets()
@@ -110,7 +131,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     ];
     purchaseTickets(tickets, purchases);
     //> "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $50.00 (Movie Access, Terrace Access)\nSenior General Admission: $35.00 (Terrace Access)\nChild General Admission: $45.00 (Education Access, Movie Access, Terrace Access)\nChild General Admission: $45.00 (Education Access, Movie Access, Terrace Access)\n-------------------------------------------\nTOTAL: $175.00"
-
+ 
  * EXAMPLE:
     const purchases = [
       {
