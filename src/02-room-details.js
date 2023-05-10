@@ -25,7 +25,38 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+  // variables established outside of function
+  let dinoNameId = ''
+  let roomName = ''
+  // 'route by example tyrannosaurus'
+  //console.log("established route", dinosaurs[14].name) // Tyrannosaurus
+  for (let dino of dinosaurs) {
+    if (dino.name === dinosaurName) {
+      //console.log('from forOf Loop', dino.name)
+      dinoNameId = dino.dinosaurId
+      // console.log('dinoNameId', dinoNameId)
+    }//end if 
+  }// end dinosaurs forOf
+  if (dinoNameId === "") {
+    return `Dinosaur with name '${dinosaurName}' cannot be found.`
+  }// if end for error
+  //console.log(rooms[8].dinosaurs[0]) // wuL4ddBinQ
+  for (let room of rooms) {
+    // console.log('2nd forOf',room.dinosaurs)
+    for (let dino of room.dinosaurs) {
+      // console.log('actual dino in room', dino)
+      if (dino === dinoNameId) {
+        //console.log('room name', room.name)
+        roomName = room.name
+        return roomName
+      }// end of room if
+    }//end forOf dino/rooms
+  }// end forOf room/rooms
+  //console.log(rooms[8].name) // Roberts Room
+
+  return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
+}// end function
 
 /**
  * getConnectedRoomNamesById()
@@ -49,7 +80,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
       "Kit Hopkins Education Wing"
     ]
  */
-function getConnectedRoomNamesById(rooms, id) {}
+function getConnectedRoomNamesById(rooms, id) { }
 
 module.exports = {
   getRoomByDinosaurName,
