@@ -135,10 +135,10 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {
+function purchaseTickets(ticketData, purchases) {  // Sam suggested I rewrite it and It worked ot. I changed the location of a few variables due to scope reasons.
   let grandTotal = 0;
   let headLine = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
-  let receipt = "";
+  let receipt = "";      
 
   for (let ticketStub of purchases) {
     let tickType = ticketStub.ticketType;
@@ -159,15 +159,15 @@ function purchaseTickets(ticketData, purchases) {
       if (ticketData.extras[extra] === undefined) {
         return `Extra type '${extra}' cannot be found.`;
       };
-      extraList += `${ticketData.extras[extra].description}\n`;
+      extraList += `${ticketData.extras[extra].description}\n`;             
       addOns += ticketData.extras[extra].priceInCents[entrant] / 100;
     };
-    tickCost += addOns;
+    tickCost += addOns;    // i changed where this variable appears so it won't increase my price considerably by doubling up with repeated extras
     receipt += `\n${entrant.charAt(0).toUpperCase() + entrant.slice(1).toLowerCase()} ${ticketData[tickType].description}: $${tickCost}.00 (${extraList})`;
     grandTotal += tickCost;
-  }
+  };
   return `${headLine} ${receipt}\n-------------------------------------------\nTOTAL: $${grandTotal}.00`;
-}
+};
 
 
 
