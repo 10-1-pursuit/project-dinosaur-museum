@@ -141,7 +141,7 @@ function purchaseTickets(ticketData, purchases) {  // Sam suggested I rewrite it
   let receipt = "";      
 
   for (let ticketStub of purchases) {
-    let tickType = ticketStub.ticketType;
+    let tickType = ticketStub.ticketType; // gemeral
     let entrant = ticketStub.entrantType;
     let extras = ticketStub.extras;
 
@@ -159,7 +159,7 @@ function purchaseTickets(ticketData, purchases) {  // Sam suggested I rewrite it
       if (ticketData.extras[extra] === undefined) {
         return `Extra type '${extra}' cannot be found.`;
       };
-      extraList += `${ticketData.extras[extra].description}\n`;             
+      extraList += `${ticketData.extras[extra].description}`;             
       addOns += ticketData.extras[extra].priceInCents[entrant] / 100;
     };
     tickCost += addOns;    // i changed where this variable appears so it won't increase my price considerably by doubling up with repeated extras
