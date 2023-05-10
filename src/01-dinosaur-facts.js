@@ -233,7 +233,7 @@ console.log(getDinosaurDescription(exampleDinosaurData, "GKl035EYKN"))
 // }
   
 // console.log(getDinosaursAliveMya(exampleDinosaurData, 155, "name"))
-
+// less than or equal tooooo
 function getDinosaursAliveMya(dinosaurs, mya, key) {
   for (const dinoLife of dinosaurs){
     

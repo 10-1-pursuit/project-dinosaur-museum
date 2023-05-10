@@ -16,10 +16,10 @@ const rooms = [
       "iOVNUcv-ww", // Compsognathus
     ],
     connectsTo: [
-      "zwfsfPU5u", // Entrance Room
-      "aIA6tevTne", // Coat Check Room
-      "dpQnu5wgaN", // Ellis Family Hall
-      "L72moIRcrX", // Kit Hopkins Education Wing
+      "Entrance Room",//"zwfsfPU5u",// 
+      "Coat Check Room",//"aIA6tevTne", //
+       "Ellis Family Hall",//"dpQnu5wgaN",//
+      "Kit Hopkins Education Wing",//"L72moIRcrX", // 
     ],
   },
   {
@@ -28,7 +28,7 @@ const rooms = [
     requiredTicketPermissions: [],
     dinosaurs: [],
     connectsTo: [
-      "A6QaYdyKra", // Ticket Center
+     "Ticket Center",//"A6QaYdyKra", 
     ],
   },
   {
@@ -107,7 +107,7 @@ const rooms = [
     connectsTo: [
       "VEr3w2ca_v", // Cabrera Hall
       "dBZeK6vhpt", // Paxton Decker Terrace
-      "Gp6nCN1JGT", // Reyes Hall
+      "Reyes Hall", // Gp6nCN1JGT" 
     ],
   },
   {
@@ -143,10 +143,10 @@ const rooms = [
       "V53DvdhV2A", // Giraffatitan
     ],
     connectsTo: [
-      "Y707HL8uP9", // Roberts Room
-      "1FMoeqQxFk", // Blackwell Amphitheater
-      "qi5e4IFDby", // Bryan Decker Hall
-      "nt85di9a1V", // Owen Family Room
+      "Roberts Room",//"Y707HL8uP9", //
+      "Blackwell Amphitheater",//"1FMoeqQxFk", // 
+      "Bryan Decker Hall",  //"qi5e4IFDby", // 
+      "Owen Family Room", //  nt85di9a1V", // 
     ],
   },
   {

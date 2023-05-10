@@ -64,14 +64,14 @@ const exampleTicketData = require("../data/tickets");
 function calculateTicketPrice(ticketData, ticketInfo) {
   for (let ticketLook of ticketData) {
     //general admision turn into call back function/or else if/or case: break;
-    if (ticketInfo.ticketType === ticketLook.general.description &&
-      ticketInfo.entrantType === ticketInfo.entrantType && Object.keys(ticketLook.general.priceInCents) === ticketInfo.entrantType ||
-      ticketInfo.extras.length > 0) {
+    if (ticketInfo.ticketType === "general" &&
+      ticketInfo.entrantType === "adult" && Object.keys(ticketLook.general[1].priceInCents) === ticketInfo.entrantType ||
+      ticketInfo.extras.length === 0) {
       return ticketLook.general.priceInCents.adult;
       } else{
     //membership admission turn into callbackfunction /or else if/or case: break;
-    if (ticketInfo.ticketType === ticketLook.membership.description && ticketLook.membership.priceInCents === ticketInfo.entrantType &&
-      Object.keys(ticketInfo.extras.movie.priceInCents) === ticketInfo.extras) {
+    if (ticketInfo.ticketType === "membership" && ticketLook.membership.priceInCents === "child" &&
+      Object.keys(ticketLook.extras.movie.description === ticketInfo.extras) ){
       return Object.values(ticketLook.membership.priceInCents) + Object.values(ticketLook.extras.priceInCents)
                           }
         //nona admission doesnt exist  turn into callback /or else if/or case: break;
