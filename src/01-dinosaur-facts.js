@@ -22,7 +22,14 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+function getLongestDinosaur(dinosaurs) {
+  const dinos = [...dinosaurs];
+  dinos.sort((a, b) => b.lengthInMeters - a.lengthInMeters);
+  if (dinos[0] === undefined) {
+    return {};
+  }
+  return { [dinos[0].name]: dinos[0].lengthInMeters * 3.281 };
+}
 
 /**
  * getDinosaurDescription()
@@ -44,7 +51,13 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  let dino = dinosaurs.find(dino => dino.dinosaurId === id);
+  if (dino === undefined) {
+    return `A dinosaur with an ID of '${id}' cannot be found.`;
+  }
+  return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${dino.mya[dino.mya.length - 1]} million years ago.`;
+}
 
 /**
  * getDinosaursAliveMya()
@@ -71,10 +84,51 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  const result = [];
+  for (dino of dinosaurs) {
+    if (dino.mya.length === 2) {
+      if (mya <= dino.mya[0] && mya >= dino.mya[1]) {
+        if (dino[key] !== undefined) {
+          result.push(dino[key]);
+        } else
+          result.push(dino.dinosaurId);
+      }
+    } else if (dino.mya.length === 1) {
+      if (mya === dino.mya[0] || mya === dino.mya[0] - 1) {
+        if (dino[key] !== undefined) {
+          result.push(dino[key]);
+        } else
+          result.push(dino.dinosaurId);
+      }
+    }
+  }
+  return result;
+}
+
+/**
+ * getDinosaursByDiet()
+ * ---------------------
+ * Returns an array of dinosaurs whose diet matches the given 'diet'. If no dinosaurs cannot be found with the diet, returns an error message.
+ * 
+ * @param {Object[]} dinosaurs - An array of dinosaur objects. See the `data/dinosaurs.js` file for an example of the input.
+ * @param {string} diet -  A diet a dinosaur might follow (i.e. "herbivorores", "omnivores")
+ * @returns {Object[]} - An array of dinosaurs that practice the diet, or an error message.
+ */
+function getDinosaursByDiet(dinosaurs, diet){
+  if(diet.toLowerCase() === "herbivorous" || diet.toLowerCase() === "herbivores"){
+    return dinosaurs.filter(herbivore => herbivore.diet === "herbivorous");
+  }else if(diet.toLowerCase() === "carnivorous" || diet.toLowerCase() === "carnivores"){
+    return dinosaurs.filter(carnivore => carnivore.diet === "carnivorous");
+  }else if(diet.toLowerCase() === "omnivorous" || diet.toLowerCase() === "omnivores"){
+    return dinosaurs.filter(omnivore => omnivore.diet === "omnivorous");
+  }else
+  return `'${diet}' could not be found.`;
+}
 
 module.exports = {
   getLongestDinosaur,
   getDinosaurDescription,
   getDinosaursAliveMya,
+  getDinosaursByDiet
 };
