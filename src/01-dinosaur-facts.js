@@ -104,7 +104,6 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       foundDinos.push(dino[valueKey]);
     };
   };
-  
   return foundDinos; 
 };
 

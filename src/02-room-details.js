@@ -72,7 +72,7 @@ function getConnectedRoomNamesById(rooms, id) {
   if (!targetRoom) {                                         // throws an error message if no object found.
     return "Room with ID of 'incorrect-id' could not be found."
   } else {
-    targetRoom.connectsTo.forEach((room) => arrayOfRooms.push(room))        //used a higher order function to push all of the connectsTo rooms into the array for a cleaner code.
+    targetRoom.connectsTo.forEach((roomCode) => arrayOfRooms.push(roomCode))        //used a higher order function to push all of the connectsTo rooms into the array for a cleaner code.
     for (let targetId of arrayOfRooms) {
       rooms.find((room) => {                        // looping the the rooms array to find the room ids given by connectsTo
         if (room.roomId === targetId) {

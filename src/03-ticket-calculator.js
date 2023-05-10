@@ -138,41 +138,38 @@ function calculateTicketPrice(ticketData, ticketInfo) {
 function purchaseTickets(ticketData, purchases) {
   let grandTotal = 0;
   let headLine = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
-  let reciept = "";
-  let extraList = "";
+  let receipt = "";
 
   for (let ticketStub of purchases) {
-    let tickType = ticketStub.ticketType; // general 
-    let entrant = ticketStub.entrantType; // "child"
-    let theExtras = ticketStub.extras;
-    let addOns = 0
+    let tickType = ticketStub.ticketType;
+    let entrant = ticketStub.entrantType;
+    let extras = ticketStub.extras;
 
     if (ticketData[tickType] === undefined) {
-      return "Ticket type 'incorrect-type' cannot be found."
-    };
+      return `Ticket type '${tickType}' cannot be found.`;
+    }
     if (ticketData[tickType].priceInCents[entrant] === undefined) {
-      return "Entrant type 'incorrect-entrant' cannot be found."
-    };
-    if (ticketData[tickType]) {
-      let tickCost = ticketData[tickType].priceInCents[entrant] / 100
-      reciept += `\n${entrant.charAt(0).toUpperCase() + entrant.slice(1).toLowerCase()} ${ticketData[tickType].description}:  $ ${tickCost}.00 (${extraList})`
-      grandTotal += tickCost
-    };
-    for (let activites of theExtras) {
-      if (ticketData.extras[activites] === undefined) {
-        return "Extra type 'incorrect-extra' cannot be found."
-      };
-      if (ticketData.extras[activites]) {
-        addOns += ticketData.extras[activites].priceInCents[entrant] / 100
-        extraList += ` ${ticketData.extras[activites].description}\n`
-        grandTotal += addOns
-      };
-    };
-  };
-  return `${headLine} ${reciept}\n-------------------------------------------\nTotal: ${grandTotal}.00`
-};
+      return `Entrant type '${entrant}' cannot be found.`;
+    }
 
+    let tickCost = ticketData[tickType].priceInCents[entrant] / 100;
+    let extraList = "";
+    let addOns = 0;
 
+    for (let extra of extras) {
+      if (ticketData.extras[extra] === undefined) {
+        return `Extra type '${extra}' cannot be found.`;
+      }
+      extraList += `${ticketData.extras[extra].description},\n`;
+      addOns += ticketData.extras[extra].priceInCents[entrant] / 100;
+    }
+
+    tickCost += addOns;
+    receipt += `\n${entrant.charAt(0).toUpperCase() + entrant.slice(1).toLowerCase()} ${ticketData[tickType].description}: $${tickCost}.00 (${extraList})`;
+    grandTotal += tickCost;
+  }
+  return `${headLine} ${receipt}\n-------------------------------------------\nTOTAL: $${grandTotal}.00`;
+}
 
 
 
