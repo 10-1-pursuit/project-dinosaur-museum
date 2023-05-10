@@ -132,25 +132,43 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     //> "Ticket type 'discount' cannot be found."
  */
 function purchaseTickets(ticketData, purchases) {
-  let ticketSum = ''
+  let ticketSummary = "";
+  let extraDescription = ""
+  let finalT = ""
+  let total = 0
   for (let info of purchases) {
+  
     let type = ticketData[info.ticketType];
-    
     let ticketCost = calculateTicketPrice(ticketData, info);
-    let exactCostStyle = ticketCost / 100;
-    exactCostStyle = `$${exactCostStyle.toPrecision(4)}`;
-    let ticketSum =`${info.entrantType} ${type.description}: ${exactCostStyle} `
-    let properTicketSum = ticketSum.charAt(0).toUpperCase()+ ticketSum.slice(1);
+    let exactCost = ticketCost / 100;
+   let singleCost = exactCost.toFixed(2)
+    total +=exactCost
+    let finalTotalSum = total.toFixed(2) 
+   
+    ticketSummary = `${info.entrantType} ${type.description}: $${singleCost} `
+   
+    let finalTicketSummary =
+      ticketSummary.charAt(0).toUpperCase() + ticketSummary.slice(1)
+     
+      for (let extra of info.extras) {
 
-    for (let extra of info.extras) { 
-      let extraName = ticketData.extras[extra];
-      properTicketSum = `${properTicketSum} ${extraName.description},`
-    
-    console.log(properTicketSum)
+     extraDescription = ticketData.extras[extra];
+   
+    }
+    extraLength = info.extras
+    if(extraLength.length === 0){
+
+      finalT  = `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n${finalTicketSummary}\n-------------------------------------------\nTOTAL: $${finalTotalSum}`
+    }else if(extraLength.length === 1){
+      finalT  = `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n${finalTicketSummary}(${extraDescription.description})\n-------------------------------------------\nTOTAL: $${finalTotalSum}`
+    }else{
+      finalT  = `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n${finalTicketSummary}(${extraDescription.description},)\n-------------------------------------------\nTOTAL: $${finalTotalSum}`
+    }
+   
   }
+return finalT
+}
 
-}
-}
 // Do not change anything below this line.
 module.exports = {
   calculateTicketPrice,
