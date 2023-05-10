@@ -74,7 +74,7 @@ const rooms = [
     ],
   },
   {
-    roomId: "Ys2Trg-1OT", // 
+    roomId: "Ys2Trg-1OT", // 7
     name: "Terrell Leon Lecture Room",
     requiredTicketPermissions: ["education"],
     dinosaurs: [],
