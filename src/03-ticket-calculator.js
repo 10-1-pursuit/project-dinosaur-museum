@@ -54,7 +54,41 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
+function calculateTicketPrice(ticketData, ticketInfo) {
+  let totalPrice = 0
+  const ticketKeys = Object.keys(ticketData)
+  const ticketDataExtrasKeys = Object.keys(ticketData.extras)
+  let ticketType = ticketKeys.find(ticket => ticket === ticketInfo.ticketType)
+  if(!ticketType){return `Ticket type '${ticketInfo.ticketType}' cannot be found.`}
+  const entrants = ["child", "adult", "senior"]
+  let entrantType = entrants.find(entrant => entrant === ticketInfo.entrantType)
+  if(!entrantType){return `Entrant type '${ticketInfo.entrantType}' cannot be found.`}
+  // Gets the type of ticket to determine the price
+  let cost = ticketData[ticketType]
+  // Determines the price with the entrant type
+  totalPrice += cost.priceInCents[entrantType]
+  // Finds if there are extras added
+  if(!!ticketInfo.extras.length){
+    // Stores the preview total
+    let previewTotal = totalPrice
+    for(const x of ticketInfo.extras){
+      for(const y of ticketDataExtrasKeys){
+        if(x === y){
+          // Stores the object of the extra added
+          let extraObj = ticketData.extras[y]
+          // Adds the price of the extra to the total
+          totalPrice += extraObj.priceInCents[entrantType]
+        }
+      }
+    }
+    // Returns an error if extras were not found on the original array by comparing the difference of prices
+    if(previewTotal === totalPrice){
+      return `Extra type '${ticketInfo.extras}' cannot be found.`
+    }
+  }
+  // Returns the total cost
+  return totalPrice;
+}
 
 /**
  * purchaseTickets()
@@ -109,7 +143,55 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) {
+  // Looks if purchases were made
+  let purchasesArr = purchases.map(purchase => calculateTicketPrice(ticketData, purchase))
+  // Returns an error if purchases were not made
+  if(!!purchasesArr[0].length){
+    return purchasesArr.reduce((previous, current) => previous + current)
+  }else{
+
+    let ticket1 = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n"
+    let ticket2 = []
+    // This is the temporary final result
+    let ticket3 = `-------------------------------------------\nTOTAL: $${parseFloat((purchasesArr.reduce((previous, current) => previous + current))/100).toFixed(2)}`
+    // This loop will create the appropiate format for each purchase
+    for(const purchase of purchases){
+      // This is the purchase string format
+      let transaction = ""
+      if(purchase.entrantType === "adult"){transaction += "Adult "}
+      else if(purchase.entrantType === "child"){transaction += "Child "}
+      else if(purchase.entrantType === "senior"){transaction += "Senior "}
+      if(purchase.ticketType === "general"){transaction += "General "}
+      else if(purchase.ticketType === "membership"){transaction += "Membership "}
+      transaction += `Admission: $${parseFloat((calculateTicketPrice(ticketData, purchase)) / 100).toFixed(2)}` 
+      if(!purchase.extras.length){
+        transaction += "\n"
+      }else{
+        let extras = []
+        let extraKeys = Object.keys(ticketData.extras)
+        transaction += " "
+        // Will look through the data to find the names of each extra
+        for(let x of purchase.extras){
+          for(let y of extraKeys){
+            if(x === y){
+              const extrasObj = ticketData.extras[y]
+              extras.push(extrasObj.description)
+              break;
+            }
+          }
+        }
+        // Will add the extras to the transaction string with the appropiate format
+        transaction += `(${extras.join(', ')})\n`
+      }
+      // Adds the purchase to the ticket
+      ticket2.push(transaction)
+    }
+    // Turns the ticket2 array into a single string to combine all transactions
+    ticket2 = ticket2.join('')
+    return ticket1 + ticket2 + ticket3
+  }
+}
 
 // Do not change anything below this line.
 module.exports = {

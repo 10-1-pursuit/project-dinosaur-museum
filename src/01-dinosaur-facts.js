@@ -22,7 +22,33 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+function getLongestDinosaur(dinosaurs) {
+  // Returns an empty object if the argument is empty
+  if(dinosaurs.length === 0){return {};}
+  // Keeps track of the current length of the longes dinosaur
+  let currentDinosaurLength = 0
+  // Keeps track of the current ID of the longes dinosaur
+  let currentDinosaurID = 0
+  // Goes through all dinosaurs, replacing the current dinosaur length and ID if a longer dinosaur is found
+  dinosaurs.forEach(dinosaur => {
+    if(!currentDinosaurLength){
+      currentDinosaurLength = dinosaur.lengthInMeters
+    }
+    else{
+      if(currentDinosaurLength < dinosaur.lengthInMeters){
+        currentDinosaurLength = dinosaur.lengthInMeters
+        currentDinosaurID = dinosaur.dinosaurId
+      }
+    }
+    return;
+  })
+  // Finds the longes dinosaur object with the ID saved in the currendDinosaurID variable
+  const tallestDinosaurObj = dinosaurs.find(dinosaur => dinosaur.dinosaurId === currentDinosaurID)
+  // Converts the dinosaur's length from meters to feet
+  const lengthInFeet = (meters) => meters * 3.281
+  // Returns an object with the name of the dinosaur as the key, and the dinosaur's length as the value
+  return {[tallestDinosaurObj.name] : lengthInFeet(tallestDinosaurObj.lengthInMeters)};
+}
 
 /**
  * getDinosaurDescription()
@@ -44,7 +70,16 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  // looks up the target dinosaur and creates a variable with the object of the dinosaur
+  const dinosaurTarget = dinosaurs.find(dinosaur => dinosaur.dinosaurId === id)
+  // Displays the information of the dinosaur if the dinosaurTarget variable is not empty
+  if(!!dinosaurTarget){
+    return `${dinosaurTarget.name} (${dinosaurTarget.pronunciation})\n${dinosaurTarget.info} It lived in the ${dinosaurTarget.period} period, over ${dinosaurTarget.mya[dinosaurTarget.mya.length - 1]} million years ago.`
+  }else{ //Displays an error if variable is empty
+    return `A dinosaur with an ID of '${id}' cannot be found.`
+  }
+}
 
 /**
  * getDinosaursAliveMya()
@@ -71,7 +106,36 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  // This array will store the dinosaurs within the given conditions
+  let dinosaurArr = []
+  // Result array
+  let newArr = []
+  // Adds to dinosaurArr al the filtered dinosaurs that were alive in the given year
+  dinosaurs.forEach(dinosaur => {
+    if(dinosaur.mya.length === 1){
+      if(dinosaur.mya >= mya && dinosaur.mya <= mya + 1){
+          dinosaurArr.push(dinosaur)
+      }
+    }else{
+      if(dinosaur.mya[0] >= mya && dinosaur.mya[1] <= mya){
+          dinosaurArr.push(dinosaur)
+      }
+    }
+  })
+  // Gets the general keys for the object structure of each dinosaur
+  const dinosaurKeys = Object.keys(dinosaurs[0])
+
+  // Looks up if given key is found in dinosaur object structure
+  if(dinosaurKeys.some(currentKey => currentKey === key)){
+      // Creates the final array with the key given 
+      newArr = dinosaurArr.map(dinosaur => dinosaur[key])
+  }else{
+    // Creates the final array with the default format (Dinosaur ID)
+    newArr = dinosaurArr.map(dinosaur => dinosaur.dinosaurId)
+  }
+  return newArr;
+}
 
 module.exports = {
   getLongestDinosaur,

@@ -25,7 +25,20 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+  // Filters the dinosaur object
+  let id = dinosaurs.find(dinosaur => dinosaur.name === dinosaurName)
+  // Returns an error if dinosaur was not found
+  if(!id){return `Dinosaur with name '${dinosaurName}' cannot be found.`}
+  // Changes the id value to the dinosaur's ID only
+  id = id.dinosaurId
+  // Searches within rooms to find where is the dinosaur's ID found
+  let roomFound = rooms.find(room => room.dinosaurs.find(dinosaur => dinosaur === id))
+  // Returns an error if dinosaur was not found on any room
+  if(!roomFound){return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`}
+  // Returns the name of the room where the dinosaur's ID was found
+  return roomFound.name
+}
 
 /**
  * getConnectedRoomNamesById()
@@ -49,7 +62,26 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
       "Kit Hopkins Education Wing"
     ]
  */
-function getConnectedRoomNamesById(rooms, id) {}
+function getConnectedRoomNamesById(rooms, id) {
+  // Gets the room's object
+  let roomTarget = rooms.find(room => room.roomId === id)
+  // Returns an error if room was not found
+  if(!roomTarget){return `Room with ID of '${id}' could not be found.`}
+  // Stores an array of the room's connected rooms IDs
+  let connectedRoomsId = roomTarget.connectsTo
+  // This array will store the name of the connected rooms
+  let connectedRoomsNames = []
+  for(const x of connectedRoomsId){
+    // Adds the object of the connected room to the connectedRoomsNames array
+    connectedRoomsNames.push(rooms.find(room => room.roomId === x))
+    // Returns an error if room ID was not found
+    if(!connectedRoomsNames[connectedRoomsNames.length - 1]){
+      return `Room with ID of '${x}' could not be found.`
+    }
+  }
+  // Returns an array of the names of the connected rooms
+  return connectedRoomsNames.map(rooms => rooms.name)
+}
 
 module.exports = {
   getRoomByDinosaurName,
