@@ -22,7 +22,30 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+// Initial value of accumulator is set to "null" since there may be no dinos 🦖 in the input array.
+function getLongestDinosaur(dinosaurs) {
+  let longestDino = { name: null, height: 0 };
+
+  // Loop through each dino 🦖 in the array then convert the length of the dino 🦖 from meters to feet.
+  // If the height of the current dino 🦖 is > than the height of the longest dinosaur so far, update the longest dino 🦖 
+  // object w/ the current dinosaur's 🦖 name & height.
+  for (let dino of dinosaurs) {
+    let heightInFeet = dino.lengthInMeters * 3.281;
+    if (heightInFeet > longestDino.height) {
+      longestDino.name = dino.name;
+      longestDino.height = heightInFeet;
+    }
+  }
+
+  // If a longest dino 🦕 was found, return an object with its name & height in feet.
+  // If NOT, return ⏎ an empty object 🪫
+  if (longestDino.name) {
+    return { [longestDino.name]: parseFloat(longestDino.height.toFixed(2)) };
+  } else {
+    return {};
+  }
+}
+
 
 /**
  * getDinosaurDescription()
@@ -44,7 +67,32 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  // Find the dinosaur 🦕 object with the given ID
+  const dinosaur = dinosaurs.find(dino => dino.dinosaurId === id);
+
+  //If no dinosaur 🦕 is found, return na error message 
+  if (!dinosaur) {
+    return `A dinosaur with an ID of '${id}' cannot be found.`;
+  }
+
+  // Intialize the `mya` variable
+  let mya;
+
+  // Check if the `mya` array has only one value, and assign the corresponding string to `mya`
+  if (dinosaur.mya.length === 1) {
+    mya = `${dinosaur.mya[0]} million years ago`;
+  } else {
+    // If the `mya` array has two values, format them as a range
+    mya = `${dinosaur.mya[0]}-${dinosaur.mya[1]} million years ago`;
+  }
+
+  //Return a string containg the 🦕dino's name pronunciation, info, period, and MYA 
+  return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${mya}.`;
+}
+// Added new variable 'mya' to hold the string representation of the dino's 🦖 "million years ago" time period. 
+// Then I used an 'if' statement to check if the 'mya' array has only one value and assigned the corresponding string to 'mya'.
+// Finally I used the 'mya' variable in the returned string instead of directly accessing the `mya` array. 
 
 /**
  * getDinosaursAliveMya()
@@ -71,8 +119,30 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  // Filter the dinos 🦖 based on whether they were alive during the specified time period (mya)
+  const filtered = dinosaurs.filter(dinosaur => {
+    // Get an array of mya values for the dino 🦖 
+    const myaValues = dinosaur.mya;
+    // If the array only contains one value, check ✅ if it's within one million years of the specified time period
+    if (myaValues.length === 1) {
+      const myaValue = myaValues[0];
+      return myaValue === mya || myaValue === mya - 1;
+    }
+    // If the array contains multiple values, check if the specified time period is included in the range
+    return myaValues.includes(mya);
+  });
 
+  // If a key is specified , return an array of values for that key from the filted dinos 🦖
+  if (key) {
+    return filtered.map(dinosaur => dinosaur[key] || dinosaur.id);
+  }
+  // If no key is specified, return an array of dinosaur 🦖 ids from the filtered dinosaurs 🦖.
+  return filtered.map(dinosaur => dinosaur.id);
+}
+
+
+// Unfortunatley  
 module.exports = {
   getLongestDinosaur,
   getDinosaurDescription,
