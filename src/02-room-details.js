@@ -67,12 +67,25 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
     ]
  */
 function getConnectedRoomNamesById(rooms, id) {
+  // They want you to return an array of strings of the names of the connected rooms based on id that they provide
+  // So we are given two parameters: rooms and id
+  // I have to return all of the names of other rooms that connects to the room id given
+
+  // - Loop through the rooms array
+  // - I have to find all of the rooms that connectsTo that room based on the id provided
+  // - Loop through the connectsTo array inside of the rooms array
+  // - They want the elements inside of connectsTo to equal the name of the room
+
   let newArr = [];
   let connectedRooms = "";
   for (const roomObj of rooms) {
-    connectedRooms = roomObj.name
-    console.log(connectedRooms)
+    if (roomObj.roomId === id) {
+      console.log(roomObj.connectsTo)
+      newArr.push(roomObj.name)
+      // console.log(connectedRooms)
+    }
   }
+  console.log(newArr)
 }
 
 
