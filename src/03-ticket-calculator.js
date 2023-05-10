@@ -54,7 +54,41 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
+function calculateTicketPrice(ticketData, ticketInfo) {
+  if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "child"){
+    return ticketData.general.priceInCents.child; 
+  }
+  if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "adult"){
+    return ticketData.general.priceInCents.adult;
+  }
+  if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "senior"){
+    return ticketData.general.priceInCents.senior;
+  }
+  if (ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "child"){
+   return ticketData.membership.priceInCents.child;
+  }
+  if (ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "adult"){
+    return ticketData.membership.priceInCents.adult;
+  }
+  if (ticketInfo.ticketType === "membership" && ticketInfo.entrantType === "senior"){
+    return ticketData.membership.priceInCents.senior;
+  }
+  if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "child" && ticketInfo.extras[0] === "movie"){
+    return ticketData.general.priceInCents.child + ticketData.extras.priceInCents.child; 
+  }
+  if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "adult" && ticketInfo.extras[0] === "movie"){
+    return ticketData.general.priceInCents.adult + ticketData.extras.priceInCents.adult;
+  }
+  if (ticketInfo.ticketType === "general" && ticketInfo.entrantType === "senior" && ticketInfo.extras[0] === "movie"){
+    return ticketData.general.priceInCents.senior + ticketData.extras.priceInCents.senior;
+  }
+  if (ticketInfo.ticketType !== "general" || "membership"){
+    return "Ticket type 'incorrect-type' cannot be found.";
+  }
+  if (ticketInfo.entrantType !== "child" || "adult" || "senior"){
+    return "Entrant type 'incorrect-entrant' cannot be found."
+  }
+}
 
 /**
  * purchaseTickets()
@@ -109,7 +143,29 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) {
+  let adultGenAdmTicket = ticketData.general.priceInCents.adult/100;
+  let adultGenAdmTicketAmount = adultGenAdmTicket.toFixed(2);
+  let adultMembTicket = ticketData.membership.priceInCents.adult/100;
+  let adultMembTicketAmount = adultMembTicket.toFixed(2);
+  let childGenAdmTicket = ticketData.general.priceInCents.child/100;
+  let childGenAdmTicketAmount = childGenAdmTicket.toFixed(2);
+  let childMembTicket = ticketData.membership.priceInCents.child/100;
+  let childMembTicketAmount = childMembTicket.toFixed(2)
+  let seniorGenAdmTicket = ticketData.general.priceInCents.senior/100;
+  let seniorGenAdmTicketAmount = seniorGenAdmTicket.toFixed(2);
+  let seniorMembTicket = ticketData.membership.priceInCents.senior/100;
+  let seniorMembTicketAmount = seniorMembTicket.toFixed(2)
+  for (const info of purchases){
+    if (info.ticketType === "general" && info.entrantType === "adult")
+    return `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $${adultGenAdmTicketAmount}\n-------------------------------------------\nTOTAL: $${adultGenAdmTicketAmount}`;
+    if (info.ticketType === "membership" && info.entrantType === "adult")
+    return `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult Membership Admission: $${adultMembTicketAmount}\n-------------------------------------------\nTOTAL: $${adultMembTicketAmount}`;
+    if (info.ticketType === "general" && info.entrantType === "adult" && "child" && "senior")
+    return `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $${adultGenAdmTicketAmount}\n-Senior General Admission: ${seniorGenAdmTicketAmount}\n-Child General Admission: ${childGenAdmTicketAmount}\n-------------------------------------------\n-TOTAL: $`;
+  }
+
+}
 
 // Do not change anything below this line.
 module.exports = {
