@@ -56,47 +56,22 @@ const exampleTicketData = require("../data/tickets");
  */
 
 function calculateTicketPrice(ticketData, ticketInfo) {
-  if (!(ticketInfo.ticketType === "general") && !(ticketInfo.ticketType === "membership")) {
+  if (!(ticketInfo.ticketType === "general" || ticketInfo.ticketType === "membership")) {
     return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
   } else if (!(ticketInfo.entrantType === "child") && !(ticketInfo.entrantType === "adult") && !(ticketInfo.entrantType === "senior")) {
     return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
   }
   let priceOfAdmission = 0
-  if ((ticketInfo.ticketType === "general") && (ticketInfo.entrantType === "child")) {
-    const genChild = priceOfAdmission += 2000
-  } else if ((ticketInfo.ticketType === "general") && (ticketInfo.entrantType === "adult")) {
-    const genAdult = priceOfAdmission += 3000
-  } else if ((ticketInfo.ticketType === "general") && (ticketInfo.entrantType === "senior")) {
-    const genSenior = priceOfAdmission += 2500
+  if ((ticketInfo.ticketType === "general" || ticketInfo.ticketType === "membership") && (ticketInfo.entrantType === "child" || ticketInfo.entrantType === "adult" || ticketInfo.entrantType === "senior")) {
+    priceOfAdmission += ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType];
   }
-  if ((ticketInfo.ticketType === "membership") && (ticketInfo.entrantType === "child")) {
-    const memberChild = priceOfAdmission += 1500
-  } else if ((ticketInfo.ticketType === "membership") && (ticketInfo.entrantType === "adult")) {
-    const memberAdult = priceOfAdmission += 2800
-  } else if ((ticketInfo.ticketType === "membership") && (ticketInfo.entrantType === "senior")) {
-    const memberSenior = priceOfAdmission += 2300
-  }
+  const { extras } = ticketData
   for (const extra of ticketInfo.extras) {
-    if (extra === "movie" && ticketInfo.ticketType === "general") {
-      priceOfAdmission += 1000
-    } else if (extra === "education" && ticketInfo.ticketType === "general") {
-      if (ticketInfo.entrantType === "child") priceOfAdmission += 1000
-      if (ticketInfo.entrantType === "adult") priceOfAdmission += 1200
-      if (ticketInfo.entrantType === "senior") priceOfAdmission += 1200
-    } else if (extra === "terrace" && ticketInfo.ticketType === "general") {
-      if (ticketInfo.entrantType === "child") priceOfAdmission += 500
-      if (ticketInfo.entrantType === "adult") priceOfAdmission += 1000
-      if (ticketInfo.entrantType === "senior") priceOfAdmission += 1000
-    } else if (extra === "movie" && ticketInfo.ticketType === "membership") {
-      priceOfAdmission += 1000
-    } else if (extra === "education" && ticketInfo.ticketType === "membership") {
-      if (ticketInfo.entrantType === "child") priceOfAdmission += 1000
-      if (ticketInfo.entrantType === "adult") priceOfAdmission += 1200
-      if (ticketInfo.entrantType === "senior") priceOfAdmission += 1200
-    } else if (extra === "terrace" && ticketInfo.ticketType === "membership") {
-      if (ticketInfo.entrantType === "child") priceOfAdmission += 500
-      if (ticketInfo.entrantType === "adult") priceOfAdmission += 1000
-      if (ticketInfo.entrantType === "senior") priceOfAdmission += 1000
+    if (extras[extra]) {
+      const extraPrice = extras[extra].priceInCents[ticketInfo.entrantType]
+      if (extraPrice) {
+        priceOfAdmission += extraPrice
+      }
     } else if (!(ticketInfo.extras.includes("movie")) && !(ticketInfo.extras.includes("education")) && !(ticketInfo.extras.includes("terrace"))) {
       return `Extra type '${ticketInfo.extras}' cannot be found.`
     }
@@ -145,7 +120,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     ];
     purchaseTickets(tickets, purchases);
     //> "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $50.00 (Movie Access, Terrace Access)\nSenior General Admission: $35.00 (Terrace Access)\nChild General Admission: $45.00 (Education Access, Movie Access, Terrace Access)\nChild General Admission: $45.00 (Education Access, Movie Access, Terrace Access)\n-------------------------------------------\nTOTAL: $175.00"
-
+ 
  * EXAMPLE:
     const purchases = [
       {
