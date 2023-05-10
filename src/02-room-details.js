@@ -76,16 +76,35 @@ function getConnectedRoomNamesById(rooms, id) {
   // - Loop through the connectsTo array inside of the rooms array
   // - They want the elements inside of connectsTo to equal the name of the room
 
+  //   let newArr = [];
+  //   let connectedRooms = {};
+
+  //   for (let roomObj of rooms) {
+  //     connectedRooms[roomObj.roomId] = roomObj.name;
+  //     console.log(connectedRooms)
+  //   }
+
+  // }
+
+
+
+
   let newArr = [];
   let connectedRooms = "";
   for (const roomObj of rooms) {
-    if (roomObj.roomId === id) {
-      console.log(roomObj.connectsTo)
-      newArr.push(roomObj.name)
-      // console.log(connectedRooms)
+    if (id === roomObj.roomId) {
+      for (const connects of roomObj.connectsTo) {
+        connectedRooms = connects;
+        for (const roomObjAgain of rooms) {
+          if (roomObjAgain.roomId === connectedRooms) {
+            connectedRooms = roomObjAgain.name;
+            newArr.push(connectedRooms);
+          }
+        }
+      }
     }
   }
-  console.log(newArr)
+  return newArr;
 }
 
 
