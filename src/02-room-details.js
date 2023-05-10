@@ -32,15 +32,15 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 
   target = dinosaurs.find((dino) => dinosaurName === dino.name);
   if (!target) {
-    return "Dinosaur with name '" + dinosaurName + "' cannot be found.";
+    return "Dinosaur with name '" + dinosaurName + "' cannot be found."; // edgcase tester return
   }
   targetRoom = rooms.find((room) => room.dinosaurs.includes(target.dinosaurId));
   if (!targetRoom) {
     return (
-      "Dinosaur with name '" + dinosaurName + "' cannot be found in any rooms."
+      "Dinosaur with name '" + dinosaurName + "' cannot be found in any rooms." // edgecase tester return
     );
   }
-  return targetRoom.name;
+  return targetRoom.name; // return the target room.name from the .find higher order function
 }
 
 /**
