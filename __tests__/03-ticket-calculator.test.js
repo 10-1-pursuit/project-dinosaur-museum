@@ -42,7 +42,7 @@ describe.only("calculateTicketPrice()", () => {
     });
   });
 
-  describe("no extras", () => {
+  describe.only("no extras", () => {
     describe("general admission", () => {
       test("should calculate a child general admission ticket without any addons", () => {
         const ticketInfo = {

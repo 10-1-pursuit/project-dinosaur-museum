@@ -54,12 +54,46 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
+
+//1 BIG ass object - maybe for in ? {}keys
+
+//!tickettype , !entranttype return error message
 function calculateTicketPrice(ticketData, ticketInfo) {
-
-
-  
+  //console.log(ticketData)
+  //console.log("tickettype", ticketInfo.ticketType);
+  // console.log("entranttype", ticketInfo.entrantType);
+  // console.log(ticketInfo.extras) - HOW CAN I GET THIS TO RETURN ON IT'S OWN
+  let price = 0;
+  //console.log(ticketInfo.ticketType)
+  if (!ticketData[ticketInfo.ticketType]) {
+    //check if ticket type is in ticket data
+    return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
+  }
+  let entrant = null; //
+  for (const ticketType in ticketData) {
+    //loop data
+    if (ticketType === ticketInfo.ticketType) {
+      // does my ticketType match param ticketType
+      for (const entrantType in ticketData[ticketType].price) {
+        //loop price obj of the ticket type
+        if (entrantType === ticketInfo.entrantType) {
+          //does what i find match oaram entrant type
+          entrant = ticketData[ticketType].price[entrantType]; // reassign to the PRICE
+          break; //exit loop1
+        }
+      }
+      break; //exit loop2
+    }
+  }
+  if (!entrant) { // if value is not there/null 
+    return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
+  }
+  price += entrant; //elsewise, value becomes price
 }
 
+//console.log("info", ticketInfo)
+// price += ticketInfo.entrantType;
+//console.log(exampleTicketData)
 /**
  * purchaseTickets()
  * ---------------------
@@ -69,6 +103,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
  * 
  * NOTE: Pay close attention to the format in the examples below and tests. You will need to have the same format to get the tests to pass.
  *
+ * 
  * @param {Object} ticketData - An object containing data about prices to enter the museum. See the `data/tickets.js` file for an example of the input.
  * @param {Object[]} purchases - An array of objects. Each object represents a single ticket being purchased.
  * @param {string} purchases[].ticketType - Represents the type of ticket. Could be any string except the value "extras".
@@ -113,7 +148,14 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+
+//print a receipt
+//iterrate arr of purchases inside
+//nest 2 loops - make it work {[purchases]}
+//purchses & foreach purchase , iterate over the .extras (maybe)
+function purchaseTickets(ticketData, purchases) {
+  let receipt = {};
+}
 
 // Do not change anything below this line.
 module.exports = {
