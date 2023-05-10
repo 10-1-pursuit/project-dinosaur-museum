@@ -27,22 +27,22 @@ const exampleRoomData = require("../data/rooms");
  *///return room where dinos are if they are there else return error message 
 
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-  let dinoInRoom;
+  let dinoInRoom;// place holder
 
-  const dinoName = dinosaurs.find(dinoName => dinoName.name === dinosaurName);
+  const dinoName = dinosaurs.find(dinoName => dinoName.name === dinosaurName);//find method to find name of dino & compare to param
   if (dinoName === undefined) {
-    return `Dinosaur with name '${dinosaurName}' cannot be found.`
+    return `Dinosaur with name '${dinosaurName}' cannot be found.`;
   }
   for (let dinoRoom of rooms) {
     for (let dino of dinosaurs) {
       if (dino.name === dinosaurName && dinoRoom.dinosaurs.includes(dino.dinosaurId)) {
-        dinoInRoom = dinoRoom.name
+        dinoInRoom = dinoRoom.name;
         return dinoInRoom;
       }
     }
   }
   if (dinoInRoom === undefined) {
-    return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
+    return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
   }
 
 }
