@@ -145,37 +145,47 @@ function calculateTicketPrice(ticketData, ticketInfo) {
  */
 
 function purchaseTickets(ticketData, purchases) {
+  // assign variables to ticket and entrant types
   const ticketTypes = ["general", "membership"];
   const entrantTypes = ["child", "adult", "senior"];
-
+  // loop and validate each purchase in array of purchases
   for (const purchase of purchases) {
     if (!ticketTypes.includes(purchase.ticketType)) {
+      // if ticket type is invalid, return error message
       return `Ticket type '${purchase.ticketType}' cannot be found.`;
     }
     if (!entrantTypes.includes(purchase.entrantType)) {
+      // if entrant type is invalid, return error message
       return `Entrant type '${purchase.entrantType}' cannot be found.`;
     }
     for (const extra of purchase.extras) {
+      // loop thru existing extras 
       if (!ticketData.extras[extra]) {
+        // if extra type is invalid, return error message
         return `Extra type '${extra}' cannot be found.`;
       }
     }
   }
-
+  // assign variables for total amount and ticket receipt
   let totalAmount = 0;
   let ticketReceipt = "";
-
+  // loop thru each purchase in array of purchases
   for (const purchase of purchases) {
+    // assign variable to cost of each ticket using past function, then add amount to total amount
     const amount = calculateTicketPrice(ticketData, purchase);
     totalAmount += amount;
+    // create ticket variable with string of ticket type, entrant type and admission price
     let ticket = `${purchase.entrantType.charAt(0).toUpperCase() + purchase.entrantType.slice(1)} ${purchase.ticketType.charAt(0).toUpperCase() + purchase.ticketType.slice(1)} Admission: $${(amount / 100).toFixed(2)}`;
+    // if there are extras, create a string using map method to pull extra descriptions or return empty string
     let extras = purchase.extras.length > 0 ? " (" + purchase.extras.map(extra => ticketData.extras[extra].description).join(", ") + ")" : "";
+    // add extras to ticket string, if next ticket receipt empty string, return empty string or new line for next ticket receipt
     ticketReceipt += (ticketReceipt === "" ? "" : `\n`) + ticket + extras;
   }
-
+  // assign variable to dino museum thank you part of receipt
   const dinoReceipt = `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n`;
+  // assign variable to end of receipt showing total amount divided by 100 to convert dollar amount and then add 2 decimal places
   const receiptAmt = `\n-------------------------------------------\nTOTAL: $${(totalAmount / 100).toFixed(2)}`;
-
+  //  return concatenated strings as total receipt
   return dinoReceipt + ticketReceipt + receiptAmt;
 }
 
