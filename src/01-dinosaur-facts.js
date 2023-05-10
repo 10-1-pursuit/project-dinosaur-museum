@@ -22,7 +22,16 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+function getLongestDinosaur(dinosaurs) {
+
+  let sizeSortedDinos = dinosaurs.slice().sort((a, b) => b.lengthInMeters - a.lengthInMeters); // used .sort to find tallest dino. *used .slice to make a shallow copy.
+  let dinosConverted = sizeSortedDinos.map(dino => ({ [dino.name]: (dino.lengthInMeters * 3.281) })); // used .map to reorder and create new keys and adjust lengths.
+  if (dinosaurs.length === 0) {   // used an if statement to see in the dinoList was empty or not.
+    return {};
+  } else {
+    return dinosConverted[0];
+  };
+};
 
 /**
  * getDinosaurDescription()
@@ -44,7 +53,15 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  let targetDino = dinosaurs.find((dino) => dino.dinosaurId === id) // i was using a for of loop at first, but i thought the test had an error with my method. it wasnt that either/
+  if (targetDino) {
+    millionYears = Math.min(...targetDino.mya) // Used the spread op to gather all the numbers.i added this because I thought the if statement i previosly wrote  was saying i was mutating my array. It was not and now i have no idea what could be.
+    return `${targetDino.name} (${targetDino.pronunciation})\n${targetDino.info} It lived in the ${targetDino.period} period, over ${millionYears} million years ago.`
+  } else
+    return "A dinosaur with an ID of '" + id + "' cannot be found."
+}
+
 
 /**
  * getDinosaursAliveMya()
@@ -71,7 +88,27 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  let valueKey = key   // I added a var for the key so that i could manipulate it later for hedge cases like "unknown Key" which isnt useable.
+  let foundDinos = []; // a var to store my found dino's in.
+
+  for (let dino of dinosaurs) {     // my major change was to move to a traditional loop. So that i could create a key as the id.
+    if (dino[valueKey] === undefined) {  // unknow Key will result in it being undefined so inplace it uses dino Id.
+      valueKey = "dinosaurId"
+    };
+    
+    if ((dino.mya.length === 1) && (mya === dino.mya[0]) || (mya === dino.mya[0] - 1)) { // seaching for a range 
+      foundDinos.push(dino[valueKey]);
+    };
+    if ((dino.mya.length === 2) && (mya <= dino.mya[0] - 1) && (mya >= dino.mya[1])) {
+      foundDinos.push(dino[valueKey]);
+    };
+  };
+  return foundDinos; 
+};
+
+
+
 
 module.exports = {
   getLongestDinosaur,

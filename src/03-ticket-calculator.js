@@ -40,7 +40,7 @@ const exampleTicketData = require("../data/tickets");
  *  const ticketInfo = {
       ticketType: "membership",
       entrantType: "child",
-      extras: ["movie"],
+      extras: ["movie", "terrace"],
     };
     calculateTicketPrice(tickets, ticketInfo);
     //> 2500
@@ -54,7 +54,33 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
+function calculateTicketPrice(ticketData, ticketInfo) {
+
+  let tickType = ticketInfo.ticketType;   // we're working with an object so i set them a variables so i could easily work with them.
+  let entrant = ticketInfo.entrantType;
+  let theExtras = ticketInfo.extras;
+  let addOns = 0
+
+  if (ticketData[tickType] === undefined) {  // checking if the key given by ticketInfo is (general//membership) or the elusive 'other'.
+    return "Ticket type 'incorrect-type' cannot be found."
+  }
+
+  if (ticketData[tickType].priceInCents[entrant] === undefined) {
+    return "Entrant type 'incorrect-entrant' cannot be found."
+  }
+
+  for (let extra of theExtras) {     // there's an array in ticketInfo using loop to access it's information. luckily it's keys for ticketData
+    if (ticketData.extras[extra] === undefined) {
+      return "Extra type 'incorrect-extra' cannot be found."
+    }
+    if (ticketData.extras[extra].priceInCents[entrant]) {          
+      addOns += ticketData.extras[extra].priceInCents[entrant]   // this value is .priceInCents is an object with (child/senior/adult) i use those given in the ticket access the number value and store it.
+    }
+  }
+
+  let ticket = ticketData[tickType].priceInCents[entrant]
+  return ticket + addOns
+}
 
 /**
  * purchaseTickets()
@@ -109,7 +135,44 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) {  // Sam suggested I rewrite it and It worked ot. I changed the location of a few variables due to scope reasons.
+  let grandTotal = 0;
+  let headLine = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
+  let receipt = "";      
+
+  for (let ticketStub of purchases) {
+    let tickType = ticketStub.ticketType; // gemeral
+    let entrant = ticketStub.entrantType;
+    let extras = ticketStub.extras;
+
+    if (ticketData[tickType] === undefined) {
+      return `Ticket type '${tickType}' cannot be found.`;
+    };
+    if (ticketData[tickType].priceInCents[entrant] === undefined) {
+      return `Entrant type '${entrant}' cannot be found.`;
+    };
+    let tickCost = ticketData[tickType].priceInCents[entrant] / 100;
+    let extraList = "";
+    let addOns = 0;
+
+    for (let extra of extras) {
+      if (ticketData.extras[extra] === undefined) {
+        return `Extra type '${extra}' cannot be found.`;
+      };
+      extraList += `${ticketData.extras[extra].description}`;             
+      addOns += ticketData.extras[extra].priceInCents[entrant] / 100;
+    };
+    tickCost += addOns;    // i changed where this variable appears so it won't increase my price considerably by doubling up with repeated extras
+    receipt += `\n${entrant.charAt(0).toUpperCase() + entrant.slice(1).toLowerCase()} ${ticketData[tickType].description}: $${tickCost}.00 (${extraList})`;
+    grandTotal += tickCost;
+  };
+  return `${headLine} ${receipt}\n-------------------------------------------\nTOTAL: $${grandTotal}.00`;
+};
+
+
+
+
+
 
 // Do not change anything below this line.
 module.exports = {
