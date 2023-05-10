@@ -22,7 +22,20 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+function getLongestDinosaur(dinosaurs) {
+  if(dinosaurs.length === 0) { 
+    return {};
+    };
+  let longestDino = dinosaurs[0];
+    for (let dinoObj of dinosaurs) {
+     if ( dinoObj.lengthInMeters * 3.281 > longestDino.lengthInMeters * 3.281 ) {
+          longestDino = dinoObj;
+        };
+      };
+      const key = longestDino.name;
+      const val = longestDino.lengthInMeters * 3.281;
+      return {[key]: val};
+    };
 
 /**
  * getDinosaurDescription()
@@ -44,7 +57,16 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  for (const dinoObj of dinosaurs) {
+    if (dinoObj.dinosaurId === id) {
+      if (dinoObj["mya"].length === 1) {
+        return `${dinoObj.name} (${dinoObj.pronunciation})\n${dinoObj.info} It lived in the ${dinoObj.period} period, over ${dinoObj.mya} million years ago.`
+        };
+      };
+    };
+    return "A dinosaur with an ID of 'incorrect-id' cannot be found."
+  };
 
 /**
  * getDinosaursAliveMya()
@@ -71,7 +93,29 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+//key is dino.name
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  let allDinosAlive = [];
+  
+  for (const dino of dinosaurs) {
+    if (dino.mya.length === 1) {
+      if (dino.mya === mya || dino.mya -1 === mya) {
+        allDinosAlive.push(dino.dinosaurId)
+      };
+    };
+    for(const ogMya of dino.mya){
+      if ( ogMya === mya ) {
+        if(Object.keys(dino).includes(key)){
+          allDinosAlive.push(dino[key])
+        } else {
+          //console.log(Math.round(ogMya / 10) * 10)
+          allDinosAlive.push(dino.dinosaurId)
+        };
+      };
+    };
+  };
+  return allDinosAlive;
+};
 
 module.exports = {
   getLongestDinosaur,
