@@ -2,6 +2,7 @@ const {
   getLongestDinosaur,
   getDinosaurDescription,
   getDinosaursAliveMya,
+  getDinosaursByDiet
 } = require("../src/01-dinosaur-facts");
 
 // Dinosaur data
@@ -145,6 +146,32 @@ describe("getDinosaursAliveMya()", () => {
     const actual = getDinosaursAliveMya(dinosaurs, mya, key);
     const expected = ["WHQcpcOj0G", "2GglUqKT0G", "wuL4ddBinQ"];
 
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("getDinosaursByDiet()", () =>{
+  test("should return error message if no dinosaurs have the diet or the diet cannot be found", ()=>{
+  const diet = "herb";
+  const actual = getDinosaursByDiet(dinosaurs, diet);
+  const expected = `'herb' could not be found.`;
+  expect(actual).toEqual(expected);
+  });
+
+  test("should return array of all dinosaur objects with matching diet", ()=>{
+    const diet = "omnivorous";
+    const actual = getDinosaursByDiet(dinosaurs, diet);
+    const expected = [  {
+      dinosaurId: "Pr6kc4Q_Xf",
+      name: "Khaan",
+      pronunciation: "kahn",
+      meaningOfName: "ruler",
+      diet: "omnivorous",
+      lengthInMeters: 1.8,
+      period: "Late Cretaceous",
+      mya: [81, 75],
+      info: "Khaan was an oviraptor with a parrot-like beak, discovered in Mongolia.",
+    }];
     expect(actual).toEqual(expected);
   });
 });
