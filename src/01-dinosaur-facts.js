@@ -25,13 +25,13 @@ const exampleDinosaurData = require("../data/dinosaurs");
 function getLongestDinosaur(dinosaurs) {
   let bigDinosaur = null; //null is a placeholder.
 
-  for(const dinosaur of dinosaurs) { // iterates over the array dinosaurs.
-    if (!bigDinosaur || dinosaur.lengthInMeters > bigDinosaur.lengthInMeters) { // if !bigDinosaur(*is null*) OR dinosaurs that are being iterated are bigger than bigDinosaur
+  for (const dinosaur of dinosaurs) { // iterates over the array dinosaurs.
+    if (!bigDinosaur || dinosaur.lengthInMeters > bigDinosaur.lengthInMeters) { // if !bigDinosaur(*is null, undefined, 0 "" etc..*) OR dinosaurs that are being iterated are bigger than bigDinosaur
       bigDinosaur = dinosaur; // if either of these happen then bigDinosaur is updated to that dinosaur that is being iterated.
-    } 
     }
+  }
 
-  if (bigDinosaur === null){ // the strictly equals make sure if bigDinosaur only equals null then return an empty object, as said in test
+  if (bigDinosaur === null) { // the strictly equals make sure if bigDinosaur only equals null then return an empty object, as said in test
     return {};
   }
 
@@ -42,14 +42,7 @@ function getLongestDinosaur(dinosaurs) {
   return bigDinosaurInFeet
 }
 
-// function getLongestDinosaur(dinosaurs) {
-  // let bigDinosaur = null;
 
-  // for(const dinosaur of dinosaurs) { // Using conditional ternary operator ?(if statement) truthy:falsy,
-    // bigDinosaur = !bigDinosaur || dinosaur.lengthInMeters > bigDinosaur.lengthInMeters ? dinosaur : bigDinosaur //if !bigDinosaur(*is null*) OR dinosaurs 
-  // } // that are being iterated are bigger than bigDinosaur then it assigns current biggest dinosaur to bigDinosaur, if not then keep it the same.
-  // return bigDinosaur ? {[bigDinosaur.name]: bigDinosaur.lengthInMeters * 3.281} : {}; // using conditional ternary operator bigDinosaur.name(new object that is DYNAMIC and has a 
-// } // SINGLE KEY-VALUE PAIR) (KEY is set to the name of the biggest dinosaur)  return bigDinosaur if the biggest dinosaur and multiply lengthInMeters to feet, or return an empty object
 
 /**
  * getDinosaurDescription()
@@ -111,20 +104,20 @@ function getDinosaurDescription(dinosaurs, id) {
 function getDinosaursAliveMya(dinosaurs, mya, key) {
   let addArr = key; //declare a variable to set it equal to key
   const result = []; //create an empty array to store the final output because they want you to return an array
-  
+
   for (let dinosaur of dinosaurs) {
     if (dinosaur[addArr] === undefined) { //checks if addArr(key) is inside dinosaur, and if it equals "undefined" then make
       addArr = "dinosaurId"; // addArr equal to "dinosaurId"
     }
 
-    if (dinosaur.mya.length === 1 && (mya === dinosaur.mya[0] || mya === (dinosaur.mya[0] -1))) { // checks if the mya.length = 1, AND if mya
+    if (dinosaur.mya.length === 1 && (mya === dinosaur.mya[0] || mya === (dinosaur.mya[0] - 1))) { // checks if the mya.length = 1, AND if mya
       result.push(dinosaur[addArr]); // value matches mya paremeter that is passed in or one less than.
-        } // if conditions are met push dinoasaur[addArr] into result.
+    } // if conditions are met push dinoasaur[addArr] into result.
     else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) { // checks if mya value is between the first and second
       result.push(dinosaur[addArr]); // elements of dinosaur.mya . if it is, push dinosaur[addArr] to result
     }
   }
-  return result
+  return result;
 }
 
 module.exports = {

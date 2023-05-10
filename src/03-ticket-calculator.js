@@ -57,23 +57,27 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
-  const {ticketType, entrantType, extras } = ticketInfo // object destructuring extracts elements from ticketInfo and assignes them to ticketType, entrantType, and extras
-  
-  if (!ticketData[ticketType]) {
-    return `Ticket type '${ticketType}' cannot be found.`
+  let ticketPrice = 0;
+
+  if (!ticketData[ticketInfo.ticketType]) {
+    return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
   }
-  if (!ticketData[ticketType][entrantType]) {
-    return `Entrant type '${entrantType}' cannot be found.`
+
+  if (!ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType]) {
+    return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
   }
-  for (let extra of extras) {
-  if (!ticketData.extras[extra] === undefined) {
-    return  "Extra type '${extra}' cannot be found."
+
+  ticketPrice = ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType]
+
+  for (const extra of ticketInfo.extras) {
+    if (!ticketData.extras[extra]) {
+      return `Extra type '${extra}' cannot be found.`;
+    }
+    ticketPrice += ticketData.extras[extra].priceInCents[ticketInfo.entrantType];
   }
-}
+  return ticketPrice;
 }
 
-  // console.log(ticketData)
-  // console.log(ticketInfo)
 /**
  * purchaseTickets()
  * ---------------------

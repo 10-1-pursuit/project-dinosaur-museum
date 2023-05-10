@@ -28,14 +28,14 @@ const exampleRoomData = require("../data/rooms");
  */
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   for (const dinosaur of dinosaurs) {
-  if(dinosaur.name === dinosaurName) { // checks if dinosaur.name matches dinosaurName argument
+    if (dinosaur.name === dinosaurName) { // checks if dinosaur.name matches dinosaurName argument
 
-    for (const room of rooms) { //this for of loop is inside the previous if statement and if a match is found it goes through this for of loop
-      if (room.dinosaurs.includes(dinosaur.dinosaurId)) { // for each room it checks if it includes dinosaurId of current dinosaur its checking
-      return room.name; // if there is a match then return the name of the room where dinosaur can be found
-    }
-    }
-     return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`; // if no match in any room, it returns this error message.
+      for (const room of rooms) { //this for of loop is inside the previous if statement and if a match is found it goes through this for of loop
+        if (room.dinosaurs.includes(dinosaur.dinosaurId)) { // for each room it checks if it includes dinosaurId of current dinosaur its checking
+          return room.name; // if there is a match then return the name of the room where dinosaur can be found
+        }
+      }
+      return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`; // if no match in any room, it returns this error message.
     }
   }
   return `Dinosaur with name '${dinosaurName}' cannot be found.`; // if there is no match in dinosaur array, then return this error message.
@@ -67,19 +67,19 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 function getConnectedRoomNamesById(rooms, id) {
   let addArr = [];
   for (const room of rooms) {
-    if(room.roomId === id) { // checks if the roomId its looping in equals id
-      for (const connect of room.connectsTo){ // if it does match then loop through connectsTo array that the room is currently on.
+    if (room.roomId === id) { // checks if the roomId its looping in equals id
+      for (const connect of room.connectsTo) { // if it does match then loop through connectsTo array that the room is currently on.
         const connectRoom = rooms.find(room => room.roomId === connect); //find method   * const connectRoom = rooms.find(function(room) { *
-        if(connectRoom) { //searches room for roomId that matches each Id in connectsTo   * return room.roomId === connect *
+        if (connectRoom) { //searches room for roomId that matches each Id in connectsTo   * return room.roomId === connect *
           addArr.push(connectRoom.name); // If it finds a match it adds name or names from connects * })   *this is same thing as the arrow syntax *
         } else { // if it doesnt find a match return the error message
-        return `Room with ID of '${connect}' could not be found.`;
+          return `Room with ID of '${connect}' could not be found.`;
         }
       }
     }
-    }
-    if(addArr.length === 0) { // outside the scope of the for of loops if addArr is empty, it means the original id parameter was not
-      return `Room with ID of '${id}' could not be found.`; // found in the rooms array so display this error message
+  }
+  if (addArr.length === 0) { // outside the scope of the for of loops if addArr is empty, it means the original id parameter was not
+    return `Room with ID of '${id}' could not be found.`; // found in the rooms array so display this error message
   }
   return addArr; //returns the string names in connectRoom
 }
