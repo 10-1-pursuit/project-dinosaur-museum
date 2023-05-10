@@ -155,6 +155,7 @@ describe("getDinosaursByDiet()", () =>{
   const diet = "herb";
   const actual = getDinosaursByDiet(dinosaurs, diet);
   const expected = `'herb' could not be found.`;
+
   expect(actual).toEqual(expected);
   });
 
@@ -172,6 +173,7 @@ describe("getDinosaursByDiet()", () =>{
       mya: [81, 75],
       info: "Khaan was an oviraptor with a parrot-like beak, discovered in Mongolia.",
     }];
+    
     expect(actual).toEqual(expected);
   });
 });
