@@ -29,7 +29,7 @@ let nFeet = (meters) => {
 };
 
 function getLongestDinosaur(dinosaurs) {
-  // This actually works better but test will still fail whithin the Alive Mya function
+  // This actually works better but test will still fail within the Alive Mya function. array is mutated , must understand
   ////////////////
   //let obj = {};
   //if (!dinosaurs.length) {
@@ -53,15 +53,18 @@ function getLongestDinosaur(dinosaurs) {
   //return dinoNonMutated;
 
   if (dinosaurs.length === 0) {
-    // takes care of the edge case
+    // takes care of the edge case, checks if the dinosaur array is empty.. if the array is empty there is no longest dinosaur.
     return {};
   }
-  let longestDino = dinosaurs[0];
-  for (let i = 1; i < dinosaurs.length; i++) {
+  let longestDino = dinosaurs[0]; // Variable called longestDino created and is initialized to the first dinosaur in the dinosaurs array
+  for (let i = 0; i < dinosaurs.length; i++) {
+    // This forloop iterates through the dinosaurs array starting at index[0] for each dinosaur of the loop iteration the condition will check if the dinosaur
+    // length in meters is greater than the length of the current longest dinosaur. When the condition is met the code updates the longestDino variable.
     if (dinosaurs[i].lengthInMeters > longestDino.lengthInMeters) {
       longestDino = dinosaurs[i];
     }
-  }
+  } // The return below returns an object witht he name of the longest dinosaur as the key and the length in feet as its value
+  // the helper function then converts the length in meters into length in feet.
 
   return { [longestDino.name]: nFeet(longestDino.lengthInMeters) };
 }
@@ -86,15 +89,13 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
-  let yoshi = null;
-  for (let dino of dinosaurs) {
-    if (dino.dinosaurId === id) {
-      yoshi = dino;
-    }
-  }
+  // Check if the dinosaur with the specified ID exists.
+  let yoshi = dinosaurs.find((dino) => dino.dinosaurId === id);
+
+  // If the dinosaur does not exist, return an error message.
   if (!yoshi) {
     return `A dinosaur with an ID of '${id}' cannot be found.`;
-  }
+  } // Return a string with the dinosaur's description.
   return `${yoshi.name} (${yoshi.pronunciation})\n${
     yoshi.info
   } It lived in the ${yoshi.period} period, over ${
