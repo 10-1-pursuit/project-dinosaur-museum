@@ -91,36 +91,36 @@ function getLongestDinosaur(dinosaurs) { }
 
 // return largestOfThePact;
 
-function getLongestDinosaur(dinosaurs) {
+// function getLongestDinosaur(dinosaurs) {
 
 
-  const dinosInSizeOrder = [...dinosaurs].sort((dino1, dino2) => {
+//   const dinosInSizeOrder = [...dinosaurs].sort((dino1, dino2) => {
 
 
-    if (dino1.lengthInMeters > dino2.lengthInMeters) {
-      return -1;
-    }
-    if (dino1.lengthInMeters < dino2.lengthInMeters) {
-      return 1
-    }
-    if (dino1.lengthInMeters === dino2.lengthInMeters) {
-      return 0;
-    }
-  });
+//     if (dino1.lengthInMeters > dino2.lengthInMeters) {
+//       return -1;
+//     }
+//     if (dino1.lengthInMeters < dino2.lengthInMeters) {
+//       return 1
+//     }
+//     if (dino1.lengthInMeters === dino2.lengthInMeters) {
+//       return 0;
+//     }
+//   });
 
-  const tallestDino = dinosInSizeOrder[0];
-  const noSuchDinosaurExists = {};
-  let dinoName = tallestDino.name
-  let dinoLength = tallestDino.lengthInMeters * 3.281
-  let largestOfThePact = { [dinoName]: dinoLength }
+//   const tallestDino = dinosInSizeOrder[0];
+//   const noSuchDinosaurExists = {};
+//   let dinoName = tallestDino.name
+//   let dinoLength = tallestDino.lengthInMeters * 3.281
+//   let largestOfThePact = { [dinoName]: dinoLength }
 
-  if (tallestDino.lengthInMeters === 0) {
-    return noSuchDinosaurExists;
-  } else {
-    return largestOfThePact;
-  }
-}
-getLongestDinosaur(exampleDinosaurData)
+//   if (tallestDino.lengthInMeters === 0) {
+//     return noSuchDinosaurExists;
+//   } else {
+//     return largestOfThePact;
+//   }
+// }
+// getLongestDinosaur(exampleDinosaurData)
 
 
 
@@ -257,8 +257,22 @@ function getDinosaursAliveMya(dinosaurs, mya, key) { }
 
 console.log(secretEntranceWays)
 
-}
+// }
 
+
+// else {
+//   dinosaurRoomGuide.connectsTo.forEach(secretEntranceWays => aLabyrinthOfDoors.push(secretEntranceWays))
+// };
+// for (aLittleDoorFlapForPets of aLabyrinthOfDoors) {
+//   rooms.find(lookForTrapDoors => lookForTrapDoors.roomId === aLittleDoorFlapForPets)
+
+//   aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth.push(loopForTrapDoors.name)
+// }
+// if (aLabyrinthOfDoors.length === 0) {
+//   return whoopsWrongRoom_DidntMeanToWalkInOnYa;
+// }
+// return aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth;
+// }
 
 
 //   for (let theIdImLookingForInsideMyWalletThatHasOverEighteenCardSlotsAndSeveralSecretStashCompartments of aLabyrinthOfDoors) {
@@ -290,9 +304,6 @@ console.log(secretEntranceWays)
 // }
 // console.log(arrayofDinoIDsFromRooms)
 // }
-
-
-// const returnConnectedRooms = rooms.connectsTo;
 
 // else if (searchKeywordByDinosaurId === true) {
 //   return returnConnectedRooms
