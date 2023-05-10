@@ -57,25 +57,28 @@ const exampleTicketData = require("../data/tickets");
 function calculateTicketPrice(ticketData, ticketInfo) {
   let ticketPrice = 0;
   const {ticketType, entrantType, extras } = ticketInfo;
-  if (!ticketData[ticketType]) {
+  if (!(ticketType in ticketData)) {
     return `Ticket type '${ticketType}' cannot be found.`
   }
-  else if (!ticketData[entrantType]) {
+  else if (!ticketData[ticketType].priceInCents[entrantType]) {
     return `Entrant type '${entrantType}' cannot be found.`
   }
-  else if (ticketInfo.ticketType === ticketData["membership" || " general"]){
-        ticketPrice = ticketData[ticketType].priceIncents[entrantType]
-        if (extras.length > 0) {
-          for (const ex of extras) {
-            if (ticketData.extras[ex]){
-              ticketPrice += ticketData.extras[ex].priceIncents[entrantType]
-            }
-            else return  "Extra type '${ex}' cannot be found."
+  else if (ticketData[ticketType].priceInCents[entrantType]){
+        ticketPrice += ticketData[ticketType].priceInCents[entrantType]
+    if (extras.length > 0) {
+      for (const ex of extras) {
+        if (!(ex in ticketData.extras)) {
+          return `Extra type '${ex}' cannot be found.`;
+        }
+        if (ticketData.extras[ex].priceInCents[entrantType] !== undefined) {
+          ticketPrice += ticketData.extras[ex].priceInCents[entrantType];
+        }
       }
     }
+    return ticketPrice
   }  
-  return ticketPrice
 }
+
 /**
  * purchaseTickets()
  * ---------------------
