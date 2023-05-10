@@ -105,14 +105,21 @@ function getDinosaurDescription(dinosaurs, id) {
  *  //> ["WHQcpcOj0G"]
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
-  const dinoAliveMya = []
-  // return empty array
-  return dinoAliveMya
-}
+  let keyToAddArr = key;
+  const dinoAliveMya = [];
+
+  // "should return an empty array if the year does not match"
+  for (let dinosaur of dinosaurs) {
+    if (dinosaur[keyToAddArr] === undefined) {
+      keyToAddArr = "dinosaurId"
+    }
+
+    return dinoAliveMya
+  }
 
 
-module.exports = {
-  getLongestDinosaur,
-  getDinosaurDescription,
-  getDinosaursAliveMya,
-};
+  module.exports = {
+    getLongestDinosaur,
+    getDinosaurDescription,
+    getDinosaursAliveMya,
+  };
