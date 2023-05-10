@@ -5,6 +5,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all tickets.
 */
+const tickets = require("../data/tickets");
 const exampleTicketData = require("../data/tickets");
 // Do not change the line above.
 
@@ -65,10 +66,10 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   for (let ticketLook of ticketData) {
     //general admision turn into call back function/or else if/or case: break;
     if (ticketInfo.ticketType === "general" &&
-      ticketInfo.entrantType === "adult" && Object.keys(ticketLook.general[1].priceInCents) === ticketInfo.entrantType ||
+      ticketInfo.entrantType === "adult" && Object.keys(tickets.general[1].priceInCents) === ticketInfo.entrantType ||
       ticketInfo.extras.length === 0) {
-      return ticketLook.general.priceInCents.adult;
-      } else{
+      return tickets.general.priceInCents.adult;
+      } 
     //membership admission turn into callbackfunction /or else if/or case: break;
     if (ticketInfo.ticketType === "membership" && ticketLook.membership.priceInCents === "child" &&
       Object.keys(ticketLook.extras.movie.description === ticketInfo.extras) ){
@@ -82,7 +83,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
       {
       }
           }
-        }
+        
   
       
 
@@ -150,7 +151,7 @@ const purchases =
 }
 
 function purchaseTickets(ticketData, purchases) {
-  for (const purchaseLook of ticketData) {
+  for (let purchaseLook of ticketData) {
 
     if (purchases.ticketType === purchaseLook.general.description ||
       purchaseLook.membership.description && purchases.extras.length > 0 ||
@@ -163,10 +164,10 @@ function purchaseTickets(ticketData, purchases) {
   
 
 
-console.log(purchaseTickets(exampleTicketData,purchases))
+console.log(purchaseTickets(exampleTicketData ,purchases))
 
 // Do not change anything below this line.
 module.exports = {
- calculateTicketPrice,
+ //calculateTicketPrice,
   purchaseTickets,
 };

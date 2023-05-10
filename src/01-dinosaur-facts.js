@@ -40,7 +40,7 @@ const exampleDinosaurData = require("../data/dinosaurs");
       let longestDino = 0 
       
       let result;
-      for(const dino of dinosaurs){
+      for(let dino of dinosaurs){
        
           if(dino.lengthInMeters > longestDino ){
             longestDino =dino.lengthInMeters;
@@ -138,7 +138,7 @@ const exampleDinosaurData = require("../data/dinosaurs");
 function getDinosaurDescription(dinosaurs, id) {
   for (let dinoId of dinosaurs)
 
-    if (id === dinoId.dinosaurId && dinoId.mya.length < 2) {
+    if (id === dinoId.dinosaurId && dinoId.mya.length <2) {
 
       return `${dinoId.name} (${dinoId.pronunciation})\n${dinoId.info} It lived in the ${dinoId.period} period, over ${dinoId.mya[0]} million years ago.`;
     }
@@ -156,34 +156,6 @@ function getDinosaurDescription(dinosaurs, id) {
 
 
 console.log(getDinosaurDescription(exampleDinosaurData, "GKl035EYKN"))
-
-
-
-
-// function getDinosaurDescription(dinosaurs, id) {
-//   for (let dinoId of dinosaurs)  
-    
-//      if (id === dinoId.dinosaurId && dinoId.mya.length <= 2) {
-    
-//   return `${dinoId.name} (${dinoId.pronunciation})\n${dinoId.info} It lived in the ${dinoId.period} period, over ${dinoId.mya[0]} million years ago.`;
-//      }
-  
-//   //  }else
-//     // if ( dinoId.mya.length > 1) {
-//     //      return `${dinoId.name} (${dinoId.pronunciation})\n${dinoId.info} It lived in the ${dinoId.period} period, over ${dinoId.mya[2]} million years ago.`;
-     
-//       return `A dinosaur with an ID of 'incorrect-id' cannot be found.`;  
-    
-//      }
-  
-//   {
-//      }
-  
- 
-// console.log(getDinosaurDescription(dinosaurs, "GKl035EYKN"))
-
-
-
 
 
 
@@ -243,7 +215,7 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       return [(dinoLife.dinosaurId)]
     
     if (mya===dinoLife.mya[0]-1&&key===dinoLife.name&& dinoLife.mya.length===1)
-      return [dinoLife.name]
+      return [dinoLife.dinosaurId]
   }  
   
 }
