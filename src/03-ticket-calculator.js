@@ -56,26 +56,37 @@ const exampleTicketData = require("../data/tickets");
  */
 
 function calculateTicketPrice(ticketData, ticketInfo) {
+  // checks if ticket type is either general or membership, if not return ticket type error
   if (!(ticketInfo.ticketType === "general" || ticketInfo.ticketType === "membership")) {
     return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
+    // checks if entrant type is either child, adult or senior, if not return ticket entrant error
   } else if (!(ticketInfo.entrantType === "child") && !(ticketInfo.entrantType === "adult") && !(ticketInfo.entrantType === "senior")) {
     return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
   }
+  // set price of admission variable to 0
   let priceOfAdmission = 0
+  // checks if ticket type & entrant type exist in ticket info, if so add corresponding price to price of admission
   if ((ticketInfo.ticketType === "general" || ticketInfo.ticketType === "membership") && (ticketInfo.entrantType === "child" || ticketInfo.entrantType === "adult" || ticketInfo.entrantType === "senior")) {
     priceOfAdmission += ticketData[ticketInfo.ticketType].priceInCents[ticketInfo.entrantType];
   }
+  // used object destructuring to extract the extras object from ticketData
   const { extras } = ticketData
+  // loop through each extra in ticketInfo
   for (const extra of ticketInfo.extras) {
+    // checks if extra exists in the extras object
     if (extras[extra]) {
+      // if so, get price of the extra for given entrant type
       const extraPrice = extras[extra].priceInCents[ticketInfo.entrantType]
+      // if extra has a price, add it to price of admission
       if (extraPrice) {
         priceOfAdmission += extraPrice
       }
+      // if extra does not exist, return ticket extras error
     } else if (!(ticketInfo.extras.includes("movie")) && !(ticketInfo.extras.includes("education")) && !(ticketInfo.extras.includes("terrace"))) {
       return `Extra type '${ticketInfo.extras}' cannot be found.`
     }
   }
+  // return final price of admission
   return priceOfAdmission
 }
 
