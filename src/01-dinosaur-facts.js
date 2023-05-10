@@ -31,11 +31,24 @@ const exampleDinosaurData = require("../data/dinosaurs");
 function feet(meters) {
 return meters * 3.281;
 }
-console.log(feet(2))
+// console.log(feet(2))
 
+    
 function getLongestDinosaur(dinosaurs) {
+    if (dinosaurs.length === 0) {
+      return {};
+    } let dinosaurArr = dinosaurs[0]
+    for (r = 1; r < dinosaurs.length; r++) {
+      if (dinosaurs[r].lengthInMeters > dinosaurArr.lengthInMeters)
+        dinosaurArr = dinosaurs[r]
+      // console.log(dinosaurArr)
+    }
+    return ({
+      [dinosaurArr.name]: dinosaurArr.lengthInMeters * 3.281
+    })
   
-}
+  }
+
 
 
 
