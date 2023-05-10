@@ -38,7 +38,7 @@ function getLongestDinosaur(dinosaurs) {
       return -1;
     }
     if (dino1.lengthInMeters < dino2.lengthInMeters) {
-      return 1
+      return 1;
     }
     if (dino1.lengthInMeters === dino2.lengthInMeters) {
       return 0;
@@ -47,12 +47,12 @@ function getLongestDinosaur(dinosaurs) {
 
   const tallestDino = dinosInSizeOrder[0];
 
-  let dinoName = tallestDino.name
-  let dinoLength = tallestDino.lengthInMeters * 3.281
-  let largestOfThePact = { [dinoName]: dinoLength }
+  let dinoName = tallestDino.name;
+  let dinoLength = tallestDino.lengthInMeters * 3.281;
+  let largestOfThePact = { [dinoName]: dinoLength };
 
   return largestOfThePact;
-}
+};
 getLongestDinosaur(exampleDinosaurData)
 
 /**
@@ -76,17 +76,17 @@ getLongestDinosaur(exampleDinosaurData)
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
-  let invalidSearchById = `A dinosaur with an ID of '${id}' cannot be found.`
+  let handsOffTheExhibitsOnDisplay = `A dinosaur with an ID of '${id}' cannot be found.`;
 
   const dinoFactSheet = dinosaurs.find((dinoData) => dinoData.dinosaurId === id)
   if (dinoFactSheet) {
-    let dinoEra = Math.min(...dinoFactSheet.mya)
-    return `${dinoFactSheet.name} (${dinoFactSheet.pronunciation})\n${dinoFactSheet.info} It lived in the ${dinoFactSheet.period} period, over ${dinoEra} million years ago.`
+    let dinoEra = Math.min(...dinoFactSheet.mya);
+    return `${dinoFactSheet.name} (${dinoFactSheet.pronunciation})\n${dinoFactSheet.info} It lived in the ${dinoFactSheet.period} period, over ${dinoEra} million years ago.`;
   }
   else
-    return invalidSearchById;
-}
-
+    return handsOffTheExhibitsOnDisplay;
+};
+getDinosaurDescription(exampleDinosaurData)
 /**
  * getDinosaursAliveMya()
  * ---------------------
