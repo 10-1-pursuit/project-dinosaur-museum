@@ -27,6 +27,10 @@ const exampleRoomData = require("../data/rooms");
  */
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 
+
+  const noDinoInTheseParts = `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
+  const dinoWhoNeverHeardOfHer = `Dinosaur with name '${dinosaurName}' cannot be found.`
+
   const findDino = dinosaurs.find((dinoSearch => dinoSearch.name === dinosaurName)
   )
   if (findDino) {
@@ -39,35 +43,10 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
       }
     }
 
-    return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
+    return noDinoInTheseParts;
   }
-
-  return `Dinosaur with name '${dinosaurName}' cannot be found.`
+  return dinoWhoNeverHeardOfHer;
 }
-
-
-
-
-
-//   let id = null;
-
-//   for (let dinoInfo of dinosaurs) {
-//     let searchKeywordByDinosaurName = dinoInfo.name;
-//     if (searchKeywordByDinosaurName === dinosaurName) {
-//       id = dinoInfo.dinosaurId;
-
-//     }
-//     for (roomInfo of rooms) {
-//       let suiteName = roomInfo.name;
-
-//       if (roomInfo.dinosaurs.includes(id)) {
-//         return suiteName;
-//       }
-//     }
-//     return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
-//   }
-//   return `Dinosaur with name '${dinosaurName}' cannot be found.`;
-// }
 
 /**
  * getConnectedRoomNamesById()
@@ -93,24 +72,49 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 */
 function getConnectedRoomNamesById(rooms, id) {
 
-  // let dinoWorld = [];
-  // // const adjacentRooms = roomInfo.name
-  // const roomNextDoor = roomInfo.connectsTo;
-  // const searchKeywordByID = dinosaurs.dinosaurId;
-  // const returnSearchofRoom = rooms.name;
-  // // Returns an array of strings, where each string is the name of a room connected to the given room. If a room ID cannot be found, an error message is returned.
 
-  // const dinosaurRoomGuide = rooms.find((searchRoomForID) => searchRoomForID.roomId === id)
-  // if (dinosaurRoomGuide === true) {
+  let whoopsWrongRoom_DidntMeanToWalkInOnYa = "Room with ID of 'incorrect-id' could not be found."
+  let thereIsNoRoomForYouInsideThisRoom = `Room with ID of '${id}' could not be found.`
+  let aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth = []
+  let littleDoorFlapForPets = {};
 
-  //   return `"Dinosaur with name ${searchKeywordByDinosaurs} cannot be found in any rooms."`
-  // }
-  // // else if (searchKeywordByDinosaurs !== returnSearchOfRoom) {
 
-  // return `"Dinosaur with name ${id} cannot be found."`
-  // // }
+  const dinosaurRoomGuide = rooms.find((searchRoomForID => searchRoomForID.roomId === id)
+  )
+  if (dinosaurRoomGuide) {
+    thisIdIsForDoorEntryNotToGetIntoBars = dinosaurRoomGuide.roomId
+  }
+  if (!dinosaurRoomGuide) {
+    return whoopsWrongRoom_DidntMeanToWalkInOnYa;
+  }
+  const adjacentRooms = rooms.find(searchRoomForSecretEntryWays => searchRoomForSecretEntryWays.connectsTo === id)
+  aLabyrinthOfDoors = adjacentRooms.connectsTo
 
-};
+  for (let theIdImLookingForInsideMyWalletThatHasOverEighteenCardSlotsAndSeveralSecretStashCompartments of adjacentRooms.connectsTo) {
+    if (!littleDoorFlapForPets[theIdImLookingForInsideMyWalletThatHasOverEighteenCardSlotsAndSeveralSecretStashCompartments]) {
+      return thereIsNoRoomForYouInsideThisRoom;
+    }
+  }
+  return aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth.push(aLabyrinthOfDoors)
+}
+
+
+//let theIdImLookingForInsideMyWalletThatHasOverEighteenCardSlotsAndSeveralSecretStashCompartments = adjacentRooms.connectTo;
+
+// if (dinosaurRoomGuide.dinosaurs.includes(thisIdIsForDoorEntryNotToGetIntoBars)) {
+
+// let dinoWorld = [];
+// // const roomNextDoor = roomInfo.name
+// const adjacentRooms  = roomInfo.connectsTo;
+// const searchKeywordByID = dinosaurs.dinosaurId;
+// const returnSearchofRoom = rooms.name;
+// // Returns an array of strings, where each string is the name of a room connected to the given room. If a room ID cannot be found, an error message is returned.
+
+
+// }
+// // else if (searchKeywordByDinosaurs !== returnSearchOfRoom) {
+// // }
+
 // console.log(adjacentRooms)
 //   const findPinkElephants = songs.find((findTimestreetsPinkElephants => findTimestreetsPinkElephants.title === "Pink Elephants")
 
@@ -131,7 +135,7 @@ function getConnectedRoomNamesById(rooms, id) {
 //     const searchKeywordByRoomID = roomInfo.roomId;
 //     const invalidDinoIDSearch = `"Room with ID of ${searchKeywordByDinoID} could not be found."`
 //     if (searchKeywordByRoomID)
-// }
+
 
 
 module.exports = {
