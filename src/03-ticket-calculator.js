@@ -168,8 +168,8 @@ function purchaseTickets(ticketData, purchases) {
  * ---------------------
  * Helper function that returns a string with only the first letter capitalized.
  * 
- * @param {String} str - Any string.
- * @return {String} A string where only the first character is uppercase.
+ * @param {string} str - Any string.
+ * @return {string} - A string where only the first character is uppercase.
 */ 
 const capitalizeFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
@@ -178,7 +178,7 @@ const capitalizeFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1
  * ---------------------
  * Helper function that returns a price number with two decimal places.
  * @param {number} priceInCents - the cost in cents.
- * @returns - a number with two decimal places.
+ * @returns {number} - a number with two decimal places.
  */
 const centsToDollars = (priceInCents) => Math.round(priceInCents/100).toFixed(2);
 
