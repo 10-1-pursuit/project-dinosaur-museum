@@ -43,7 +43,7 @@ function getLongestDinosaur(dinosaurs) {
     return;
   })
   // Finds the longes dinosaur object with the ID saved in the currendDinosaurID variable
-  tallestDinosaurObj = dinosaurs.find(dinosaur => dinosaur.dinosaurId === currentDinosaurID)
+  const tallestDinosaurObj = dinosaurs.find(dinosaur => dinosaur.dinosaurId === currentDinosaurID)
   // Converts the dinosaur's length from meters to feet
   const lengthInFeet = (meters) => meters * 3.281
   // Returns an object with the name of the dinosaur as the key, and the dinosaur's length as the value
