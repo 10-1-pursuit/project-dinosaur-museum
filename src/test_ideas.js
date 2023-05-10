@@ -84,6 +84,7 @@ return foundDinosaur;
     //connectedRoom = room.name;
     //console.log(connection)
   }
+}
 
 
      // for (const entrantType in ticketData[ticketType].price) {
@@ -121,3 +122,40 @@ return foundDinosaur;
   //     return `Extra type '$incorrect-extra' cannot be found.`;
   //   }
   // }
+
+
+   // set the variables for the extras named extra ticket that is pulled from the ticket info object
+ let xTicket = ticketInfo.extras; // type is assigned to the value of ticketType and is a property of the ticketData obj
+ // this variable will also represnet the ticket type that had been selecv
+ let type = ticketData[ticketInfo.ticketType];
+ //Checks if the ticket type or entrant type is actually valid
+ if (type === undefined) {
+   // edge case if it is undefined the string will equate to the ticket type infor not found.
+   return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
+ } // gets the price for the specified entrant type.
+ let price = type.priceInCents[ticketInfo.entrantType];
+ if (price === undefined) {
+   // edge case tester in the event that the price is declared as undefined
+   return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
+ } // If there are no extra tickets, return the price of the ticket.
+ if (xTicket.length === 0) {
+   return price;
+ } // this for loop will iterate over the extra tickets
+ for (let info of ticketInfo.extras) {
+   let extraType = ticketData.extras[info];
+   if (extraType === undefined) {
+     return `Extra type '${info}' cannot be found.`
+   } // gets the price of the specified extra type.
+   let extraPrice = extraType.priceInCents[ticketInfo.entrantType];
+   price = price + extraPrice;
+ } // returns the total price of the ticket
+ return price;
+}
+
+const newFunc = calculateTicketPrice(ticketData , ticketInfo);
+for (let purchase of purchases) {
+  const ticketInfo = {
+    ticketType: purchase.ticketType,
+    entrantType: purchase.entrantType,
+    extras: purchase.extras
+  };

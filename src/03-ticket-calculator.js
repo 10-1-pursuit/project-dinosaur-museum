@@ -59,47 +59,42 @@ const exampleTicketData = require("../data/tickets");
 
 //!tickettype , !entranttype return error message
 function calculateTicketPrice(ticketData, ticketInfo) {
-  //console.log(ticketData)
-  //console.log("tickettype", ticketInfo.ticketType);
-  // console.log("entranttype", ticketInfo.entrantType);
   // console.log(ticketInfo.extras) - HOW CAN I GET THIS TO RETURN ON IT'S OWN
-  let price;
-  
 
-  if (!ticketData[ticketInfo.ticketType]) {
-    //check if ticket type key is in ticket data obj
+  const ticketType = ticketData[ticketInfo.ticketType];
+
+  if (!ticketType) { // Check if ticketType exists
     return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
   }
-  //console.log(ticketData.extras.keys)
-  for (let extra of ticketInfo.extras) {
-    if (!ticketData.extras[extra]) {
-      //check if extras key contains value of extras
-      return `Extra type 'incorrect-extra' cannot be found.`;
-    }
-  }
-
-  //console.log(ticketData[ticketInfo.ticketType]) //- gives me each ticket type obj w type & price
-
-  for (const ticketType in ticketData) {
-    if (ticketType !== ticketInfo.entrantType) {
-      //check if entrant type doesnt match param of ticket type
-      return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
-    }
-    
-  }
- 
+  const entrantPrice = ticketType.priceInCents[ticketInfo.entrantType];
   
+  if (!entrantPrice) { // Check if entrantPrice exists
+    return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
+  }
+  let totalCost = entrantPrice; //
+  
+  for (let extra of ticketInfo.extras) { // Loop through extras array
+    const extraType = ticketData.extras[extra]; //assign [extra-value] from {data.extras}
 
+   
+    if (!extraType) {  // Check if extraType exists
+      return `Extra type '${extra}' cannot be found.`;
+    }
 
+    const extraPrice = extraType.priceInCents[ticketInfo.entrantType]; //
+
+   
+    if (!extraPrice) {  // Check if extraPrice exists
+      return `Extra price for entrant type '${ticketInfo.entrantType}' cannot be found.`;
+    }
+
+    totalCost += extraPrice;
+  }
+
+  return totalCost;
 }
 
 
-//starting price will not be 0
-//general & membership prices vary depending on person type 
-
-//console.log("info", ticketInfo)
-// price += ticketInfo.entrantType;
-//console.log(exampleTicketData)
 /**
  * purchaseTickets()
  * ---------------------
@@ -161,6 +156,17 @@ function calculateTicketPrice(ticketData, ticketInfo) {
 //purchses & foreach purchase , iterate over the .extras (maybe)
 function purchaseTickets(ticketData, purchases) {
   let receipt = {};
+  
+  for (let purchase of purchases) {
+    const ticketInfo = {
+      ticketType: purchase.ticketType,
+      entrantType: purchase.entrantType,
+      extras: purchase.extras
+    }
+    
+    const priceOfATicket = calculateTicketPrice(ticketData, ticketInfo);
+    console.log(priceOfATicket)
+  }
 }
 
 // Do not change anything below this line.
