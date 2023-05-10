@@ -22,9 +22,53 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
 
-/**
+// Helper function created , which will convert meters into feet.
+let nFeet = (meters) => {
+  return meters * 3.281;
+};
+
+function getLongestDinosaur(dinosaurs) {
+  // This actually works better but test will still fail within the Alive Mya function. array is mutated , must understand
+  ////////////////
+  //let obj = {};
+  //if (!dinosaurs.length) {
+  //return obj;
+  // }
+  // run .map
+  //let sortedSaurs = dinosaurs.sort(
+  //(a, b) => b.lengthInMeters - a.lengthInMeters
+  //);
+  //let tallestDinosaur = sortedSaurs[0];
+  // then .sort .... copy sort and return;
+  //obj[tallestDinosaur.name] = nFeet(tallestDinosaur.lengthInMeters);
+  //return obj;
+  /////////////////////////////////////// Tired my best here it kept mutating the array
+  //let sortedSaurs = dinosaurs
+  // .slice()
+  //.sort((a, b) => b.lengthInMeters - a.lengthInMeters);
+  //let dinoNonMutated = sortedSaurs.map((dino) => ({
+  //[dino.name]: dino.lengthInMeters,
+  // }));
+  //return dinoNonMutated;
+
+  if (dinosaurs.length === 0) {
+    // takes care of the edge case, checks if the dinosaur array is empty.. if the array is empty there is no longest dinosaur.
+    return {};
+  }
+  let longestDino = dinosaurs[0]; // Variable called longestDino created and is initialized to the first dinosaur in the dinosaurs array
+  for (let i = 0; i < dinosaurs.length; i++) {
+    // This forloop iterates through the dinosaurs array starting at index[0] for each dinosaur of the loop iteration the condition will check if the dinosaur
+    // length in meters is greater than the length of the current longest dinosaur. When the condition is met the code updates the longestDino variable.
+    if (dinosaurs[i].lengthInMeters > longestDino.lengthInMeters) {
+      longestDino = dinosaurs[i];
+    }
+  } // The return below returns an object witht he name of the longest dinosaur as the key and the length in feet as its value
+  // the helper function then converts the length in meters into length in feet.
+
+  return { [longestDino.name]: nFeet(longestDino.lengthInMeters) };
+}
+/**¡
  * getDinosaurDescription()
  * ---------------------
  * Returns a formatted description of a dinosaur. If the dinosaur cannot be found, returns an error message.
@@ -44,8 +88,21 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  // Check if the dinosaur with the specified ID exists.
+  let yoshi = dinosaurs.find((dino) => dino.dinosaurId === id); // The find method will return the first dinosaur in the array whos property Id is equal to
+  // the specified Id in the given parameter withing the function.
 
+  // If the dinosaur does not exist, return an error message.
+  if (!yoshi) {
+    return `A dinosaur with an ID of '${id}' cannot be found.`;
+  } // Return a string with the dinosaur's description as per
+  return `${yoshi.name} (${yoshi.pronunciation})\n${
+    yoshi.info
+  } It lived in the ${yoshi.period} period, over ${
+    yoshi.mya[yoshi.mya.length - 1]
+  } million years ago.`;
+}
 /**
  * getDinosaursAliveMya()
  * ---------------------
@@ -71,8 +128,29 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  const dinosaurArr = []; // Empty array set up for the pushed information when and if a specified condition is then met.
 
+  for (const dino of dinosaurs) {
+    // the for of loop iterates thorugh the array of dinosaurs
+    const dinoId = key || "dinosaurId"; // get dinosaurs id.
+    if (dino[dinoId] === undefined) {
+      // if the dinosaur does not have an Id it will be skipped
+      continue;
+    }
+    const myaAlive = dino.mya; // this vairable will capture the dinosaur mya age
+    if (
+      myaAlive.length === 1 &&
+      (mya === myaAlive[0] || mya === myaAlive[0] - 1) // If the mya range is a single number , check if it is equal to a specified mya.
+    ) {
+      dinosaurArr.push(dino[dinoId]); // this code block adds(.push) the dinosaur's ID to the empty array when a single number condition is met.
+    } else if (mya <= myaAlive[0] && mya >= myaAlive[1]) {
+      // If the mya range is two numbers, check if the specified mya is within a range.
+      dinosaurArr.push(dino[dinoId]); // This code block adds (.push) the dinosaur's ID to the empty array when a specified condition is compared aganist 2 numbers.
+    }
+  }
+  return dinosaurArr;
+}
 module.exports = {
   getLongestDinosaur,
   getDinosaurDescription,
