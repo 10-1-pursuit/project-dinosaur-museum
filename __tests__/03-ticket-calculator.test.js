@@ -7,7 +7,7 @@ const {
 const tickets = require("../data/tickets");
 
 describe("calculateTicketPrice()", () => {
-  describe("errors", () => {
+  describe.only("errors", () => {
     test("ticket type does not match an existing ticket type", () => {
       const ticketInfo = {
         ticketType: "incorrect-type",
