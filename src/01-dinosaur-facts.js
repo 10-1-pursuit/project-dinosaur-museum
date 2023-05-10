@@ -63,8 +63,8 @@ function getLongestDinosaur(dinosaurs) {
  */
 function getDinosaurDescription(dinosaurs, id) {
   let dino = null;
-  for (let dinosaur of dinosaurs){
-    if (dinosaur.dinosaurId === id){
+  for (let dinosaur of dinosaurs) {
+    if (dinosaur.dinosaurId === id) {
       dino = dinosaur;
     }
   }

@@ -80,15 +80,15 @@ function getConnectedRoomNamesById(rooms, id) {
   let roomByName = {};
 
   for (let room of rooms) {
-    roomByName[room.roomId]= room.name;//assigning key value to my empty obj
-   
+    roomByName[room.roomId] = room.name;//assigning key value to my empty obj
+
   }
   if (roomByName[id] === undefined) {//id isnst in obj return unfound
     return `Room with ID of '${id}' could not be found.`;
   }
   let foundRoom = rooms.find(roomsI => roomsI.roomId === id);//
   for (let room of foundRoom.connectsTo) {
-    if (roomByName[room]=== undefined) {
+    if (roomByName[room] === undefined) {
       return `Room with ID of 'incorrect-id' could not be found.`;
     }
     roomNames.push(roomByName[room]);
