@@ -93,22 +93,18 @@ function getDinosaurDescription(dinosaurs, id) {
  */
 function getDinosaursAliveMya(dinosaurs, mya, key) {
   let dinoArr = [];
-  let addToArr = key;
-
+  let addToArr = key || "dinosaurId";
   for (const dinoObj of dinosaurs) {
     if (!dinoObj[addToArr]) {
       addToArr = "dinosaurId";
-    }
-
+    };
     if (dinoObj.mya.length === 1 && (dinoObj.mya[0] === mya || dinoObj.mya[0] - 1 === mya)) {
-      dinoArr.push(dinoObj.dinosaurId)
+      dinoArr.push(dinoObj[addToArr]);
     } else if (mya <= dinoObj.mya[0] && mya >= dinoObj.mya[1]) {
-      dinoArr.push(dinoObj.dinosaurId)
-    }
-  }
-
+      dinoArr.push(dinoObj[addToArr]);
+    };
+  };
   return dinoArr;
-
 }
 
 module.exports = {
