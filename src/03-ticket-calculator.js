@@ -54,7 +54,30 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
+function calculateTicketPrice(ticketData, ticketInfo) {
+  let ticketPrice = 0;
+  const {ticketType, entrantType, extras } = ticketInfo;
+  if (!(ticketType in ticketData)) {
+    return `Ticket type '${ticketType}' cannot be found.`
+  }
+  else if (!ticketData[ticketType].priceInCents[entrantType]) {
+    return `Entrant type '${entrantType}' cannot be found.`
+  }
+  else if (ticketData[ticketType].priceInCents[entrantType]){
+        ticketPrice += ticketData[ticketType].priceInCents[entrantType]
+    if (extras.length > 0) {
+      for (const ex of extras) {
+        if (!(ex in ticketData.extras)) {
+          return `Extra type '${ex}' cannot be found.`;
+        }
+        if (ticketData.extras[ex].priceInCents[entrantType]) {
+          ticketPrice += ticketData.extras[ex].priceInCents[entrantType];
+        }
+      }
+    }
+    return ticketPrice
+  }  
+}
 
 /**
  * purchaseTickets()
@@ -109,7 +132,23 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) {
+  receipt = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
+  for (const purchase of purchases){
+   tickPrice = purchase
+   // set ticket price to equal one object inside of the purchases array
+   price = calculateTicketPrice(ticketData, tickPrice)
+   // set price to equal the results of the calculate price function 
+   if (typeof(price) === "string"){
+    return price
+    // if the results are a string, this means its an error message, and we should return the error message immeadiately
+   }
+  tickPrice = price.toLocaleString("en-US");
+  // if its not a string, then it can only be a number, and so we are converting the price to a US dollar, and reassigning tickPrice to equal the US dollar amount
+
+  }
+return receipt
+}
 
 // Do not change anything below this line.
 module.exports = {
