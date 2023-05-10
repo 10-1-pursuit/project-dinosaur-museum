@@ -84,3 +84,40 @@ return foundDinosaur;
     //connectedRoom = room.name;
     //console.log(connection)
   }
+
+
+     // for (const entrantType in ticketData[ticketType].price) {
+      //   //loop price obj of the ticket type
+      //  
+        // if (entrantType === ticketInfo.entrantType) {
+        //   //does what i find match oaram entrant type
+
+        //   entrant = ticketData[ticketType].priceInCents[entrantType]; // reassign to the PRICE
+      
+
+
+         //if (!entrant) {
+  // if value is not there/null
+  //return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
+  //}
+  //price += entrant; //elsewise, value becomes price
+
+  // for (const extraFeature in ticketData.extras) {
+
+  //   //loop ticket info for extras
+
+  //   if (!ticketData.extras || !ticketData.extras[extra]) {
+  //     //if none
+  //     return `Extra type '${ticketInfo.extras}' cannot be found.`;
+  //   }
+  //   price += ticketData.extras[extra].priceInCents; // reassign price
+  // }
+  // return price;
+
+
+   //console.log(!!Object.keys(ticketData.extras).length)
+  // for (let extra of ticketInfo.extras) {
+  //   if (!ticketData.extras[extra]) {
+  //     return `Extra type '$incorrect-extra' cannot be found.`;
+  //   }
+  // }

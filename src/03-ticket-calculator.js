@@ -63,33 +63,39 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   //console.log("tickettype", ticketInfo.ticketType);
   // console.log("entranttype", ticketInfo.entrantType);
   // console.log(ticketInfo.extras) - HOW CAN I GET THIS TO RETURN ON IT'S OWN
-  let price = 0;
-  //console.log(ticketInfo.ticketType)
+  let price;
+  
+
   if (!ticketData[ticketInfo.ticketType]) {
-    //check if ticket type is in ticket data
+    //check if ticket type key is in ticket data obj
     return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
   }
-  let entrant = null; //
-  for (const ticketType in ticketData) {
-    //loop data
-    if (ticketType === ticketInfo.ticketType) {
-      // does my ticketType match param ticketType
-      for (const entrantType in ticketData[ticketType].price) {
-        //loop price obj of the ticket type
-        if (entrantType === ticketInfo.entrantType) {
-          //does what i find match oaram entrant type
-          entrant = ticketData[ticketType].price[entrantType]; // reassign to the PRICE
-          break; //exit loop1
-        }
-      }
-      break; //exit loop2
+  //console.log(ticketData.extras.keys)
+  for (let extra of ticketInfo.extras) {
+    if (!ticketData.extras[extra]) {
+      //check if extras key contains value of extras
+      return `Extra type 'incorrect-extra' cannot be found.`;
     }
   }
-  if (!entrant) { // if value is not there/null 
-    return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
+
+  //console.log(ticketData[ticketInfo.ticketType]) //- gives me each ticket type obj w type & price
+
+  for (const ticketType in ticketData) {
+    if (ticketType !== ticketInfo.entrantType) {
+      //check if entrant type doesnt match param of ticket type
+      return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
+    }
+    
   }
-  price += entrant; //elsewise, value becomes price
+ 
+  
+
+
 }
+
+
+//starting price will not be 0
+//general & membership prices vary depending on person type 
 
 //console.log("info", ticketInfo)
 // price += ticketInfo.entrantType;
