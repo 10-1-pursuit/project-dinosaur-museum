@@ -59,7 +59,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   let ticketPrice = 0;
 
   const { ticketType, entrantType, extras } = ticketInfo;
-  
+
   if (!(ticketType in ticketData)) {
     return `Ticket type '${ticketType}' cannot be found.`
   }
@@ -69,26 +69,24 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   }
 
   else if (ticketData[ticketType].priceInCents[entrantType]) {
-    
+
     ticketPrice += ticketData[ticketType].priceInCents[entrantType]
-    
+
     if (extras.length > 0) {
       for (const xtra of extras) {
-        
+
         if (!(xtra in ticketData.extras)) {
           return `Extra type '${xtra}' cannot be found.`;
         }
-        
+
         if (ticketData.extras[xtra].priceInCents[entrantType]) {
           ticketPrice += ticketData.extras[xtra].priceInCents[entrantType];
         }
       }
     }
-    return ticketPrice
+    return ticketPrice;
   }
 }
-
-
 
 /**
  * purchaseTickets()

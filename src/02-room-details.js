@@ -97,18 +97,6 @@ function getConnectedRoomNamesById(rooms, id) {
 
 }
 
-/*let roomArr = [];
-
-
-
-  for (let dinoHotel of rooms){
-    if(dinoHotel.connectsTo !== id){
-      return "Room with ID of 'incorrect-id' counld not be found."
-    }
-  }*/
-
-//return roomArr;
-
 
 module.exports = {
   getRoomByDinosaurName,

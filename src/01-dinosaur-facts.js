@@ -84,7 +84,7 @@ function getDinosaurDescription(dinosaurs, id) {
     //this checks if any value is placed within placeHeld, if there is not we will be left with a message. 
   }
   return `${placeHeld.name} (${placeHeld.pronunciation})\n${placeHeld.info} It lived in the ${placeHeld.period} period, over ${placeHeld.mya[placeHeld.mya.length - 1]} million years ago.`
-  //returns a string that
+  //returns a string manipulated by string interlopation to the desired requirments 
 
 }
 /**
@@ -115,19 +115,23 @@ function getDinosaurDescription(dinosaurs, id) {
 function getDinosaursAliveMya(dinosaurs, mya, key) {
   let dinoArr = [];
   let keyOrId = (key || "dinosaurId");
+  //using short circuiting I assigned "key" which is value being passed through by the user or "dinosaurId" 
 
   for (let dino of dinosaurs) {
+    // for let is used to intirate over dinosaurs using dino
     if (!dino[keyOrId]) {
-      keyOrId = "dinosaurId"
-
+      keyOrId = "dinosaurId";
+      // ! in this situation is used to check if there is anything within key from our user if there is not using [] notation if thhere is not the string 'dinosaurId' will be prompted
     }
     if (dino.mya.length === 1 && (mya === (dino.mya[0]) || (mya === dino.mya[0] - 1))) {
+      //using the .length method we check to see if dinosaur only has a single value for `mya, and if the mya being passed by users matches the value of mya at position zero with the mya array or if it matches one less than the value of mya 
 
       dinoArr.push(dino[keyOrId]);
+      //places all the keys that match with in the dino array we created. 
 
     } else if (mya <= dino.mya[0] && mya >= dino.mya[1]) {
-      dinoArr.push(dino[keyOrId])
 
+      dinoArr.push(dino[keyOrId])
     }
   }
   return dinoArr;
