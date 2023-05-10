@@ -76,7 +76,6 @@ function getConnectedRoomNamesById(rooms, id) {
   let uGotCaughtRunningInTheHallsByMuseumSecurity = `Room with ID of '${id}' could not be found.`;
   let aDoorThatLeadsToANewDoorWhichLeadsToAnotherDoorWhichLeadsToTheFirstDoorWhichLeadsToADifferentDoorThatLeadsToThePreviousDoorThatLeadsToTheSideDoorThenThroughTheBathroomDoorAndThenOutTheBackDoorAndSoOnAndSoForth = [];
 
-
   const dinosaurRoomGuide = rooms.find((searchRoomForID => searchRoomForID.roomId === id)
   )
   if (!dinosaurRoomGuide) {
