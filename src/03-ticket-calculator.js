@@ -55,14 +55,17 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
+  // Declared variables to hold prices
+  // Transform using object.values extras prices into arrays for easier access to information.
   let ticketPricing;
-  let extrasPricing = [
-    {
-      movie: Object.values(ticketData.extras.movie.priceInCents),
-      education: Object.values(ticketData.extras.education.priceInCents),
-      terrace: Object.values(ticketData.extras.terrace.priceInCents),
-    }
-  ];
+  let extrasPricing =
+  {
+    movie: Object.values(ticketData.extras.movie.priceInCents),
+    education: Object.values(ticketData.extras.education.priceInCents),
+    terrace: Object.values(ticketData.extras.terrace.priceInCents),
+  }
+    ;
+  // Declared variables and assigned index placement to reach appropriate prices.
   const childPriceIndex = 0;
   const adultPriceIndex = 1;
   const seniorPriceIndex = 2;
@@ -93,8 +96,22 @@ function calculateTicketPrice(ticketData, ticketInfo) {
   if (ticketInfo.extras.length === 0 && ticketInfo.entrantType === "senior") {
     return ticketPriceInCents = ticketPricing[seniorPriceIndex];
   }
-
-  if (ticketInfo.extras.length > 0 && 
+  // Calculates ticket Price by returning sum of general or membership price of entrant and price of all add-ons. 
+  if (ticketInfo.extras.length > 0 && ticketInfo.entrantType === "child") {
+    let sumofExtras = 0;
+    ticketInfo.extras.map(extra => extrasPricing[extra][childPriceIndex]).forEach(extraPrice => sumofExtras += extraPrice);
+    return ticketPriceInCents = ticketPricing[childPriceIndex] + sumofExtras;
+  }
+  if (ticketInfo.extras.length > 0 && ticketInfo.entrantType === "adult") {
+    let sumofExtras = 0;
+    ticketInfo.extras.map(extra => extrasPricing[extra][adultPriceIndex]).forEach(extraPrice => sumofExtras += extraPrice);
+    return ticketPriceInCents = ticketPricing[adultPriceIndex] + sumofExtras;
+  }
+  if (ticketInfo.extras.length > 0 && ticketInfo.entrantType === "senior") {
+    let sumofExtras = 0;
+    ticketInfo.extras.map(extra => extrasPricing[extra][seniorPriceIndex]).forEach(extraPrice => sumofExtras += extraPrice);
+    return ticketPriceInCents = ticketPricing[seniorPriceIndex] + sumofExtras;
+  }
 }
 /**
  * purchaseTickets()
