@@ -134,6 +134,35 @@ function calculateTicketPrice(ticketData, ticketInfo) {
  */
 function purchaseTickets(ticketData, purchases) {
   receipt = "";
+  if (purchases.length === 1){
+    ticketInfo = purchases[0];
+    tickPrice = function calculateTicketPrice(ticketData, ticketInfo) {
+    let ticketPrice = 0;
+    const {ticketType, entrantType, extras } = ticketInfo;
+    if (!(ticketType in ticketData)) {
+      return `Ticket type '${ticketType}' cannot be found.`
+    }
+    else if (!ticketData[ticketType].priceInCents[entrantType]) {
+      return `Entrant type '${entrantType}' cannot be found.`
+    }
+    else if (ticketData[ticketType].priceInCents[entrantType]){
+          ticketPrice += ticketData[ticketType].priceInCents[entrantType]
+      if (extras.length > 0) {
+        for (const ex of extras) {
+          if (!(ex in ticketData.extras)) {
+            return `Extra type '${ex}' cannot be found.`;
+          }
+          if (ticketData.extras[ex].priceInCents[entrantType]) {
+            ticketPrice += ticketData.extras[ex].priceInCents[entrantType];
+          }
+        }
+      }
+      return ticketPrice
+    }  
+    }
+    tickPrice = tickPrice.toLocaleString("en-US");
+    receipt =  `Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $30.00\n-------------------------------------------\nTOTAL: $${tickPrice}`
+  }
   for (const purchase of purchases){
    ticketInfo = purchase;
     tickPrice = function calculateTicketPrice(ticketData, ticketInfo) {
@@ -161,7 +190,7 @@ function purchaseTickets(ticketData, purchases) {
     }  
     }
     tickPrice = tickPrice.toLocaleString("en-US");
-    
+
   }
 return receipt
 }
