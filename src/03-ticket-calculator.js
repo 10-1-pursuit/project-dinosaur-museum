@@ -156,7 +156,8 @@ function calculateTicketPrice(ticketData, ticketInfo) {
 //purchses & foreach purchase , iterate over the .extras (maybe)
 function purchaseTickets(ticketData, purchases) {
   let receipt = {};
-  let thanks = "Thank you for visiting the Dinosaur Museum!";
+  let thanks = 
+  "Thank you for visiting the Dinosaur Museum!-------------------------------------------";
   
   for (let purchase of purchases) {
     const ticketInfo = {
@@ -170,7 +171,12 @@ function purchaseTickets(ticketData, purchases) {
     if (typeof priceOfATicket === "string") { // Check if ticketType exists
       return `${priceOfATicket}`;
     }
-    //console.log(ticketData)
+   
+    for (const extraPurchase of purchase.extras) { //type of extras -- needed for extras tiers "movie" "terrace" "education"
+      //console.log(extraPurchase)
+      
+    }
+    //console.log(priceOfATicket) //prices "3000", "2000", "2800", "5000", "2500", "1500", "4000", "2300", "4500", "4800", "3800"
   }
 }
 
