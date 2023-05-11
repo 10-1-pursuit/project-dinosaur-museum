@@ -76,8 +76,11 @@ function getLongestDinosaur(dinosaurs) {
  */
 function getDinosaurDescription(dinosaurs, id) {
   let dinosaur = dinosaurs.find(dino => dino.dinosaurId === id)
+  // declared a variable that stores the object that matches thr dinosaur id
   if (!dinosaur) return "A dinosaur with an ID of 'incorrect-id' cannot be found."
+  //if the object is not found (false), return message (edge case)
   return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${dinosaur.mya[dinosaur.mya.length-1]} million years ago.`
+  // if dinosaur object is found, return string with accessed keys of matching dinosaur object
 }
 
 
@@ -119,9 +122,7 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       dinosaurArr.push(dino[dinoId]);
     } else if (mya <= myaAlive[0] && mya >= myaAlive[1]) {
       dinosaurArr.push(dino[dinoId]);
-    } else if (mya === myaAlive[0] || myaAlive[1] === mya) {
-        dinosaurArr.push(dino[dinoId]);
-    }
+    } 
   }
   return dinosaurArr
 }

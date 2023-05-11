@@ -132,7 +132,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     //> "Ticket type 'discount' cannot be found."
  */
 function purchaseTickets(ticketData, purchases) { 
-  
+  let dinoTickets = purchases.map(ticket => ticketType)
 }
 
 // Do not change anything below this line.
