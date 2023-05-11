@@ -28,19 +28,21 @@ const exampleDinosaurData = require("../data/dinosaurs");
 //convert the longest dinosaur from meters to feet
 //return the object with the longest dinosaur from the list 
 
-function feet(meters) {
-return meters * 3.281;
-}
+// function feet(meters) {
+// return meters * 3.281;
+// }
 // console.log(feet(2))
 
     
 function getLongestDinosaur(dinosaurs) {
     if (dinosaurs.length === 0) {
+      //checking if dinosaurs array is empty. if it is, return an empty object array
       return {};
     } let dinosaurArr = dinosaurs[0]
     for (i = 1; i < dinosaurs.length; i++) {
       if (dinosaurs[i].lengthInMeters > dinosaurArr.lengthInMeters)
         dinosaurArr = dinosaurs[i]
+        //checking the lengthInMeters
       // console.log(dinosaurArr)
     }
     return ({
@@ -117,6 +119,8 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       dinosaurArr.push(dino[dinoId]);
     } else if (mya <= myaAlive[0] && mya >= myaAlive[1]) {
       dinosaurArr.push(dino[dinoId]);
+    } else if (mya === myaAlive[0] || myaAlive[1] === mya) {
+        dinosaurArr.push(dino[dinoId]);
     }
   }
   return dinosaurArr
