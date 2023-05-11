@@ -31,7 +31,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   for (let room of rooms) {
     for (let dino of room.dinosaurs) {
       if (dino === dinosaurName) {
-        return rooms.name;
+        return room.dinosaurName;
       }
     }
   }
@@ -42,6 +42,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   }
   return `Dinosaur with name '${dinosaurName}' cannot be found.`;
 }
+
 
 
 
