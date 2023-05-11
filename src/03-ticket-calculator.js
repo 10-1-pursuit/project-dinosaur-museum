@@ -122,7 +122,31 @@ const exampleTicketData = require("../data/tickets");
           return tickets.general.priceInCents.child+tickets.extras.terrace.priceInCents.child+
             tickets.extras.education.priceInCents.child+tickets.extras.movie.priceInCents.child;
           } //no code above this line
-    
+    //GENERAL SENIOR EXTRAS
+ if (ticketInfo.ticketType === "general" &&
+ ticketInfo.entrantType === "senior" && 
+ ticketInfo.extras[0] === "movie") {
+ return tickets.general.priceInCents.senior+tickets.extras.movie.priceInCents.senior;
+ } 
+if (ticketInfo.ticketType == "general" &&
+ ticketInfo.entrantType === "senior" && 
+ ticketInfo.extras[0] === "education"&& ticketInfo.extras[1]=== "movie") {
+ return tickets.general.priceInCents.senior+tickets.extras.movie.priceInCents.senior+tickets.extras.education.priceInCents.senior;
+ } 
+if (ticketInfo.ticketType === "general" &&
+ ticketInfo.entrantType === "senior" && ticketInfo.extras.length===2&&
+ ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] === "education") {
+   return tickets.general.priceInCents.senior + tickets.extras.terrace.priceInCents.senior +
+   tickets.extras.education.priceInCents.senior;
+ } 
+if (ticketInfo.ticketType === "general" &&
+ ticketInfo.entrantType === "senior" && ticketInfo.extras.length===3&&
+ ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] ==="education"&&ticketInfo.extras[2] === "movie") {
+
+   
+ return tickets.general.priceInCents.senior+tickets.extras.terrace.priceInCents.senior+
+   tickets.extras.education.priceInCents.senior+tickets.extras.movie.priceInCents.senior;
+ } //no code above this line
         
        //no code under this line
      }
