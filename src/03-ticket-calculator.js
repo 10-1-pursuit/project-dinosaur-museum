@@ -56,9 +56,9 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
     const ticketInfo = {
-      ticketType: "membership",
+      ticketType: "general",
       entrantType: "child",
-      extras: [],
+      extras: ["terrace","education","movie"],
     };
 
     function calculateTicketPrice(ticketData, ticketInfo) {
@@ -98,13 +98,13 @@ const exampleTicketData = require("../data/tickets");
           } 
     
      //GENERAL CHILD WITH EXTRAS
-     if (ticketInfo.ticketType === "general" &&
+     if (ticketInfo.ticketType === "general" && ticketInfo.extras.length===1&&
           ticketInfo.entrantType === "child" && 
           ticketInfo.extras[0] === "movie") {
           return tickets.general.priceInCents.child+tickets.extras.movie.priceInCents.child;
           } 
         if (ticketInfo.ticketType == "general" &&
-          ticketInfo.entrantType === "child" && 
+          ticketInfo.entrantType === "child" && ticketInfo.extras.length===2 &&
           ticketInfo.extras[0] === "education"&& ticketInfo.extras[1]=== "movie") {
           return tickets.general.priceInCents.child+tickets.extras.movie.priceInCents.child+tickets.extras.education.priceInCents.child;
           } 
@@ -116,9 +116,7 @@ const exampleTicketData = require("../data/tickets");
           } 
         if (ticketInfo.ticketType === "general" &&
           ticketInfo.entrantType === "child" && ticketInfo.extras.length===3&&
-          ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] ==="education"&&ticketInfo.extras[2] === "movie") {
-     
-            
+          ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] ==="education"&&ticketInfo.extras[2] === "movie") { 
           return tickets.general.priceInCents.child+tickets.extras.terrace.priceInCents.child+
             tickets.extras.education.priceInCents.child+tickets.extras.movie.priceInCents.child;
           } //no code above this line
@@ -147,7 +145,80 @@ if (ticketInfo.ticketType === "general" &&
  return tickets.general.priceInCents.senior+tickets.extras.terrace.priceInCents.senior+
    tickets.extras.education.priceInCents.senior+tickets.extras.movie.priceInCents.senior;
  } //no code above this line
-        
+ //ADULT GENERAL WITH EXTRAS
+ if (ticketInfo.ticketType === "general" &&
+ ticketInfo.entrantType === "adult" && 
+ ticketInfo.extras[0] === "movie") {
+ return tickets.general.priceInCents.adult+tickets.extras.movie.priceInCents.adult;
+ } 
+if (ticketInfo.ticketType == "general" &&
+ ticketInfo.entrantType === "adult" && 
+ ticketInfo.extras[0] === "education"&& ticketInfo.extras[1]=== "movie") {
+ return tickets.general.priceInCents.adult + tickets.extras.movie.priceInCents.adult + tickets.extras.education.priceInCents.adult;
+ } 
+if (ticketInfo.ticketType === "general" &&
+ ticketInfo.entrantType === "adult" && ticketInfo.extras.length===2&&
+ ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] === "education") {
+   return tickets.general.priceInCents.adult + tickets.extras.terrace.priceInCents.adult +
+   tickets.extras.education.priceInCents.adult;
+ } 
+if (ticketInfo.ticketType === "general" &&
+ ticketInfo.entrantType === "adult" && ticketInfo.extras.length===3&&
+ ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] ==="education"&&ticketInfo.extras[2] === "movie") {
+
+   
+ return tickets.general.priceInCents.adult+tickets.extras.terrace.priceInCents.adult+
+   tickets.extras.education.priceInCents.adult+tickets.extras.movie.priceInCents.adult;
+ } //no code above this line
+        //Child Membership Extras
+if (ticketInfo.ticketType === "membership" &&
+ticketInfo.entrantType === "child" && 
+ticketInfo.extras[0] === "movie") {
+return tickets.membership.priceInCents.child+tickets.extras.movie.priceInCents.child;
+} 
+if (ticketInfo.ticketType == "membership" &&
+ticketInfo.entrantType === "child" && ticketInfo.length ===2 &&
+ticketInfo.extras[0] === "education"&& ticketInfo.extras[1]=== "movie") {
+return tickets.membership.priceInCents.child+tickets.extras.movie.priceInCents.child+tickets.extras.education.priceInCents.child;
+} 
+if (ticketInfo.ticketType === "membership" &&
+ticketInfo.entrantType === "child" && ticketInfo.extras.length===2&&
+ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] === "education") {
+  return tickets.membership.priceInCents.child+tickets.extras.terrace.priceInCents.child+
+  tickets.extras.education.priceInCents.child;
+} 
+if (ticketInfo.ticketType === "membership" &&
+ticketInfo.entrantType === "child" && ticketInfo.extras.length===3&&
+ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] ==="education"&&ticketInfo.extras[2] === "movie") {
+  return tickets.membership.priceInCents.child+tickets.extras.terrace.priceInCents.child+
+  tickets.extras.education.priceInCents.child+tickets.extras.movie.priceInCents.child;
+
+}
+//ADULT MEMBERSHIP WITH EXTRAS
+if (ticketInfo.ticketType === "membership" &&
+ticketInfo.entrantType === "adult" && 
+ticketInfo.extras[0] === "movie") {
+return tickets.membership.priceInCents.adult+tickets.extras.movie.priceInCents.adult;
+} 
+if (ticketInfo.ticketType == "membership" &&
+ticketInfo.entrantType === "adult" && 
+ticketInfo.extras[0] === "education"&& ticketInfo.extras[1]=== "movie") {
+return tickets.membership.priceInCents.adult + tickets.extras.movie.priceInCents.adult + tickets.extras.education.priceInCents.adult;
+} 
+if (ticketInfo.ticketType === "membership" &&
+ticketInfo.entrantType === "adult" && ticketInfo.extras.length===2&&
+ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] === "education") {
+  return tickets.membership.priceInCents.adult + tickets.extras.terrace.priceInCents.adult +
+  tickets.extras.education.priceInCents.adult;
+} 
+if (ticketInfo.ticketType === "membership" &&
+ticketInfo.entrantType === "adult" && ticketInfo.extras.length===3&&
+ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] ==="education"&&ticketInfo.extras[2] === "movie") {
+
+  
+return tickets.membership.priceInCents.adult+tickets.extras.terrace.priceInCents.adult+
+  tickets.extras.education.priceInCents.adult+tickets.extras.movie.priceInCents.adult;
+} //no code above this line
        //no code under this line
      }
         return `Entrant type ${ticketInfo.entrantType} cannot be found.`
