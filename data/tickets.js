@@ -15,6 +15,7 @@ const tickets = {
       senior: 2300,
     },
   },
+
   extras: {
     movie: {
       description: "Movie Access",
