@@ -61,7 +61,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
   }
   const entPrice = ticketPrice.priceInCents[ticketInfo.entrantType];
-  if (!entPrice) {
+  if (!entPrice )  {
     return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
   }
   let totalPrice = entPrice;
@@ -137,7 +137,20 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) { }
+function purchaseTickets(ticketData, purchases) {
+  for (let purchase of purchases) {
+    const ticketInfo = {
+      ticketType: purchase.ticketType,
+      entrantType: purchase.entrantType,
+      extras: purchase.extras
+    };
+    const ticketPrices = calculateTicketPrice(ticketData, ticketInfo)
+   // console.log(ticketPrices)
+    if (typeof ticketPrices === "string") { // Check if ticketType exists
+      return `${ticketPrices}`;
+    }
+}
+}
 
 // Do not change anything below this line.
 module.exports = {
