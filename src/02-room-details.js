@@ -27,18 +27,18 @@ const exampleRoomData = require("../data/rooms");
  */
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 
-  let newInfo = dinosaurs.find(dino => dino.name == dinosaurName);
+  let newInfo = dinosaurs.find(dino => dino.name == dinosaurName); // a let statement was added so that the array can be accessed. I used .find to return the first array that passes the test. 
   if (newInfo === undefined) {
-    return `Dinosaur with name '${dinosaurName}' cannot be found.`
+    return `Dinosaur with name '${dinosaurName}' cannot be found.` // if the dinosaur name cannot be found, this error message will be ran. 
   }
 
-  let newRoom = rooms.find(room => room.dinosaurs.includes(newInfo.dinosaurId));
+  let newRoom = rooms.find(room => room.dinosaurs.includes(newInfo.dinosaurId));// finding the rooms that corresponds and .includes was used in order to decipher if this was a true or false statement. 
   if (!newRoom) {
-    return `Dinosaur with name '${newInfo.name}' cannot be found in any rooms.`
+    return `Dinosaur with name '${newInfo.name}' cannot be found in any rooms.` // if the room cannot be found; this error message will be displayed. 
 
   }
 
-  return newRoom.name
+  return newRoom.name // the room info will be displayed. 
 }
 
 

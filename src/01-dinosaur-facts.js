@@ -37,7 +37,7 @@ function getLongestDinosaur(dinosaurs) { //figuring out which dino is the longes
     }
   }
   longestDinosaur[name] = heightInFeet * 3.281; // once the dinosaur name is found, and the height in feet is found; it needs to be converted and this is why we multiply that value. 
-  return longestDinosaur;
+  return longestDinosaur; // returns the longest dinosaur object. 
 }
 
 /**

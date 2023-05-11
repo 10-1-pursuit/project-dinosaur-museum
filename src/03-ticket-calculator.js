@@ -78,7 +78,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
       return `Extra type '${info}' cannot be found.`;
     } // gets the price of the specified extra type.
     let extraPrice = extraType.priceInCents[ticketInfo.entrantType];
-    newPrice = newPrice + extraPrice;
+    newPrice = newprice + extraPrice;
   } // returns the total price of the ticket
   return price;
 }
