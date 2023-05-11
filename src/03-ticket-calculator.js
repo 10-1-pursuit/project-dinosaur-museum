@@ -91,9 +91,11 @@ const exampleTicketData = require("../data/tickets");
           ticketInfo.extras.length === 0) {
           return tickets.general.priceInCents.child;
           } 
-        if (ticketInfo.ticketType === "general" &&
-          ticketInfo.entrantType === "adult" && 
-          ticketInfo.extras.length === 0) {
+        if (ticketInfo.ticketType === "general" ||
+          ticketInfo.entrantType === "adult" &&
+          ticketInfo.extras.length === 0 ||ticketInfo[0].entrantType === "adult"||
+ ticketInfo[1].ticketType === "general" ||ticketInfo[1].entrantType === "adult"||
+ ticketInfo.extras[0] === "movie"||ticketInfo[0].ticketType === "general") {
           return tickets.general.priceInCents.adult;
         }
     if (ticketInfo.ticketType === "general" &&
@@ -103,19 +105,25 @@ const exampleTicketData = require("../data/tickets");
         }
                       
         //MEMBERSHIP
-        if (ticketInfo.ticketType === "membership" &&
-          ticketInfo.entrantType === "child" && 
-          ticketInfo.extras.length === 0) {
+        if (ticketInfo.ticketType === "membership" ||
+          ticketInfo.entrantType === "child" ||
+          ticketInfo.extras.length === 0|| ticketInfo[0].entrantType === "child"||
+ ticketInfo[1].ticketType === "membership" ||ticketInfo[1].entrantType === "child"||
+  ticketInfo.extras[0] === "movie"||ticketInfo[0].ticketType === "membership")  {
           return tickets.membership.priceInCents.child;
           } 
         if (ticketInfo.ticketType === "membership" &&
           ticketInfo.entrantType === "adult" && 
-          ticketInfo.extras.length === 0) {
+          ticketInfo.extras.length === 0|| ticketInfo.extras.length === 0|| ticketInfo[0].entrantType === "adult"||
+ ticketInfo[1].ticketType === "membership" ||ticketInfo[1].entrantType === "adult"||
+  ticketInfo.extras[0] === "movie"||ticketInfo[0].ticketType === "membership") {
           return tickets.membership.priceInCents.adult;
           } 
-        if (ticketInfo.ticketType === "membership" &&
-          ticketInfo.entrantType === "senior" && 
-          ticketInfo.extras.length === 0) {
+        if (ticketInfo.ticketType === "membership" ||
+          ticketInfo.entrantType === "senior" ||
+          ticketInfo.extras.length === 0||ticketInfo.extras.length === 0|| ticketInfo[0].entrantType === "senior"||
+ ticketInfo[1].ticketType === "membership" ||ticketInfo[1].entrantType === "senior"||
+  ticketInfo.extras[0] === "movie"||ticketInfo[0].ticketType === "membership") {
           return tickets.membership.priceInCents.senior;
           } 
     
@@ -168,9 +176,9 @@ if (ticketInfo.ticketType === "general" &&
    tickets.extras.education.priceInCents.senior+tickets.extras.movie.priceInCents.senior;
  } //no code above this line
  //ADULT GENERAL WITH EXTRAS
- if (ticketInfo.ticketType === "general" &&
- ticketInfo.entrantType === "adult" && 
- ticketInfo.extras[0] === "movie") {
+ if (ticketInfo.ticketType === "general" ||ticketInfo[0].entrantType === "adult"||
+ ticketInfo.entrantType === "adult" ||ticketInfo[1].ticketType === "general" ||ticketInfo[1].entrantType === "adult"||
+ ticketInfo.extras[0] === "movie"||ticketInfo[0].ticketType === "general") {
  return tickets.general.priceInCents.adult+tickets.extras.movie.priceInCents.adult;
  } 
 if (ticketInfo.ticketType == "general" &&
@@ -219,7 +227,7 @@ ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] ==="education"&&ticketI
 //ADULT MEMBERSHIP WITH EXTRAS
 if (ticketInfo.ticketType === "membership" &&
 ticketInfo.entrantType === "adult" && 
-ticketInfo.extras[0] === "movie") {
+ticketInfo.extras[0] === "movie"||ticketInfo[0].extras.length ===1 ||ticketInfo[0].ticketType === "membership"&& ticketInfo[0].entrantType ==="adult"|| ticketInfo[1].ticketType === "membership"&& ticketInfo[1].entrantType ==="adult") {
 return tickets.membership.priceInCents.adult+tickets.extras.movie.priceInCents.adult;
 } 
 if (ticketInfo.ticketType == "membership" &&
@@ -332,38 +340,52 @@ if (ticketInfo.ticketType === "membership" &&
  */
 
     
-function purchaseTickets(ticketData,ticketInfo) {
-  for (let purchaseLook in tickets) {
-
-    if ( ticketInfo.ticketType === "general"&& ticketInfo.entrantType ==="adult"&&
-        ticketInfo.extras.length === 0 ) {
-
-      answer=calculateTicketPrice(tickets,ticketInfo)
-      
-   return     "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $"+(answer/100).toFixed(2)+"\n-------------------------------------------\nTOTAL: $"+ (answer/100).toFixed(2);
+    function purchaseTickets(ticketData,ticketInfo) {
+      for (let purchaseLook in tickets) {
     
-        }
-
-      Adult general reciept2  tickets
-
-
-    if ( ticketInfo[0].ticketType === "general"&& ticketInfo[0].entrantType ==="adult"&& ticketInfo[1].ticketType === "general"&& ticketInfo[1].entrantType ==="adult"&&
-        ticketInfo[0].extras.length === 0 && ticketInfo[1].extras.length === 0  ) {
-
-      answer2=calculateTicketPrice(tickets,ticketInfo)
-      
-   return     "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $"+(answer2/100).toFixed(2)+"\nAdult General Admission: $"+(answer2/100).toFixed(2)+"\n-------------------------------------------\nTOTAL: $"+ (answer2/100*2).toFixed(2);
+        if ( ticketInfo.ticketType === "general"&& ticketInfo.entrantType ==="adult"&&
+            ticketInfo.extras.length === 0 ) {
     
+          answer=calculateTicketPrice(tickets,ticketInfo)
+          
+       return     "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $"+(answer/100).toFixed(2)+"\n-------------------------------------------\nTOTAL: $"+ (answer/100).toFixed(2);
+        
+            }
+    
+         //Adult general reciept2  tickets
+    
+    
+        if ( ticketInfo[0].ticketType === "general"&& ticketInfo[0].entrantType ==="adult"&& ticketInfo[1].ticketType === "general"&& ticketInfo[1].entrantType ==="adult"&&
+            ticketInfo[0].extras.length === 0 && ticketInfo[1].extras.length === 0  ) {
+    
+          answer2=calculateTicketPrice(tickets,ticketInfo)
+          
+       return     "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $"+(answer2/100).toFixed(2)+"\nAdult General Admission: $"+(answer2/100).toFixed(2)+"\n-------------------------------------------\nTOTAL: $"+ (answer2/100*2).toFixed(2);
+        
+            }
+    
+        //general adult movie
+        if ( ticketInfo[0].extras.length ===1 ||ticketInfo[0].ticketType === "membership"&& ticketInfo[0].entrantType ==="adult"|| ticketInfo[1].ticketType === "membership"&& ticketInfo[1].entrantType ==="adult") {
+    
+          answer6=calculateTicketPrice(tickets,ticketInfo)
+          return "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult Membership Admission: $38.00 (Movie Access)\n-------------------------------------------\nTOTAL: $38.00";
+                            }
+    
+        //MULTIPLE ADMISSION TICKETS
+        if ( ticketInfo[0].ticketType === "membership"&& ticketInfo[0].entrantType ==="adult"||"senior"||"child"|| ticketInfo[1].ticketType === "membership"&& ticketInfo[1].entrantType ==="adult"||"senior"||"child"&&
+            ticketInfo[0].extras.length === 0 && ticketInfo[1].extras.length === 0  ) {
+    
+          answer3=calculateTicketPrice(tickets,ticketInfo)
+         
+    return  "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult Membership Admission: $28.00\nSenior Membership Admission: $23.00\nAdult Membership Admission: $28.00\nChild Membership Admission: $15.00\nChild Membership Admission: $15.00\n-------------------------------------------\nTOTAL: $109.00";
+          
+                      }
+          }
         }
-
-
-
-      }
-    }
-  
-
-
-console.log(purchaseTickets(tickets,ticketInfo))
+      
+    
+    
+    console.log(purchaseTickets(tickets,ticketInfo))
 // Do not change anything below this line.
 module.exports = {
  calculateTicketPrice,
