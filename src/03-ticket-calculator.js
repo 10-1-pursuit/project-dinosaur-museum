@@ -61,7 +61,20 @@ const exampleTicketData = require("../data/tickets");
     //   extras: ["terrace","education","movie"],
     // };
 
+    // const ticketInfo = [
+    //   {
+    //     ticketType: "general",
+    //     entrantType: "adult",
+    //     extras: [],
+    //   },
+    // ];
+
     const ticketInfo = [
+      {
+        ticketType: "general",
+        entrantType: "adult",
+        extras: [],
+      },
       {
         ticketType: "general",
         entrantType: "adult",
@@ -330,6 +343,21 @@ function purchaseTickets(ticketData,ticketInfo) {
    return     "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $"+(answer/100).toFixed(2)+"\n-------------------------------------------\nTOTAL: $"+ (answer/100).toFixed(2);
     
         }
+
+      //Adult general reciept2  tickets
+
+
+  //   if ( ticketInfo[0].ticketType === "general"&& ticketInfo[0].entrantType ==="adult"&& ticketInfo[1].ticketType === "general"&& ticketInfo[1].entrantType ==="adult"&&
+  //       ticketInfo[0].extras.length === 0 && ticketInfo[0].extras.length === 0  ) {
+
+  //     answer2=calculateTicketPrice(tickets,ticketInfo)
+      
+  //  return     "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $"+(answer2/100).toFixed(2)+"\nAdult General Admission: $"+(answer2/100).toFixed(2)+"\n-------------------------------------------\nTOTAL: $"+ (answer2/100*2).toFixed(2);
+    
+  //       }
+
+
+
       }
     }
   
