@@ -159,3 +159,7 @@ for (let purchase of purchases) {
     entrantType: purchase.entrantType,
     extras: purchase.extras
   };
+
+
+    // const {ticketType, entrantType, extras} = purchases
+   

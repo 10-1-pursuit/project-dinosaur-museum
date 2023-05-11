@@ -156,6 +156,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
 //purchses & foreach purchase , iterate over the .extras (maybe)
 function purchaseTickets(ticketData, purchases) {
   let receipt = {};
+  let thanks = "Thank you for visiting the Dinosaur Museum!";
   
   for (let purchase of purchases) {
     const ticketInfo = {
@@ -163,9 +164,13 @@ function purchaseTickets(ticketData, purchases) {
       entrantType: purchase.entrantType,
       extras: purchase.extras
     }
-    
+   
     const priceOfATicket = calculateTicketPrice(ticketData, ticketInfo);
-    console.log(priceOfATicket)
+    //console.log(ticketInfo.ticketType)
+    if (typeof priceOfATicket === "string") { // Check if ticketType exists
+      return `${priceOfATicket}`;
+    }
+    //console.log(ticketData)
   }
 }
 
