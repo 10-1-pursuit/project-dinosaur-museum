@@ -78,7 +78,7 @@ function getConnectedRoomNamesById(rooms, id) {
   for(let getConnect of rooms){
     if(getConnect.roomid === id) {
       for(const connect of getConnect.connectsTo) {
-        const connectedRooms = rooms.find(room => getConnect.roomId === connect)
+        const connectedRooms = rooms.find(getConnect => getConnect.roomId === connect)
         if (connectedRooms) {
           getConnectedRoom.push(connectedRooms.name);
         }else { 
