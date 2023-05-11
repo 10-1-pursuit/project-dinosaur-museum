@@ -319,7 +319,6 @@ if (ticketInfo.ticketType === "membership" &&
  */
 
     
-//Adult general reciept
 function purchaseTickets(ticketData,ticketInfo) {
   for (let purchaseLook in tickets) {
 
