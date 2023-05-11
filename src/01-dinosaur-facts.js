@@ -22,7 +22,31 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+function getLongestDinosaur(dinosaurs) {
+  // empty object for possible population
+  let longestDinoObj = {}
+  // (test) should return an empty object if there are no dinosaurs
+  if (!dinosaurs.length) {
+    return longestDinoObj
+  }
+
+  // declare variables for the longest dino name & length
+  let longestDinoName = ""
+  let longestDino = dinosaurs[0].lengthInMeters
+  // iterate through dinosaur array
+  for (let i = 1; i < dinosaurs.length; i++) {
+    // (test) should return the first dinosaur if there are multiples with the same length
+    if (longestDino < dinosaurs[i].lengthInMeters) {
+      longestDino = dinosaurs[i].lengthInMeters
+      longestDinoName = dinosaurs[i].name
+    }
+  }
+  // (test)key is the name of the dinosaur and the value is the height of the dinosaur in feet.
+  longestDinoObj[`${longestDinoName}`] = longestDino * 3.281
+
+  return longestDinoObj
+  // ✅
+}
 
 /**
  * getDinosaurDescription()
@@ -44,7 +68,16 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
+function getDinosaurDescription(dinosaurs, id) {
+  // for Of Loop to iterate the dinosaur array 
+  for (let dino of dinosaurs) {
+    if (dino.dinosaurId === id) {
+      return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${dino.mya[1] || dino.mya[0]} million years ago.`
+    }
+  } // If the dinosaur cannot be found, returns an error message
+  return `A dinosaur with an ID of '${id}' cannot be found.`;
+  //✅
+}
 
 /**
  * getDinosaursAliveMya()
@@ -71,7 +104,30 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  let keyToAddArr = key;
+  const dinoAliveMya = [];
+
+  // "should return an empty array if the year does not match"
+  for (let dinosaur of dinosaurs) {
+    if (dinosaur[keyToAddArr] === undefined) {
+      keyToAddArr = "dinosaurId"
+    }
+    // "returns the IDs of all dinosaurs that were alive approximately at the given time"
+    // "if the `mya` key is an array of one number, should allow for 1 MYA less than the amount"
+    // "include dinosaurs with only one `mya` year"
+    if (dinosaur.mya.length === 1 && (mya === dinosaur.mya[0] || mya === (dinosaur.mya[0] - 1))) {
+      dinoAliveMya.push(dinosaur[keyToAddArr])
+    }
+    else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) {
+      dinoAliveMya.push(dinosaur[keyToAddArr])
+    }
+  }
+
+  return dinoAliveMya
+  //✅
+}
+
 
 module.exports = {
   getLongestDinosaur,
