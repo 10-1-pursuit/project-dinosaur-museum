@@ -106,9 +106,9 @@ let foundDino = [];// this empty array was created to return the values in the a
   if(!dinosaur[targetKey]) { targetKey = "dinosaurId" } //This if statemnts checks to see if the dinosaurs array contains any properties that are inside targetKey and if undefined then targetkey is assigned the value of dinosaurdId.
 
    if(dinosaur.mya.length === 1 && (dinosaur.mya[0] === mya) || (dinosaur.mya[0] - 1 === mya)) {
-  foundDino.push(dinosaur[targetKey])
+  foundDino.push(dinosaur[targetKey]) //if the length is equal to 1 && the dinosaur has one value push the first value of the array OR if the first value in the array is off by one give me the one closest to the value inside the array. 
   }
-  else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) {
+  else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) { // This is the last checks before 
    foundDino.push(dinosaur[targetKey]);
   }
   }
