@@ -22,25 +22,24 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {
- 
-    let longestDinosaur = {
-      name: "",
-      heightInFeet: 0,
-    };
-    if(dinosaurs.length === 0){
-      return {}
-    }
-    for (const dinosaur of dinosaurs) {
-      if (longestDinosaur.heightInFeet < dinosaur.lengthInMeters) {
-            longestDinosaur.name = dinosaur.name
-            longestDinosaur.heightInFeet= dinosaur.lengthInMeters
-      }
-    }
-      longestDinosaur.heightInFeet = longestDinosaur.heightInFeet * 3.281;
-        return longestDinosaur;
+function getLongestDinosaur(dinosaurs) { //figuring out which dino is the longest.
+
+  let longestDinosaur = {};  //did 3 let statements in order to extract the info from inside the array that is needed. 
+  let name = null
+  let heightInFeet = 0
+  if (dinosaurs.length === 0) { // this will take care of the edge case. 
+    return longestDinosaur
   }
-  
+  for (const dinosaur of dinosaurs) {
+    if (heightInFeet < dinosaur.lengthInMeters) { // the height in ft is less-than the length in meters; it will loop through the array and look into the key named "name". 
+      name = dinosaur.name
+      heightInFeet = dinosaur.lengthInMeters  // if this a true statement, the length in meters will appear. 
+    }
+  }
+  longestDinosaur[name] = heightInFeet * 3.281; // once the dinosaur name is found, and the height in feet is found; it needs to be converted and this is why we multiply that value. 
+  return longestDinosaur;
+}
+
 /**
  * getDinosaurDescription()
  * ---------------------
@@ -62,12 +61,13 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
-  for (const dino of dinosaurs) {
-    if(dinosaurId === id ){
-      let currentInfo = Math.min(...dino.mya) 
-        return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period,over ${}
+  for (let dino of dinosaurs) {
+    let currentYear = Math.min(...dino.mya)
+    if (dino.dinosaurId === id) {
+      return `${dino.name} (${dino.pronunciation})\n${dino.info} It lived in the ${dino.period} period, over ${currentYear} million years ago.`
+    }
   }
-}
+  return `A dinosaur with an ID of '${id}' cannot be found.`
 }
 /**
  * getDinosaursAliveMya()
@@ -94,7 +94,23 @@ function getDinosaurDescription(dinosaurs, id) {
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+
+  const result = [];
+  for (const dinosaur of dinosaurs) {
+    const addToArr = key || "dinosaurId";
+    if (dinosaur[addToArr] === undefined) {
+      continue;
+    }
+    const aliveMya = dinosaur.mya;
+    if (aliveMya.length === 1 && (mya === aliveMya[0] || mya === (aliveMya[0] - 1))) {
+      result.push(dinosaur[addToArr]);
+    } else if (mya <= aliveMya[0] && mya >= aliveMya[1]) {
+      result.push(dinosaur[addToArr]);
+    }
+  }
+  return result;
+}
 
 module.exports = {
   getLongestDinosaur,
