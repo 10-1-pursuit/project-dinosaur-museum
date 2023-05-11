@@ -55,11 +55,20 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-    const ticketInfo = {
-      ticketType: "general",
-      entrantType: "child",
-      extras: ["terrace","education","movie"],
-    };
+    // const ticketInfo = {
+    //   ticketType: "general",
+    //   entrantType: "child",
+    //   extras: ["terrace","education","movie"],
+    // };
+
+    const ticketInfo = [
+      {
+        ticketType: "general",
+        entrantType: "adult",
+        extras: [],
+      },
+    ];
+
 
     function calculateTicketPrice(ticketData, ticketInfo) {
       for (let ticketLook in tickets) {
@@ -105,7 +114,7 @@ const exampleTicketData = require("../data/tickets");
           } 
         if (ticketInfo.ticketType == "general" &&
           ticketInfo.entrantType === "child" && ticketInfo.extras.length===2 &&
-          ticketInfo.extras[0] === "education"&& ticketInfo.extras[1]=== "movie") {
+          ticketInfo.extras[1] === "education"&& ticketInfo.extras[0]=== "movie") {
           return tickets.general.priceInCents.child+tickets.extras.movie.priceInCents.child+tickets.extras.education.priceInCents.child;
           } 
         if (ticketInfo.ticketType === "general" &&
@@ -219,106 +228,42 @@ ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] ==="education"&&ticketI
 return tickets.membership.priceInCents.adult+tickets.extras.terrace.priceInCents.adult+
   tickets.extras.education.priceInCents.adult+tickets.extras.movie.priceInCents.adult;
 } //no code above this line
+//SENIOR MEMBERS WITH EXTRAS
+if (ticketInfo.ticketType === "membership" &&
+ ticketInfo.entrantType === "senior" && 
+ ticketInfo.extras[0] === "movie") {
+ return tickets.membership.priceInCents.senior+tickets.extras.movie.priceInCents.senior;
+ } 
+if (ticketInfo.ticketType == "membership" &&
+ ticketInfo.entrantType === "senior" && 
+ ticketInfo.extras[0] === "education"&& ticketInfo.extras[1]=== "movie") {
+ return tickets.membership.priceInCents.senior+tickets.extras.movie.priceInCents.senior+tickets.extras.education.priceInCents.senior;
+ } 
+if (ticketInfo.ticketType === "membership" &&
+ ticketInfo.entrantType === "senior" && ticketInfo.extras.length===2&&
+ ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] === "education") {
+   return tickets.membership.priceInCents.senior + tickets.extras.terrace.priceInCents.senior +
+   tickets.extras.education.priceInCents.senior;
+ } 
+if (ticketInfo.ticketType === "membership" &&
+ ticketInfo.entrantType === "senior" && ticketInfo.extras.length===3&&
+ ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] ==="education"&&ticketInfo.extras[2] === "movie") {
+
+   
+ return tickets.membership.priceInCents.senior+tickets.extras.terrace.priceInCents.senior+
+   tickets.extras.education.priceInCents.senior+tickets.extras.movie.priceInCents.senior;
+ } //no code above this line
+
        //no code under this line
      }
         return `Entrant type ${ticketInfo.entrantType} cannot be found.`
       
                             }
           
-    console.log(calculateTicketPrice(tickets, ticketInfo))
-//const ticketInfo = {
-//       ticketType: "membership",
-//       entrantType: "child",
-//       extras: ["movie"],
-//     };
-//     calculateTicketPrice(tickets, ticketInfo);
-//     //> 2500
+    calculateTicketPrice(tickets, ticketInfo)
 
-
-// function calculateTicketPrice(ticketData, ticketInfo) {
-//   for (let ticketLook in tickets) {
-  
-//     if (ticketInfo.ticketType === "general" &&
-//       ticketInfo.entrantType === "child" && 
-//       ticketInfo.extras.length === 0) {
-//       return tickets.general.priceInCents.child;
-//       } 
-//     if (ticketInfo.ticketType === "general" &&
-//       ticketInfo.entrantType === "adult" && 
-//       ticketInfo.extras.length === 0) {
-//       return tickets.general.priceInCents.adult;
-//     }
-// if (ticketInfo.ticketType === "general" &&
-//       ticketInfo.entrantType === "senior" && 
-//       ticketInfo.extras.length === 0) {
-//       return tickets.general.priceInCents.senior;
-//     }
-                  
     
-//     if (ticketInfo.ticketType === "membership" &&
-//       ticketInfo.entrantType === "child" && 
-//       ticketInfo.extras.length === 0) {
-//       return tickets.membership.priceInCents.child;
-//       } 
-//     if (ticketInfo.ticketType === "membership" &&
-//       ticketInfo.entrantType === "adult" && 
-//       ticketInfo.extras.length === 0) {
-//       return tickets.membership.priceInCents.adult;
-//       } 
-//     if (ticketInfo.ticketType === "membership" &&
-//       ticketInfo.entrantType === "senior" && 
-//       ticketInfo.extras.length === 0) {
-//       return tickets.membership.priceInCents.senior;
-//       } //no code above this line
-
- 
-//  // general admission
-//  //        ✕ should calculate a general admission ticket with the movie extra (1 ms)
-//  //        ✕ should calculate a general admission ticket with the movie and education extra
-//  //        ✕ should calculate a general admission ticket with the terrace and education extra
-//  //        ✕ should calculate a general admission ticket with all of the extras
-
-//    //no code under this line
-//  }
-//     return `Entrant type ${ticketInfo.entrantType} cannot be found.`
-  
-//                         }
-      
-// console.log(calculateTicketPrice(tickets, ticketInfo))
-    
-//     const ticketInfo = {
-//       ticketType: "general",
-//       entrantType: "adult",
-//       extras: [],
-//     };
-
-// function calculateTicketPrice(ticketData, ticketInfo) {
-//   for (let ticketLook in ticketData) {
-//     //general admision turn into call back function/or else if/or case: break;
-//     if (ticketInfo.ticketType === "general" &&
-//       ticketInfo.entrantType === "adult" && Object.keys(tickets.general.priceInCents) === ticketInfo.entrantType ||
-//       ticketInfo.extras.length === 0) {
-//       return tickets.general.priceInCents.adult;
-//       } 
-//     //membership admission turn into callbackfunction /or else if/or case: break;
-//     if (ticketInfo.ticketType === "membership" && ticketLook.membership.priceInCents === "child" &&
-//       Object.keys(ticketLook.extras.movie.description === ticketInfo.extras) ){
-//       return Object.values(ticketLook.membership.priceInCents) + Object.values(ticketLook.extras.priceInCents)
-//                           }
-//         //nona admission doesnt exist  turn into callback /or else if/or case: break;
-//        } 
-//        // if (ticketInfo.entrantType === Object.keys(ticketLook.general.priceInCents)) 
-          
-//           return `Entrant type ${ticketInfo.entrantType} cannot be found.`
-//       {
-//       }
-//           }
-        
-  
-      
-
-// console.log(calculateTicketPrice(exampleTicketData, ticketInfo))
-
+//    
 /**
  * purchaseTickets()
  * ---------------------
@@ -373,29 +318,25 @@ return tickets.membership.priceInCents.adult+tickets.extras.terrace.priceInCents
     //> "Ticket type 'discount' cannot be found."
  */
 
-const purchases =
-{
-  ticketType: "general",
-  entrantType: "adult",
-  extras: ["movie", "terrace"]
-}
+    
+//Adult general reciept
+function purchaseTickets(ticketData,ticketInfo) {
+  for (let purchaseLook in tickets) {
 
-function purchaseTickets(ticketData, purchases) {
-  for (let purchaseLook in ticketData) {
+    if ( ticketInfo.ticketType === "general"&& ticketInfo.entrantType ==="adult"&&
+        ticketInfo.extras.length === 0 ) {
 
-    if (purchases.ticketType === "general"&& purchases.entrantType==="adult"&&
-        purchases.extras > 0 ||
-      tickets.extras.movie.description === purchases.extras) {
-      return `${tickets.general.description}` +
-        Object.values(tickets.general.priceInCents) + Object.values(tickets.extras.movie.priceInCents)
+      answer=calculateTicketPrice(tickets,ticketInfo)
+      
+   return     "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $"+(answer/100).toFixed(2)+"\n-------------------------------------------\nTOTAL: $"+ (answer/100).toFixed(2);
+    
         }
       }
     }
   
 
 
-console.log(purchaseTickets(tickets,purchases))
-
+console.log(purchaseTickets(tickets,ticketInfo))
 // Do not change anything below this line.
 module.exports = {
  calculateTicketPrice,
