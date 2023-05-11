@@ -163,6 +163,7 @@ function purchaseTickets(ticketData, purchases) {
   }
   receipt += `-------------------------------------------\nTOTAL: $${(fullPrice / 100).toFixed(2)}`
   return receipt
+  //✅
 }
 
 
