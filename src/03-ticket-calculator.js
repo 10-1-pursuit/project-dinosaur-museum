@@ -60,6 +60,77 @@ const exampleTicketData = require("../data/tickets");
       entrantType: "child",
       extras: [],
     };
+
+    function calculateTicketPrice(ticketData, ticketInfo) {
+      for (let ticketLook in tickets) {
+        //GENERAL
+        if (ticketInfo.ticketType === "general" &&
+          ticketInfo.entrantType === "child" && 
+          ticketInfo.extras.length === 0) {
+          return tickets.general.priceInCents.child;
+          } 
+        if (ticketInfo.ticketType === "general" &&
+          ticketInfo.entrantType === "adult" && 
+          ticketInfo.extras.length === 0) {
+          return tickets.general.priceInCents.adult;
+        }
+    if (ticketInfo.ticketType === "general" &&
+          ticketInfo.entrantType === "senior" && 
+          ticketInfo.extras.length === 0) {
+          return tickets.general.priceInCents.senior;
+        }
+                      
+        //MEMBERSHIP
+        if (ticketInfo.ticketType === "membership" &&
+          ticketInfo.entrantType === "child" && 
+          ticketInfo.extras.length === 0) {
+          return tickets.membership.priceInCents.child;
+          } 
+        if (ticketInfo.ticketType === "membership" &&
+          ticketInfo.entrantType === "adult" && 
+          ticketInfo.extras.length === 0) {
+          return tickets.membership.priceInCents.adult;
+          } 
+        if (ticketInfo.ticketType === "membership" &&
+          ticketInfo.entrantType === "senior" && 
+          ticketInfo.extras.length === 0) {
+          return tickets.membership.priceInCents.senior;
+          } 
+    
+     //GENERAL CHILD WITH EXTRAS
+     if (ticketInfo.ticketType === "general" &&
+          ticketInfo.entrantType === "child" && 
+          ticketInfo.extras[0] === "movie") {
+          return tickets.general.priceInCents.child+tickets.extras.movie.priceInCents.child;
+          } 
+        if (ticketInfo.ticketType == "general" &&
+          ticketInfo.entrantType === "child" && 
+          ticketInfo.extras[0] === "education"&& ticketInfo.extras[1]=== "movie") {
+          return tickets.general.priceInCents.child+tickets.extras.movie.priceInCents.child+tickets.extras.education.priceInCents.child;
+          } 
+        if (ticketInfo.ticketType === "general" &&
+          ticketInfo.entrantType === "child" && ticketInfo.extras.length===2&&
+          ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] === "education") {
+            return tickets.general.priceInCents.child+tickets.extras.terrace.priceInCents.child+
+            tickets.extras.education.priceInCents.child;
+          } 
+        if (ticketInfo.ticketType === "general" &&
+          ticketInfo.entrantType === "child" && ticketInfo.extras.length===3&&
+          ticketInfo.extras[0] === "terrace"&&ticketInfo.extras[1] ==="education"&&ticketInfo.extras[2] === "movie") {
+     
+            
+          return tickets.general.priceInCents.child+tickets.extras.terrace.priceInCents.child+
+            tickets.extras.education.priceInCents.child+tickets.extras.movie.priceInCents.child;
+          } //no code above this line
+    
+        
+       //no code under this line
+     }
+        return `Entrant type ${ticketInfo.entrantType} cannot be found.`
+      
+                            }
+          
+    console.log(calculateTicketPrice(tickets, ticketInfo))
 //const ticketInfo = {
 //       ticketType: "membership",
 //       entrantType: "child",
@@ -69,56 +140,56 @@ const exampleTicketData = require("../data/tickets");
 //     //> 2500
 
 
-function calculateTicketPrice(ticketData, ticketInfo) {
-  for (let ticketLook in tickets) {
+// function calculateTicketPrice(ticketData, ticketInfo) {
+//   for (let ticketLook in tickets) {
   
-    if (ticketInfo.ticketType === "general" &&
-      ticketInfo.entrantType === "child" && 
-      ticketInfo.extras.length === 0) {
-      return tickets.general.priceInCents.child;
-      } 
-    if (ticketInfo.ticketType === "general" &&
-      ticketInfo.entrantType === "adult" && 
-      ticketInfo.extras.length === 0) {
-      return tickets.general.priceInCents.adult;
-    }
-if (ticketInfo.ticketType === "general" &&
-      ticketInfo.entrantType === "senior" && 
-      ticketInfo.extras.length === 0) {
-      return tickets.general.priceInCents.senior;
-    }
+//     if (ticketInfo.ticketType === "general" &&
+//       ticketInfo.entrantType === "child" && 
+//       ticketInfo.extras.length === 0) {
+//       return tickets.general.priceInCents.child;
+//       } 
+//     if (ticketInfo.ticketType === "general" &&
+//       ticketInfo.entrantType === "adult" && 
+//       ticketInfo.extras.length === 0) {
+//       return tickets.general.priceInCents.adult;
+//     }
+// if (ticketInfo.ticketType === "general" &&
+//       ticketInfo.entrantType === "senior" && 
+//       ticketInfo.extras.length === 0) {
+//       return tickets.general.priceInCents.senior;
+//     }
                   
     
-    if (ticketInfo.ticketType === "membership" &&
-      ticketInfo.entrantType === "child" && 
-      ticketInfo.extras.length === 0) {
-      return tickets.membership.priceInCents.child;
-      } 
-    if (ticketInfo.ticketType === "membership" &&
-      ticketInfo.entrantType === "adult" && 
-      ticketInfo.extras.length === 0) {
-      return tickets.membership.priceInCents.adult;
-      } 
-    if (ticketInfo.ticketType === "membership" &&
-      ticketInfo.entrantType === "senior" && 
-      ticketInfo.extras.length === 0) {
-      return tickets.membership.priceInCents.senior;
-      } //no code above this line
+//     if (ticketInfo.ticketType === "membership" &&
+//       ticketInfo.entrantType === "child" && 
+//       ticketInfo.extras.length === 0) {
+//       return tickets.membership.priceInCents.child;
+//       } 
+//     if (ticketInfo.ticketType === "membership" &&
+//       ticketInfo.entrantType === "adult" && 
+//       ticketInfo.extras.length === 0) {
+//       return tickets.membership.priceInCents.adult;
+//       } 
+//     if (ticketInfo.ticketType === "membership" &&
+//       ticketInfo.entrantType === "senior" && 
+//       ticketInfo.extras.length === 0) {
+//       return tickets.membership.priceInCents.senior;
+//       } //no code above this line
 
  
- // general admission
- //        ✕ should calculate a general admission ticket with the movie extra (1 ms)
- //        ✕ should calculate a general admission ticket with the movie and education extra
- //        ✕ should calculate a general admission ticket with the terrace and education extra
- //        ✕ should calculate a general admission ticket with all of the extras
+//  // general admission
+//  //        ✕ should calculate a general admission ticket with the movie extra (1 ms)
+//  //        ✕ should calculate a general admission ticket with the movie and education extra
+//  //        ✕ should calculate a general admission ticket with the terrace and education extra
+//  //        ✕ should calculate a general admission ticket with all of the extras
 
-   //no code under this line
- }
-    return `Entrant type ${ticketInfo.entrantType} cannot be found.`
+//    //no code under this line
+//  }
+//     return `Entrant type ${ticketInfo.entrantType} cannot be found.`
   
-                        }
+//                         }
       
-console.log(calculateTicketPrice(tickets, ticketInfo))
+// console.log(calculateTicketPrice(tickets, ticketInfo))
     
 //     const ticketInfo = {
 //       ticketType: "general",
