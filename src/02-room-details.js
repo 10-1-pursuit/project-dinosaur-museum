@@ -74,26 +74,50 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
  */
 function getConnectedRoomNamesById(rooms, id) {
   let getConnectedRoom = [];
+  let mainRoom = {};
 
   for(let getConnect of rooms){
-    if(getConnect.roomid === id) {
-      for(const connect of getConnect.connectsTo) {
-        const connectedRooms = rooms.find(getConnect => getConnect.roomId === connect)
-        if (connectedRooms) {
-          getConnectedRoom.push(connectedRooms.name);
-        }else { 
-          return `Room with ID of 'incorrect-id' could not be found.`;
-       } 
-       }  
-      }   
-      }
-  if (getConnectedRoom.length === 0) {
-    return `Room with ID of '${id}' could not be found.`;
-    
+    mainRoom[getConnect.roomId]= getConnect.name //taking all room ids and setting it as a key, where the value is the name. 
   }
+  if(!mainRoom[id]) {
+  return `Room with ID of 'incorrect-id' could not be found.`;
+}
+    let connectedRooms = rooms.find(getConnect => getConnect.roomId === id)
+    for(let connect of connectedRooms.connectsTo) {
+        if (!mainRoom[connect]) {
+          return `Room with ID of 'incorrect-id' could not be found.`;
+        }     
+        getConnectedRoom.push(mainRoom[connect]);
+        
+      }   
+      
   return getConnectedRoom;
 
 }
+
+// function getConnectedRoomNamesById(rooms, id) {
+//   let connectedTo = [];
+//   let connected = {};
+//   for (const conRoom of rooms) {
+//     connected[conRoom.roomId] = conRoom.name;
+//     //put all the room names in an object with the key being the roomId
+//   }
+//   if (!connected[id]) {
+//     return Room with ID of 'incorrect-id' could not be found.;
+//   }
+//   let myTarget = rooms.find(conRoom => conRoom.roomId === id);
+//   // .find will search through the entire array, use the key work conroom, and equal it to my target only if the roomId matches the given Id
+//   for (let roomId of myTarget.connectsTo) {
+//   //looping through the array of connectsTo inside of the conRoom that has matches the Id given
+//    if (!connected[roomId]) {
+//      return Room with ID of 'incorrect-id' could not be found.;
+//     }
+//    connectedTo.push(connected[roomId]);
+//    //if the room has an Id that is inside of the room we're trying to find connections for, were giving back that name inside of our array
+//   }
+//   return connectedTo;
+// }
+
 
 module.exports = {
   getRoomByDinosaurName,
