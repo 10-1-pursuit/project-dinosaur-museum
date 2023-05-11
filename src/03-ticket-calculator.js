@@ -54,10 +54,61 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo){}
 
+function calculateTicketPrice(ticketData, ticketInfo) {
+  let ticketValue = 0;
 
+  const {typeofTix, entrantType, extras } = ticketInfo;
+  if (!(typeofTix in ticketData)) {
+    return `Ticket type  '${typeofTix}' cannot be found.`
+  }
+  else if (!ticketData[typeofTix].priceInCents[entrantType]) {
+    return `Entrant type  '${entrantType}' cannot be found.`
+  }
+  else if (ticketData[typeofTix].priceInCents[entrantType]){
+        ticketPrice += ticketData[typeofTix].priceInCents[entrantType]
+    if (extras.length > 0) {
+      for (const ex of extras) {
+        if (!(ex in ticketData.extras)) {
+          return `Extra type '${ex}' cannot be found.`;
+        }
+        if (ticketData.extras[ex].priceInCents[entrantType]) {
+          ticketPrice += ticketData.extras[ex].priceInCents[entrantType];
+        }
+      }
+    }
+    return ticketValue
+  }
+}
+
+// function calculateTicketPrice(ticketData, ticketInfo) {
+//   let ticketPrice = 0;
+//   const {ticketType, entrantType, extras } = ticketInfo;
+//   if (!(ticketType in ticketData)) {
+//     return Ticket type '${ticketType}' cannot be found.
+//   }
+//   else if (!ticketData[ticketType].priceInCents[entrantType]) {
+//     return Entrant type '${entrantType}' cannot be found.
+//   }
+//   else if (ticketData[ticketType].priceInCents[entrantType]){
+//         ticketPrice += ticketData[ticketType].priceInCents[entrantType]
+//     if (extras.length > 0) {
+//       for (const ex of extras) {
+//         if (!(ex in ticketData.extras)) {
+//           return Extra type '${ex}' cannot be found.;
+//         }
+//         if (ticketData.extras[ex].priceInCents[entrantType]) {
+//           ticketPrice += ticketData.extras[ex].priceInCents[entrantType];
+//         }
+//       }
+//     }
+//     return ticketPrice
+//   }
+// }
+
+// This function was reference from the assistance of my co-horts Ana, Xavier and Jesse, I have a basic understanding of it but not fully. 
 /**
+ *
  * purchaseTickets()
  * ---------------------
  * Returns a receipt based off of a number of purchase. Each "purchase" maintains the shape from `ticketInfo` in the previous function.
