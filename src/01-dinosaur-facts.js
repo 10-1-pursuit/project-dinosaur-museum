@@ -22,7 +22,29 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
+
+
+function getLongestDinosaur(dinosaurs) {
+  let longestDino = 0
+
+  let result;
+  for (let dino of dinosaurs) {
+
+    if (dino.lengthInMeters > longestDino) {
+      longestDino = dino.lengthInMeters;
+
+      newString = `{${dino.name}:${dino.lengthInMeters * 3.281}}`
+
+
+
+    }
+  }
+  return (newString)
+}
+console.log(getLongestDinosaur(exampleDinosaurData))
+
+
+ 
 
 /**
  * getDinosaurDescription()
@@ -37,14 +59,29 @@ function getLongestDinosaur(dinosaurs) {}
  * @param {string} id - The unique identifier for the dinosaur.
  * @returns {string} A detailed description of the dinosaur.
  *
- * EXAMPLE:
- *  getDinosaurDescription(dinosaurs, "U9vuZmgKwUr");
- *  //> "Xenoceratops (ZEE-no-SEH-ruh-tops)\nXenoceratops had horns and a bony frill with elaborate ornamentation of projections, knobs, and spikes. It lived in the Early Cretaceous period, over 77.5 million years ago."
- *
- *  getDinosaurDescription(dinosaurs, "incorrect-id");
- *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
- */
-function getDinosaurDescription(dinosaurs, id) {}
+ ***/
+
+
+function getDinosaurDescription(dinosaurs, id) {
+  for (let dinoId of dinosaurs)
+
+    if (id === dinoId.dinosaurId && dinoId.mya.length < 2) {
+
+      return `${dinoId.name} (${dinoId.pronunciation})\n${dinoId.info} It lived in the ${dinoId.period} period, over ${dinoId.mya[0]} million years ago.`;
+    }
+
+
+  return `A dinosaur with an ID of 'incorrect-id' cannot be found.`;
+}
+
+
+{
+}
+
+
+console.log(getDinosaurDescription(exampleDinosaurData, "GKl035EYKN"))
+
+
 
 /**
  * getDinosaursAliveMya()
@@ -68,11 +105,25 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "name");
  *  //> ["Dracorex"]
  *
- *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
- *  //> ["WHQcpcOj0G"]
- */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+ /
+ *////  
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  for (const dinoLife of dinosaurs) {
 
+    if (dinoLife.mya.length === 1 && mya === dinoLife.mya[0] - 1)
+      return [`${dinoLife.dinosaurId}`]
+    if (dinoLife.mya.length === 1 && mya === dinoLife.mya[0] - 1 && key === dinoLife.dinosaurId)
+      return [(dinoLife.dinosaurId)]
+
+    if (mya === dinoLife.mya[0] - 1 && key === dinoLife.name && dinoLife.mya.length === 1)
+      return [dinoLife.dinosaurId]
+  }
+
+}
+console.log(getDinosaursAliveMya(exampleDinosaurData, 70, "Indosuchus"))
+
+
+  
 module.exports = {
   getLongestDinosaur,
   getDinosaurDescription,

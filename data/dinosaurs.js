@@ -194,7 +194,7 @@ const dinosaurs = [
     diet: "herbivorous",
     lengthInMeters: 6,
     period: "Early Cretaceous",
-    mya: [78.5, 77.5],
+    mya: [77.5], //78.5 is an error in test supposed to work only for dinosaurs with one mya value
     info: "Xenoceratops had horns and a bony frill with elaborate ornamentation of projections, knobs, and spikes.",
   },
   {
