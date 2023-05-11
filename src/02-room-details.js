@@ -25,7 +25,23 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+
+  let newInfo = dinosaurs.find(dino => dino.name == dinosaurName); // a let statement was added so that the array can be accessed. I used .find to return the first array that passes the test. 
+  if (newInfo === undefined) {
+    return `Dinosaur with name '${dinosaurName}' cannot be found.` // if the dinosaur name cannot be found, this error message will be ran. 
+  }
+
+  let newRoom = rooms.find(room => room.dinosaurs.includes(newInfo.dinosaurId));// finding the rooms that corresponds and .includes was used in order to decipher if this was a true or false statement. 
+  if (!newRoom) {
+    return `Dinosaur with name '${newInfo.name}' cannot be found in any rooms.` // if the room cannot be found; this error message will be displayed. 
+
+  }
+
+  return newRoom.name // the room info will be displayed. 
+}
+
+
 
 /**
  * getConnectedRoomNamesById()
@@ -49,7 +65,28 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
       "Kit Hopkins Education Wing"
     ]
  */
-function getConnectedRoomNamesById(rooms, id) {}
+function getConnectedRoomNamesById(rooms, id) {
+  let newRoom = rooms.find((room) => room.roomId === id);
+  if (!newRoom) {
+    return `Room with ID of '${id}' could not be found.`
+  }
+  let roomLoc = [];
+  for (let i = 0; i < newRoom.connectsTo.length; i++) {
+    let connectedRoomId = newRoom.connectsTo[i]
+    let connectedRoom = rooms.find((newRoom) => newRoom.roomId === connectedRoomId);
+    if (!connectedRoom) {
+      return `Room with ID of '${connectedRoomId}' could not be found.`
+    }
+    roomLoc.push(connectedRoom.name)
+  }
+  return roomLoc;
+
+
+}
+
+
+
+
 
 module.exports = {
   getRoomByDinosaurName,
