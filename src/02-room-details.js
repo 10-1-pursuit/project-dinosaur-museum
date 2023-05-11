@@ -98,6 +98,7 @@ function getConnectedRoomNamesById(rooms, id) {
     }
   }// An array of room names
   return nameOfRoom
+  //✅
 }
 
 module.exports = {
