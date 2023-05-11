@@ -108,11 +108,11 @@ let foundDino = [];// this empty array was created to return the values in the a
    if(dinosaur.mya.length === 1 && (dinosaur.mya[0] === mya) || (dinosaur.mya[0] - 1 === mya)) {
   foundDino.push(dinosaur[targetKey]) //if the length is equal to 1 && the dinosaur has one value push the first value of the array OR if the first value in the array is off by one give me the one closest to the value inside the array. 
   }
-  else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) { // This is the last checks before 
+  else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) { // This is the last if statements that checks if whether or not the array at index or 1 is less than or more than the array given and pushes the one being asked for into the target key to return the key needed.
    foundDino.push(dinosaur[targetKey]);
   }
   }
-  return foundDino
+  return foundDino // returns the entire array. 
 }
 
 module.exports = {
