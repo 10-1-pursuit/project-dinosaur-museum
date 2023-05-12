@@ -57,27 +57,27 @@ const exampleTicketData = require("../data/tickets");
 function calculateTicketPrice(ticketData, ticketInfo) {
   let genAdminTicketWithOutExtra = 0
   let entrantObj = {};
-  // for (const info in ticketData) {
-  //   // console.log(info)
-  //   if (ticketInfo.ticketType !== info) {
-  //     return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
-  //   }
-  //   if (ticketInfo.entrantType !== info.priceInCents) {
-  //     return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
-  //   }
-  //   for (const elements of ticketInfo.extras) {
-  //     if (elements !== ticketData.extras) {
-  //       return `Extra type '${ticketInfo.extras}' cannot be found.`
-  //     }
-  //   }
-  // }
-
-  if (ticketData.general) {
-    let entrants = ticketData.general.priceInCents;
-    console.log(entrantObj = { [entrants]: child })
+  for (const info in ticketData) {
+    // console.log(info)
+    if (ticketInfo.ticketType !== info) {
+      return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
+    }
+    if (ticketInfo.entrantType !== info.priceInCents) {
+      return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
+    }
+    for (const elements of ticketInfo.extras) {
+      if (elements !== ticketData.extras) {
+        return `Extra type '${ticketInfo.extras}' cannot be found.`
+      }
+    }
   }
-
 }
+//   if (ticketData.general) {
+//     let entrants = ticketData.general.priceInCents;
+//     console.log(entrantObj = { [entrants]: child })
+//   }
+
+// }
 
 /**
  * purchaseTickets()
