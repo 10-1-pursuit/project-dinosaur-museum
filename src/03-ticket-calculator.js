@@ -56,44 +56,47 @@ const exampleTicketData = require("../data/tickets");
  */
 
 //1 BIG ass object - maybe for in ? {}keys
-
 //!tickettype , !entranttype return error message
+
 function calculateTicketPrice(ticketData, ticketInfo) {
-  // console.log(ticketInfo.extras) - HOW CAN I GET THIS TO RETURN ON IT'S OWN
+  // function example() {
+  //   return condition1 ? value1
+  //         :
 
   const ticketType = ticketData[ticketInfo.ticketType];
 
-  if (!ticketType) { // Check if ticketType exists
+  if (!ticketType) {
+    // ticketType exists ?
     return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
   }
   const entrantPrice = ticketType.priceInCents[ticketInfo.entrantType];
-  
-  if (!entrantPrice) { // Check if entrantPrice exists
+
+  if (!entrantPrice) {
+    // entrantPrice exists ?
     return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
   }
-  let totalCost = entrantPrice; //
-  
-  for (let extra of ticketInfo.extras) { // Loop through extras array
+  let totalCost = entrantPrice; // ill need this later
+
+  for (let extra of ticketInfo.extras) {
     const extraType = ticketData.extras[extra]; //assign [extra-value] from {data.extras}
 
-   
-    if (!extraType) {  // Check if extraType exists
+    if (!extraType) {
+      // Check if extraType exists
       return `Extra type '${extra}' cannot be found.`;
     }
 
     const extraPrice = extraType.priceInCents[ticketInfo.entrantType]; //
 
-   
-    if (!extraPrice) {  // Check if extraPrice exists
+    if (!extraPrice) {
+      // Check if extraPrice exists
       return `Extra price for entrant type '${ticketInfo.entrantType}' cannot be found.`;
     }
 
     totalCost += extraPrice;
   }
-
+  //console.log(totalCost)
   return totalCost;
 }
-
 
 /**
  * purchaseTickets()
@@ -155,30 +158,49 @@ function calculateTicketPrice(ticketData, ticketInfo) {
 //nest 2 loops - make it work {[purchases]}
 //purchses & foreach purchase , iterate over the .extras (maybe)
 function purchaseTickets(ticketData, purchases) {
-  let receipt = {};
-  let thanks = 
-  "Thank you for visiting the Dinosaur Museum!-------------------------------------------";
+  let receiptHeader =
+    "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
+  let receiptFooter = "-------------------------------------------\nTOTAL:";
+  let receipt = receiptHeader;
+
+  for (let purchase of purchases) { //reassign for easy access
+    const purchaseTicket = purchase.ticketType;
+    const purchaseEntrant = purchase.entrantType;
+    const purchaseExtras =purchase.extras;
+    const priceOfATicket = calculateTicketPrice(ticketData, purchase);
   
-  for (let purchase of purchases) {
-    const ticketInfo = {
-      ticketType: purchase.ticketType,
-      entrantType: purchase.entrantType,
-      extras: purchase.extras
-    }
-   
-    const priceOfATicket = calculateTicketPrice(ticketData, ticketInfo);
-    //console.log(ticketInfo.ticketType)
-    if (typeof priceOfATicket === "string") { // Check if ticketType exists
+    if (typeof priceOfATicket === "string") {  //validity or prev function
+      // Check if ticketType exists
       return `${priceOfATicket}`;
     }
-   
-    for (const extraPurchase of purchase.extras) { //type of extras -- needed for extras tiers "movie" "terrace" "education"
-      //console.log(extraPurchase)
-      
+     
+    
+    const ticketDescription = ticketData[purchaseTicket].description; // (reassign) gen : membership
+    const entrantDescription = ticketData[purchaseTicket].priceInCents[purchaseEntrant].description; 
+    if (Array.isArray(purchaseExtras)) { // if array, get me description on extras
+      extraOptions = purchaseExtras.map((extra) => ticketData.extras[extra].description); 
     }
-    //console.log(priceOfATicket) //prices "3000", "2000", "2800", "5000", "2500", "1500", "4000", "2300", "4500", "4800", "3800"
+
+    const formatExtraDescription = extraOptions.join(", "); //put values outside array
+    const ticketLine = `${purchaseEntrant.charAt(0).toUpperCase() + purchaseEntrant.slice(1)} ${ticketDescription}: $${(priceOfATicket / 100).toFixed(2)}`; //add price to ticket
+    
+    let extrasLine = '';  //earlier values need a home, assign them to a variable
+    if (formatExtraDescription) {
+    extrasLine = ` (${formatExtraDescription})`;
+    
+    }
+    receipt += `${ticketLine}${extrasLine}\n`;  //almost complete receipt
+    
+  
   }
+  const totalSum = purchases.reduce((total, purchase) => total + calculateTicketPrice(ticketData, purchase),0) //add up add-ons
+  receipt += `${receiptFooter} $${(totalSum/100).toFixed(2)}`; //mtsh!!
+  return receipt;
 }
+  
+
+
+
 
 // Do not change anything below this line.
 module.exports = {
