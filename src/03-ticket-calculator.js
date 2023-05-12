@@ -61,7 +61,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
   }
   const entPrice = ticketPrice.priceInCents[ticketInfo.entrantType];
-  if (!entPrice )  {
+  if (!entPrice) {
     return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
   }
   let totalPrice = entPrice;
@@ -138,18 +138,36 @@ function calculateTicketPrice(ticketData, ticketInfo) {
     //> "Ticket type 'discount' cannot be found."
  */
 function purchaseTickets(ticketData, purchases) {
+  let headOfReciept = "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n"
+  let footOfReciept = "-------------------------------------------\nTOTAL:"
+  let printReciept = headOfReciept
   for (let purchase of purchases) {
-    const ticketInfo = {
-      ticketType: purchase.ticketType,
-      entrantType: purchase.entrantType,
-      extras: purchase.extras
-    };
-    const ticketPrices = calculateTicketPrice(ticketData, ticketInfo)
-   // console.log(ticketPrices)
+    let purchasesType = purchase.ticketType
+    let entrantPurchases = purchase.entrantType
+    let extraP = purchase.extras
+    const ticketPrices = calculateTicketPrice(ticketData, purchase)
+    // console.log(ticketPrices)
     if (typeof ticketPrices === "string") { // Check if ticketType exists
       return `${ticketPrices}`;
     }
-}
+    const descripTicket = ticketData[purchasesType].description
+    const entrantDescrip = ticketData[purchasesType].priceInCents[entrantPurchases].description
+    if (Array.isArray(extraP)) {
+      optionExtra = extraP.map((xtras) => ticketData.extras[xtras].description)
+    }
+
+    let extraDescription = optionExtra.join(', ')
+    let printOut = `${entrantPurchases.charAt(0).toUpperCase() + entrantPurchases.slice(1)} ${descripTicket}: $${(ticketPrices / 100).toFixed(2)}` // add price to ticket 
+    let newLine = ""
+    if (extraDescription) {
+      newLine = ` (${extraDescription})`
+    }
+    printReciept += `${printOut}${newLine}\n`
+
+  }
+  const total = purchases.reduce((sum, purchase) => sum + calculateTicketPrice(ticketData, purchase), 0)
+  printReciept += `${footOfReciept} $${(total / 100).toFixed(2)}`/// get total sum
+  return printReciept
 }
 
 // Do not change anything below this line.
