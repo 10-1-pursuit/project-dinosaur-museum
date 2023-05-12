@@ -78,15 +78,18 @@ function getConnectedRoomNamesById(rooms, id) {
         connectedRooms = connects;
         for (const roomObjAgain of rooms) {
           if (roomObjAgain.roomId === connectedRooms) {
+            connectRoomId = true;
             connectedRooms = roomObjAgain.name;
             newArr.push(connectedRooms);
-            connectRoomId = true;
           }
         }
       }
     }
   }
   if (!initialRoomId) {
+    return `Room with ID of '${id}' could not be found.`
+  }
+  if (!connectRoomId) {
     return `Room with ID of '${id}' could not be found.`
   }
   return newArr;
