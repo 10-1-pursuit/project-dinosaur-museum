@@ -55,13 +55,8 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
 
-//1 BIG ass object - maybe for in ? {}keys
-//!tickettype , !entranttype return error message
 
 function calculateTicketPrice(ticketData, ticketInfo) {
-  // function example() {
-  //   return condition1 ? value1
-  //         :
 
   const ticketType = ticketData[ticketInfo.ticketType];
 
@@ -161,7 +156,7 @@ function purchaseTickets(ticketData, purchases) {
   let receiptHeader =
     "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
   let receiptFooter = "-------------------------------------------\nTOTAL:";
-  let receipt = receiptHeader;
+  let receipt = receiptHeader; //start here & build
 
   for (let purchase of purchases) { //reassign for easy access
     const purchaseTicket = purchase.ticketType;

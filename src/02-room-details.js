@@ -26,16 +26,13 @@ const exampleRoomData = require("../data/rooms");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
 function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
-  //console.log(`hey , ${dinosaurs}`)
-  //return room name where Dino can be found
-  //ELSE if it's not in "dinosaurs" or in "rooms" return error message
+  //r
   let foundDinosaur = null; //placeholder for dino name
   let foundInRoom = false; //placeholder for dino in room
 
   for (let dino of dinosaurs) {
-    // loop dinos
+    // loop dinos for param name mat
     if (dino.name === dinosaurName) {
-      //myobj name is exactly equal to param name ?
       foundDinosaur = dino; // reassign null to my obj
     }
   }
@@ -45,17 +42,13 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   }
 
   for (const room of rooms) {
-    //iterate through rooms
     for (const dinosaur of dinosaurs) {
-      //iterate through dinos
-      //console.log(dinosaur)
       if (
         dinosaur.name === dinosaurName &&
         room.dinosaurs.includes(dinosaur.dinosaurId)
       ) {
-        //dinoName matches param & room has same dino(by id to match name)
-        foundDinosaur = room.name; //placeholder becomes room name
-        foundInRoom = true; //dino is in room
+        foundDinosaur = room.name;
+        foundInRoom = true;
       }
     }
   }
@@ -64,8 +57,7 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
     //true values
     return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
   }
-
-  return foundDinosaur; // room.name
+  return foundDinosaur;
 }
 
 /**
@@ -90,13 +82,10 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
       "Kit Hopkins Education Wing"
     ]
  */
-// return rooms connected by room ID
-//if incorrect id,  "Room with ID of 'incorrect-id' could not be found."
-//if incorrect id , also ^^
+
 function getConnectedRoomNamesById(rooms, id) {
-  let arrOfRooms = []; //empty array to push in my obj+
-  connectedRoom = {}; //empty obj to hold key
-  //HOW DO I GET ROOMID TO SAY IT MATCHES CONNECTS ID - ha reassign
+  let arrOfRooms = []; //push in my obj+
+  connectedRoom = {}; //hold key
 
   for (let room of rooms) {
     //loop rooms
@@ -110,17 +99,13 @@ function getConnectedRoomNamesById(rooms, id) {
   let wantedRoom = rooms.find((roomObj) => roomObj.roomId === id); // looped rooms using find to obtain values in my obj.roomId to match param id
 
   for (let roomId of wantedRoom.connectsTo) {
-    // loops connectedTo's for their ID's
-    //a connected room id
     if (!connectedRoom[roomId]) {
-      // if my obj doesn't have the connectedTo's ID , catch the edge case before it happens
+      //catch the edge case before it happens
       return `Room with ID of 'incorrect-id' could not be found.`;
     }
-
-    arrOfRooms.push(connectedRoom[roomId]); //push it in there if it exists now
+    arrOfRooms.push(connectedRoom[roomId]); //it exists here
   }
-
-  return arrOfRooms; // return the array with the values
+  return arrOfRooms;
 }
 
 module.exports = {

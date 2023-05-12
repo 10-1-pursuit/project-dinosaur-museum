@@ -24,19 +24,18 @@ const exampleDinosaurData = require("../data/dinosaurs");
  */
 function getLongestDinosaur(dinosaurs) {
   if (!dinosaurs.length) {
-    // if no length exists
+    // if no length/dino exists
     return {};
   }
 
-  let longestDino = dinosaurs[0]; //if the longest is the 1st element, can also be a placeholder (=)
+  let longestDino = dinosaurs[0]; //[i]longest || placeholder (=)
   for (let i = 1; i < dinosaurs.length; i++) {
     // iterate from 1 since 0 is already taken ^^^
     if (dinosaurs[i].lengthInMeters > longestDino.lengthInMeters) {
-      //compare each index.length to [0].length
-      longestDino = dinosaurs[i]; //reassign longest to found index
+      longestDino = dinosaurs[i];
     }
   }
-  return { [longestDino.name]: longestDino.lengthInMeters * 3.281 }; //return kvp as obj
+  return { [longestDino.name]: longestDino.lengthInMeters * 3.281 }; //return kvp in obj
 }
 //console.log(getLongestDinosaur(exampleDinosaurData))
 
@@ -61,17 +60,19 @@ function getLongestDinosaur(dinosaurs) {
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
 function getDinosaurDescription(dinosaurs, id) {
-  let found = null; //can be reassigned to hold obj/array/number/boolean
+  let found = ""; //can be reassigned to hold obj/array/number/boolean
+
   for (let dino of dinosaurs) {
-    //iterate through dinosaurs
-    if (dino.dinosaurId === id) { // compare my obj.id to id in param
+    if (dino.dinosaurId === id) {
       found = dino; //reassign null to my obj if === true
     }
   }
-  if (!found) { // there is an existing value that isn't a given id
-    console.log( `A dinosaur with an ID of '${id}' cannot be found.`); //i couldnt do interpolation of id - why? 
+  if (!found) {
+    // there is an existing value that isn't a given id
+    return `A dinosaur with an ID of '${id}' cannot be found.`;
   }
-  return `${found.name} (${found.pronunciation})\n${ // obj.assign w my null bc it was reassigned to be the var(69)
+  return `${found.name} (${found.pronunciation})\n${
+    // obj.assign w my null bc it was reassigned from(67)
     found.info
   } It lived in the ${found.period} period, over ${
     found.mya[found.mya.length - 1]
@@ -103,32 +104,14 @@ function getDinosaurDescription(dinosaurs, id) {
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-// function getDinosaursAliveMya(dinosaurs, mya, key) {
-//   //if key(optional ""), return it or return dino id
-//   //if my mya = mya(param) or -1,
-//   //use key to find dino
-//   let foundKey = key || "dinosaurId";
-//   let target = [];
-
-//   for (let oneDino of dinosaurs) {
-//     if (
-//       oneDino.mya.length === 1 && (oneDino.mya[0] - 1) ||
-//       mya === oneDino.mya[0])) {//check if my array has anything inside && if the mya(param) = myobj[0] or that value -1
-//       target.push(oneDino[foundKey]); //push the kvp into empty arr
-//     } else if (mya <= oneDino.mya[0] && mya >= oneDino.mya[1]) { //if param mya <= myobj & it's greater than the value after [0]
-//       target.push(oneDino[foundKey]); // push the kvp into empty arr
-//     }
-//   }
-
-//   return target;
-// }
 
 function getDinosaursAliveMya(dinosaurs, mya, key) {
   let targetKey = key || "dinosaurId"; //declare key to be either key or the id as instructed
-  let matching = []; //an empty array to push in the info if found , based on return instructions
+  let matching = []; //hold info found
 
   for (let dino of dinosaurs) {
-    if (!dino[targetKey]) { //if my obj doesn't have a key - 85
+    if (!dino[targetKey]) {
+      //if my obj doesn't have a key - 85
       targetKey = "dinosaurId"; // let it be the id
     }
     if (
@@ -136,7 +119,7 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
       (mya === dino.mya[0] - 1 || mya === dino.mya[0])
     ) {
       matching.push(dino[targetKey]);
-    } else if (mya <= dino.mya[0] && mya >= dino.mya[1]) { 
+    } else if (mya <= dino.mya[0] && mya >= dino.mya[1]) {
       matching.push(dino[targetKey]);
     }
   }
