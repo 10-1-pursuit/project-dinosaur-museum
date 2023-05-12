@@ -24,8 +24,31 @@ const exampleRoomData = require("../data/rooms");
  * EXAMPLE:
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
- */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+ *///return room where dinos are if they are there else return error message 
+
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+  let dinoInRoom;// place holder
+
+  const dinoName = dinosaurs.find(dinoName => dinoName.name === dinosaurName);//find method to find name of dino & compare to param
+  if (dinoName === undefined) {
+    return `Dinosaur with name '${dinosaurName}' cannot be found.`;
+  }
+  for (let dinoRoom of rooms) {
+    for (let dino of dinosaurs) {
+      if (dino.name === dinosaurName && dinoRoom.dinosaurs.includes(dino.dinosaurId)) {
+        dinoInRoom = dinoRoom.name;
+        return dinoInRoom;
+      }
+    }
+  }
+  if (dinoInRoom === undefined) {
+    return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
+  }
+
+}
+
+
+
 
 /**
  * getConnectedRoomNamesById()
@@ -49,7 +72,29 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
       "Kit Hopkins Education Wing"
     ]
  */
-function getConnectedRoomNamesById(rooms, id) {}
+//return array of strings 
+//EacH string is name of room connected to input room
+//if no roomid return error message 
+function getConnectedRoomNamesById(rooms, id) {
+  let roomNames = [];
+  let roomByName = {};
+
+  for (let room of rooms) {
+    roomByName[room.roomId] = room.name;//assigning key value to my empty obj
+
+  }
+  if (roomByName[id] === undefined) {//id isnst in obj return unfound
+    return `Room with ID of '${id}' could not be found.`;
+  }
+  let foundRoom = rooms.find(roomsI => roomsI.roomId === id);//
+  for (let room of foundRoom.connectsTo) {
+    if (roomByName[room] === undefined) {
+      return `Room with ID of 'incorrect-id' could not be found.`;
+    }
+    roomNames.push(roomByName[room]);
+  }
+  return roomNames;
+}
 
 module.exports = {
   getRoomByDinosaurName,
