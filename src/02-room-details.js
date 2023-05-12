@@ -30,15 +30,17 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
   for (const dinosaur of dinosaurs) {
     if (dinosaur.name === dinosaurName) { // checks if dinosaur.name matches dinosaurName argument
 
-      for (const room of rooms) { //this for of loop is inside the previous if statement and if a match is found it goes through this for of loop
+      for (const room of rooms) { // this for of loop is inside the previous if statement and if a match is found it goes through this for of loop
         if (room.dinosaurs.includes(dinosaur.dinosaurId)) { // for each room it checks if it includes dinosaurId of current dinosaur its checking
           return room.name; // if there is a match then return the name of the room where dinosaur can be found
         }
       }
-      return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`; // if no match in any room, it returns this error message.
+      return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`; // if no match in any room, it returns this error message. 
+      // outside the scope of the inner loop but inside the outer loop because when the code reaches this point that means a dinosaur match was found, but it wasnt found in any rooms.
     }
   }
-  return `Dinosaur with name '${dinosaurName}' cannot be found.`; // if there is no match in dinosaur array, then return this error message.
+  return `Dinosaur with name '${dinosaurName}' cannot be found.`; // out side both for of loops because if room.dinosaurs.includes(dinosaur.dinosaurId doesnt have a match then there is no match in dinosaur array
+  // , then return this error message
 }
 
 
@@ -78,8 +80,8 @@ function getConnectedRoomNamesById(rooms, id) {
       }
     }
   }
-  if (addArr.length === 0) { // outside the scope of the for of loops if addArr is empty, it means the original id parameter was not
-    return `Room with ID of '${id}' could not be found.`; // found in the rooms array so display this error message
+  if (addArr.length === 0) { // outside the scope of the for of loops because after completing the loops if addArr is empty then, 
+    return `Room with ID of '${id}' could not be found.`;  //it means the original id parameter was not found in the rooms array so display this error message
   }
   return addArr; //returns the string names in connectRoom
 }

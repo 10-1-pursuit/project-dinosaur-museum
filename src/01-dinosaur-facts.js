@@ -69,7 +69,7 @@ function getDinosaurDescription(dinosaurs, id) {
     if (id === dinosaur.dinosaurId) { // if the STRING (id) equals dinosaur id
       years = Math.min(...dinosaur.mya); // years EQUALS Math.min(find the smallest value in array) using the spread operator
       return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${years} million years ago.`;
-    }//Math.min takes two arguments if available
+    }
   }
   return "A dinosaur with an ID of 'incorrect-id' cannot be found.";
 }
@@ -107,14 +107,20 @@ function getDinosaursAliveMya(dinosaurs, mya, key) {
 
   for (let dinosaur of dinosaurs) {
     if (dinosaur[addArr] === undefined) { //checks if addArr(key) is inside dinosaur, and if it equals "undefined" then make
-      addArr = "dinosaurId"; // addArr equal to "dinosaurId"
+      addArr = "dinosaurId"; // addArr equal to "dinosaurId" if the key parameter doesnt have any matches, "dinosaurId" makes sure
+      // it replaces that with ID of dinosaurs instead of the key value
     }
 
-    if (dinosaur.mya.length === 1 && (mya === dinosaur.mya[0] || mya === (dinosaur.mya[0] - 1))) { // checks if the mya.length = 1, AND if mya
-      result.push(dinosaur[addArr]); // value matches mya paremeter that is passed in or one less than.
-    } // if conditions are met push dinoasaur[addArr] into result.
-    else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) { // checks if mya value is between the first and second
-      result.push(dinosaur[addArr]); // elements of dinosaur.mya . if it is, push dinosaur[addArr] to result
+    if (dinosaur.mya.length === 1 && (mya === dinosaur.mya[0] || mya === (dinosaur.mya[0] - 1))) { // checks if the mya.length = 1 which also means that there is a single value for mya, 
+      // if this is true then move along and checks if mya matches the single value of dinosaur (index[0]) or if mya matches the single value of dinosaur - 1(value-1), if matches are found
+      // push dinosaur[addArr] into result array. addArr is basically a key that is provided as an argument. This if statement accounts for this section of the instructions
+      // If the dinosaur only has a single value for `mya`, allows for the `mya` value to be equal to the given value or one less. 
+      // For example, if a dinosaur has a `mya` value of `[29]`, the dinosaur's information will be returned if `29` is entered or `28` is entered.
+      result.push(dinosaur[addArr]);
+    } // If the conditions arent met for the first if statement then move onto the next one
+    else if (mya <= dinosaur.mya[0] && mya >= dinosaur.mya[1]) { // This if statement checks if mya parameter is less than or equal to index 0 or the first element of dinosaur.mya
+      //the 2nd part of the if statement checks if mya paramer is greater than or equal to index 1 which is the 2nd element of dinosaur.mya . if this is true. 
+      result.push(dinosaur[addArr]); // push dinosaur[addArr] into result array. 
     }
   }
   return result;
