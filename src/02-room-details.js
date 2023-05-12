@@ -25,7 +25,40 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+  //r
+  let foundDinosaur = null; //placeholder for dino name
+  let foundInRoom = false; //placeholder for dino in room
+
+  for (let dino of dinosaurs) {
+    // loop dinos for param name mat
+    if (dino.name === dinosaurName) {
+      foundDinosaur = dino; // reassign null to my obj
+    }
+  }
+  if (!foundDinosaur) {
+    // if my obj doesn't exist
+    return `Dinosaur with name '${dinosaurName}' cannot be found.`;
+  }
+
+  for (const room of rooms) {
+    for (const dinosaur of dinosaurs) {
+      if (
+        dinosaur.name === dinosaurName &&
+        room.dinosaurs.includes(dinosaur.dinosaurId)
+      ) {
+        foundDinosaur = room.name;
+        foundInRoom = true;
+      }
+    }
+  }
+
+  if (!foundInRoom) {
+    //true values
+    return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
+  }
+  return foundDinosaur;
+}
 
 /**
  * getConnectedRoomNamesById()
@@ -49,7 +82,31 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
       "Kit Hopkins Education Wing"
     ]
  */
-function getConnectedRoomNamesById(rooms, id) {}
+
+function getConnectedRoomNamesById(rooms, id) {
+  let arrOfRooms = []; //push in my obj+
+  connectedRoom = {}; //hold key
+
+  for (let room of rooms) {
+    //loop rooms
+    connectedRoom[room.roomId] = room.name; //assign oobj+key = obj.key
+  }
+  if (!connectedRoom[id]) {
+    //my obj doesn't have param value
+    return `Room with ID of 'incorrect-id' could not be found.`;
+  }
+
+  let wantedRoom = rooms.find((roomObj) => roomObj.roomId === id); // looped rooms using find to obtain values in my obj.roomId to match param id
+
+  for (let roomId of wantedRoom.connectsTo) {
+    if (!connectedRoom[roomId]) {
+      //catch the edge case before it happens
+      return `Room with ID of 'incorrect-id' could not be found.`;
+    }
+    arrOfRooms.push(connectedRoom[roomId]); //it exists here
+  }
+  return arrOfRooms;
+}
 
 module.exports = {
   getRoomByDinosaurName,

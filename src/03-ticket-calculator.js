@@ -54,7 +54,44 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
+
+
+function calculateTicketPrice(ticketData, ticketInfo) {
+
+  const ticketType = ticketData[ticketInfo.ticketType];
+
+  if (!ticketType) {
+    // ticketType exists ?
+    return `Ticket type '${ticketInfo.ticketType}' cannot be found.`;
+  }
+  const entrantPrice = ticketType.priceInCents[ticketInfo.entrantType];
+
+  if (!entrantPrice) {
+    // entrantPrice exists ?
+    return `Entrant type '${ticketInfo.entrantType}' cannot be found.`;
+  }
+  let totalCost = entrantPrice; // ill need this later
+
+  for (let extra of ticketInfo.extras) {
+    const extraType = ticketData.extras[extra]; //assign [extra-value] from {data.extras}
+
+    if (!extraType) {
+      // Check if extraType exists
+      return `Extra type '${extra}' cannot be found.`;
+    }
+
+    const extraPrice = extraType.priceInCents[ticketInfo.entrantType]; //
+
+    if (!extraPrice) {
+      // Check if extraPrice exists
+      return `Extra price for entrant type '${ticketInfo.entrantType}' cannot be found.`;
+    }
+
+    totalCost += extraPrice;
+  }
+  //console.log(totalCost)
+  return totalCost;
+}
 
 /**
  * purchaseTickets()
@@ -65,6 +102,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
  * 
  * NOTE: Pay close attention to the format in the examples below and tests. You will need to have the same format to get the tests to pass.
  *
+ * 
  * @param {Object} ticketData - An object containing data about prices to enter the museum. See the `data/tickets.js` file for an example of the input.
  * @param {Object[]} purchases - An array of objects. Each object represents a single ticket being purchased.
  * @param {string} purchases[].ticketType - Represents the type of ticket. Could be any string except the value "extras".
@@ -109,7 +147,55 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+
+//print a receipt
+//iterrate arr of purchases inside
+//nest 2 loops - make it work {[purchases]}
+//purchses & foreach purchase , iterate over the .extras (maybe)
+function purchaseTickets(ticketData, purchases) {
+  let receiptHeader =
+    "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\n";
+  let receiptFooter = "-------------------------------------------\nTOTAL:";
+  let receipt = receiptHeader; //start here & build
+
+  for (let purchase of purchases) { //reassign for easy access
+    const purchaseTicket = purchase.ticketType;
+    const purchaseEntrant = purchase.entrantType;
+    const purchaseExtras =purchase.extras;
+    const priceOfATicket = calculateTicketPrice(ticketData, purchase);
+  
+    if (typeof priceOfATicket === "string") {  //validity or prev function
+      // Check if ticketType exists
+      return `${priceOfATicket}`;
+    }
+     
+    
+    const ticketDescription = ticketData[purchaseTicket].description; // (reassign) gen : membership
+    const entrantDescription = ticketData[purchaseTicket].priceInCents[purchaseEntrant].description; 
+    if (Array.isArray(purchaseExtras)) { // if array, get me description on extras
+      extraOptions = purchaseExtras.map((extra) => ticketData.extras[extra].description); 
+    }
+
+    const formatExtraDescription = extraOptions.join(", "); //put values outside array
+    const ticketLine = `${purchaseEntrant.charAt(0).toUpperCase() + purchaseEntrant.slice(1)} ${ticketDescription}: $${(priceOfATicket / 100).toFixed(2)}`; //add price to ticket
+    
+    let extrasLine = '';  //earlier values need a home, assign them to a variable
+    if (formatExtraDescription) {
+    extrasLine = ` (${formatExtraDescription})`;
+    
+    }
+    receipt += `${ticketLine}${extrasLine}\n`;  //almost complete receipt
+    
+  
+  }
+  const totalSum = purchases.reduce((total, purchase) => total + calculateTicketPrice(ticketData, purchase),0) //add up add-ons
+  receipt += `${receiptFooter} $${(totalSum/100).toFixed(2)}`; //mtsh!!
+  return receipt;
+}
+  
+
+
+
 
 // Do not change anything below this line.
 module.exports = {
