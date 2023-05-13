@@ -55,27 +55,43 @@ const exampleTicketData = require("../data/tickets");
     //> "Entrant type 'kid' cannot be found."
  */
 function calculateTicketPrice(ticketData, ticketInfo) {
-  let genAdminTicketWithOutExtra = 0
-  let entrantObj = {};
-  for (const info in ticketData) {
-    // console.log(info)
-    if (ticketInfo.ticketType !== info) {
-      return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
-    }
-    if (ticketInfo.entrantType !== info.priceInCents) {
-      return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
-    }
-    for (const elements of ticketInfo.extras) {
-      if (elements !== ticketData.extras) {
-        return `Extra type '${ticketInfo.extras}' cannot be found.`
+  // let genAdminTicketWithOutExtra = 0
+  // let entrantObj = {};
+  // console.log(ticketInfo.extras)
+  // for (const info in ticketData) {
+  //   // console.log(info)
+  //   if (ticketInfo.ticketType !== info) {
+  //     return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
+  //   }
+  //   if (ticketInfo.entrantType !== info.priceInCents) {
+  //     return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
+  //   }
+  //   if (ticketInfo.extras !== ticketData.extras) {
+  //     return `Extra type '${ticketInfo.extras}' cannot be found.`;
+  //   }
+
+  // }
+
+
+  for (const elements of ticketInfo.extras) {
+    console.log("The stuff in the extras array: ", elements)
+    // console.log(extraKeys)
+    for (const ticketKey in ticketData) {
+      console.log("The keys in tickets: ", ticketKey)
+      let extraKeys = ticketData.extras;
+      // console.log(extraKeys)
+      for (const keys in extraKeys) {
+        console.log(keys)
+        if (elements !== keys) {
+          return `Extra type '${ticketInfo.extras}' cannot be found.`
+        }
       }
     }
   }
+
+
+
 }
-//   if (ticketData.general) {
-//     let entrants = ticketData.general.priceInCents;
-//     console.log(entrantObj = { [entrants]: child })
-//   }
 
 // }
 
