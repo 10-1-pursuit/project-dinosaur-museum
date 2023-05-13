@@ -54,7 +54,40 @@ const exampleTicketData = require("../data/tickets");
     calculateTicketPrice(tickets, ticketInfo);
     //> "Entrant type 'kid' cannot be found."
  */
-function calculateTicketPrice(ticketData, ticketInfo) {}
+function calculateTicketPrice(ticketData, ticketInfo) {
+  let genAdminTicketWithOutExtra = 0
+  let entrantObj = {};
+  console.log(ticketInfo.extras)
+  for (const info in ticketData) {
+    // console.log(info)
+    if (ticketInfo.ticketType !== info) {
+      return `Ticket type '${ticketInfo.ticketType}' cannot be found.`
+    }
+    if (ticketInfo.entrantType !== info.priceInCents) {
+      return `Entrant type '${ticketInfo.entrantType}' cannot be found.`
+    }
+    for (const elements of ticketInfo.extras) {
+      console.log("The stuff in the extras array: ", elements)
+      // console.log(extraKeys)
+      for (const ticketKey in ticketData) {
+        console.log("The keys in tickets: ", ticketKey)
+        let extraKeys = ticketData.extras;
+        // console.log(extraKeys)
+        for (const keys in extraKeys) {
+          console.log(keys)
+          if (elements !== keys) {
+            return `Extra type '${ticketInfo.extras}' cannot be found.`
+          }
+        }
+      }
+    }
+  }
+
+
+
+}
+
+// }
 
 /**
  * purchaseTickets()
@@ -97,7 +130,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
     ];
     purchaseTickets(tickets, purchases);
     //> "Thank you for visiting the Dinosaur Museum!\n-------------------------------------------\nAdult General Admission: $50.00 (Movie Access, Terrace Access)\nSenior General Admission: $35.00 (Terrace Access)\nChild General Admission: $45.00 (Education Access, Movie Access, Terrace Access)\nChild General Admission: $45.00 (Education Access, Movie Access, Terrace Access)\n-------------------------------------------\nTOTAL: $175.00"
-
+ 
  * EXAMPLE:
     const purchases = [
       {
@@ -109,7 +142,7 @@ function calculateTicketPrice(ticketData, ticketInfo) {}
     purchaseTickets(tickets, purchases);
     //> "Ticket type 'discount' cannot be found."
  */
-function purchaseTickets(ticketData, purchases) {}
+function purchaseTickets(ticketData, purchases) { }
 
 // Do not change anything below this line.
 module.exports = {
