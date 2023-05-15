@@ -25,33 +25,70 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
 
-/**
- * getConnectedRoomNamesById()
- * ---------------------
- * Returns an array of strings, where each string is the name of a room connected to the given room. If a room ID cannot be found, an error message is returned.
- *
- * @param {Object[]} rooms - An array of room objects. See the `data/rooms.js` file for an example of the input.
- * @param {string} id - A unique room identifier.
- * @returns {string|string[]} An array of room names, or an error message.
- *
- * EXAMPLE:
- *  getConnectedRoomNamesById(rooms, "aIA6tevTne");
- *  //> ["Ticket Center"]
- *
- * EXAMPLE:
- *  getConnectedRoomNamesById(rooms, "A6QaYdyKra");
- *  //> [
-      "Entrance Room",
-      "Coat Check Room",
-      "Ellis Family Hall",
-      "Kit Hopkins Education Wing"
-    ]
- */
-function getConnectedRoomNamesById(rooms, id) {}
+  
+  for (let room of rooms) {
+     if (dinosaurName in rooms ) {
+      return rooms
+    } 
+      if (!dinosaurName && room.name) {
+        return `Dinosaur with name '${dinosaurName}' cannot be found.`;
+      }
 
-module.exports = {
-  getRoomByDinosaurName,
-  getConnectedRoomNamesById,
-};
+      if (!dinosaurName in rooms) {
+      return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`;
+       }
+     
+    }
+
+  }
+
+
+
+
+
+  // let result  
+
+  //   for(let room of rooms){
+  //   if(rooms.includes(dinosaurName)){
+  //   result = room.name;
+  //   }
+
+  //       if(!dinosaurs){
+  //     return `Dinosaur with name ${dinosaurName} cannot be found.`;  
+  //     }
+
+
+  //  }
+  // return result;
+  // }
+
+  /**
+   * getConnectedRoomNamesById()
+   * ---------------------
+   * Returns an array of strings, where each string is the name of a room connected to the given room. If a room ID cannot be found, an error message is returned.
+   *
+   * @param {Object[]} rooms - An array of room objects. See the `data/rooms.js` file for an example of the input.
+   * @param {string} id - A unique room identifier.
+   * @returns {string|string[]} An array of room names, or an error message.
+   *
+   * EXAMPLE:
+   *  getConnectedRoomNamesById(rooms, "aIA6tevTne");
+   *  //> ["Ticket Center"]
+   *
+   * EXAMPLE:
+   *  getConnectedRoomNamesById(rooms, "A6QaYdyKra");
+   *  //> [
+        "Entrance Room",
+        "Coat Check Room",
+        "Ellis Family Hall",
+        "Kit Hopkins Education Wing"
+      ]
+   */
+  function getConnectedRoomNamesById(rooms, id) { }
+
+  module.exports = {
+    getRoomByDinosaurName,
+    getConnectedRoomNamesById,
+  };
