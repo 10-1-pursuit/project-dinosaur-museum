@@ -22,8 +22,19 @@ const exampleDinosaurData = require("../data/dinosaurs");
  *  getLongestDinosaur(dinosaurs);
  *  //> { Brachiosaurus: 98.43 }
  */
-function getLongestDinosaur(dinosaurs) {}
-
+function getLongestDinosaur(dinosaurs) {
+  if (dinosaurs.length === 0){
+  return {}; //returns empty obj
+}
+let longestDino = dinosaurs[0]; //first element
+for (let i = 1; i < dinosaurs.length; i++){ //looping through all dinos to determinate the longest one
+  if (dinosaurs[i].lengthInMeters > longestDino.lengthInMeters) { 
+    longestDino = dinosaurs[i]; //checking and iterating the length of object
+  }
+}
+const lengthInFeet = longestDino.lengthInMeters * 3.28084 //calculates in feets
+return {[longestDino.name]: lengthInFeet}; //returning an obj of the longest dino
+}
 /**
  * getDinosaurDescription()
  * ---------------------
@@ -44,8 +55,16 @@ function getLongestDinosaur(dinosaurs) {}
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(dinosaurs, id) {}
-
+function getDinosaurDescription(dinosaurs, id) {
+  
+  let dinosaur = dinosaurs.find(dino => dino.dinosaurId === id); //using .find method to search for dino obj in dinosaurs.js array w/'dinosaurId'='id'
+  if (dinosaur === undefined) {
+    return "A dinosaur with an ID of '" + id + "' cannot be found."; //returns an error msg since dino was undefined
+  }
+  return `${dinosaur.name} (${dinosaur.pronunciation})\n${dinosaur.info} It lived in the ${dinosaur.period} period, over ${dinosaur.mya[dinosaur.mya.length - 1]} million years ago.`;
+  } //returns searched dinos 
+   
+  
 /**
  * getDinosaursAliveMya()
  * ---------------------
@@ -71,7 +90,37 @@ function getDinosaurDescription(dinosaurs, id) {}
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(dinosaurs, mya, key) {}
+function getDinosaursAliveMya(dinosaurs, mya, key) {
+  const i = 0; //const variable 
+const ids = []; //empty array
+dinosaurs.forEach(dino=> { //initiates loop for each dino obj in "dinosaurs".js array
+  if (Array.isArray(dino.mya) && dino.mya.length === 1) { //checks if mya of obj 'dino' is an array and has length of 1
+    const dinoMya = dino.mya[0]; //assigns the only value of property 'mya' and obj 'dino' 
+    if (dinoMya >= mya - i && dinoMya <= mya) { //checks if the value of 'dinoMya' if greater or= to 'mya -i' as well as less than or = to 'mya'
+     ids.push(dino.dinosaurId) //if true pushes obj 'dino' to the 'ids' array
+    }
+  } else {
+    dino.mya.forEach (dinoMya => {
+      if (dinoMya >= mya - i && dinoMya <= mya) {
+       return ids.push(dino.dinosaurId) //looping througt each array with method '.ForEach' and checks if 'dinosaur.mya'falls with specific range. if all good it will be pushed to array 'ids' 
+    }
+  });
+}
+});
+if (key) { //checks if 'key' exists 
+  return ids.map(dinosaurId => { //using .map method to transform 'dinosaurId' to array of 'ids'
+    const dino = dinosaurs.find(dino1 => dino1.dinosaurId === dinosaurId); //using method .find to search for matching 'dinosaurId' in 'ids' array
+    if (dino[key]) { //checks if 'dino' obj has a prop. that matches 'key'
+      return dino[key]; //returns value assosiated w/ 'key'
+    } else {
+      return dinosaurId; //returns dinosaurId if paramenters dot match w/'key'
+  }
+});
+} else {
+  return ids; // returns an array of all dino's ID
+}
+}
+
 
 module.exports = {
   getLongestDinosaur,
