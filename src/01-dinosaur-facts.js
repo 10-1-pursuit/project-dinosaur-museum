@@ -27,7 +27,7 @@ function getLongestDinosaur(dinosaurs) {
   let aObj = {};
   let size = 0;
   let lizzardName = ''
-  if(!dinosaurs.length){
+  if (!dinosaurs.length) {
     return {};
   }
 
@@ -36,7 +36,7 @@ function getLongestDinosaur(dinosaurs) {
       size = info.lengthInMeters
       lizzardName = info.name
     }
-}
+  }
 
   aObj[`${lizzardName}`] = Number(`${size * 3.281}`)
 
@@ -67,18 +67,18 @@ function getLongestDinosaur(dinosaurs) {
  *  getDinosaurDescription(dinosaurs, "incorrect-id");
  *  //> "A dinosaur with an ID of 'incorrect-id' cannot be found."
  */
-function getDinosaurDescription(_dinosaurs, _id) { 
-  let value  
-   for(let info of dinosaurs){
-    if(info.dinosaurId === _id){
+function getDinosaurDescription(_dinosaurs, _id) {
+  let value
+  for (let info of dinosaurs) {
+    if (info.dinosaurId === _id) {
       value = info
     }
   }
-   if(!value){
+  if (!value) {
     return `A dinosaur with an ID of '${_id}' cannot be found.`;
-   }
-  
-return `${value.name} (${value.pronunciation})\n${value.info} It lived in the ${value.period} period, over ${value.mya[value.mya.length - 1]} million years ago.`
+  }
+
+  return `${value.name} (${value.pronunciation})\n${value.info} It lived in the ${value.period} period, over ${value.mya[value.mya.length - 1]} million years ago.`
 }
 
 /**
@@ -106,22 +106,22 @@ return `${value.name} (${value.pronunciation})\n${value.info} It lived in the ${
  *  getDinosaursAliveMya(dinosaurs, 65, "unknown-key");
  *  //> ["WHQcpcOj0G"]
  */
-function getDinosaursAliveMya(_dinosaurs, _mya, _key) { 
+function getDinosaursAliveMya(_dinosaurs, _mya, _key) {
   let searchingFor = [];
   let keyOfKeys = (_key || "dinosaurId")
-   
-for(let info of dinosaurs){ 
-  if(!info[keyOfKeys]){
-   keyOfKeys = "dinosaurId";
+
+  for (let info of dinosaurs) {
+    if (!info[keyOfKeys]) {
+      keyOfKeys = "dinosaurId";
+    }
+    if (info.mya.length === 1 && (_mya === info.mya[0]) || (_mya === info.mya[0] - 1)) {
+      searchingFor.push(info[keyOfKeys]);
+    } else if (_mya <= info.mya[0] && _mya >= info.mya[1]) {
+      searchingFor.push(info[keyOfKeys])
+    }
+
   }
-   if(info.mya.length === 1 && (_mya === info.mya[0]) || (_mya === info.mya[0] - 1)){
-     searchingFor.push(info[keyOfKeys]);
-   }else if(_mya <= info.mya[0] && _mya >= info.mya[1]){
-    searchingFor.push(info[keyOfKeys])
-   }
- 
- }
- return searchingFor;
+  return searchingFor;
 }
 
 module.exports = {
