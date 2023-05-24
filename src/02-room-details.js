@@ -6,7 +6,6 @@
 const exampleDinosaurData = require("../data/dinosaurs");
 const exampleRoomData = require("../data/rooms");
 // Do not change the lines above.
-
 /**
  * getRoomByDinosaurName()
  * ---------------------
