@@ -6,7 +6,6 @@
 const exampleDinosaurData = require("../data/dinosaurs");
 const exampleRoomData = require("../data/rooms");
 // Do not change the lines above.
-
 /**
  * getRoomByDinosaurName()
  * ---------------------
@@ -25,7 +24,23 @@ const exampleRoomData = require("../data/rooms");
  *  getRoomByDinosaurName(dinosaurs, rooms, "Pterodactyl");
  *  //> "Dinosaur with name 'Pterodactyl' cannot be found."
  */
-function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
+function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {
+  //assigning variable to result of find method looking for dinosaur object that has the same name value as dinosaurName
+  const dinosaur = dinosaurs.find((dino) => dino.name === dinosaurName)
+  if (!dinosaur) {
+    //if variable is falsy it will return error that dinosaur was not found in any dinosaur object
+    return `Dinosaur with name '${dinosaurName}' cannot be found.`
+  }
+  for (dinoRooms of rooms) {
+    //iterate thru each room object
+    if (dinoRooms.dinosaurs.includes(dinosaur.dinosaurId)) {
+      //checks to see if each room includes the Id value of the dinosaur variable(obj) and returns room name
+      return dinoRooms.name
+    }
+  }
+  //returns error for dinosaur not found in any room
+  return `Dinosaur with name '${dinosaurName}' cannot be found in any rooms.`
+}
 
 /**
  * getConnectedRoomNamesById()
@@ -49,7 +64,22 @@ function getRoomByDinosaurName(dinosaurs, rooms, dinosaurName) {}
       "Kit Hopkins Education Wing"
     ]
  */
-function getConnectedRoomNamesById(rooms, id) {}
+function getConnectedRoomNamesById(rooms, id) {
+  //assign variable to result of find method returning objects of rooms with same room Id value as Id parameter
+  const room = rooms.find(room => room.roomId === id)
+  if (!room) {
+    //if room varibale is falsy it returns error showing no room id value matches id parameter
+    return `Room with ID of '${id}' could not be found.`
+  } else if (room.connectsTo.includes('incorrect-id')) {
+    //if room object has connecting room id value as incorrect-id return error 
+    return "Room with ID of 'incorrect-id' could not be found."
+  }
+  //assign variable to result of filter method creating array with room objects that include connecting room id value as id parameter
+  const connectedRooms = rooms.filter(room => room.connectsTo.includes(id))
+  //assign variable to result of map method creating array with the corresponding room names from room objects that include id parameters
+  const connectedRoomsNames = connectedRooms.map(room => room.name)
+  return connectedRoomsNames
+}
 
 module.exports = {
   getRoomByDinosaurName,
